@@ -1,40 +1,26 @@
 # StudentCitationTools.com
 
-🌐 **Live Website:** [https://studentcitationtools.com](https://studentcitationtools.com)
+🌐 **Live Site:** [https://studentcitationtools.com](https://studentcitationtools.com)
 
-A free, open-source citation generator for students and researchers. Generate accurate APA 7th edition citations instantly with no registration required.
+A free, production-ready APA citation generator for students. No registration, no ads, completely free.
 
-## ✨ Features
+## 🚀 Features
 
-- **APA 7th Edition Generator** - Latest APA format
-- **Multiple Source Types** - Books, journals, websites, theses
-- **No Registration** - Completely free, no signup needed
-- **Privacy Focused** - All processing happens in your browser
-- **Mobile Optimized** - Works perfectly on all devices
+- **APA 7th Edition** - Latest formatting standards
+- **Multiple Source Types** - Books, journals, websites
+- **Instant Results** - Generate citations in seconds
+- **Privacy First** - All processing happens in browser
+- **Mobile Optimized** - Responsive design
 - **Copy & Download** - Easy export options
-- **Ad-Supported** - Free service supported by non-intrusive ads
+- **Keyboard Shortcuts** - Faster workflow
 
 ## 🛠️ Tech Stack
 
 - **Frontend:** HTML5, CSS3, Vanilla JavaScript
 - **Hosting:** Vercel (Free Tier)
 - **Domain:** studentcitationtools.com
-- **Analytics:** Google Analytics (future)
-- **Monetization:** Google AdSense (future)
+- **Analytics:** Basic event tracking
+- **SEO:** Optimized for search engines
 
-## 🚀 Quick Start
+## 📁 Project Structure
 
-### Local Development
-```bash
-# Clone repository
-git clone https://github.com/[your-username]/studentcitationtools.git
-
-# Navigate to project
-cd studentcitationtools
-
-# Open in browser
-open index.html
-# or
-start index.html
-# or
-xdg-open index.html
