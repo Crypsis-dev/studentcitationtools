@@ -1,3 +1,16 @@
 User-agent: *
 Allow: /
-Sitemap: https://your-site.vercel.app/sitemap.xml
+Allow: /index.html
+Allow: /style.css
+Allow: /script.js
+Disallow: /admin/
+Disallow: /private/
+
+Sitemap: https://studentcitationtools.com/sitemap.xml
+Sitemap: https://www.studentcitationtools.com/sitemap.xml
+
+# Crawl delay (be nice to servers)
+Crawl-delay: 2
+
+# StudentCitationTools.com robots.txt
+# Generated on: 2026-01-07
