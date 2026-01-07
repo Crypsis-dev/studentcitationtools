@@ -1,16 +1,9 @@
-# StudentCitationTools.com - Robots.txt
-# Generated: 2024-01-07
-
 User-agent: *
 Allow: /
-Allow: /index.html
-Allow: /style.css
-Allow: /script.js
 Disallow: /admin/
 Disallow: /private/
 Disallow: /tmp/
 
 Crawl-delay: 2
-
 Sitemap: https://studentcitationtools.com/sitemap.xml
 Sitemap: https://www.studentcitationtools.com/sitemap.xml
