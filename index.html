@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free APA Citation Generator - AcademicCite</title>
+    <meta name="description" content="Generate accurate APA citations instantly. Free tool for students and researchers.">
+    <link rel="stylesheet" href="style.css">
+    <!-- AdSense will be added after approval -->
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Free APA 7th Edition Citation Generator</h1>
+            <p class="subtitle">Create perfect citations in seconds. No registration required.</p>
+        </header>
+        
+        <main>
+            <div class="tool-container">
+                <div class="input-section">
+                    <h2>Enter Book Details</h2>
+                    
+                    <div class="form-group">
+                        <label>Author(s) (Last Name, First Initial.)*</label>
+                        <input type="text" id="author" placeholder="e.g., Smith, J., Johnson, M. L.">
+                        <small>Separate multiple authors with commas</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Publication Year*</label>
+                        <input type="number" id="year" placeholder="e.g., 2023" min="1000" max="2100">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Book Title*</label>
+                        <input type="text" id="title" placeholder="e.g., Psychology of Learning">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Publisher*</label>
+                        <input type="text" id="publisher" placeholder="e.g., Oxford University Press">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Location (City, State/Country)</label>
+                        <input type="text" id="location" placeholder="e.g., New York, NY">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>DOI or URL (if online)</label>
+                        <input type="url" id="url" placeholder="e.g., https://doi.org/xxxx">
+                    </div>
+                    
+                    <button onclick="generateCitation()" class="generate-btn">
+                        Generate APA Citation
+                    </button>
+                    <button onclick="clearAll()" class="clear-btn">
+                        Clear All
+                    </button>
+                </div>
+                
+                <div class="result-section">
+                    <h2>Your APA Citation</h2>
+                    <div class="result-box" id="result">
+                        <p class="placeholder">Your citation will appear here...</p>
+                    </div>
+                    
+                    <div class="actions">
+                        <button onclick="copyCitation()" class="copy-btn">
+                            Copy to Clipboard
+                        </button>
+                        <button onclick="downloadCitation()" class="download-btn">
+                            Download as .txt
+                        </button>
+                    </div>
+                    
+                    <!-- Ad Space 1 -->
+                    <div class="ad-space">
+                        <div class="ad-label">Advertisement</div>
+                        <div class="ad-placeholder">
+                            AdSense will display here<br>
+                            (300x250)
+                        </div>
+                    </div>
+                    
+                    <div class="examples">
+                        <h3>Example Citations:</h3>
+                        <p><strong>Book:</strong> Smith, J. (2023). <em>Psychology of Learning</em>. Oxford University Press.</p>
+                        <p><strong>Journal Article:</strong> Johnson, M. L., & Lee, K. (2022). Cognitive development in children. <em>Journal of Education</em>, 45(2), 123-145.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ad Space 2 -->
+            <div class="ad-horizontal">
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-placeholder-wide">
+                    Horizontal Ad (728x90)
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h2>About APA 7th Edition</h2>
+                <p>APA (American Psychological Association) style is commonly used for citing sources in psychology, education, and social sciences.</p>
+                <p><strong>Key changes in 7th edition:</strong></p>
+                <ul>
+                    <li>Up to 20 authors listed in reference entries</li>
+                    <li>DOIs and URLs formatted as hyperlinks</li>
+                    <li>Simplified in-text citations for 3+ authors</li>
+                    <li>New guidelines for online sources</li>
+                </ul>
+            </div>
+        </main>
+        
+        <footer>
+            <p>© 2025 AcademicCite.com | Free tools for students and researchers</p>
+            <p class="disclaimer">This tool generates citations based on APA 7th edition guidelines. Always double-check with your institution's requirements.</p>
+        </footer>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
