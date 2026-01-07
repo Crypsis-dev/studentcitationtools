@@ -3,23 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free APA Citation Generator - StudentCitationTools.com</title>
-    <meta name="description" content="Generate accurate APA 7th edition citations instantly. Free citation tool for students with no registration required.">
-    <meta name="keywords" content="apa citation generator, mla citation, free citation tool, student tools, academic writing, apa 7th edition">
+    <title>Free Citation Generator - APA, MLA, Chicago | StudentCitationTools.com</title>
+    <meta name="description" content="Generate accurate APA, MLA, and Chicago citations instantly. Free tool for students, researchers, and writers. No registration required.">
+    <meta name="keywords" content="apa citation generator, mla citation generator, chicago style generator, free citation tool, academic writing, bibliography maker">
     <meta name="author" content="StudentCitationTools.com">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Free APA Citation Generator">
-    <meta property="og:description" content="Generate APA citations in seconds. No signup, no ads, completely free.">
+    <meta property="og:title" content="Free Citation Generator - APA, MLA, Chicago">
+    <meta property="og:description" content="Generate perfect citations in seconds. 100% free, no registration required.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://studentcitationtools.com">
-    <meta property="og:image" content="https://studentcitationtools.com/og-image.png">
     <link rel="canonical" href="https://studentcitationtools.com">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
-    <!-- Google Analytics (Add after approval) -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script> -->
-    <!-- Google AdSense (Add after approval) -->
-    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX" crossorigin="anonymous"></script> -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
 </head>
 <body>
     <!-- Header -->
@@ -27,104 +22,158 @@
         <div class="container">
             <div class="logo">
                 <h1>📚 StudentCitationTools.com</h1>
-                <p class="tagline">Free APA 7th Edition Citation Generator</p>
+                <p class="tagline">Free APA, MLA & Chicago Citation Generator</p>
             </div>
             <nav class="main-nav">
-                <a href="#apa" class="nav-active">APA Generator</a>
-                <a href="#mla" class="nav-upcoming">MLA (Coming)</a>
-                <a href="#chicago" class="nav-upcoming">Chicago (Coming)</a>
+                <a href="#home" class="nav-active">Home</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <a href="mailto:qtechz073@gmail.com" class="contact-btn">Email Support</a>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Generate Perfect Citations in Seconds</h2>
+                <p class="hero-subtitle">Free APA, MLA, and Chicago style citations. No registration, no limits.</p>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Free</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Available</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">0</span>
+                        <span class="stat-label">Registration</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Tool -->
     <main class="main">
         <div class="container">
-            <!-- Hero Section -->
-            <section class="hero">
-                <h2>Generate APA Citations in Seconds</h2>
-                <p class="hero-subtitle">No registration required • 100% Free • Used by thousands of students</p>
-            </section>
+            <!-- Style Selector -->
+            <div class="style-selector">
+                <div class="style-tabs">
+                    <button class="style-tab active" data-style="apa">APA 7th Edition</button>
+                    <button class="style-tab" data-style="mla">MLA 9th Edition</button>
+                    <button class="style-tab" data-style="chicago">Chicago 17th Edition</button>
+                </div>
+                <div class="style-info" id="styleInfo">
+                    <p><strong>APA (American Psychological Association):</strong> Used in psychology, education, and social sciences.</p>
+                </div>
+            </div>
 
-            <!-- Tool Section -->
-            <section class="tool-section">
-                <div class="tool-grid">
-                    <!-- Input Form -->
+            <!-- Tool Container -->
+            <div class="tool-container">
+                <!-- Input Form -->
+                <div class="input-section">
                     <div class="input-card">
                         <h3>📝 Enter Source Details</h3>
                         
                         <div class="form-group">
-                            <label>Author(s) *</label>
+                            <label for="author">Author(s) *</label>
                             <input type="text" id="author" placeholder="e.g., Smith, John A., Johnson, Mary L.">
-                            <small class="help">Format: Last Name, First Initial.</small>
+                            <small class="help-text">Format: Last Name, First Initial. (APA/Chicago) or Last Name, First Name (MLA)</small>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label>Year *</label>
+                                <label for="year">Publication Year *</label>
                                 <input type="number" id="year" placeholder="2024" min="1000" max="2100">
                             </div>
                             <div class="form-group">
-                                <label>Source Type</label>
+                                <label for="sourceType">Source Type</label>
                                 <select id="sourceType">
                                     <option value="book">Book</option>
                                     <option value="journal">Journal Article</option>
                                     <option value="website">Website/Online</option>
+                                    <option value="thesis">Thesis/Dissertation</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label>Title *</label>
-                            <input type="text" id="title" placeholder="e.g., The Psychology of Learning">
+                            <label for="title">Title *</label>
+                            <input type="text" id="title" placeholder="e.g., The Psychology of Modern Learning">
                         </div>
 
-                        <div id="additionalFields">
-                            <!-- Dynamic fields based on source type -->
-                            <div class="form-group" id="publisherField">
-                                <label>Publisher</label>
-                                <input type="text" id="publisher" placeholder="e.g., Oxford University Press">
-                            </div>
+                        <!-- Dynamic Fields -->
+                        <div id="dynamicFields">
+                            <!-- Fields change based on source type -->
                         </div>
 
                         <div class="form-group">
-                            <label>DOI or URL (Optional)</label>
-                            <input type="url" id="url" placeholder="https://doi.org/xxxx or https://example.com">
+                            <label for="url">DOI or URL (Optional)</label>
+                            <input type="url" id="url" placeholder="https://doi.org/10.xxxx/xxxx or https://example.com">
+                            <small class="help-text">For APA: DOI preferred. For MLA: URL without https://</small>
                         </div>
 
                         <div class="button-group">
                             <button onclick="generateCitation()" class="btn btn-primary">
                                 <span class="btn-icon">✨</span> Generate Citation
                             </button>
-                            <button onclick="clearForm()" class="btn btn-secondary">
-                                <span class="btn-icon">🗑️</span> Clear
+                            <button onclick="fillExample()" class="btn btn-secondary">
+                                <span class="btn-icon">📋</span> Load Example
                             </button>
-                            <button onclick="fillExample()" class="btn btn-outline">
-                                <span class="btn-icon">📋</span> Example
+                            <button onclick="clearForm()" class="btn btn-outline">
+                                <span class="btn-icon">🗑️</span> Clear Form
                             </button>
                         </div>
                     </div>
 
-                    <!-- Result Section -->
+                    <!-- Quick Guide -->
+                    <div class="guide-card">
+                        <h4>📖 Quick Formatting Guide</h4>
+                        <div class="guide-content">
+                            <div class="guide-item" data-style="apa">
+                                <h5>APA Format:</h5>
+                                <p>Author, A. A. (Year). <em>Title</em>. Publisher.</p>
+                            </div>
+                            <div class="guide-item" data-style="mla">
+                                <h5>MLA Format:</h5>
+                                <p>Author Last Name, First Name. <em>Title</em>. Publisher, Year.</p>
+                            </div>
+                            <div class="guide-item" data-style="chicago">
+                                <h5>Chicago Format:</h5>
+                                <p>Author First Name Last Name. <em>Title</em>. Publisher, Year.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result Section -->
+                <div class="result-section">
                     <div class="result-card">
-                        <h3>📄 Your APA Citation</h3>
+                        <div class="result-header">
+                            <h3>📄 Generated Citation</h3>
+                            <div class="style-badge" id="styleBadge">APA 7th</div>
+                        </div>
                         
                         <div class="result-box" id="result">
                             <div class="result-placeholder">
                                 <div class="placeholder-icon">📄</div>
-                                <p>Your citation will appear here</p>
+                                <p>Select a style and fill the form to generate citation</p>
                             </div>
                         </div>
 
                         <div class="action-buttons">
                             <button onclick="copyCitation()" class="btn btn-success" id="copyBtn">
-                                <span class="btn-icon">📋</span> Copy
+                                <span class="btn-icon">📋</span> Copy Citation
                             </button>
                             <button onclick="downloadCitation()" class="btn btn-info">
-                                <span class="btn-icon">💾</span> Download
+                                <span class="btn-icon">💾</span> Download (.txt)
                             </button>
-                            <button onclick="shareCitation()" class="btn btn-warning">
-                                <span class="btn-icon">📤</span> Share
+                            <button onclick="exportBibtex()" class="btn btn-warning">
+                                <span class="btn-icon">📑</span> BibTeX
                             </button>
                         </div>
 
@@ -132,24 +181,94 @@
                         <div class="ad-space">
                             <div class="ad-label">Advertisement</div>
                             <div class="ad-placeholder">
-                                <small>AdSense will display here</small>
+                                <small>Ad loading...</small>
                             </div>
                         </div>
 
-                        <!-- Quick Tips -->
-                        <div class="tips">
-                            <h4>💡 Quick Tips:</h4>
-                            <ul>
-                                <li>For multiple authors: <code>Smith, J., Johnson, M. L.</code></li>
-                                <li>DOIs are preferred over URLs when available</li>
-                                <li>Always double-check with your institution</li>
-                            </ul>
+                        <!-- Citation History -->
+                        <div class="history-card">
+                            <h4>🕐 Recent Citations</h4>
+                            <div class="history-list" id="historyList">
+                                <div class="history-empty">No citations generated yet</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ad Space 2 -->
+                    <div class="ad-space-vertical">
+                        <div class="ad-label">Advertisement</div>
+                        <div class="ad-placeholder">
+                            <small>300x600 Ad</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <section class="features">
+                <h2>Everything You Need for Academic Writing</h2>
+                <div class="features-grid">
+                    <div class="feature">
+                        <div class="feature-icon">🎯</div>
+                        <h4>3 Major Styles</h4>
+                        <p>APA, MLA, and Chicago - all in one place</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h4>Instant Results</h4>
+                        <p>Generate citations in less than 2 seconds</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🔒</div>
+                        <h4>Complete Privacy</h4>
+                        <p>Your data never leaves your browser</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">📱</div>
+                        <h4>Mobile Friendly</h4>
+                        <p>Works perfectly on all devices</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Examples Section -->
+            <section class="examples">
+                <h2>Citation Examples</h2>
+                <div class="examples-grid">
+                    <div class="example-card">
+                        <div class="example-header">
+                            <span class="example-style apa-badge">APA</span>
+                            <span class="example-type">Book</span>
+                        </div>
+                        <div class="example-content">
+                            <p><strong>Input:</strong> Author: Kahneman, Daniel; Year: 2011; Title: Thinking, Fast and Slow; Publisher: Farrar, Straus and Giroux</p>
+                            <p><strong>Output:</strong> Kahneman, D. (2011). <em>Thinking, fast and slow</em>. Farrar, Straus and Giroux.</p>
+                        </div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-header">
+                            <span class="example-style mla-badge">MLA</span>
+                            <span class="example-type">Journal</span>
+                        </div>
+                        <div class="example-content">
+                            <p><strong>Input:</strong> Author: Smith, John; Year: 2023; Title: Modern Education; Journal: Education Today; Volume: 45; Issue: 2</p>
+                            <p><strong>Output:</strong> Smith, John. "Modern Education." <em>Education Today</em>, vol. 45, no. 2, 2023, pp. 123-145.</p>
+                        </div>
+                    </div>
+                    <div class="example-card">
+                        <div class="example-header">
+                            <span class="example-style chicago-badge">Chicago</span>
+                            <span class="example-type">Website</span>
+                        </div>
+                        <div class="example-content">
+                            <p><strong>Input:</strong> Author: World Health Organization; Year: 2023; Title: Health Report; URL: who.int/report</p>
+                            <p><strong>Output:</strong> World Health Organization. "Health Report." Last modified 2023. https://who.int/report.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Ad Space 2 -->
+            <!-- Ad Banner -->
             <div class="ad-banner">
                 <div class="ad-label">Advertisement</div>
                 <div class="ad-placeholder-wide">
@@ -157,49 +276,25 @@
                 </div>
             </div>
 
-            <!-- Features -->
-            <section class="features">
-                <h2>Why Students Love Our Tool</h2>
-                <div class="feature-grid">
-                    <div class="feature">
-                        <div class="feature-icon">⚡</div>
-                        <h4>Instant Results</h4>
-                        <p>Generate citations in seconds, not minutes</p>
+            <!-- FAQ Section -->
+            <section class="faq">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>Is this really free?</h4>
+                        <p>Yes! StudentCitationTools.com is 100% free with no hidden costs or registration requirements.</p>
                     </div>
-                    <div class="feature">
-                        <div class="feature-icon">🔒</div>
-                        <h4>No Data Stored</h4>
-                        <p>Your information never leaves your browser</p>
+                    <div class="faq-item">
+                        <h4>Which citation styles are supported?</h4>
+                        <p>We support APA 7th edition, MLA 9th edition, and Chicago 17th edition - the three most popular academic styles.</p>
                     </div>
-                    <div class="feature">
-                        <div class="feature-icon">📱</div>
-                        <h4>Mobile Friendly</h4>
-                        <p>Works perfectly on phones and tablets</p>
+                    <div class="faq-item">
+                        <h4>Do you store my data?</h4>
+                        <p>No! All processing happens in your browser. We don't store any of your information.</p>
                     </div>
-                    <div class="feature">
-                        <div class="feature-icon">🎯</div>
-                        <h4>APA 7th Edition</h4>
-                        <p>Always up-to-date with latest guidelines</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Info Section -->
-            <section class="info">
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h3>📚 Book Example</h3>
-                        <div class="example">
-                            <p><strong>Input:</strong> Kahneman, D. (2011). Thinking, Fast and Slow. Farrar, Straus and Giroux.</p>
-                            <p><strong>Output:</strong> Kahneman, D. (2011). <em>Thinking, fast and slow</em>. Farrar, Straus and Giroux.</p>
-                        </div>
-                    </div>
-                    <div class="info-card">
-                        <h3>📰 Journal Example</h3>
-                        <div class="example">
-                            <p><strong>Input:</strong> Lyubomirsky, S., King, L., & Diener, E. (2005). The benefits of frequent positive affect. Psychological Bulletin, 131(6), 803-855.</p>
-                            <p><strong>Output:</strong> Lyubomirsky, S., King, L., & Diener, E. (2005). The benefits of frequent positive affect. <em>Psychological Bulletin</em>, 131(6), 803-855.</p>
-                        </div>
+                    <div class="faq-item">
+                        <h4>Can I use this on mobile?</h4>
+                        <p>Absolutely! Our tool is fully responsive and works perfectly on smartphones and tablets.</p>
                     </div>
                 </div>
             </section>
@@ -212,26 +307,40 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>StudentCitationTools.com</h4>
-                    <p>Free academic tools for students worldwide</p>
+                    <p>Free academic tools for students worldwide. Making citation generation easy and accessible.</p>
                     <p>Contact: <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a></p>
                 </div>
                 <div class="footer-section">
-                    <h4>Tools</h4>
-                    <a href="/">APA Generator</a>
-                    <a href="#mla">MLA Generator (Soon)</a>
-                    <a href="#chicago">Chicago Style (Soon)</a>
+                    <h4>Citation Styles</h4>
+                    <a href="#apa">APA Generator</a>
+                    <a href="#mla">MLA Generator</a>
+                    <a href="#chicago">Chicago Generator</a>
+                    <a href="#all">All Styles</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#guide">Formatting Guide</a>
+                    <a href="#examples">Citation Examples</a>
+                    <a href="#tips">Writing Tips</a>
+                    <a href="#blog">Academic Blog</a>
                 </div>
                 <div class="footer-section">
                     <h4>Legal</h4>
-                    <a href="/privacy">Privacy Policy</a>
-                    <a href="/terms">Terms of Service</a>
-                    <a href="/disclaimer">Disclaimer</a>
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                    <a href="#disclaimer">Disclaimer</a>
+                    <a href="#cookies">Cookie Policy</a>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>© 2024 StudentCitationTools.com | Free APA Citation Generator</p>
-                <p class="disclaimer">This tool generates citations based on APA 7th edition guidelines. Always verify with your institution's requirements.</p>
+                <p>© 2024 StudentCitationTools.com | Free APA, MLA & Chicago Citation Generator</p>
+                <p class="disclaimer">This tool generates citations based on official style guides. Always verify with your institution's specific requirements.</p>
+                <div class="footer-links">
+                    <a href="mailto:qtechz073@gmail.com">Contact Support</a> • 
+                    <a href="#report">Report Issue</a> • 
+                    <a href="#suggest">Suggest Feature</a>
+                </div>
             </div>
         </div>
     </footer>
