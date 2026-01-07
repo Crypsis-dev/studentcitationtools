@@ -3,132 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free APA 7th Citation Generator | StudentCitationTools.com</title>
-    <meta name="description" content="Generate accurate APA 7th edition citations instantly. Free citation generator for Books, Journals, and Websites.">
+    <title>Free APA Citation Generator - StudentCitationTools.com</title>
+    <meta name="description" content="Generate accurate APA 7th edition citations instantly. Free citation tool for students with no registration required.">
+    <meta name="keywords" content="apa citation generator, mla citation, free citation tool, student tools, academic writing, apa 7th edition">
+    <meta name="author" content="StudentCitationTools.com">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free APA Citation Generator">
+    <meta property="og:description" content="Generate APA citations in seconds. No signup, no ads, completely free.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://studentcitationtools.com">
+    <meta property="og:image" content="https://studentcitationtools.com/og-image.png">
+    <link rel="canonical" href="https://studentcitationtools.com">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <!-- Google Analytics (Add after approval) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script> -->
+    <!-- Google AdSense (Add after approval) -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX" crossorigin="anonymous"></script> -->
 </head>
 <body>
-
-<div class="container">
-    <header>
-        <div class="logo">
-            <h1>📚 StudentCitationTools<span style="color:#2563eb">.com</span></h1>
-            <p class="tagline">Free APA 7th Edition Generator</p>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>📚 StudentCitationTools.com</h1>
+                <p class="tagline">Free APA 7th Edition Citation Generator</p>
+            </div>
+            <nav class="main-nav">
+                <a href="#apa" class="nav-active">APA Generator</a>
+                <a href="#mla" class="nav-upcoming">MLA (Coming)</a>
+                <a href="#chicago" class="nav-upcoming">Chicago (Coming)</a>
+            </nav>
         </div>
-        <nav class="main-nav">
-            <a href="#" class="nav-active">APA Generator</a>
-            <a href="#">MLA (Coming Soon)</a>
-        </nav>
     </header>
 
-    <main>
-        <div class="ad-horizontal">
-            <div class="ad-label">Advertisement</div>
-            <div class="ad-placeholder-wide">Google AdSense (728x90)</div>
-        </div>
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h2>Generate APA Citations in Seconds</h2>
+                <p class="hero-subtitle">No registration required • 100% Free • Used by thousands of students</p>
+            </section>
 
-        <div class="hero">
-            <h2>Generate APA Citations in Seconds</h2>
-            <p>Enter your source details below. No signup required.</p>
-        </div>
+            <!-- Tool Section -->
+            <section class="tool-section">
+                <div class="tool-grid">
+                    <!-- Input Form -->
+                    <div class="input-card">
+                        <h3>📝 Enter Source Details</h3>
+                        
+                        <div class="form-group">
+                            <label>Author(s) *</label>
+                            <input type="text" id="author" placeholder="e.g., Smith, John A., Johnson, Mary L.">
+                            <small class="help">Format: Last Name, First Initial.</small>
+                        </div>
 
-        <div class="tool-container">
-            <div class="form-group">
-                <label>Source Type</label>
-                <select id="sourceType" onchange="toggleFields()">
-                    <option value="book">Book</option>
-                    <option value="journal">Journal Article</option>
-                    <option value="website">Website / Online Article</option>
-                    <option value="thesis">Thesis / Dissertation</option>
-                </select>
-            </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Year *</label>
+                                <input type="number" id="year" placeholder="2024" min="1000" max="2100">
+                            </div>
+                            <div class="form-group">
+                                <label>Source Type</label>
+                                <select id="sourceType">
+                                    <option value="book">Book</option>
+                                    <option value="journal">Journal Article</option>
+                                    <option value="website">Website/Online</option>
+                                </select>
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label>Author(s) (Last Name, First Initial)</label>
-                <input type="text" id="author" placeholder="e.g. Smith, J., Johnson, M. L.">
-                <small class="help-text">Separate multiple authors with commas.</small>
-            </div>
+                        <div class="form-group">
+                            <label>Title *</label>
+                            <input type="text" id="title" placeholder="e.g., The Psychology of Learning">
+                        </div>
 
-            <div class="form-group">
-                <label>Publication Year</label>
-                <input type="text" id="year" placeholder="e.g. 2024">
-            </div>
+                        <div id="additionalFields">
+                            <!-- Dynamic fields based on source type -->
+                            <div class="form-group" id="publisherField">
+                                <label>Publisher</label>
+                                <input type="text" id="publisher" placeholder="e.g., Oxford University Press">
+                            </div>
+                        </div>
 
-            <div class="form-group">
-                <label>Title of Work</label>
-                <input type="text" id="title" placeholder="Title of Book, Article, or Webpage">
-            </div>
+                        <div class="form-group">
+                            <label>DOI or URL (Optional)</label>
+                            <input type="url" id="url" placeholder="https://doi.org/xxxx or https://example.com">
+                        </div>
 
-            <div id="bookFields">
-                <div class="form-group">
-                    <label>Publisher</label>
-                    <input type="text" id="publisher" placeholder="e.g. Penguin Random House">
+                        <div class="button-group">
+                            <button onclick="generateCitation()" class="btn btn-primary">
+                                <span class="btn-icon">✨</span> Generate Citation
+                            </button>
+                            <button onclick="clearForm()" class="btn btn-secondary">
+                                <span class="btn-icon">🗑️</span> Clear
+                            </button>
+                            <button onclick="fillExample()" class="btn btn-outline">
+                                <span class="btn-icon">📋</span> Example
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Result Section -->
+                    <div class="result-card">
+                        <h3>📄 Your APA Citation</h3>
+                        
+                        <div class="result-box" id="result">
+                            <div class="result-placeholder">
+                                <div class="placeholder-icon">📄</div>
+                                <p>Your citation will appear here</p>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button onclick="copyCitation()" class="btn btn-success" id="copyBtn">
+                                <span class="btn-icon">📋</span> Copy
+                            </button>
+                            <button onclick="downloadCitation()" class="btn btn-info">
+                                <span class="btn-icon">💾</span> Download
+                            </button>
+                            <button onclick="shareCitation()" class="btn btn-warning">
+                                <span class="btn-icon">📤</span> Share
+                            </button>
+                        </div>
+
+                        <!-- Ad Space 1 -->
+                        <div class="ad-space">
+                            <div class="ad-label">Advertisement</div>
+                            <div class="ad-placeholder">
+                                <small>AdSense will display here</small>
+                            </div>
+                        </div>
+
+                        <!-- Quick Tips -->
+                        <div class="tips">
+                            <h4>💡 Quick Tips:</h4>
+                            <ul>
+                                <li>For multiple authors: <code>Smith, J., Johnson, M. L.</code></li>
+                                <li>DOIs are preferred over URLs when available</li>
+                                <li>Always double-check with your institution</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ad Space 2 -->
+            <div class="ad-banner">
+                <div class="ad-label">Advertisement</div>
+                <div class="ad-placeholder-wide">
+                    <small>728x90 Banner Ad</small>
                 </div>
             </div>
 
-            <div id="journalFields" class="hidden">
-                <div class="form-group">
-                    <label>Journal Name</label>
-                    <input type="text" id="journalName" placeholder="e.g. Journal of Psychology">
+            <!-- Features -->
+            <section class="features">
+                <h2>Why Students Love Our Tool</h2>
+                <div class="feature-grid">
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h4>Instant Results</h4>
+                        <p>Generate citations in seconds, not minutes</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🔒</div>
+                        <h4>No Data Stored</h4>
+                        <p>Your information never leaves your browser</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">📱</div>
+                        <h4>Mobile Friendly</h4>
+                        <p>Works perfectly on phones and tablets</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎯</div>
+                        <h4>APA 7th Edition</h4>
+                        <p>Always up-to-date with latest guidelines</p>
+                    </div>
                 </div>
-                <div class="grid-3">
-                    <div class="form-group">
-                        <label>Volume</label>
-                        <input type="text" id="volume" placeholder="45">
+            </section>
+
+            <!-- Info Section -->
+            <section class="info">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>📚 Book Example</h3>
+                        <div class="example">
+                            <p><strong>Input:</strong> Kahneman, D. (2011). Thinking, Fast and Slow. Farrar, Straus and Giroux.</p>
+                            <p><strong>Output:</strong> Kahneman, D. (2011). <em>Thinking, fast and slow</em>. Farrar, Straus and Giroux.</p>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Issue</label>
-                        <input type="text" id="issue" placeholder="2">
-                    </div>
-                    <div class="form-group">
-                        <label>Pages</label>
-                        <input type="text" id="pages" placeholder="100-112">
+                    <div class="info-card">
+                        <h3>📰 Journal Example</h3>
+                        <div class="example">
+                            <p><strong>Input:</strong> Lyubomirsky, S., King, L., & Diener, E. (2005). The benefits of frequent positive affect. Psychological Bulletin, 131(6), 803-855.</p>
+                            <p><strong>Output:</strong> Lyubomirsky, S., King, L., & Diener, E. (2005). The benefits of frequent positive affect. <em>Psychological Bulletin</em>, 131(6), 803-855.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label>DOI or URL (Optional but Recommended)</label>
-                <input type="text" id="url" placeholder="https://doi.org/... or https://website.com/...">
-            </div>
-
-            <div class="button-group">
-                <button onclick="generateCitation()" class="generate-btn">✨ Generate Citation</button>
-                <button onclick="fillExample()" class="example-btn">📋 Fill Example</button>
-                <button onclick="clearAll()" class="clear-btn">🗑️ Clear</button>
-            </div>
+            </section>
         </div>
+    </main>
 
-        <div class="result-section">
-            <h3>Your Citation Result:</h3>
-            <div class="result-box" id="result">
-                <div class="result-placeholder">
-                    <p>Result will appear here...</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>StudentCitationTools.com</h4>
+                    <p>Free academic tools for students worldwide</p>
+                    <p>Contact: <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Tools</h4>
+                    <a href="/">APA Generator</a>
+                    <a href="#mla">MLA Generator (Soon)</a>
+                    <a href="#chicago">Chicago Style (Soon)</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="/disclaimer">Disclaimer</a>
                 </div>
             </div>
             
-            <div class="result-actions">
-                <button onclick="copyCitation()" class="copy-btn">Copy to Clipboard</button>
-                <button onclick="downloadCitation()" class="download-btn">Download .txt</button>
-                <button onclick="shareCitation()" class="share-btn">Share</button>
+            <div class="footer-bottom">
+                <p>© 2024 StudentCitationTools.com | Free APA Citation Generator</p>
+                <p class="disclaimer">This tool generates citations based on APA 7th edition guidelines. Always verify with your institution's requirements.</p>
             </div>
         </div>
-
-        <div class="ad-space">
-            <div class="ad-label">Advertisement</div>
-            <div class="ad-placeholder">Google AdSense (300x250)</div>
-        </div>
-
-    </main>
-
-    <footer>
-        <div class="footer-bottom">
-            <p>&copy; 2024 StudentCitationTools.com. All rights reserved.</p>
-            <p>Not affiliated with the American Psychological Association.</p>
-        </div>
     </footer>
-</div>
 
-<script src="script.js"></script>
+    <!-- Scripts -->
+    <script src="script.js"></script>
 </body>
 </html>
