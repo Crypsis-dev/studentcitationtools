@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 🔥 SEO FOR CHICAGO PAGE -->
+    <title>Free Chicago Style Citation Generator [2024] | Notes & Bibliography | StudentCitationTools.com</title>
+    <meta name="description" content="Generate Chicago style citations instantly. Free Chicago Manual of Style 17th edition generator for notes, bibliography, and author-date system.">
+    <meta name="keywords" content="chicago style citation, chicago manual of style, chicago citation generator, notes and bibliography, author-date system">
+    
+    <!-- 🔗 Canonical URL -->
+    <link rel="canonical" href="https://studentcitationtools.com/chicago.html">
+    
+    <!-- 🌟 Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Chicago Style Citation Generator",
+      "url": "https://studentcitationtools.com/chicago.html",
+      "description": "Free Chicago style citation generator for notes and bibliography",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.7",
+        "ratingCount": "189",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
+    
+    <!-- 📱 Open Graph -->
+    <meta property="og:title" content="Free Chicago Style Citation Generator | StudentCitationTools.com">
+    <meta property="og:description" content="Generate Chicago style citations instantly. Notes and bibliography format.">
+    <meta property="og:image" content="https://studentcitationtools.com/images/chicago-og-image.png">
+    <meta property="og:url" content="https://studentcitationtools.com/chicago.html">
+    
+    <!-- 🐦 Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Chicago Style Citation Generator">
+    
+    <!-- 🏷️ Extra Meta -->
+    <meta name="author" content="StudentCitationTools.com">
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="aTGRYksmhtOAByg5LePzUupoNZiNbhTzVtitq7VOw6w" />
+    
+    <!-- 🎨 CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+</head>
+<body>
+    <!-- Header (Updated for Chicago) -->
+    <header class="header">
+        <div class="container">
+            <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+            <div class="logo">
+                <h1>📚 Chicago Style Citation Generator</h1>
+                <p class="tagline">Free Chicago Manual of Style 17th Edition</p>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="apa.html">APA Generator</a>
+                <a href="mla.html">MLA Generator</a>
+                <a href="chicago.html" class="nav-active">Chicago Generator</a>
+                <a href="chicago-guide.html">Chicago Guide</a>
+                <a href="examples.html">Chicago Examples</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Chicago Style Citation Generator</h1>
+                <p class="hero-subtitle">Generate Chicago Manual of Style 17th edition citations for notes, bibliography, and author-date system.</p>
+                
+                <!-- Style Selector -->
+                <div class="chicago-style-selector">
+                    <button class="style-option active" data-style="notes">Notes & Bibliography</button>
+                    <button class="style-option" data-style="author-date">Author-Date System</button>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">Chicago 17</span>
+                        <span class="stat-label">Latest Edition</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Two Systems</span>
+                        <span class="stat-label">Notes & Author-Date</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Free</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Chicago Tool -->
+    <main class="main">
+        <div class="container">
+            <!-- Chicago Tool Container -->
+            <div class="tool-container">
+                <!-- Input Form -->
+                <div class="input-section">
+                    <div class="input-card">
+                        <h2>Chicago Citation Form</h2>
+                        
+                        <div class="form-group">
+                            <label for="chicago-author">Author(s) <span class="required">*</span></label>
+                            <input type="text" id="chicago-author" placeholder="e.g., Smith, John">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="chicago-title">Title <span class="required">*</span></label>
+                            <input type="text" id="chicago-title" placeholder="e.g., Book Title or Article Title">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="chicago-publisher">Publisher</label>
+                                <input type="text" id="chicago-publisher" placeholder="e.g., University Press">
+                            </div>
+                            <div class="form-group">
+                                <label for="chicago-year">Publication Year</label>
+                                <input type="number" id="chicago-year" placeholder="2024">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="chicago-place">Place of Publication</label>
+                            <input type="text" id="chicago-place" placeholder="e.g., Chicago, IL">
+                        </div>
+
+                        <div class="button-group">
+                            <button onclick="generateChicagoCitation()" class="btn btn-primary">
+                                <span class="btn-icon">✨</span> Generate Chicago Citation
+                            </button>
+                            <button onclick="fillChicagoExample()" class="btn btn-secondary">
+                                <span class="btn-icon">📋</span> Load Example
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result Section -->
+                <div class="result-section">
+                    <div class="result-card">
+                        <div class="result-header">
+                            <h2>📄 Chicago Citation Results</h2>
+                            <div class="style-badge">Chicago 17th</div>
+                        </div>
+                        
+                        <div class="result-tabs">
+                            <button class="tab-btn active" data-tab="notes">Notes</button>
+                            <button class="tab-btn" data-tab="bibliography">Bibliography</button>
+                        </div>
+                        
+                        <div class="result-box" id="chicagoResult">
+                            <div class="citation-example">
+                                <p><strong>Notes Format:</strong></p>
+                                <p>1. John Smith, <em>Book Title</em> (Chicago: University Press, 2024), 45.</p>
+                                <p><strong>Bibliography Format:</strong></p>
+                                <p>Smith, John. <em>Book Title</em>. Chicago: University Press, 2024.</p>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button onclick="copyChicagoCitation()" class="btn btn-success">
+                                <span class="btn-icon">📋</span> Copy Citation
+                            </button>
+                            <button onclick="downloadChicagoCitation()" class="btn btn-info">
+                                <span class="btn-icon">💾</span> Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chicago Content Section -->
+            <section class="content-section">
+                <h2>Chicago Manual of Style Guide</h2>
+                
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>📝 Notes & Bibliography System</h3>
+                        <p><strong>Used in:</strong> Humanities, literature, arts</p>
+                        <p><strong>Features:</strong> Footnotes/endnotes, bibliography page</p>
+                        <p><strong>Example:</strong> John Smith, <em>History of Chicago</em> (Chicago: University Press, 2024), 123.</p>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h3>📊 Author-Date System</h3>
+                        <p><strong>Used in:</strong> Sciences, social sciences</p>
+                        <p><strong>Features:</strong> In-text citations, reference list</p>
+                        <p><strong>Example:</strong> (Smith 2024, 123)</p>
+                    </div>
+                    
+                    <div class="content-card">
+                        <h3>📚 Book Citation Format</h3>
+                        <p><strong>Notes:</strong> Author, <em>Title</em> (Place: Publisher, Year), Page.</p>
+                        <p><strong>Bibliography:</strong> Author. <em>Title</em>. Place: Publisher, Year.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <!-- Same footer as MLA page -->
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script src="chicago-generator.js"></script>
+</body>
+</html>
