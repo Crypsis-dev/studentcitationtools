@@ -1,9 +1,23 @@
 User-agent: *
 Allow: /
+Allow: /index.html
+Allow: /style.css
+Allow: /script.js
+Allow: /apa.html
+Allow: /mla.html
+Allow: /chicago.html
+Allow: /guide.html
+Allow: /examples.html
+Allow: /tips.html
+Allow: /contact.html
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /disclaimer.html
+Allow: /cookies.html
 Disallow: /admin/
 Disallow: /private/
 Disallow: /tmp/
 
 Crawl-delay: 2
+
 Sitemap: https://studentcitationtools.com/sitemap.xml
-Sitemap: https://www.studentcitationtools.com/sitemap.xml
