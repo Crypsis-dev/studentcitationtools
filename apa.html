@@ -3,17 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free APA Citation Generator | StudentCitationTools.com</title>
-    <meta name="description" content="Generate accurate APA 7th edition citations instantly. Free APA citation tool for students and researchers.">
+    <title>Free APA 7th Edition Citation Generator - StudentCitationTools.com</title>
+    <meta name="description" content="Generate accurate APA 7th edition citations instantly. Perfect for psychology, education, and social sciences papers.">
+    <meta name="keywords" content="apa citation, apa format, apa 7th edition, apa generator, apa style, free apa, reference list">
+    <meta name="author" content="StudentCitationTools.com">
+    <meta property="og:title" content="Free APA 7th Edition Citation Generator">
+    <meta property="og:description" content="Generate accurate APA 7th edition citations instantly.">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHREV68R2D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-ZHREV68R2D');
+    </script>
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
         <div class="container">
             <button class="mobile-menu-btn" aria-label="Menu">☰</button>
             <div class="logo">
                 <h1>📚 StudentCitationTools.com</h1>
-                <p class="tagline">Free APA Citation Generator</p>
+                <p class="tagline">Free academic tools for students worldwide</p>
             </div>
             <nav class="main-nav">
                 <a href="index.html">Home</a>
@@ -21,102 +36,250 @@
                 <a href="mla.html">MLA Generator</a>
                 <a href="chicago.html">Chicago Generator</a>
                 <a href="guide.html">Formatting Guide</a>
+                <a href="examples.html">Examples</a>
+                <a href="tips.html">Writing Tips</a>
                 <a href="contact.html">Contact</a>
             </nav>
         </div>
     </header>
 
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>APA 7th Edition Citation Generator</h2>
+                <p class="hero-subtitle">Generate perfect APA citations for psychology, education, and social sciences</p>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">APA 7</span>
+                        <span class="stat-label">Latest Edition</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Accurate</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Free</span>
+                        <span class="stat-label">No Limits</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb container">
+        <a href="index.html">Home</a> &gt; <span>APA Citation Generator</span>
+    </div>
+
+    <!-- Main Tool -->
     <main class="main">
         <div class="container">
-            <div class="content-page">
-                <h1>APA 7th Edition Citation Generator</h1>
-                <p>Generate accurate APA 7th edition citations for books, journal articles, websites, and more.</p>
-                
-                <!-- Simple APA Form -->
-                <div class="input-card" style="margin: 2rem 0;">
-                    <h3>📝 APA Citation Form</h3>
-                    
-                    <div class="form-group">
-                        <label>Author(s) *</label>
-                        <input type="text" id="apaAuthor" placeholder="e.g., Smith, J., Johnson, M. L.">
-                        <small>Format: Last Name, First Initial.</small>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Year *</label>
-                            <input type="number" id="apaYear" placeholder="2024">
-                        </div>
-                        <div class="form-group">
-                            <label>Source Type</label>
-                            <select id="apaSourceType">
-                                <option value="book">Book</option>
-                                <option value="journal">Journal Article</option>
-                                <option value="website">Website</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Title *</label>
-                        <input type="text" id="apaTitle" placeholder="Title of the work">
-                    </div>
-
-                    <div class="form-group">
-                        <label id="apaExtraLabel">Publisher *</label>
-                        <input type="text" id="apaExtra" placeholder="Publisher name">
-                    </div>
-
-                    <div class="form-group">
-                        <label>DOI or URL (Optional)</label>
-                        <input type="url" id="apaUrl" placeholder="https://doi.org/10.xxxx">
-                    </div>
-
-                    <div class="button-group">
-                        <button onclick="generateAPACitation()" class="btn btn-primary">
-                            Generate APA Citation
-                        </button>
-                        <button onclick="clearAPAForm()" class="btn btn-outline">
-                            Clear
-                        </button>
-                    </div>
+            <!-- Style Info -->
+            <div class="style-selector">
+                <div class="style-tabs">
+                    <button class="style-tab active">APA 7th Edition</button>
+                    <button class="style-tab" onclick="window.location.href='mla.html'">MLA 9th Edition</button>
+                    <button class="style-tab" onclick="window.location.href='chicago.html'">Chicago 17th Edition</button>
                 </div>
-
-                <!-- Result -->
-                <div class="result-card">
-                    <h3>📄 APA Citation Result</h3>
-                    <div class="result-box" id="apaResult">
-                        <div class="result-placeholder">
-                            <div class="placeholder-icon">📄</div>
-                            <p>Your APA citation will appear here</p>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button onclick="copyAPACitation()" class="btn btn-success">
-                            Copy to Clipboard
-                        </button>
-                    </div>
+                <div class="style-info">
+                    <p><strong>APA (American Psychological Association):</strong> Used in psychology, education, social sciences, nursing, and business. The 7th edition (2020) is current.</p>
                 </div>
-
-                <!-- APA Guide -->
-                <h2>APA 7th Edition Formatting Rules</h2>
-                
-                <h3>Book Citations</h3>
-                <p><strong>Format:</strong> Author, A. A. (Year). <em>Title of work</em>. Publisher.</p>
-                <p><strong>Example:</strong> Smith, J. A. (2023). <em>Psychology of learning</em>. Academic Press.</p>
-                
-                <h3>Journal Article Citations</h3>
-                <p><strong>Format:</strong> Author, A. A. (Year). Article title. <em>Journal Title</em>, Volume(Issue), pages. DOI</p>
-                <p><strong>Example:</strong> Johnson, M. L., & Brown, K. (2024). Cognitive development. <em>Journal of Education</em>, 45(2), 123-145. https://doi.org/10.xxxx</p>
-                
-                <h3>Website Citations</h3>
-                <p><strong>Format:</strong> Author, A. A. (Year, Month Day). Title of page. <em>Site Name</em>. URL</p>
-                <p><strong>Example:</strong> World Health Organization. (2023, March 15). <em>Mental health report</em>. WHO. https://who.int/report</p>
             </div>
+
+            <!-- Tool Container -->
+            <div class="tool-container">
+                <!-- Input Form -->
+                <div class="input-section">
+                    <div class="input-card">
+                        <h3>📝 Enter APA Source Details</h3>
+                        
+                        <div class="form-group">
+                            <label for="author">Author(s) *</label>
+                            <input type="text" id="author" placeholder="e.g., Smith, J. or Johnson, M. L.">
+                            <small class="help-text">Format: Last Name, First Initial. (use & for multiple authors)</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="year">Publication Year *</label>
+                                <input type="number" id="year" placeholder="2024" min="1000" max="2099">
+                            </div>
+                            <div class="form-group">
+                                <label for="month">Month (Optional)</label>
+                                <select id="month">
+                                    <option value="">Select Month</option>
+                                    <option value="January">January</option>
+                                    <option value="February">February</option>
+                                    <option value="March">March</option>
+                                    <option value="April">April</option>
+                                    <option value="May">May</option>
+                                    <option value="June">June</option>
+                                    <option value="July">July</option>
+                                    <option value="August">August</option>
+                                    <option value="September">September</option>
+                                    <option value="October">October</option>
+                                    <option value="November">November</option>
+                                    <option value="December">December</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title">Title *</label>
+                            <input type="text" id="title" placeholder="e.g., Psychology of Learning">
+                            <small class="help-text">Use sentence case (capitalize first word only)</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="container">Source Title</label>
+                            <input type="text" id="container" placeholder="e.g., Journal of Psychology">
+                            <small class="help-text">Journal name, book title, or website name</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="volume">Volume Number</label>
+                                <input type="text" id="volume" placeholder="e.g., 12">
+                            </div>
+                            <div class="form-group">
+                                <label for="issue">Issue Number</label>
+                                <input type="text" id="issue" placeholder="e.g., 3">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="publisher">Publisher</label>
+                                <input type="text" id="publisher" placeholder="e.g., American Psychological Association">
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" id="location" placeholder="e.g., Washington, DC">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pages">Page Range</label>
+                                <input type="text" id="pages" placeholder="e.g., 45-67">
+                            </div>
+                            <div class="form-group">
+                                <label for="doi">DOI</label>
+                                <input type="text" id="doi" placeholder="e.g., 10.1037/0003-066X.59.1.29">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="url">URL (if no DOI)</label>
+                            <input type="url" id="url" placeholder="https://example.com">
+                        </div>
+
+                        <div class="button-group">
+                            <button onclick="generateAPACitation()" class="btn btn-primary">
+                                <span class="btn-icon">✨</span> Generate APA Citation
+                            </button>
+                            <button onclick="fillAPAExample()" class="btn btn-secondary">
+                                <span class="btn-icon">📋</span> Load Example
+                            </button>
+                            <button onclick="clearAPAForm()" class="btn btn-outline">
+                                <span class="btn-icon">🗑️</span> Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result Section -->
+                <div class="result-section">
+                    <div class="result-card">
+                        <div class="result-header">
+                            <h3>📄 APA 7th Edition Citation</h3>
+                            <div class="style-badge">APA 7th</div>
+                        </div>
+                        
+                        <div class="result-box" id="result">
+                            <div class="result-placeholder">
+                                <div class="placeholder-icon">📄</div>
+                                <p>Fill the form to generate APA citation</p>
+                            </div>
+                        </div>
+
+                        <div class="result-box" id="reference" style="display: none; margin-top: 20px;">
+                            <h4 style="margin-bottom: 10px;">Reference List Entry</h4>
+                            <pre id="referenceText"></pre>
+                        </div>
+
+                        <div class="result-box" id="inText" style="display: none; margin-top: 20px;">
+                            <h4 style="margin-bottom: 10px;">In-Text Citation</h4>
+                            <pre id="inTextText"></pre>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button onclick="copyCitation()" class="btn btn-success" id="copyBtn">
+                                <span class="btn-icon">📋</span> Copy Citation
+                            </button>
+                            <button onclick="downloadCitation()" class="btn btn-info">
+                                <span class="btn-icon">💾</span> Download
+                            </button>
+                            <button onclick="toggleReferences()" class="btn btn-outline">
+                                <span class="btn-icon">📚</span> References
+                            </button>
+                        </div>
+
+                        <!-- APA Format Tips -->
+                        <div class="ad-space" style="background: #fff8f0; border-color: #e67e22;">
+                            <h4 style="margin-bottom: 10px; color: #2c3e50;">APA Format Tips:</h4>
+                            <ul style="font-size: 0.9rem; padding-left: 20px; color: #2c3e50;">
+                                <li>Use Times New Roman, 12pt font</li>
+                                <li>Double-space entire document</li>
+                                <li>1-inch margins on all sides</li>
+                                <li>Running head on each page</li>
+                                <li>Title page with author note</li>
+                                <li>Indent paragraphs 0.5 inches</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APA Quick Guide -->
+            <section class="content-page">
+                <h2>APA 7th Edition Quick Guide</h2>
+                
+                <h3>Basic Reference Format</h3>
+                <pre>Author, A. A. (Year). Title of work: Subtitle if any. Publisher.</pre>
+
+                <h3>Journal Article Format</h3>
+                <p><strong>Format:</strong> Author, A. A. (Year). Title of article. <em>Journal Name, Volume</em>(Issue), pages. DOI or URL</p>
+                <p><strong>Example:</strong> Smith, J. D., & Johnson, M. L. (2023). Cognitive development in early childhood. <em>Journal of Educational Psychology, 115</em>(2), 245-267. https://doi.org/10.1037/edu0000456</p>
+
+                <h3>Book Format</h3>
+                <p><strong>Format:</strong> Author, A. A. (Year). <em>Title of book: Subtitle if any</em> (Edition). Publisher.</p>
+                <p><strong>Example:</strong> American Psychological Association. (2020). <em>Publication manual of the American Psychological Association</em> (7th ed.).</p>
+
+                <h3>Website Format</h3>
+                <p><strong>Format:</strong> Author, A. A. (Year, Month Day). Title of page. <em>Website Name</em>. URL</p>
+                <p><strong>Example:</strong> Centers for Disease Control and Prevention. (2023, March 15). <em>Mental health statistics</em>. https://www.cdc.gov/mentalhealth</p>
+
+                <h3>In-Text Citations</h3>
+                <p><strong>One author:</strong> (Smith, 2023)</p>
+                <p><strong>Two authors:</strong> (Smith & Johnson, 2023)</p>
+                <p><strong>Three or more authors:</strong> (Smith et al., 2023)</p>
+                <p><strong>Direct quote with page:</strong> (Smith, 2023, p. 45)</p>
+
+                <div class="button-group" style="justify-content: center; margin-top: 30px;">
+                    <button onclick="window.location.href='guide.html#apa'" class="btn btn-primary">
+                        <span class="btn-icon">📖</span> View Complete APA Guide
+                    </button>
+                    <button onclick="window.location.href='examples.html#apa'" class="btn btn-secondary">
+                        <span class="btn-icon">📝</span> More APA Examples
+                    </button>
+                </div>
+            </section>
         </div>
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -133,6 +296,12 @@
                     <a href="index.html">All Styles</a>
                 </div>
                 <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="guide.html">Formatting Guide</a>
+                    <a href="examples.html">Citation Examples</a>
+                    <a href="tips.html">Writing Tips</a>
+                </div>
+                <div class="footer-section">
                     <h4>Legal</h4>
                     <a href="privacy.html">Privacy Policy</a>
                     <a href="terms.html">Terms of Service</a>
@@ -141,101 +310,164 @@
             </div>
             
             <div class="footer-bottom">
-                <p>© 2024 StudentCitationTools.com | Free APA Citation Generator</p>
+                <p>© 2024 StudentCitationTools.com | Free APA 7th Edition Citation Generator</p>
+                <p class="disclaimer">This tool generates APA citations based on the 7th edition guidelines. Always verify with your institution's requirements.</p>
+                <div class="footer-links">
+                    <a href="contact.html">Contact Support</a> • 
+                    <a href="mailto:qtechz073@gmail.com">Report Issue</a> • 
+                    <a href="contact.html">Suggest Feature</a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="script.js"></script>
     <script>
-        // Update label based on source type
-        document.getElementById('apaSourceType').addEventListener('change', function() {
-            const label = document.getElementById('apaExtraLabel');
-            const input = document.getElementById('apaExtra');
-            
-            if (this.value === 'book') {
-                label.textContent = 'Publisher *';
-                input.placeholder = 'Publisher name';
-            } else if (this.value === 'journal') {
-                label.textContent = 'Journal Name *';
-                input.placeholder = 'Journal name';
-            } else {
-                label.textContent = 'Website Name';
-                input.placeholder = 'Website or organization';
-            }
-        });
-
+        // APA-specific JavaScript
         function generateAPACitation() {
-            const author = document.getElementById('apaAuthor').value.trim();
-            const year = document.getElementById('apaYear').value.trim();
-            const title = document.getElementById('apaTitle').value.trim();
-            const type = document.getElementById('apaSourceType').value;
-            const extra = document.getElementById('apaExtra').value.trim();
-            const url = document.getElementById('apaUrl').value.trim();
+            const author = document.getElementById('author').value.trim();
+            const year = document.getElementById('year').value.trim();
+            const month = document.getElementById('month').value;
+            const title = document.getElementById('title').value.trim();
+            const container = document.getElementById('container').value.trim();
+            const volume = document.getElementById('volume').value.trim();
+            const issue = document.getElementById('issue').value.trim();
+            const publisher = document.getElementById('publisher').value.trim();
+            const location = document.getElementById('location').value.trim();
+            const pages = document.getElementById('pages').value.trim();
+            const doi = document.getElementById('doi').value.trim();
+            const url = document.getElementById('url').value.trim();
             
-            if (!author || !year || !title || !extra) {
-                alert('Please fill in all required fields');
+            if (!author || !year || !title) {
+                alert('Please fill in all required fields (*)');
                 return;
             }
             
-            let citation = formatAPAAuthor(author) + ` (${year}). `;
+            let citation = '';
+            let reference = '';
+            let inText = '';
             
-            if (type === 'book') {
-                citation += `<em>${title}</em>. ${extra}.`;
-            } else if (type === 'journal') {
-                citation += `${title}. <em>${extra}</em>.`;
-            } else {
-                citation += `${title}. ${extra}.`;
-            }
+            // Format author(s)
+            const authors = author.split('&').map(a => {
+                const parts = a.split(',');
+                if (parts.length >= 2) {
+                    const [last, first] = parts.map(p => p.trim());
+                    const initials = first.split(' ').map(i => i.charAt(0) + '.').join(' ');
+                    return `${last}, ${initials}`;
+                }
+                return a.trim();
+            });
             
-            if (url) {
-                if (url.includes('doi.org')) {
-                    citation += ` ${url}`;
-                } else {
-                    citation += ` Retrieved from ${url}`;
+            const authorStr = authors.length === 1 ? authors[0] + '.' :
+                             authors.length === 2 ? authors[0] + ', & ' + authors[1] + '.' :
+                             authors.slice(0, -1).join(', ') + ', & ' + authors[authors.length - 1] + '.';
+            
+            // Format date
+            const dateStr = month ? `(${year}, ${month}).` : `(${year}).`;
+            
+            // Generate reference list entry
+            reference = `${authorStr} ${dateStr} ${title}.`;
+            
+            if (container) {
+                reference += ` <em>${container}</em>`;
+                if (volume) {
+                    reference += `, <em>${volume}</em>`;
+                    if (issue) reference += `(${issue})`;
                 }
             }
             
-            document.getElementById('apaResult').innerHTML = `
-                <div class="citation-output">
-                    <div class="citation-content">${citation}</div>
-                </div>
-            `;
-            document.getElementById('apaResult').dataset.citation = citation.replace(/<[^>]*>/g, '');
-        }
-
-        function formatAPAAuthor(author) {
-            const authors = author.split(',').map(a => a.trim());
-            if (authors.length === 1) return authors[0];
-            if (authors.length === 2) return `${authors[0]} & ${authors[1]}`;
-            return `${authors[0]} et al.`;
-        }
-
-        function copyAPACitation() {
-            const citation = document.getElementById('apaResult').dataset.citation;
-            if (!citation) {
-                alert('Please generate a citation first');
-                return;
+            if (publisher) {
+                reference += `. ${publisher}`;
+                if (location) reference += `, ${location}`;
             }
-            navigator.clipboard.writeText(citation).then(() => {
-                alert('APA citation copied to clipboard!');
-            });
+            
+            if (pages) reference += `, ${pages}`;
+            
+            if (doi) {
+                reference += `. https://doi.org/${doi}`;
+            } else if (url) {
+                reference += `. ${url}`;
+            } else {
+                reference += '.';
+            }
+            
+            // Generate in-text citation
+            if (authors.length === 1) {
+                inText = `(${authors[0].split(',')[0]}, ${year})`;
+            } else if (authors.length === 2) {
+                inText = `(${authors[0].split(',')[0]} & ${authors[1].split(',')[0]}, ${year})`;
+            } else {
+                inText = `(${authors[0].split(',')[0]} et al., ${year})`;
+            }
+            
+            if (pages) {
+                citation = `${reference}\n\nIn-text citation: ${inText}`;
+            } else {
+                citation = reference;
+            }
+            
+            // Display results
+            document.getElementById('result').innerHTML = `<pre>${citation}</pre>`;
+            document.getElementById('referenceText').textContent = reference;
+            document.getElementById('inTextText').textContent = inText;
+            document.getElementById('reference').style.display = 'none';
+            document.getElementById('inText').style.display = 'none';
+            
+            // Track in Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'generate_apa', {
+                    'event_category': 'apa',
+                    'event_label': 'citation'
+                });
+            }
         }
-
+        
+        function fillAPAExample() {
+            document.getElementById('author').value = 'American Psychological Association';
+            document.getElementById('year').value = '2020';
+            document.getElementById('title').value = 'Publication manual of the American Psychological Association';
+            document.getElementById('container').value = '';
+            document.getElementById('publisher').value = 'American Psychological Association';
+            document.getElementById('location').value = 'Washington, DC';
+            document.getElementById('pages').value = '';
+            document.getElementById('doi').value = '';
+            document.getElementById('url').value = '';
+            
+            // Trigger generation
+            setTimeout(generateAPACitation, 100);
+        }
+        
         function clearAPAForm() {
-            document.getElementById('apaAuthor').value = '';
-            document.getElementById('apaYear').value = '';
-            document.getElementById('apaTitle').value = '';
-            document.getElementById('apaExtra').value = '';
-            document.getElementById('apaUrl').value = '';
-            document.getElementById('apaResult').innerHTML = `
+            document.getElementById('author').value = '';
+            document.getElementById('year').value = '';
+            document.getElementById('month').value = '';
+            document.getElementById('title').value = '';
+            document.getElementById('container').value = '';
+            document.getElementById('volume').value = '';
+            document.getElementById('issue').value = '';
+            document.getElementById('publisher').value = '';
+            document.getElementById('location').value = '';
+            document.getElementById('pages').value = '';
+            document.getElementById('doi').value = '';
+            document.getElementById('url').value = '';
+            document.getElementById('result').innerHTML = `
                 <div class="result-placeholder">
                     <div class="placeholder-icon">📄</div>
-                    <p>Your APA citation will appear here</p>
-                </div>
-            `;
+                    <p>Fill the form to generate APA citation</p>
+                </div>`;
+            document.getElementById('reference').style.display = 'none';
+            document.getElementById('inText').style.display = 'none';
         }
-
-        // Mobile menu
+        
+        function toggleReferences() {
+            const reference = document.getElementById('reference');
+            const inText = document.getElementById('inText');
+            reference.style.display = reference.style.display === 'none' ? 'block' : 'none';
+            inText.style.display = inText.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // Mobile menu toggle
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.querySelector('.main-nav').classList.toggle('active');
         });
