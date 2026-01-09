@@ -5,17 +5,446 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free MLA Citation Generator 9th Edition - StudentCitationTools.com</title>
     <meta name="description" content="Generate accurate MLA 9th edition citations instantly. Free tool for essays, research papers, and academic writing in humanities.">
-    <meta name="keywords" content="mla citation, mla format, mla 9th edition, mla generator, mla style">
-    <!-- Include same header as index.html -->
+    <meta name="keywords" content="mla citation, mla format, mla 9th edition, mla generator, mla style, free mla, works cited">
+    <meta name="author" content="StudentCitationTools.com">
+    <meta property="og:title" content="Free MLA Citation Generator 9th Edition">
+    <meta property="og:description" content="Generate accurate MLA 9th edition citations instantly.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHREV68R2D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-ZHREV68R2D');
+    </script>
 </head>
 <body>
-    <!-- Similar structure to index.html but focused on MLA -->
-    <div class="container">
-        <div class="breadcrumb">
-            <a href="index.html">Home</a> &gt; <span>MLA Citation Generator</span>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+            <div class="logo">
+                <h1>📚 StudentCitationTools.com</h1>
+                <p class="tagline">Free academic tools for students worldwide</p>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="apa.html">APA Generator</a>
+                <a href="mla.html" class="nav-active">MLA Generator</a>
+                <a href="chicago.html">Chicago Generator</a>
+                <a href="guide.html">Formatting Guide</a>
+                <a href="examples.html">Examples</a>
+                <a href="tips.html">Writing Tips</a>
+                <a href="contact.html">Contact</a>
+            </nav>
         </div>
-        <h1>MLA 9th Edition Citation Generator</h1>
-        <!-- MLA-specific form and generator -->
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>MLA 9th Edition Citation Generator</h2>
+                <p class="hero-subtitle">Generate perfect MLA citations for books, articles, websites, and more</p>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">MLA 9</span>
+                        <span class="stat-label">Latest Edition</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Accurate</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Free</span>
+                        <span class="stat-label">No Limits</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb container">
+        <a href="index.html">Home</a> &gt; <span>MLA Citation Generator</span>
     </div>
+
+    <!-- Main Tool -->
+    <main class="main">
+        <div class="container">
+            <!-- Style Info -->
+            <div class="style-selector">
+                <div class="style-tabs">
+                    <button class="style-tab" onclick="window.location.href='apa.html'">APA 7th Edition</button>
+                    <button class="style-tab active">MLA 9th Edition</button>
+                    <button class="style-tab" onclick="window.location.href='chicago.html'">Chicago 17th Edition</button>
+                </div>
+                <div class="style-info">
+                    <p><strong>MLA (Modern Language Association):</strong> Used in humanities, literature, arts, and languages. The 9th edition (2021) is the current standard.</p>
+                </div>
+            </div>
+
+            <!-- Tool Container -->
+            <div class="tool-container">
+                <!-- Input Form -->
+                <div class="input-section">
+                    <div class="input-card">
+                        <h3>📝 Enter MLA Source Details</h3>
+                        
+                        <div class="form-group">
+                            <label for="author">Author(s) *</label>
+                            <input type="text" id="author" placeholder="e.g., Smith, John">
+                            <small class="help-text">Format: Last Name, First Name (use semicolons for multiple authors)</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="year">Publication Year *</label>
+                                <input type="number" id="year" placeholder="2024" min="1000" max="2099">
+                            </div>
+                            <div class="form-group">
+                                <label for="sourceType">Source Type</label>
+                                <select id="sourceType">
+                                    <option value="book">Book</option>
+                                    <option value="journal">Journal Article</option>
+                                    <option value="website">Website</option>
+                                    <option value="newspaper">Newspaper</option>
+                                    <option value="magazine">Magazine</option>
+                                    <option value="ebook">E-book</option>
+                                    <option value="video">Video/Film</option>
+                                    <option value="podcast">Podcast</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title">Title *</label>
+                            <input type="text" id="title" placeholder="e.g., The Great Gatsby">
+                            <small class="help-text">For articles, use quotation marks; for books, italicize</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="container">Container Title</label>
+                            <input type="text" id="container" placeholder="e.g., Journal Name or Book Title">
+                            <small class="help-text">Journal, magazine, or book containing the work</small>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="publisher">Publisher</label>
+                                <input type="text" id="publisher" placeholder="e.g., Scribner">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City of Publication</label>
+                                <input type="text" id="city" placeholder="e.g., New York">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="pages">Page Range</label>
+                                <input type="text" id="pages" placeholder="e.g., 45-67">
+                            </div>
+                            <div class="form-group">
+                                <label for="edition">Edition</label>
+                                <input type="text" id="edition" placeholder="e.g., 2nd ed.">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="url">URL or DOI (Optional)</label>
+                            <input type="url" id="url" placeholder="https://example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="accessDate">Access Date (for online sources)</label>
+                            <input type="date" id="accessDate">
+                        </div>
+
+                        <div class="button-group">
+                            <button onclick="generateMLACitation()" class="btn btn-primary">
+                                <span class="btn-icon">✨</span> Generate MLA Citation
+                            </button>
+                            <button onclick="fillMLAExample()" class="btn btn-secondary">
+                                <span class="btn-icon">📋</span> Load Example
+                            </button>
+                            <button onclick="clearMLAForm()" class="btn btn-outline">
+                                <span class="btn-icon">🗑️</span> Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result Section -->
+                <div class="result-section">
+                    <div class="result-card">
+                        <div class="result-header">
+                            <h3>📄 MLA 9th Edition Citation</h3>
+                            <div class="style-badge">MLA 9th</div>
+                        </div>
+                        
+                        <div class="result-box" id="result">
+                            <div class="result-placeholder">
+                                <div class="placeholder-icon">📄</div>
+                                <p>Fill the form to generate MLA citation</p>
+                            </div>
+                        </div>
+
+                        <div class="result-box" id="worksCited" style="display: none; margin-top: 20px;">
+                            <h4 style="margin-bottom: 10px;">Works Cited Entry</h4>
+                            <pre id="worksCitedText"></pre>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button onclick="copyCitation()" class="btn btn-success" id="copyBtn">
+                                <span class="btn-icon">📋</span> Copy Citation
+                            </button>
+                            <button onclick="downloadCitation()" class="btn btn-info">
+                                <span class="btn-icon">💾</span> Download
+                            </button>
+                            <button onclick="toggleWorksCited()" class="btn btn-outline">
+                                <span class="btn-icon">📚</span> Works Cited
+                            </button>
+                        </div>
+
+                        <!-- MLA Format Tips -->
+                        <div class="ad-space" style="background: #f0f8ff; border-color: #3498db;">
+                            <h4 style="margin-bottom: 10px; color: #2c3e50;">MLA Format Tips:</h4>
+                            <ul style="font-size: 0.9rem; padding-left: 20px; color: #2c3e50;">
+                                <li>Use Times New Roman, 12pt font</li>
+                                <li>Double-space entire document</li>
+                                <li>1-inch margins on all sides</li>
+                                <li>Last name and page number in header</li>
+                                <li>Indent second and subsequent lines (hanging indent)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MLA Quick Guide -->
+            <section class="content-page">
+                <h2>MLA 9th Edition Quick Guide</h2>
+                
+                <h3>Basic Format</h3>
+                <pre>Author. "Title of Source." Title of Container, Other Contributors, Version, Number, 
+Publisher, Publication Date, Location.</pre>
+
+                <h3>Book Citation Format</h3>
+                <p><strong>Format:</strong> Last Name, First Name. <em>Title of Book</em>. Publisher, Publication Date.</p>
+                <p><strong>Example:</strong> Fitzgerald, F. Scott. <em>The Great Gatsby</em>. Scribner, 1925.</p>
+
+                <h3>Journal Article Format</h3>
+                <p><strong>Format:</strong> Author. "Title of Article." <em>Journal Name</em>, vol. number, no. number, Year, pages.</p>
+                <p><strong>Example:</strong> Smith, John. "Modern Poetry Analysis." <em>Literary Review</em>, vol. 12, no. 3, 2023, pp. 45-67.</p>
+
+                <h3>Website Format</h3>
+                <p><strong>Format:</strong> Author. "Title of Web Page." <em>Website Name</em>, Publisher, Publication Date, URL. Accessed Day Month Year.</p>
+                <p><strong>Example:</strong> Johnson, Mary. "Understanding Shakespeare." <em>Literature Online</em>, LitWeb, 15 Mar. 2023, www.example.com/shakespeare. Accessed 10 Dec. 2024.</p>
+
+                <h3>In-Text Citations</h3>
+                <p><strong>Basic format:</strong> (Author Page)</p>
+                <p><strong>Example:</strong> (Fitzgerald 45)</p>
+                <p><strong>Two authors:</strong> (Smith and Johnson 123)</p>
+                <p><strong>Three or more authors:</strong> (Smith et al. 89)</p>
+
+                <div class="button-group" style="justify-content: center; margin-top: 30px;">
+                    <button onclick="window.location.href='guide.html#mla'" class="btn btn-primary">
+                        <span class="btn-icon">📖</span> View Complete MLA Guide
+                    </button>
+                    <button onclick="window.location.href='examples.html#mla'" class="btn btn-secondary">
+                        <span class="btn-icon">📝</span> More MLA Examples
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>StudentCitationTools.com</h4>
+                    <p>Free academic tools for students worldwide. Making citation generation easy and accessible.</p>
+                    <p>Contact: <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Citation Styles</h4>
+                    <a href="apa.html">APA Generator</a>
+                    <a href="mla.html">MLA Generator</a>
+                    <a href="chicago.html">Chicago Generator</a>
+                    <a href="index.html">All Styles</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="guide.html">Formatting Guide</a>
+                    <a href="examples.html">Citation Examples</a>
+                    <a href="tips.html">Writing Tips</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                    <a href="disclaimer.html">Disclaimer</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2024 StudentCitationTools.com | Free MLA 9th Edition Citation Generator</p>
+                <p class="disclaimer">This tool generates MLA citations based on the 9th edition guidelines. Always verify with your institution's requirements.</p>
+                <div class="footer-links">
+                    <a href="contact.html">Contact Support</a> • 
+                    <a href="mailto:qtechz073@gmail.com">Report Issue</a> • 
+                    <a href="contact.html">Suggest Feature</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // MLA-specific JavaScript
+        function generateMLACitation() {
+            const author = document.getElementById('author').value.trim();
+            const year = document.getElementById('year').value.trim();
+            const title = document.getElementById('title').value.trim();
+            const container = document.getElementById('container').value.trim();
+            const publisher = document.getElementById('publisher').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const pages = document.getElementById('pages').value.trim();
+            const edition = document.getElementById('edition').value.trim();
+            const url = document.getElementById('url').value.trim();
+            const sourceType = document.getElementById('sourceType').value;
+            const accessDateInput = document.getElementById('accessDate').value;
+            
+            if (!author || !year || !title) {
+                alert('Please fill in all required fields (*)');
+                return;
+            }
+            
+            let citation = '';
+            let worksCited = '';
+            
+            // Format author(s)
+            const authors = author.split(';').map(a => {
+                const parts = a.split(',');
+                if (parts.length === 2) {
+                    const [last, first] = parts.map(p => p.trim());
+                    return `${last}, ${first}`;
+                }
+                return a.trim();
+            });
+            
+            const authorStr = authors.length === 1 ? authors[0] + '.' : 
+                             authors.length === 2 ? authors[0] + ', and ' + authors[1] + '.' :
+                             authors[0] + ', et al.';
+            
+            // Format access date
+            let accessDate = '';
+            if (accessDateInput) {
+                const date = new Date(accessDateInput);
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                accessDate = ' Accessed ' + date.toLocaleDateString('en-US', options) + '.';
+            }
+            
+            // Generate citation based on source type
+            switch(sourceType) {
+                case 'book':
+                    citation = `${authorStr} <em>${title}</em>`;
+                    if (edition) citation += `, ${edition}`;
+                    if (city) citation += `, ${city}: ${publisher}`;
+                    else if (publisher) citation += `, ${publisher}`;
+                    citation += `, ${year}.`;
+                    break;
+                    
+                case 'journal':
+                    citation = `${authorStr} "${title}."`;
+                    if (container) citation += ` <em>${container}</em>`;
+                    if (year) citation += `, ${year}`;
+                    if (pages) citation += `, pp. ${pages}.`;
+                    break;
+                    
+                case 'website':
+                    citation = `${authorStr} "${title}."`;
+                    if (container) citation += ` <em>${container}</em>,`;
+                    if (publisher) citation += ` ${publisher},`;
+                    if (year) citation += ` ${year},`;
+                    if (url) citation += ` ${url}.`;
+                    citation += accessDate;
+                    break;
+                    
+                default:
+                    citation = `${authorStr} "${title}."`;
+                    if (container) citation += ` <em>${container}</em>,`;
+                    if (publisher) citation += ` ${publisher},`;
+                    citation += ` ${year}.`;
+            }
+            
+            // Generate works cited format
+            worksCited = citation.replace(/<em>|<\/em>/g, '');
+            
+            // Display results
+            document.getElementById('result').innerHTML = `<pre>${citation}</pre>`;
+            document.getElementById('worksCitedText').textContent = worksCited;
+            document.getElementById('worksCited').style.display = 'none';
+            
+            // Track in Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'generate_mla', {
+                    'event_category': 'mla',
+                    'event_label': sourceType
+                });
+            }
+        }
+        
+        function fillMLAExample() {
+            document.getElementById('author').value = 'Fitzgerald, F. Scott';
+            document.getElementById('year').value = '1925';
+            document.getElementById('title').value = 'The Great Gatsby';
+            document.getElementById('container').value = '';
+            document.getElementById('publisher').value = 'Scribner';
+            document.getElementById('city').value = 'New York';
+            document.getElementById('pages').value = '';
+            document.getElementById('edition').value = '';
+            document.getElementById('sourceType').value = 'book';
+            
+            // Trigger generation
+            setTimeout(generateMLACitation, 100);
+        }
+        
+        function clearMLAForm() {
+            document.getElementById('author').value = '';
+            document.getElementById('year').value = '';
+            document.getElementById('title').value = '';
+            document.getElementById('container').value = '';
+            document.getElementById('publisher').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('pages').value = '';
+            document.getElementById('edition').value = '';
+            document.getElementById('url').value = '';
+            document.getElementById('accessDate').value = '';
+            document.getElementById('result').innerHTML = `
+                <div class="result-placeholder">
+                    <div class="placeholder-icon">📄</div>
+                    <p>Fill the form to generate MLA citation</p>
+                </div>`;
+            document.getElementById('worksCited').style.display = 'none';
+        }
+        
+        function toggleWorksCited() {
+            const worksCited = document.getElementById('worksCited');
+            worksCited.style.display = worksCited.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.main-nav').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
