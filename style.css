@@ -669,6 +669,180 @@ body {
     font-size: 0.9rem;
     color: #7f8c8d;
 }
+/* Mobile Menu Fixes */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #2c3e50;
+    padding: 5px;
+    z-index: 1001;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .header .container {
+        position: relative;
+        padding-right: 50px;
+    }
+    
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 280px;
+        height: 100vh;
+        background: white;
+        padding: 80px 20px 20px;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        z-index: 1000;
+        flex-direction: column;
+        gap: 10px;
+        overflow-y: auto;
+    }
+    
+    .main-nav.active {
+        right: 0;
+    }
+    
+    .main-nav a {
+        display: block;
+        padding: 12px 15px;
+        margin: 5px 0;
+        border-radius: 5px;
+        text-align: left;
+        font-size: 1.1rem;
+    }
+    
+    /* Overlay when menu is open */
+    .main-nav.active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: -1;
+    }
+    
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+        overflow: hidden;
+    }
+    
+    .logo h1 {
+        font-size: 1.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
+    }
+    
+    .tagline {
+        font-size: 0.7rem;
+    }
+}
+
+/* Tablet optimizations */
+@media (max-width: 1024px) {
+    .tool-container {
+        gap: 20px;
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .stat {
+        flex-direction: row;
+        gap: 10px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .btn, .style-tab, .mobile-menu-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    input, select, textarea {
+        font-size: 16px; /* Prevents iOS zoom */
+    }
+    
+    .form-group input, .form-group select {
+        padding: 12px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .header, .footer, .mobile-menu-btn, .ad-space, .ad-banner {
+        display: none !important;
+    }
+    
+    .result-box {
+        border: 1px solid #000 !important;
+        page-break-inside: avoid;
+    }
+}
 
 /* Print Styles */
 @media print {
