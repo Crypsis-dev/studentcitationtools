@@ -295,7 +295,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>© 2026 StudentCitationTools.com | Free APA, MLA & Chicago Citation Generator</p>
+                <p>© 2024 StudentCitationTools.com | Free APA, MLA & Chicago Citation Generator</p>
                 <p class="disclaimer">This tool generates citations based on official style guides. Always verify with your institution's requirements.</p>
                 <div class="footer-links">
                     <a href="contact.html">Contact Support</a> • 
@@ -306,7 +306,260 @@
         </div>
     </footer>
 
-    <!-- Scripts - ONLY ONE SCRIPT INCLUDED -->
+    <!-- Scripts -->
     <script src="script.js"></script>
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileMenuBtn && mainNav) {
+                // Toggle mobile menu
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mainNav.classList.toggle('active');
+                    mobileMenuBtn.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+                    mobileMenuBtn.setAttribute('aria-label', 
+                        mainNav.classList.contains('active') ? 'Close menu' : 'Open menu');
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.textContent = '☰';
+                        mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+                    }
+                });
+                
+                // Close menu when clicking a link
+                const navLinks = mainNav.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.textContent = '☰';
+                        mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+                    });
+                });
+                
+                // Close menu on escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.textContent = '☰';
+                        mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+                    }
+                });
+            }
+            
+            // Initialize tab functionality
+            initializeTabs();
+            
+            // Track page view in analytics
+            trackPageView();
+        });
+        
+        function initializeTabs() {
+            const tabs = document.querySelectorAll('.style-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const style = this.dataset.style;
+                    
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Update style badge
+                    const badgeText = style === 'apa' ? 'APA 7th' : 
+                                     style === 'mla' ? 'MLA 9th' : 'Chicago 17th';
+                    document.getElementById('styleBadge').textContent = badgeText;
+                    
+                    // Update style info
+                    const infoText = {
+                        apa: 'APA (American Psychological Association): Used in psychology, education, and social sciences.',
+                        mla: 'MLA (Modern Language Association): Used in humanities, literature, and arts.',
+                        chicago: 'Chicago Manual of Style: Used in publishing, history, and some social sciences.'
+                    };
+                    document.getElementById('styleInfo').innerHTML = 
+                        `<p><strong>${badgeText}:</strong> ${infoText[style]}</p>`;
+                    
+                    // Update form fields
+                    updateFormForStyle(style);
+                });
+            });
+        }
+        
+        function updateFormForStyle(style) {
+            const dynamicFields = document.getElementById('dynamicFields');
+            if (style === 'apa') {
+                dynamicFields.innerHTML = `
+                    <div class="form-group">
+                        <label for="publisher">Publisher</label>
+                        <input type="text" id="publisher" placeholder="e.g., Oxford University Press">
+                    </div>
+                    <div class="form-group">
+                        <label for="journal">Journal Name (if applicable)</label>
+                        <input type="text" id="journal" placeholder="e.g., Journal of Psychology">
+                    </div>
+                `;
+            } else if (style === 'mla') {
+                dynamicFields.innerHTML = `
+                    <div class="form-group">
+                        <label for="publisher">Publisher</label>
+                        <input type="text" id="publisher" placeholder="e.g., Oxford University Press">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City of Publication</label>
+                        <input type="text" id="city" placeholder="e.g., New York">
+                    </div>
+                `;
+            } else {
+                dynamicFields.innerHTML = `
+                    <div class="form-group">
+                        <label for="publisher">Publisher</label>
+                        <input type="text" id="publisher" placeholder="e.g., University of Chicago Press">
+                    </div>
+                    <div class="form-group">
+                        <label for="edition">Edition (if applicable)</label>
+                        <input type="text" id="edition" placeholder="e.g., 3rd ed.">
+                    </div>
+                `;
+            }
+        }
+        
+        function generateCitation() {
+            const author = document.getElementById('author').value.trim();
+            const year = document.getElementById('year').value.trim();
+            const title = document.getElementById('title').value.trim();
+            
+            if (!author || !year || !title) {
+                alert('Please fill in all required fields (*)');
+                return;
+            }
+            
+            // Get active style
+            const activeTab = document.querySelector('.style-tab.active');
+            const style = activeTab ? activeTab.dataset.style : 'apa';
+            
+            let citation = '';
+            if (style === 'apa') {
+                citation = `${author}. (${year}). ${title}.`;
+            } else if (style === 'mla') {
+                citation = `${author}. "${title}." ${year}.`;
+            } else {
+                citation = `${author}. ${title}. ${year}.`;
+            }
+            
+            document.getElementById('result').innerHTML = `<pre>${citation}</pre>`;
+            
+            // Track citation generation in analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'generate_citation', {
+                    'event_category': 'citation',
+                    'event_label': style,
+                    'value': 1
+                });
+            }
+        }
+        
+        function fillExample() {
+            document.getElementById('author').value = 'Smith, John';
+            document.getElementById('year').value = '2024';
+            document.getElementById('title').value = 'The Psychology of Modern Learning';
+            document.getElementById('publisher').value = 'Academic Press';
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'click', {
+                    'event_category': 'example',
+                    'event_label': 'load_example'
+                });
+            }
+        }
+        
+        function clearForm() {
+            document.getElementById('author').value = '';
+            document.getElementById('year').value = '';
+            document.getElementById('title').value = '';
+            document.getElementById('publisher').value = '';
+            document.getElementById('url').value = '';
+            document.getElementById('result').innerHTML = `
+                <div class="result-placeholder">
+                    <div class="placeholder-icon">📄</div>
+                    <p>Select a style and fill the form to generate citation</p>
+                </div>`;
+        }
+        
+        function copyCitation() {
+            const resultText = document.getElementById('result').textContent;
+            if (resultText && !resultText.includes('Select a style')) {
+                navigator.clipboard.writeText(resultText).then(() => {
+                    const copyBtn = document.getElementById('copyBtn');
+                    const originalText = copyBtn.innerHTML;
+                    copyBtn.innerHTML = '<span class="btn-icon">✓</span> Copied!';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalText;
+                    }, 2000);
+                    
+                    // Track copy action
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'click', {
+                            'event_category': 'action',
+                            'event_label': 'copy_citation'
+                        });
+                    }
+                });
+            }
+        }
+        
+        function downloadCitation() {
+            const resultText = document.getElementById('result').textContent;
+            if (resultText && !resultText.includes('Select a style')) {
+                const blob = new Blob([resultText], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'citation.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                
+                // Track download action
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'click', {
+                        'event_category': 'action',
+                        'event_label': 'download_citation'
+                    });
+                }
+            }
+        }
+        
+        function trackPageView() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    'page_title': document.title,
+                    'page_location': window.location.href,
+                    'page_path': window.location.pathname
+                });
+            }
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const mainNav = document.getElementById('mainNav');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (window.innerWidth > 768 && mainNav) {
+                mainNav.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.textContent = '☰';
+                    mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+                }
+            }
+        });
+    </script>
 </body>
 </html>
