@@ -11,6 +11,7 @@ body {
     color: #333;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .container {
@@ -33,6 +34,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 15px 20px;
+    position: relative;
 }
 
 .logo h1 {
@@ -49,6 +51,7 @@ body {
     margin-top: 5px;
 }
 
+/* Desktop Navigation */
 .main-nav {
     display: flex;
     gap: 15px;
@@ -69,12 +72,20 @@ body {
     color: white;
 }
 
+/* Mobile Menu Button */
 .mobile-menu-btn {
     display: none;
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     cursor: pointer;
+    color: #2c3e50;
+    padding: 8px;
+    z-index: 1001;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Hero */
@@ -202,7 +213,7 @@ body {
 .form-group input,
 .form-group select {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
@@ -498,26 +509,89 @@ body {
     margin: 0 5px;
 }
 
-/* Mobile Responsive */
+/* ====================== */
+/* MOBILE RESPONSIVE STYLES */
+/* ====================== */
+
 @media (max-width: 768px) {
+    /* Mobile Menu Button */
     .mobile-menu-btn {
-        display: block;
+        display: flex;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
     }
     
+    /* Hide desktop navigation on mobile */
     .main-nav {
-        display: none;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: white;
+        padding: 80px 20px 20px;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 999;
         flex-direction: column;
-        position: absolute;
-        top: 100%;
+        gap: 5px;
+        overflow-y: auto;
+        display: flex !important; /* Force display */
+    }
+    
+    /* Active state - slide in */
+    .main-nav.active {
+        right: 0;
+    }
+    
+    /* Navigation links on mobile */
+    .main-nav a {
+        display: block;
+        padding: 15px;
+        margin: 5px 0;
+        border-radius: 5px;
+        text-align: left;
+        font-size: 1.1rem;
+        border-left: 3px solid transparent;
+    }
+    
+    .main-nav a:hover,
+    .main-nav a.nav-active {
+        background: #f0f8ff;
+        color: #3498db;
+        border-left-color: #3498db;
+    }
+    
+    /* Overlay when menu is open */
+    .main-nav.active::after {
+        content: '';
+        position: fixed;
+        top: 0;
         left: 0;
         right: 0;
-        background: white;
-        padding: 20px;
-        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: -1;
+        pointer-events: all;
     }
     
-    .main-nav.active {
-        display: flex;
+    /* Prevent body scroll when menu is open */
+    body.menu-open {
+        overflow: hidden;
+    }
+    
+    .logo h1 {
+        font-size: 1.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 200px;
+    }
+    
+    .tagline {
+        font-size: 0.7rem;
     }
     
     .hero h2 {
@@ -540,6 +614,119 @@ body {
     .btn {
         width: 100%;
         justify-content: center;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    /* Add close button inside mobile menu */
+    .main-nav::before {
+        content: '✕';
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 1.5rem;
+        color: #2c3e50;
+        cursor: pointer;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1002;
+    }
+}
+
+/* Tablet optimizations */
+@media (max-width: 1024px) {
+    .tool-container {
+        gap: 20px;
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .stat {
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* Adjust mobile menu for very small screens */
+    .main-nav {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .btn, .style-tab, .mobile-menu-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    input, select, textarea {
+        font-size: 16px; /* Prevents iOS zoom */
+    }
+    
+    .form-group input, .form-group select {
+        padding: 12px;
+    }
+    
+    /* Better touch targets for mobile nav */
+    .main-nav a {
+        min-height: 50px;
+        display: flex;
+        align-items: center;
     }
 }
 
@@ -669,184 +856,10 @@ body {
     font-size: 0.9rem;
     color: #7f8c8d;
 }
-/* Mobile Menu Fixes */
-.mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #2c3e50;
-    padding: 5px;
-    z-index: 1001;
-}
-
-@media (max-width: 768px) {
-    .mobile-menu-btn {
-        display: block;
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    
-    .header .container {
-        position: relative;
-        padding-right: 50px;
-    }
-    
-    .main-nav {
-        position: fixed;
-        top: 0;
-        right: -300px;
-        width: 280px;
-        height: 100vh;
-        background: white;
-        padding: 80px 20px 20px;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-        transition: right 0.3s ease;
-        z-index: 1000;
-        flex-direction: column;
-        gap: 10px;
-        overflow-y: auto;
-    }
-    
-    .main-nav.active {
-        right: 0;
-    }
-    
-    .main-nav a {
-        display: block;
-        padding: 12px 15px;
-        margin: 5px 0;
-        border-radius: 5px;
-        text-align: left;
-        font-size: 1.1rem;
-    }
-    
-    /* Overlay when menu is open */
-    .main-nav.active::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0,0,0,0.5);
-        z-index: -1;
-    }
-    
-    /* Prevent body scroll when menu is open */
-    body.menu-open {
-        overflow: hidden;
-    }
-    
-    .logo h1 {
-        font-size: 1.2rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 200px;
-    }
-    
-    .tagline {
-        font-size: 0.7rem;
-    }
-}
-
-/* Tablet optimizations */
-@media (max-width: 1024px) {
-    .tool-container {
-        gap: 20px;
-    }
-    
-    .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .faq-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Very small screens */
-@media (max-width: 480px) {
-    .hero h2 {
-        font-size: 1.5rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-    
-    .stats {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .stat {
-        flex-direction: row;
-        gap: 10px;
-    }
-    
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-    
-    .button-group {
-        flex-direction: column;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
-    }
-    
-    .btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-}
-
-/* Touch device optimizations */
-@media (hover: none) and (pointer: coarse) {
-    .btn, .style-tab, .mobile-menu-btn {
-        min-height: 44px;
-        min-width: 44px;
-    }
-    
-    input, select, textarea {
-        font-size: 16px; /* Prevents iOS zoom */
-    }
-    
-    .form-group input, .form-group select {
-        padding: 12px;
-    }
-}
 
 /* Print styles */
 @media print {
     .header, .footer, .mobile-menu-btn, .ad-space, .ad-banner {
-        display: none !important;
-    }
-    
-    .result-box {
-        border: 1px solid #000 !important;
-        page-break-inside: avoid;
-    }
-}
-
-/* Print Styles */
-@media print {
-    .header, .footer, .ad-space, .ad-banner, .mobile-menu-btn {
         display: none !important;
     }
     
@@ -857,5 +870,48 @@ body {
     .result-box {
         border: 1px solid #000 !important;
         background: white !important;
+        page-break-inside: avoid;
+    }
+}
+
+/* Additional Mobile Fixes */
+@media (max-width: 768px) {
+    /* Ensure proper stacking on mobile */
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* Fix any overflow issues */
+    .input-card, .result-card {
+        padding: 20px;
+    }
+    
+    /* Better spacing on mobile */
+    .main {
+        padding: 20px 0;
+    }
+    
+    /* Mobile menu overlay fix */
+    .main-nav.active {
+        box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+    }
+}
+
+/* Animation for mobile menu */
+@keyframes slideIn {
+    from {
+        right: -100%;
+    }
+    to {
+        right: 0;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        right: 0;
+    }
+    to {
+        right: -100%;
     }
 }
