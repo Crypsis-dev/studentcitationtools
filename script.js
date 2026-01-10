@@ -5,20 +5,19 @@ let currentStyle = 'apa';
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Citation Generator initializing...');
     
-    // Initialize mobile menu FIRST
+    // Initialize all modules
     initializeMobileMenu();
-    
-    // Initialize other modules
     initializeTabs();
     initializeForm();
     initializeCitationGenerator();
+    initializeAnalytics();
     checkURLParameters();
     
     console.log('Citation Generator initialized successfully!');
 });
 
 // ======================
-// MOBILE MENU FUNCTIONS - SIMPLIFIED AND FIXED
+// MOBILE MENU FUNCTIONS - FIXED
 // ======================
 function initializeMobileMenu() {
     console.log('Initializing mobile menu...');
@@ -28,73 +27,81 @@ function initializeMobileMenu() {
     
     if (!mobileMenuBtn || !mainNav) {
         console.error('Mobile menu elements not found!');
+        console.log('Button:', mobileMenuBtn);
+        console.log('Nav:', mainNav);
         return;
     }
     
-    console.log('Mobile menu elements found');
+    console.log('Found mobile menu elements');
     
     // Toggle mobile menu
     mobileMenuBtn.addEventListener('click', function(e) {
         e.stopPropagation();
         console.log('Mobile menu button clicked');
         
-        // Toggle active class on nav
-        mainNav.classList.toggle('active');
+        const isActive = mainNav.classList.contains('active');
         
-        // Update button text and aria-label
-        if (mainNav.classList.contains('active')) {
-            mobileMenuBtn.textContent = '✕';
-            mobileMenuBtn.setAttribute('aria-label', 'Close menu');
-            document.body.style.overflow = 'hidden';
-        } else {
-            mobileMenuBtn.textContent = '☰';
-            mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-            document.body.style.overflow = '';
-        }
-    });
-    
-    // Close menu when clicking on a link
-    const navLinks = mainNav.querySelectorAll('a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
-                mainNav.classList.remove('active');
-                mobileMenuBtn.textContent = '☰';
-                mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-                document.body.style.overflow = '';
-            }
-        });
-    });
-    
-    // Close menu when clicking outside (on overlay)
-    document.addEventListener('click', function(e) {
-        if (mainNav.classList.contains('active') && 
-            !mainNav.contains(e.target) && 
-            !mobileMenuBtn.contains(e.target)) {
+        if (isActive) {
+            // Close menu
             mainNav.classList.remove('active');
             mobileMenuBtn.textContent = '☰';
             mobileMenuBtn.setAttribute('aria-label', 'Open menu');
             document.body.style.overflow = '';
+            console.log('Mobile menu closed');
+        } else {
+            // Open menu
+            mainNav.classList.add('active');
+            mobileMenuBtn.textContent = '✕';
+            mobileMenuBtn.setAttribute('aria-label', 'Close menu');
+            document.body.style.overflow = 'hidden';
+            console.log('Mobile menu opened');
         }
     });
     
-    // Close menu with Escape key
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mainNav.classList.contains('active')) {
+            mainNav.classList.remove('active');
+            mobileMenuBtn.textContent = '☰';
+            mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+            document.body.style.overflow = '';
+            console.log('Mobile menu closed (click outside)');
+        }
+    });
+    
+    // Close menu on escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && mainNav.classList.contains('active')) {
             mainNav.classList.remove('active');
             mobileMenuBtn.textContent = '☰';
             mobileMenuBtn.setAttribute('aria-label', 'Open menu');
             document.body.style.overflow = '';
+            console.log('Mobile menu closed (Escape key)');
         }
     });
     
-    // Close menu on window resize (when going to desktop)
+    // Close menu when clicking a link
+    const navLinks = mainNav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) { // Only close on mobile
+                mainNav.classList.remove('active');
+                mobileMenuBtn.textContent = '☰';
+                mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+                document.body.style.overflow = '';
+                console.log('Mobile menu closed (link clicked)');
+            }
+        });
+    });
+    
+    // Handle window resize
     window.addEventListener('resize', function() {
         if (window.innerWidth > 768 && mainNav.classList.contains('active')) {
             mainNav.classList.remove('active');
             mobileMenuBtn.textContent = '☰';
             mobileMenuBtn.setAttribute('aria-label', 'Open menu');
             document.body.style.overflow = '';
+            console.log('Mobile menu closed (window resized)');
         }
     });
     
@@ -317,12 +324,12 @@ function generateCitation() {
     
     // Validation
     if (!author || !year || !title) {
-        alert('Please fill in all required fields (Author, Year, Title)');
+        showAlert('Please fill in all required fields (Author, Year, Title)', 'error');
         return;
     }
     
     if (year && (isNaN(year) || year < 1000 || year > new Date().getFullYear() + 1)) {
-        alert('Please enter a valid publication year (1000-' + (new Date().getFullYear() + 1) + ')');
+        showAlert('Please enter a valid publication year (1000-' + (new Date().getFullYear() + 1) + ')', 'error');
         return;
     }
     
@@ -349,9 +356,12 @@ function generateCitation() {
             resultElement.innerHTML = `<pre>${citation}</pre>`;
         }
         
+        // Show success message
+        showAlert('Citation generated successfully!', 'success');
+        
     } catch (error) {
         console.error('Citation generation error:', error);
-        alert('Error generating citation. Please check your input.');
+        showAlert('Error generating citation. Please check your input.', 'error');
     }
 }
 
@@ -531,6 +541,8 @@ function clearForm() {
     
     // Clear saved form data
     localStorage.removeItem('citationFormData');
+    
+    showAlert('Form cleared', 'info');
 }
 
 function copyCitation() {
@@ -539,7 +551,7 @@ function copyCitation() {
     
     const text = result.textContent;
     if (!text || text.includes('Select a style')) {
-        alert('No citation to copy. Please generate a citation first.');
+        showAlert('No citation to copy. Please generate a citation first.', 'warning');
         return;
     }
     
@@ -556,11 +568,11 @@ function copyCitation() {
             }, 2000);
         }
         
-        alert('Citation copied to clipboard!');
+        showAlert('Citation copied to clipboard!', 'success');
         
     }).catch(err => {
         console.error('Failed to copy:', err);
-        alert('Failed to copy. Please try again.');
+        showAlert('Failed to copy. Please try again.', 'error');
     });
 }
 
@@ -570,7 +582,7 @@ function downloadCitation() {
     
     const text = result.textContent;
     if (!text || text.includes('Select a style')) {
-        alert('No citation to download. Please generate a citation first.');
+        showAlert('No citation to download. Please generate a citation first.', 'warning');
         return;
     }
     
@@ -585,17 +597,101 @@ function downloadCitation() {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
         
-        alert('Citation downloaded successfully!');
+        showAlert('Citation downloaded successfully!', 'success');
         
     } catch (error) {
         console.error('Download error:', error);
-        alert('Failed to download citation.');
+        showAlert('Failed to download citation.', 'error');
     }
 }
 
 // ======================
 // HELPER FUNCTIONS
 // ======================
+function showAlert(message, type = 'info') {
+    // Remove existing alerts
+    const existingAlert = document.querySelector('.custom-alert');
+    if (existingAlert) {
+        existingAlert.remove();
+    }
+    
+    // Create alert element
+    const alert = document.createElement('div');
+    alert.className = `custom-alert custom-alert-${type}`;
+    alert.innerHTML = `
+        <span>${message}</span>
+        <button class="alert-close" onclick="this.parentElement.remove()">&times;</button>
+    `;
+    
+    // Add styles if not already added
+    if (!document.querySelector('#alert-styles')) {
+        const style = document.createElement('style');
+        style.id = 'alert-styles';
+        style.textContent = `
+            .custom-alert {
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                padding: 12px 20px;
+                border-radius: 5px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 9999;
+                max-width: 300px;
+                animation: slideInRight 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .custom-alert-info {
+                background: #3498db;
+                color: white;
+                border-left: 4px solid #2980b9;
+            }
+            .custom-alert-success {
+                background: #2ecc71;
+                color: white;
+                border-left: 4px solid #27ae60;
+            }
+            .custom-alert-warning {
+                background: #f39c12;
+                color: white;
+                border-left: 4px solid #d35400;
+            }
+            .custom-alert-error {
+                background: #e74c3c;
+                color: white;
+                border-left: 4px solid #c0392b;
+            }
+            .alert-close {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1.2rem;
+                cursor: pointer;
+                margin-left: 15px;
+                opacity: 0.8;
+            }
+            .alert-close:hover {
+                opacity: 1;
+            }
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    document.body.appendChild(alert);
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        if (alert.parentElement) {
+            alert.remove();
+        }
+    }, 5000);
+}
+
 function getFormattedDate() {
     const now = new Date();
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
@@ -612,7 +708,30 @@ function checkURLParameters() {
 }
 
 // ======================
-// EXPORT FUNCTIONS FOR HTML onclick ATTRIBUTES
+// ANALYTICS FUNCTIONS
+// ======================
+function initializeAnalytics() {
+    // Track interactions
+    trackInteractions();
+}
+
+function trackInteractions() {
+    // Track button clicks
+    document.querySelectorAll('.btn, .style-tab, .mobile-menu-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const text = this.textContent.trim() || this.getAttribute('aria-label') || 'button';
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'click', {
+                    'event_category': 'ui',
+                    'event_label': text
+                });
+            }
+        });
+    });
+}
+
+// ======================
+// EXPORT FUNCTIONS FOR HTML
 // ======================
 // Make functions available globally for onclick attributes
 window.generateCitation = generateCitation;
@@ -620,5 +739,21 @@ window.fillExample = fillExample;
 window.clearForm = clearForm;
 window.copyCitation = copyCitation;
 window.downloadCitation = downloadCitation;
+
+// Add CSS for invalid fields
+if (!document.querySelector('#form-styles')) {
+    const style = document.createElement('style');
+    style.id = 'form-styles';
+    style.textContent = `
+        .invalid {
+            border-color: #e74c3c !important;
+            box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.1) !important;
+        }
+        .copied {
+            background-color: #27ae60 !important;
+        }
+    `;
+    document.head.appendChild(style);
+}
 
 console.log('Citation Generator script loaded successfully');
