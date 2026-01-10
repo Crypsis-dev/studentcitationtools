@@ -72,21 +72,53 @@ body {
     color: white;
 }
 
-/* Mobile Menu Button */
+/* Mobile Menu Styles */
 .mobile-menu-btn {
     display: none;
     background: none;
     border: none;
-    font-size: 1.8rem;
+    font-size: 24px;
     cursor: pointer;
-    color: #2c3e50;
-    padding: 8px;
-    z-index: 1001;
-    width: 44px;
-    height: 44px;
-    align-items: center;
-    justify-content: center;
+    color: #333;
+    padding: 10px;
 }
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        z-index: 1000;
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .main-nav.active {
+        display: flex;
+    }
+    
+    .main-nav a {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .main-nav a:last-child {
+        border-bottom: none;
+    }
 
 /* Hero */
 .hero {
