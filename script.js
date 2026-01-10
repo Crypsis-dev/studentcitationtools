@@ -3,7 +3,7 @@ let currentStyle = 'apa';
 
 // Main initialization
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Citation Generator initializing...');
+    console.log('Initializing Citation Generator...');
     
     // Initialize all modules
     initializeMobileMenu();
@@ -13,99 +13,114 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeAnalytics();
     checkURLParameters();
     
+    // Set up service worker if available
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('Service Worker registered:', reg))
+            .catch(err => console.log('Service Worker registration failed:', err));
+    }
+    
     console.log('Citation Generator initialized successfully!');
 });
 
 // ======================
-// MOBILE MENU FUNCTIONS - FIXED
+// MOBILE MENU FUNCTIONS
 // ======================
 function initializeMobileMenu() {
-    console.log('Initializing mobile menu...');
-    
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mainNav = document.getElementById('mainNav');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mainNav = document.querySelector('.main-nav');
+    const body = document.body;
     
     if (!mobileMenuBtn || !mainNav) {
-        console.error('Mobile menu elements not found!');
-        console.log('Button:', mobileMenuBtn);
-        console.log('Nav:', mainNav);
+        console.warn('Mobile menu elements not found');
         return;
     }
     
-    console.log('Found mobile menu elements');
+    console.log('Initializing mobile menu...');
     
-    // Toggle mobile menu
+    // Mobile menu toggle
     mobileMenuBtn.addEventListener('click', function(e) {
         e.stopPropagation();
-        console.log('Mobile menu button clicked');
+        e.preventDefault();
         
         const isActive = mainNav.classList.contains('active');
         
         if (isActive) {
-            // Close menu
-            mainNav.classList.remove('active');
-            mobileMenuBtn.textContent = '☰';
-            mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-            document.body.style.overflow = '';
-            console.log('Mobile menu closed');
+            closeMobileMenu();
         } else {
-            // Open menu
-            mainNav.classList.add('active');
-            mobileMenuBtn.textContent = '✕';
-            mobileMenuBtn.setAttribute('aria-label', 'Close menu');
-            document.body.style.overflow = 'hidden';
-            console.log('Mobile menu opened');
+            openMobileMenu();
         }
     });
     
     // Close menu when clicking outside
     document.addEventListener('click', function(e) {
-        if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mainNav.classList.contains('active')) {
-            mainNav.classList.remove('active');
-            mobileMenuBtn.textContent = '☰';
-            mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-            document.body.style.overflow = '';
-            console.log('Mobile menu closed (click outside)');
+        if (mainNav.classList.contains('active') && 
+            !mainNav.contains(e.target) && 
+            !mobileMenuBtn.contains(e.target)) {
+            closeMobileMenu();
         }
     });
     
     // Close menu on escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && mainNav.classList.contains('active')) {
-            mainNav.classList.remove('active');
-            mobileMenuBtn.textContent = '☰';
-            mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-            document.body.style.overflow = '';
-            console.log('Mobile menu closed (Escape key)');
+            closeMobileMenu();
         }
     });
     
-    // Close menu when clicking a link
+    // Close menu when clicking links (optional delay for smooth transition)
     const navLinks = mainNav.querySelectorAll('a');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
-            if (window.innerWidth <= 768) { // Only close on mobile
-                mainNav.classList.remove('active');
-                mobileMenuBtn.textContent = '☰';
-                mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-                document.body.style.overflow = '';
-                console.log('Mobile menu closed (link clicked)');
-            }
+            // Add small delay for better UX
+            setTimeout(closeMobileMenu, 100);
         });
     });
     
     // Handle window resize
     window.addEventListener('resize', function() {
         if (window.innerWidth > 768 && mainNav.classList.contains('active')) {
-            mainNav.classList.remove('active');
-            mobileMenuBtn.textContent = '☰';
-            mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-            document.body.style.overflow = '';
-            console.log('Mobile menu closed (window resized)');
+            closeMobileMenu();
         }
     });
     
-    console.log('Mobile menu initialized successfully');
+    console.log('Mobile menu initialized');
+}
+
+function openMobileMenu() {
+    const mainNav = document.querySelector('.main-nav');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const body = document.body;
+    
+    if (!mainNav || !mobileMenuBtn) return;
+    
+    mainNav.classList.add('active');
+    mobileMenuBtn.innerHTML = '✕';
+    mobileMenuBtn.setAttribute('aria-label', 'Close menu');
+    body.classList.add('menu-open');
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+    
+    trackEvent('mobile_menu', 'open');
+}
+
+function closeMobileMenu() {
+    const mainNav = document.querySelector('.main-nav');
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const body = document.body;
+    
+    if (!mainNav || !mobileMenuBtn) return;
+    
+    mainNav.classList.remove('active');
+    mobileMenuBtn.innerHTML = '☰';
+    mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+    body.classList.remove('menu-open');
+    
+    // Restore body scroll
+    document.body.style.overflow = '';
+    
+    trackEvent('mobile_menu', 'close');
 }
 
 // ======================
@@ -181,6 +196,13 @@ function switchStyle(style) {
     
     // Update form fields
     updateFormForStyle(style);
+    
+    // Update URL without reload
+    const url = new URL(window.location);
+    url.searchParams.set('style', style);
+    window.history.replaceState({}, '', url);
+    
+    trackEvent('citation_style', 'switch', style);
     
     // Regenerate citation if form has data
     if (document.getElementById('author')?.value.trim()) {
@@ -258,6 +280,7 @@ function initializeForm() {
 function validateField(field) {
     if (field.required && !field.value.trim()) {
         field.classList.add('invalid');
+        showAlert(`Please fill in ${field.previousElementSibling?.textContent || 'this field'}`, 'error');
         return false;
     }
     field.classList.remove('invalid');
@@ -287,6 +310,7 @@ function loadFormData() {
             const data = JSON.parse(saved);
             if (data.style) switchStyle(data.style);
             
+            // Wait for form to update, then fill data
             setTimeout(() => {
                 if (data.author) document.getElementById('author').value = data.author;
                 if (data.year) document.getElementById('year').value = data.year;
@@ -356,8 +380,14 @@ function generateCitation() {
             resultElement.innerHTML = `<pre>${citation}</pre>`;
         }
         
+        // Save to history
+        saveCitationToHistory(citation);
+        
         // Show success message
         showAlert('Citation generated successfully!', 'success');
+        
+        // Track generation
+        trackEvent('citation', 'generate', currentStyle);
         
     } catch (error) {
         console.error('Citation generation error:', error);
@@ -380,7 +410,7 @@ function generateAPACitation(author, year, title, publisher, url, sourceType) {
             break;
             
         case 'website':
-            citation = `${authors} (${year}). ${title}.`;
+            citation = `${authors} (${year}, ${getCurrentMonth()}). ${title}.`;
             if (publisher) citation += ` ${publisher}.`;
             if (url) citation += ` Retrieved from ${url}`;
             else citation += '.';
@@ -519,6 +549,8 @@ function fillExample() {
         if (editionField) editionField.value = example.edition;
     }
     
+    trackEvent('example', 'load', currentStyle);
+    
     // Auto-generate after a delay
     setTimeout(generateCitation, 300);
 }
@@ -543,6 +575,7 @@ function clearForm() {
     localStorage.removeItem('citationFormData');
     
     showAlert('Form cleared', 'info');
+    trackEvent('form', 'clear');
 }
 
 function copyCitation() {
@@ -569,6 +602,7 @@ function copyCitation() {
         }
         
         showAlert('Citation copied to clipboard!', 'success');
+        trackEvent('citation', 'copy');
         
     }).catch(err => {
         console.error('Failed to copy:', err);
@@ -598,6 +632,7 @@ function downloadCitation() {
         URL.revokeObjectURL(url);
         
         showAlert('Citation downloaded successfully!', 'success');
+        trackEvent('citation', 'download');
         
     } catch (error) {
         console.error('Download error:', error);
@@ -606,8 +641,104 @@ function downloadCitation() {
 }
 
 // ======================
+// ANALYTICS FUNCTIONS
+// ======================
+function initializeAnalytics() {
+    // Track page view
+    trackPageView();
+    
+    // Track interactions
+    trackInteractions();
+    
+    // Track errors
+    window.addEventListener('error', function(e) {
+        trackEvent('error', 'javascript', e.message, 1);
+    });
+    
+    // Track performance
+    if ('performance' in window) {
+        window.addEventListener('load', function() {
+            const timing = performance.timing;
+            const loadTime = timing.loadEventEnd - timing.navigationStart;
+            trackEvent('performance', 'page_load', loadTime.toString(), 1);
+        });
+    }
+}
+
+function trackPageView() {
+    if (typeof gtag === 'function') {
+        gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: window.location.href,
+            page_path: window.location.pathname
+        });
+    }
+}
+
+function trackEvent(category, action, label = null, value = null) {
+    if (typeof gtag === 'function') {
+        const eventParams = {
+            event_category: category,
+            event_label: label || action,
+            value: value || 1
+        };
+        
+        // Clean up parameters
+        Object.keys(eventParams).forEach(key => {
+            if (eventParams[key] === null || eventParams[key] === undefined) {
+                delete eventParams[key];
+            }
+        });
+        
+        gtag('event', action, eventParams);
+    }
+    
+    // Also log to console for debugging
+    console.log(`[Analytics] ${category}.${action}`, label ? `Label: ${label}` : '', value ? `Value: ${value}` : '');
+}
+
+function trackInteractions() {
+    // Track button clicks
+    document.querySelectorAll('.btn, .style-tab, .mobile-menu-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const text = this.textContent.trim() || this.getAttribute('aria-label') || 'button';
+            trackEvent('ui', 'click', text);
+        });
+    });
+    
+    // Track form field interactions
+    document.querySelectorAll('input, select, textarea').forEach(field => {
+        field.addEventListener('focus', function() {
+            trackEvent('form', 'focus', this.name || this.id);
+        });
+    });
+}
+
+// ======================
 // HELPER FUNCTIONS
 // ======================
+function saveCitationToHistory(citation) {
+    try {
+        const history = JSON.parse(localStorage.getItem('citationHistory') || '[]');
+        
+        history.unshift({
+            citation,
+            style: currentStyle,
+            timestamp: new Date().toISOString(),
+            id: Date.now()
+        });
+        
+        // Keep only last 50 entries
+        if (history.length > 50) {
+            history.length = 50;
+        }
+        
+        localStorage.setItem('citationHistory', JSON.stringify(history));
+    } catch (e) {
+        console.error('Failed to save citation history:', e);
+    }
+}
+
 function showAlert(message, type = 'info') {
     // Remove existing alerts
     const existingAlert = document.querySelector('.custom-alert');
@@ -692,6 +823,14 @@ function showAlert(message, type = 'info') {
     }, 5000);
 }
 
+function getCurrentMonth() {
+    const months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    return months[new Date().getMonth()];
+}
+
 function getFormattedDate() {
     const now = new Date();
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
@@ -708,29 +847,6 @@ function checkURLParameters() {
 }
 
 // ======================
-// ANALYTICS FUNCTIONS
-// ======================
-function initializeAnalytics() {
-    // Track interactions
-    trackInteractions();
-}
-
-function trackInteractions() {
-    // Track button clicks
-    document.querySelectorAll('.btn, .style-tab, .mobile-menu-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const text = this.textContent.trim() || this.getAttribute('aria-label') || 'button';
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'click', {
-                    'event_category': 'ui',
-                    'event_label': text
-                });
-            }
-        });
-    });
-}
-
-// ======================
 // EXPORT FUNCTIONS FOR HTML
 // ======================
 // Make functions available globally for onclick attributes
@@ -739,6 +855,28 @@ window.fillExample = fillExample;
 window.clearForm = clearForm;
 window.copyCitation = copyCitation;
 window.downloadCitation = downloadCitation;
+
+// Add keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+    // Ctrl/Cmd + Enter to generate
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        generateCitation();
+    }
+    
+    // Ctrl/Cmd + E for example
+    if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+        e.preventDefault();
+        fillExample();
+    }
+    
+    // Ctrl/Cmd + C to copy (only when not in input)
+    if ((e.ctrlKey || e.metaKey) && e.key === 'c' && 
+        !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+        e.preventDefault();
+        copyCitation();
+    }
+});
 
 // Add CSS for invalid fields
 if (!document.querySelector('#form-styles')) {
