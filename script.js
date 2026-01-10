@@ -24,59 +24,48 @@ function initializeMobileMenu() {
     
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mainNav = document.getElementById('mainNav');
+    const body = document.body;
     
     if (!mobileMenuBtn || !mainNav) {
         console.error('Mobile menu elements not found!');
-        console.log('Button:', mobileMenuBtn);
-        console.log('Nav:', mainNav);
+        console.log('Mobile Menu Button:', mobileMenuBtn);
+        console.log('Main Nav:', mainNav);
         return;
     }
     
     console.log('Found mobile menu elements');
     
-    // Toggle mobile menu
+    // Mobile menu toggle
     mobileMenuBtn.addEventListener('click', function(e) {
         e.stopPropagation();
-        console.log('Mobile menu button clicked');
+        e.preventDefault();
         
         const isActive = mainNav.classList.contains('active');
         
+        console.log('Menu button clicked, current state:', isActive);
+        
         if (isActive) {
-            // Close menu
-            mainNav.classList.remove('active');
-            mobileMenuBtn.textContent = '☰';
-            mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-            document.body.style.overflow = '';
-            console.log('Mobile menu closed');
+            closeMobileMenu();
         } else {
-            // Open menu
-            mainNav.classList.add('active');
-            mobileMenuBtn.textContent = '✕';
-            mobileMenuBtn.setAttribute('aria-label', 'Close menu');
-            document.body.style.overflow = 'hidden';
-            console.log('Mobile menu opened');
+            openMobileMenu();
         }
     });
     
     // Close menu when clicking outside
     document.addEventListener('click', function(e) {
-        if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target) && mainNav.classList.contains('active')) {
-            mainNav.classList.remove('active');
-            mobileMenuBtn.textContent = '☰';
-            mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-            document.body.style.overflow = '';
-            console.log('Mobile menu closed (click outside)');
+        const isMenuActive = mainNav.classList.contains('active');
+        const clickedOnMenu = mainNav.contains(e.target);
+        const clickedOnButton = mobileMenuBtn.contains(e.target);
+        
+        if (isMenuActive && !clickedOnMenu && !clickedOnButton) {
+            closeMobileMenu();
         }
     });
     
     // Close menu on escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && mainNav.classList.contains('active')) {
-            mainNav.classList.remove('active');
-            mobileMenuBtn.textContent = '☰';
-            mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-            document.body.style.overflow = '';
-            console.log('Mobile menu closed (Escape key)');
+            closeMobileMenu();
         }
     });
     
@@ -84,12 +73,8 @@ function initializeMobileMenu() {
     const navLinks = mainNav.querySelectorAll('a');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
-            if (window.innerWidth <= 768) { // Only close on mobile
-                mainNav.classList.remove('active');
-                mobileMenuBtn.textContent = '☰';
-                mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-                document.body.style.overflow = '';
-                console.log('Mobile menu closed (link clicked)');
+            if (window.innerWidth <= 768) {
+                setTimeout(closeMobileMenu, 300);
             }
         });
     });
@@ -97,15 +82,64 @@ function initializeMobileMenu() {
     // Handle window resize
     window.addEventListener('resize', function() {
         if (window.innerWidth > 768 && mainNav.classList.contains('active')) {
-            mainNav.classList.remove('active');
-            mobileMenuBtn.textContent = '☰';
-            mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-            document.body.style.overflow = '';
-            console.log('Mobile menu closed (window resized)');
+            closeMobileMenu();
         }
     });
     
     console.log('Mobile menu initialized successfully');
+}
+
+function openMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    const body = document.body;
+    
+    if (!mobileMenuBtn || !mainNav) return;
+    
+    mainNav.classList.add('active');
+    body.classList.add('menu-open');
+    mobileMenuBtn.textContent = '✕';
+    mobileMenuBtn.setAttribute('aria-label', 'Close menu');
+    
+    // Add click event to the close button in the CSS pseudo-element
+    // We'll create an actual overlay for closing
+    const overlay = document.createElement('div');
+    overlay.className = 'menu-overlay';
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 998;
+        display: block;
+    `;
+    overlay.addEventListener('click', closeMobileMenu);
+    document.body.appendChild(overlay);
+    
+    console.log('Mobile menu opened');
+}
+
+function closeMobileMenu() {
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mainNav = document.getElementById('mainNav');
+    const body = document.body;
+    
+    if (!mobileMenuBtn || !mainNav) return;
+    
+    mainNav.classList.remove('active');
+    body.classList.remove('menu-open');
+    mobileMenuBtn.textContent = '☰';
+    mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+    
+    // Remove overlay if exists
+    const overlay = document.querySelector('.menu-overlay');
+    if (overlay) {
+        overlay.remove();
+    }
+    
+    console.log('Mobile menu closed');
 }
 
 // ======================
@@ -720,7 +754,7 @@ function trackInteractions() {
     document.querySelectorAll('.btn, .style-tab, .mobile-menu-btn').forEach(button => {
         button.addEventListener('click', function() {
             const text = this.textContent.trim() || this.getAttribute('aria-label') || 'button';
-            if (typeof gtag !== 'undefined') {
+            if (typeof gtag === 'function') {
                 gtag('event', 'click', {
                     'event_category': 'ui',
                     'event_label': text
@@ -740,7 +774,7 @@ window.clearForm = clearForm;
 window.copyCitation = copyCitation;
 window.downloadCitation = downloadCitation;
 
-// Add CSS for invalid fields
+// Add CSS for invalid fields and mobile overlay
 if (!document.querySelector('#form-styles')) {
     const style = document.createElement('style');
     style.id = 'form-styles';
@@ -751,6 +785,19 @@ if (!document.querySelector('#form-styles')) {
         }
         .copied {
             background-color: #27ae60 !important;
+        }
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 998;
+            display: none;
+        }
+        .main-nav.active ~ .menu-overlay {
+            display: block;
         }
     `;
     document.head.appendChild(style);
