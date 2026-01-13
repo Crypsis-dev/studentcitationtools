@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHREV68R2D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZHREV68R2D');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Plagiarism Checker | StudentCitationTools.com</title>
+    <meta name="description" content="Check your academic papers for plagiarism with our advanced plagiarism detection tool. Ensure originality and academic integrity. Premium feature.">
+    <meta name="keywords" content="plagiarism checker, plagiarism detection, academic integrity, originality check, premium tool">
+    <meta name="author" content="StudentCitationTools.com">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Plagiarism Checker - Premium Feature">
+    <meta property="og:description" content="Check your academic papers for plagiarism. Ensure originality and academic integrity.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://studentcitationtools.com/plagiarism-checker.html">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Plagiarism Checker",
+        "url": "https://studentcitationtools.com/plagiarism-checker.html",
+        "description": "Advanced plagiarism detection tool for academic papers",
+        "applicationCategory": "EducationalApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "4.99",
+            "priceCurrency": "USD"
+        },
+        "featureList": "Plagiarism detection, Similarity percentage, Source identification, Detailed reports"
+    }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .plagiarism-hero {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .plagiarism-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .plagiarism-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+        
+        .plagiarism-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .plagiarism-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        @media (max-width: 992px) {
+            .plagiarism-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .plagiarism-input {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .plagiarism-input {
+            background: var(--dark-color);
+        }
+        
+        .plagiarism-results {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .plagiarism-results {
+            background: var(--dark-color);
+        }
+        
+        .plagiarism-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .plagiarism-header h2 {
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        body.dark-mode .plagiarism-header h2 {
+            color: #ecf0f1;
+        }
+        
+        .input-methods {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .method-tab {
+            padding: 12px 25px;
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        body.dark-mode .method-tab {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ecf0f1;
+        }
+        
+        .method-tab:hover {
+            background: #e9ecef;
+        }
+        
+        body.dark-mode .method-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .method-tab.active {
+            background: #2ecc71;
+            color: white;
+            border-color: #2ecc71;
+        }
+        
+        .method-content {
+            display: none;
+        }
+        
+        .method-content.active {
+            display: block;
+        }
+        
+        .text-input textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            min-height: 300px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+        
+        body.dark-mode .text-input textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #555;
+            color: #ecf0f1;
+        }
+        
+        .word-count {
+            text-align: right;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        .file-upload {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        body.dark-mode .file-upload {
+            border-color: #555;
+        }
+        
+        .file-upload:hover {
+            border-color: #2ecc71;
+            background: rgba(46, 204, 113, 0.05);
+        }
+        
+        .file-upload i {
+            font-size: 3rem;
+            color: #2ecc71;
+            margin-bottom: 15px;
+        }
+        
+        .file-upload p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        body.dark-mode .file-upload p {
+            color: #bdc3c7;
+        }
+        
+        .supported-formats {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-top: 15px;
+        }
+        
+        .similarity-score {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        
+        .score-circle svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+        
+        .circle-bg {
+            fill: none;
+            stroke: #f0f0f0;
+            stroke-width: 10;
+        }
+        
+        body.dark-mode .circle-bg {
+            stroke: #555;
+        }
+        
+        .circle-progress {
+            fill: none;
+            stroke: #2ecc71;
+            stroke-width: 10;
+            stroke-linecap: round;
+            stroke-dasharray: 565;
+            stroke-dashoffset: 565;
+            transition: stroke-dashoffset 1s ease;
+        }
+        
+        .circle-progress.warning {
+            stroke: #f39c12;
+        }
+        
+        .circle-progress.danger {
+            stroke: #e74c3c;
+        }
+        
+        .score-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+        .score-percentage {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        body.dark-mode .score-percentage {
+            color: #ecf0f1;
+        }
+        
+        .score-label {
+            font-size: 1rem;
+            color: #7f8c8d;
+        }
+        
+        .score-interpretation {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        body.dark-mode .score-interpretation {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .score-interpretation h4 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        body.dark-mode .score-interpretation h4 {
+            color: #ecf0f1;
+        }
+        
+        .matched-sources {
+            margin-top: 30px;
+        }
+        
+        .source-item {
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        body.dark-mode .source-item {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .source-item:hover {
+            background: #e9ecef;
+        }
+        
+        body.dark-mode .source-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .source-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .source-title {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        body.dark-mode .source-title {
+            color: #ecf0f1;
+        }
+        
+        .source-similarity {
+            background: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        
+        .source-match {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .source-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .source-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .plagiarism-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .premium-required {
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .premium-required h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .premium-required p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .plagiarism-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .stat-card {
+            background: var(--dark-color);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2ecc71;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .plagiarism-features {
+            margin: 60px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        body.dark-mode .feature-card {
+            background: var(--dark-color);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #2ecc71;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h4 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        body.dark-mode .feature-card h4 {
+            color: #ecf0f1;
+        }
+        
+        .feature-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+        
+        .score-guide {
+            margin: 40px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+        }
+        
+        body.dark-mode .score-guide {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .score-guide h3 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        body.dark-mode .score-guide h3 {
+            color: #ecf0f1;
+        }
+        
+        .score-level {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .score-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        
+        .score-info {
+            flex: 1;
+        }
+        
+        .score-range {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        body.dark-mode .score-range {
+            color: #ecf0f1;
+        }
+        
+        .score-description {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+        
+        @media (max-width: 768px) {
+            .plagiarism-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .plagiarism-input,
+            .plagiarism-results {
+                padding: 25px;
+            }
+            
+            .input-methods {
+                flex-direction: column;
+            }
+            
+            .method-tab {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .score-circle {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .score-percentage {
+                font-size: 2rem;
+            }
+            
+            .plagiarism-actions {
+                flex-direction: column;
+            }
+            
+            .plagiarism-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <button class="mobile-menu-btn" aria-label="Menu" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo">
+                <h1><i class="fas fa-book-open"></i> StudentCitationTools.com</h1>
+                <p class="tagline">Free academic tools for students worldwide</p>
+            </div>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="apa.html"><i class="fas fa-file-alt"></i> APA Generator</a>
+                <a href="mla.html"><i class="fas fa-font"></i> MLA Generator</a>
+                <a href="chicago.html"><i class="fas fa-university"></i> Chicago Generator</a>
+                <a href="batch.html"><i class="fas fa-layer-group"></i> Batch Generator</a>
+                <a href="plagiarism-checker.html" class="nav-active"><i class="fas fa-search"></i> Plagiarism Check</a>
+                <a href="premium.html"><i class="fas fa-crown"></i> Premium</a>
+                <a href="guide.html"><i class="fas fa-graduation-cap"></i> Guide</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-small" id="themeToggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="plagiarism-hero">
+        <div class="plagiarism-container">
+            <h1><i class="fas fa-search"></i> Plagiarism Checker</h1>
+            <p>Ensure originality and academic integrity with our advanced plagiarism detection tool</p>
+            <div class="cta-buttons">
+                <a href="#try-demo" class="btn btn-primary btn-large">
+                    <i class="fas fa-play"></i> Try Demo
+                </a>
+                <a href="premium.html" class="btn btn-premium btn-large">
+                    <i class="fas fa-crown"></i> Unlock Premium
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="plagiarism-container">
+            <!-- Stats -->
+            <div class="plagiarism-stats">
+                <div class="stat-card">
+                    <div class="stat-number">99%</div>
+                    <div class="stat-label">Accuracy rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10B+</div>
+                    <div class="stat-label">Web pages checked</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">60M+</div>
+                    <div class="stat-label">Academic papers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Supported languages</div>
+                </div>
+            </div>
+            
+            <!-- Plagiarism Checker Interface -->
+            <div class="plagiarism-grid" id="try-demo">
+                <!-- Input Section -->
+                <div class="plagiarism-input">
+                    <div class="plagiarism-header">
+                        <h2><i class="fas fa-edit"></i> Check Your Text</h2>
+                        <div class="word-count" id="wordCount">0 words</div>
+                    </div>
+                    
+                    <div class="input-methods">
+                        <div class="method-tab active" data-method="text">
+                            <i class="fas fa-font"></i>
+                            <span>Text Input</span>
+                        </div>
+                        <div class="method-tab" data-method="file">
+                            <i class="fas fa-file-upload"></i>
+                            <span>File Upload</span>
+                        </div>
+                        <div class="method-tab" data-method="url">
+                            <i class="fas fa-link"></i>
+                            <span>URL Check</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Text Input Method -->
+                    <div class="method-content active" id="text-method">
+                        <div class="text-input">
+                            <textarea id="plagiarismText" placeholder="Paste your text here to check for plagiarism...
+
+Example: Artificial intelligence has revolutionized many industries, including education. AI-powered tools can provide personalized learning experiences, automate administrative tasks, and offer intelligent tutoring systems. These advancements have made education more accessible and efficient for students worldwide."></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- File Input Method -->
+                    <div class="method-content" id="file-method">
+                        <div class="file-upload" id="fileUpload">
+                            <i class="fas fa-file-upload"></i>
+                            <h3>Upload Document</h3>
+                            <p>Drag and drop your document here or click to browse</p>
+                            <p class="supported-formats">Supported formats: .doc, .docx, .pdf, .txt, .rtf</p>
+                            <input type="file" id="documentFile" accept=".doc,.docx,.pdf,.txt,.rtf" style="display: none;">
+                        </div>
+                    </div>
+                    
+                    <!-- URL Input Method -->
+                    <div class="method-content" id="url-method">
+                        <div class="form-group">
+                            <label for="urlInput"><i class="fas fa-link"></i> Enter URL to Check</label>
+                            <input type="url" id="urlInput" placeholder="https://example.com/article">
+                            <div class="supported-formats" style="margin-top: 10px;">
+                                <p><i class="fas fa-info-circle"></i> We'll analyze the content of the webpage for plagiarism.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="plagiarism-actions">
+                        <button class="btn btn-primary" onclick="checkPlagiarism()">
+                            <i class="fas fa-search"></i> Check for Plagiarism
+                        </button>
+                        <button class="btn btn-outline" onclick="clearText()">
+                            <i class="fas fa-trash"></i> Clear Text
+                        </button>
+                        <button class="btn btn-secondary" onclick="loadSample()">
+                            <i class="fas fa-file-alt"></i> Load Sample
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Results Section -->
+                <div class="plagiarism-results">
+                    <div class="plagiarism-header">
+                        <h2><i class="fas fa-chart-bar"></i> Results</h2>
+                        <div class="score-status" id="scoreStatus">Not checked</div>
+                    </div>
+                    
+                    <div class="similarity-score">
+                        <div class="score-circle">
+                            <svg>
+                                <circle class="circle-bg" cx="100" cy="100" r="90"></circle>
+                                <circle class="circle-progress" cx="100" cy="100" r="90" id="progressCircle"></circle>
+                            </svg>
+                            <div class="score-text">
+                                <div class="score-percentage" id="scorePercentage">0%</div>
+                                <div class="score-label">Similarity</div>
+                            </div>
+                        </div>
+                        
+                        <div class="score-interpretation" id="scoreInterpretation">
+                            <h4><i class="fas fa-info-circle"></i> Interpretation</h4>
+                            <p>No text has been checked yet. Paste your text and click "Check for Plagiarism" to see results.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="matched-sources" id="matchedSources">
+                        <h3><i class="fas fa-file-contract"></i> Matched Sources</h3>
+                        <p class="no-sources">No matches found yet. Check your text to see potential sources.</p>
+                    </div>
+                    
+                    <div class="plagiarism-actions" style="margin-top: 30px;">
+                        <button class="btn btn-success" onclick="downloadReport()">
+                            <i class="fas fa-download"></i> Download Report
+                        </button>
+                        <button class="btn btn-info" onclick="shareResults()">
+                            <i class="fas fa-share-alt"></i> Share Results
+                        </button>
+                        <button class="btn btn-premium" onclick="viewDetailed()">
+                            <i class="fas fa-chart-line"></i> Detailed Analysis
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Score Guide -->
+            <div class="score-guide">
+                <h3><i class="fas fa-graduation-cap"></i> Understanding Your Similarity Score</h3>
+                
+                <div class="score-level" style="background: rgba(46, 204, 113, 0.1);">
+                    <div class="score-color" style="background: #2ecc71;"></div>
+                    <div class="score-info">
+                        <div class="score-range">0-15% - Excellent</div>
+                        <div class="score-description">Your work shows high originality. This is an acceptable range for most academic institutions.</div>
+                    </div>
+                </div>
+                
+                <div class="score-level" style="background: rgba(243, 156, 18, 0.1);">
+                    <div class="score-color" style="background: #f39c12;"></div>
+                    <div class="score-info">
+                        <div class="score-range">16-30% - Good</div>
+                        <div class="score-description">Some similarity detected, likely from properly cited sources. Review highlighted sections.</div>
+                    </div>
+                </div>
+                
+                <div class="score-level" style="background: rgba(231, 76, 60, 0.1);">
+                    <div class="score-color" style="background: #e74c3c;"></div>
+                    <div class="score-info">
+                        <div class="score-range">31-50% - Problematic</div>
+                        <div class="score-description">Significant similarity detected. Review and rewrite highlighted sections to avoid plagiarism.</div>
+                    </div>
+                </div>
+                
+                <div class="score-level" style="background: rgba(192, 57, 43, 0.1);">
+                    <div class="score-color" style="background: #c0392b;"></div>
+                    <div class="score-info">
+                        <div class="score-range">51-100% - Critical</div>
+                        <div class="score-description">High similarity indicates potential plagiarism. Major revisions required before submission.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Premium Required Notice -->
+            <div class="premium-required">
+                <h3><i class="fas fa-crown"></i> Premium Feature</h3>
+                <p>Advanced plagiarism checking is available exclusively for Premium subscribers. Upgrade now to ensure academic integrity and avoid plagiarism!</p>
+                <div class="cta-buttons">
+                    <a href="premium.html" class="btn btn-premium btn-large">
+                        <i class="fas fa-rocket"></i> Upgrade to Premium - $4.99/month
+                    </a>
+                    <a href="#features" class="btn btn-outline btn-large" style="background: rgba(255,255,255,0.2); color: white; border-color: white;">
+                        <i class="fas fa-star"></i> See All Features
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Features -->
+            <section class="plagiarism-features" id="features">
+                <div class="section-header">
+                    <h2><i class="fas fa-star"></i> Advanced Plagiarism Detection</h2>
+                    <p>Comprehensive tools to ensure your work is original</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h4>Massive Database</h4>
+                        <p>Check against billions of web pages, academic papers, and published works for comprehensive plagiarism detection.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <h4>Deep Analysis</h4>
+                        <p>Advanced algorithms detect paraphrased content, synonym substitution, and structural plagiarism that simple tools miss.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h4>Detailed Reports</h4>
+                        <p>Get comprehensive reports with highlighted matches, source links, and similarity percentages for each section.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h4>Multi-Language Support</h4>
+                        <p>Check content in English, Spanish, French, German, and Chinese with equal accuracy and precision.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Privacy Protected</h4>
+                        <p>Your documents are never stored or shared. All checks are performed securely with encryption.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h4>Revision History</h4>
+                        <p>Track changes over time and see how your similarity score improves with each revision of your document.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Final CTA -->
+            <div class="info-box" style="text-align: center; margin: 60px 0; padding: 40px;">
+                <h3><i class="fas fa-shield-alt"></i> Protect Your Academic Integrity</h3>
+                <p>Join thousands of students and researchers who trust our plagiarism checker to ensure their work is original and properly cited.</p>
+                <div style="margin-top: 30px;">
+                    <a href="premium.html" class="btn btn-premium btn-large">
+                        <i class="fas fa-crown"></i> Start Your Premium Trial
+                    </a>
+                    <a href="contact.html" class="btn btn-outline btn-large">
+                        <i class="fas fa-question-circle"></i> Questions? Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h4><i class="fas fa-book-open"></i> StudentCitationTools.com</h4>
+                    </div>
+                    <p>Free academic tools for students worldwide. Making citation generation easy and accessible since 2023.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Premium Tools</h5>
+                    <a href="batch.html"><i class="fas fa-chevron-right"></i> Batch Generator</a>
+                    <a href="plagiarism-checker.html" class="nav-active"><i class="fas fa-chevron-right"></i> Plagiarism Checker</a>
+                    <a href="premium.html"><i class="fas fa-chevron-right"></i> All Premium Features</a>
+                    <a href="premium.html#pricing"><i class="fas fa-chevron-right"></i> Pricing Plans</a>
+                    <a href="premium.html#features"><i class="fas fa-chevron-right"></i> Feature Comparison</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Resources</h5>
+                    <a href="guide.html"><i class="fas fa-chevron-right"></i> Formatting Guide</a>
+                    <a href="examples.html"><i class="fas fa-chevron-right"></i> Citation Examples</a>
+                    <a href="tips.html"><i class="fas fa-chevron-right"></i> Writing Tips</a>
+                    <a href="faq.html"><i class="fas fa-chevron-right"></i> FAQ</a>
+                    <a href="blog.html"><i class="fas fa-chevron-right"></i> Academic Blog</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Legal</h5>
+                    <a href="privacy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
+                    <a href="terms.html"><i class="fas fa-chevron-right"></i> Terms of Service</a>
+                    <a href="disclaimer.html"><i class="fas fa-chevron-right"></i> Disclaimer</a>
+                    <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>© 2024 StudentCitationTools.com | Professional Citation Generator</p>
+                    <p class="disclaimer">Plagiarism checking is a Premium feature. Results are for guidance only and should be verified with institutional requirements.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mainNav.classList.toggle('active');
+                    mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? 
+                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (mainNav.classList.contains('active') && 
+                        !mainNav.contains(e.target) && 
+                        !mobileMenuBtn.contains(e.target)) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+            }
+            
+            // Initialize theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-mode');
+                    
+                    const icon = this.querySelector('i');
+                    if (document.body.classList.contains('dark-mode')) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                        localStorage.setItem('theme', 'light');
+                    }
+                });
+                
+                // Load saved theme
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    themeToggle.querySelector('i').classList.remove('fa-moon');
+                    themeToggle.querySelector('i').classList.add('fa-sun');
+                }
+            }
+            
+            // Initialize method tabs
+            const methodTabs = document.querySelectorAll('.method-tab');
+            methodTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const method = this.dataset.method;
+                    
+                    // Update active tab
+                    methodTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    document.querySelectorAll('.method-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(method + '-method').classList.add('active');
+                });
+            });
+            
+            // Initialize file upload
+            const fileUpload = document.getElementById('fileUpload');
+            const documentFile = document.getElementById('documentFile');
+            
+            if (fileUpload && documentFile) {
+                fileUpload.addEventListener('click', () => documentFile.click());
+                fileUpload.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    fileUpload.style.borderColor = '#2ecc71';
+                    fileUpload.style.background = 'rgba(46, 204, 113, 0.1)';
+                });
+                fileUpload.addEventListener('dragleave', () => {
+                    fileUpload.style.borderColor = '';
+                    fileUpload.style.background = '';
+                });
+                fileUpload.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    fileUpload.style.borderColor = '';
+                    fileUpload.style.background = '';
+                    
+                    const file = e.dataTransfer.files[0];
+                    if (file) {
+                        handleDocumentFile(file);
+                    }
+                });
+                
+                documentFile.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        handleDocumentFile(file);
+                    }
+                });
+            }
+            
+            // Word count tracking
+            const plagiarismText = document.getElementById('plagiarismText');
+            const wordCount = document.getElementById('wordCount');
+            
+            if (plagiarismText && wordCount) {
+                plagiarismText.addEventListener('input', updateWordCount);
+                updateWordCount(); // Initial count
+            }
+            
+            // Track page view
+            if (typeof gtag === 'function') {
+                gtag('event', 'page_view', {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                    page_path: window.location.pathname
+                });
+            }
+        });
+        
+        function updateWordCount() {
+            const text = document.getElementById('plagiarismText').value;
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+            const wordCount = document.getElementById('wordCount');
+            wordCount.textContent = `${words.length} words`;
+            
+            // Track significant input
+            if (words.length > 100 && typeof gtag === 'function') {
+                gtag('event', 'text_input', {
+                    'event_category': 'plagiarism',
+                    'event_label': 'word_count',
+                    'value': words.length
+                });
+            }
+        }
+        
+        function handleDocumentFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // For demo purposes, just show a success message
+                showNotification(`Document "${file.name}" uploaded successfully!`, 'success');
+                
+                // In a real implementation, you would extract text from the document
+                console.log('File uploaded:', file.name, file.type);
+                
+                // Track file upload
+                if (typeof gtag === 'function') {
+                    gtag('event', 'document_upload', {
+                        'event_category': 'plagiarism',
+                        'event_label': file.type
+                    });
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function checkPlagiarism() {
+            const text = document.getElementById('plagiarismText').value.trim();
+            
+            if (!text) {
+                showNotification('Please enter some text to check for plagiarism.', 'error');
+                return;
+            }
+            
+            if (text.split(/\s+/).length < 10) {
+                showNotification('Please enter at least 10 words for meaningful plagiarism detection.', 'warning');
+                return;
+            }
+            
+            // Show premium required notice
+            showNotification('Advanced plagiarism checking is a Premium feature. Upgrade for comprehensive detection!', 'info');
+            
+            // For demo purposes, generate random results
+            const similarityScore = Math.floor(Math.random() * 40); // 0-40% for demo
+            displayResults(similarityScore);
+            
+            // Track plagiarism check
+            if (typeof gtag === 'function') {
+                gtag('event', 'plagiarism_check', {
+                    'event_category': 'plagiarism',
+                    'event_label': 'demo_check',
+                    'value': similarityScore
+                });
+            }
+        }
+        
+        function displayResults(score) {
+            const scorePercentage = document.getElementById('scorePercentage');
+            const scoreStatus = document.getElementById('scoreStatus');
+            const progressCircle = document.getElementById('progressCircle');
+            const scoreInterpretation = document.getElementById('scoreInterpretation');
+            const matchedSources = document.getElementById('matchedSources');
+            
+            // Update score display
+            scorePercentage.textContent = `${score}%`;
+            
+            // Update progress circle
+            const circumference = 565; // 2 * π * 90
+            const offset = circumference - (score / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+            
+            // Update circle color based on score
+            progressCircle.className = 'circle-progress';
+            if (score <= 15) {
+                progressCircle.classList.add('excellent');
+                scoreStatus.textContent = 'Excellent';
+                scoreStatus.style.color = '#2ecc71';
+            } else if (score <= 30) {
+                progressCircle.classList.add('warning');
+                scoreStatus.textContent = 'Good';
+                scoreStatus.style.color = '#f39c12';
+            } else {
+                progressCircle.classList.add('danger');
+                scoreStatus.textContent = 'Problematic';
+                scoreStatus.style.color = '#e74c3c';
+            }
+            
+            // Update interpretation
+            if (score <= 15) {
+                scoreInterpretation.innerHTML = `
+                    <h4><i class="fas fa-check-circle" style="color: #2ecc71;"></i> Excellent Originality</h4>
+                    <p>Your work shows high originality. This similarity score is within the acceptable range for most academic institutions. Any matches detected are likely from properly cited sources.</p>
+                `;
+            } else if (score <= 30) {
+                scoreInterpretation.innerHTML = `
+                    <h4><i class="fas fa-exclamation-triangle" style="color: #f39c12;"></i> Good with Some Similarity</h4>
+                    <p>Some similarity has been detected. This may be from properly cited sources, but we recommend reviewing the highlighted sections to ensure proper citation and paraphrasing.</p>
+                `;
+            } else {
+                scoreInterpretation.innerHTML = `
+                    <h4><i class="fas fa-exclamation-circle" style="color: #e74c3c;"></i> Significant Similarity Detected</h4>
+                    <p>Significant similarity has been detected. We recommend reviewing and rewriting the highlighted sections to avoid potential plagiarism issues. Ensure all sources are properly cited.</p>
+                `;
+            }
+            
+            // Display matched sources (demo data)
+            if (score > 0) {
+                const sources = [
+                    {
+                        title: "Artificial Intelligence in Education: A Review",
+                        similarity: Math.floor(score * 0.6) + '%',
+                        match: "Artificial intelligence has revolutionized many industries, including education.",
+                        url: "https://example.com/ai-education-review"
+                    },
+                    {
+                        title: "Personalized Learning with AI Technology",
+                        similarity: Math.floor(score * 0.4) + '%',
+                        match: "AI-powered tools can provide personalized learning experiences...",
+                        url: "https://example.com/personalized-learning-ai"
+                    }
+                ];
+                
+                let sourcesHTML = '<h3><i class="fas fa-file-contract"></i> Matched Sources</h3>';
+                sources.forEach(source => {
+                    sourcesHTML += `
+                        <div class="source-item">
+                            <div class="source-header">
+                                <div class="source-title">${source.title}</div>
+                                <div class="source-similarity">${source.similarity} match</div>
+                            </div>
+                            <div class="source-match">"${source.match}"</div>
+                            <div class="source-link">
+                                <a href="${source.url}" target="_blank"><i class="fas fa-external-link-alt"></i> View Source</a>
+                            </div>
+                        </div>
+                    `;
+                });
+                matchedSources.innerHTML = sourcesHTML;
+            } else {
+                matchedSources.innerHTML = `
+                    <h3><i class="fas fa-file-contract"></i> Matched Sources</h3>
+                    <p class="no-sources">No significant matches found. Your text appears to be highly original!</p>
+                `;
+            }
+        }
+        
+        function clearText() {
+            document.getElementById('plagiarismText').value = '';
+            updateWordCount();
+            
+            // Reset results
+            document.getElementById('scorePercentage').textContent = '0%';
+            document.getElementById('scoreStatus').textContent = 'Not checked';
+            document.getElementById('scoreStatus').style.color = '';
+            document.getElementById('progressCircle').style.strokeDashoffset = '565';
+            document.getElementById('progressCircle').className = 'circle-progress';
+            document.getElementById('scoreInterpretation').innerHTML = `
+                <h4><i class="fas fa-info-circle"></i> Interpretation</h4>
+                <p>No text has been checked yet. Paste your text and click "Check for Plagiarism" to see results.</p>
+            `;
+            document.getElementById('matchedSources').innerHTML = `
+                <h3><i class="fas fa-file-contract"></i> Matched Sources</h3>
+                <p class="no-sources">No matches found yet. Check your text to see potential sources.</p>
+            `;
+            
+            showNotification('Text cleared.', 'info');
+        }
+        
+        function loadSample() {
+            const sampleText = `Artificial intelligence has revolutionized many industries, including education. AI-powered tools can provide personalized learning experiences, automate administrative tasks, and offer intelligent tutoring systems. These advancements have made education more accessible and efficient for students worldwide.
+
+Machine learning algorithms can analyze student performance data to identify learning gaps and recommend personalized study materials. This adaptive learning approach helps students learn at their own pace and focus on areas where they need improvement.
+
+Moreover, natural language processing enables chatbots and virtual assistants to answer student questions 24/7, providing instant support outside of classroom hours. This technology also powers plagiarism detection tools that help maintain academic integrity.
+
+As AI continues to evolve, we can expect even more innovative applications in education, such as virtual reality classrooms and AI-generated educational content tailored to individual learning styles.`;
+
+            document.getElementById('plagiarismText').value = sampleText;
+            updateWordCount();
+            
+            // Switch to text method
+            document.querySelectorAll('.method-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelector('[data-method="text"]').classList.add('active');
+            document.querySelectorAll('.method-content').forEach(content => content.classList.remove('active'));
+            document.getElementById('text-method').classList.add('active');
+            
+            showNotification('Sample text loaded. Click "Check for Plagiarism" to see a demo.', 'success');
+            
+            // Track sample load
+            if (typeof gtag === 'function') {
+                gtag('event', 'plagiarism_sample', {
+                    'event_category': 'plagiarism',
+                    'event_label': 'load_sample'
+                });
+            }
+        }
+        
+        function downloadReport() {
+            showNotification('Detailed report download is a Premium feature. Upgrade to access comprehensive plagiarism reports!', 'info');
+            
+            // Track report download attempt
+            if (typeof gtag === 'function') {
+                gtag('event', 'plagiarism_report', {
+                    'event_category': 'plagiarism',
+                    'event_label': 'download_premium_required'
+                });
+            }
+        }
+        
+        function shareResults() {
+            showNotification('Sharing results is a Premium feature. Upgrade to share detailed plagiarism reports with instructors or collaborators!', 'info');
+            
+            // Track share attempt
+            if (typeof gtag === 'function') {
+                gtag('event', 'plagiarism_share', {
+                    'event_category': 'plagiarism',
+                    'event_label': 'share_premium_required'
+                });
+            }
+        }
+        
+        function viewDetailed() {
+            showNotification('Detailed analysis is a Premium feature. Upgrade to see comprehensive breakdowns of similarity by section and source!', 'info');
+            
+            // Track detailed view attempt
+            if (typeof gtag === 'function') {
+                gtag('event', 'plagiarism_detailed', {
+                    'event_category': 'plagiarism',
+                    'event_label': 'detailed_premium_required'
+                });
+            }
+        }
+        
+        function showNotification(message, type) {
+            // Remove existing notification
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+        
+        // Add window resize handler
+        window.addEventListener('resize', function() {
+            const mainNav = document.getElementById('mainNav');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (window.innerWidth > 768 && mainNav) {
+                mainNav.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
