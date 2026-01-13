@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHREV68R2D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZHREV68R2D');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Batch Citation Generator | StudentCitationTools.com</title>
+    <meta name="description" content="Generate multiple citations at once with our batch citation generator. Save time on bibliographies and reference lists. Premium feature.">
+    <meta name="keywords" content="batch citation generator, multiple citations, bibliography generator, reference list generator, premium citation tool">
+    <meta name="author" content="StudentCitationTools.com">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Batch Citation Generator - Premium Feature">
+    <meta property="og:description" content="Generate multiple citations at once. Save time on bibliographies and reference lists.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://studentcitationtools.com/batch.html">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Batch Citation Generator",
+        "url": "https://studentcitationtools.com/batch.html",
+        "description": "Generate multiple citations at once with batch processing",
+        "applicationCategory": "EducationalApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "4.99",
+            "priceCurrency": "USD"
+        },
+        "featureList": "Multiple citation generation, ISBN batch lookup, Export to multiple formats, Bibliography creation"
+    }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .batch-hero {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .batch-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .batch-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+        
+        .batch-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .batch-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        @media (max-width: 992px) {
+            .batch-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .batch-input {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .batch-input {
+            background: var(--dark-color);
+        }
+        
+        .batch-preview {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .batch-preview {
+            background: var(--dark-color);
+        }
+        
+        .batch-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .batch-header h2 {
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        body.dark-mode .batch-header h2 {
+            color: #ecf0f1;
+        }
+        
+        .input-methods {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .method-tab {
+            padding: 12px 25px;
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        body.dark-mode .method-tab {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ecf0f1;
+        }
+        
+        .method-tab:hover {
+            background: #e9ecef;
+        }
+        
+        body.dark-mode .method-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .method-tab.active {
+            background: #9b59b6;
+            color: white;
+            border-color: #9b59b6;
+        }
+        
+        .method-content {
+            display: none;
+        }
+        
+        .method-content.active {
+            display: block;
+        }
+        
+        .isbn-batch-input textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        body.dark-mode .isbn-batch-input textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #555;
+            color: #ecf0f1;
+        }
+        
+        .isbn-help {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
+        body.dark-mode .isbn-help {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .csv-upload {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        body.dark-mode .csv-upload {
+            border-color: #555;
+        }
+        
+        .csv-upload:hover {
+            border-color: #9b59b6;
+            background: rgba(155, 89, 182, 0.05);
+        }
+        
+        .csv-upload i {
+            font-size: 3rem;
+            color: #9b59b6;
+            margin-bottom: 15px;
+        }
+        
+        .csv-upload p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        body.dark-mode .csv-upload p {
+            color: #bdc3c7;
+        }
+        
+        .citation-item {
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        body.dark-mode .citation-item {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .citation-item:hover {
+            background: #e9ecef;
+        }
+        
+        body.dark-mode .citation-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .citation-content {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .citation-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+        
+        .citation-style {
+            background: rgba(155, 89, 182, 0.1);
+            color: #9b59b6;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        
+        .batch-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .premium-required {
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .premium-required h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .premium-required p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .batch-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .stat-card {
+            background: var(--dark-color);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #9b59b6;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .batch-features {
+            margin: 60px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        body.dark-mode .feature-card {
+            background: var(--dark-color);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #9b59b6;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h4 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        body.dark-mode .feature-card h4 {
+            color: #ecf0f1;
+        }
+        
+        .feature-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .batch-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .batch-input,
+            .batch-preview {
+                padding: 25px;
+            }
+            
+            .input-methods {
+                flex-direction: column;
+            }
+            
+            .method-tab {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .batch-actions {
+                flex-direction: column;
+            }
+            
+            .batch-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <button class="mobile-menu-btn" aria-label="Menu" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo">
+                <h1><i class="fas fa-book-open"></i> StudentCitationTools.com</h1>
+                <p class="tagline">Free academic tools for students worldwide</p>
+            </div>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="apa.html"><i class="fas fa-file-alt"></i> APA Generator</a>
+                <a href="mla.html"><i class="fas fa-font"></i> MLA Generator</a>
+                <a href="chicago.html"><i class="fas fa-university"></i> Chicago Generator</a>
+                <a href="isbn.html"><i class="fas fa-barcode"></i> ISBN Lookup</a>
+                <a href="batch.html" class="nav-active"><i class="fas fa-layer-group"></i> Batch Generator</a>
+                <a href="premium.html"><i class="fas fa-crown"></i> Premium</a>
+                <a href="guide.html"><i class="fas fa-graduation-cap"></i> Guide</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-small" id="themeToggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="batch-hero">
+        <div class="batch-container">
+            <h1><i class="fas fa-layer-group"></i> Batch Citation Generator</h1>
+            <p>Generate multiple citations at once. Perfect for bibliographies, reference lists, and research papers.</p>
+            <div class="cta-buttons">
+                <a href="#try-demo" class="btn btn-primary btn-large">
+                    <i class="fas fa-play"></i> Try Demo
+                </a>
+                <a href="premium.html" class="btn btn-premium btn-large">
+                    <i class="fas fa-crown"></i> Unlock Premium
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="batch-container">
+            <!-- Stats -->
+            <div class="batch-stats">
+                <div class="stat-card">
+                    <div class="stat-number">10x</div>
+                    <div class="stat-label">Faster than manual entry</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Citations per batch</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Accuracy guaranteed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Export formats</div>
+                </div>
+            </div>
+            
+            <!-- Batch Generator Interface -->
+            <div class="batch-grid" id="try-demo">
+                <!-- Input Section -->
+                <div class="batch-input">
+                    <div class="batch-header">
+                        <h2><i class="fas fa-edit"></i> Input Sources</h2>
+                        <div class="style-badge">
+                            <i class="fas fa-tag"></i> APA 7th
+                        </div>
+                    </div>
+                    
+                    <div class="input-methods">
+                        <div class="method-tab active" data-method="isbn">
+                            <i class="fas fa-barcode"></i>
+                            <span>ISBN List</span>
+                        </div>
+                        <div class="method-tab" data-method="csv">
+                            <i class="fas fa-file-csv"></i>
+                            <span>CSV Upload</span>
+                        </div>
+                        <div class="method-tab" data-method="manual">
+                            <i class="fas fa-keyboard"></i>
+                            <span>Manual Entry</span>
+                        </div>
+                    </div>
+                    
+                    <!-- ISBN Input Method -->
+                    <div class="method-content active" id="isbn-method">
+                        <div class="isbn-batch-input">
+                            <label for="isbnBatch"><i class="fas fa-list-ol"></i> Enter ISBNs (one per line)</label>
+                            <textarea id="isbnBatch" placeholder="978-3-16-148410-0
+978-0-262-03384-8
+978-0-452-28423-4
+978-1-4028-9462-6
+978-0-06-112008-4
+978-0-7432-7356-5
+978-0-14-303943-3
+978-0-679-72369-9"></textarea>
+                            
+                            <div class="isbn-help">
+                                <p><i class="fas fa-info-circle"></i> Enter ISBN-10 or ISBN-13 numbers, one per line. We'll automatically fetch book details and generate citations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- CSV Input Method -->
+                    <div class="method-content" id="csv-method">
+                        <div class="csv-upload" id="csvUpload">
+                            <i class="fas fa-file-upload"></i>
+                            <h3>Upload CSV File</h3>
+                            <p>Drag and drop your CSV file here or click to browse</p>
+                            <p class="small">Supported format: author,title,year,publisher,isbn</p>
+                            <input type="file" id="csvFile" accept=".csv" style="display: none;">
+                        </div>
+                    </div>
+                    
+                    <!-- Manual Input Method -->
+                    <div class="method-content" id="manual-method">
+                        <div class="form-group">
+                            <label for="manualEntries"><i class="fas fa-keyboard"></i> Manual Entry</label>
+                            <textarea id="manualEntries" rows="10" placeholder="Format each entry as:
+Author: Last, First
+Title: Book Title
+Year: 2023
+Publisher: Publisher Name
+ISBN: 978-1-234-56789-0
+
+Separate entries with a blank line."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="batch-actions">
+                        <button class="btn btn-primary" onclick="processBatch()">
+                            <i class="fas fa-magic"></i> Generate Citations
+                        </button>
+                        <button class="btn btn-outline" onclick="clearBatch()">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                        <button class="btn btn-secondary" onclick="loadExample()">
+                            <i class="fas fa-file-alt"></i> Load Example
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Preview Section -->
+                <div class="batch-preview">
+                    <div class="batch-header">
+                        <h2><i class="fas fa-eye"></i> Generated Citations</h2>
+                        <div class="citation-count" id="citationCount">0 citations</div>
+                    </div>
+                    
+                    <div class="citations-preview" id="citationsPreview">
+                        <div class="no-citations">
+                            <i class="fas fa-file-alt fa-3x" style="margin-bottom: 20px; color: #bdc3c7;"></i>
+                            <h3>No citations generated yet</h3>
+                            <p>Enter ISBNs or upload a CSV file to generate citations in bulk.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="batch-actions" style="margin-top: 30px;">
+                        <button class="btn btn-success" onclick="exportBatch('txt')">
+                            <i class="fas fa-download"></i> Export as TXT
+                        </button>
+                        <button class="btn btn-info" onclick="exportBatch('doc')">
+                            <i class="fas fa-file-word"></i> Export as DOC
+                        </button>
+                        <button class="btn btn-premium" onclick="exportBatch('pdf')">
+                            <i class="fas fa-file-pdf"></i> Export as PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Premium Required Notice -->
+            <div class="premium-required">
+                <h3><i class="fas fa-crown"></i> Premium Feature</h3>
+                <p>Batch citation generation is available exclusively for Premium subscribers. Upgrade now to unlock this time-saving feature and more!</p>
+                <div class="cta-buttons">
+                    <a href="premium.html" class="btn btn-premium btn-large">
+                        <i class="fas fa-rocket"></i> Upgrade to Premium - $4.99/month
+                    </a>
+                    <a href="#features" class="btn btn-outline btn-large" style="background: rgba(255,255,255,0.2); color: white; border-color: white;">
+                        <i class="fas fa-star"></i> See All Features
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Features -->
+            <section class="batch-features" id="features">
+                <div class="section-header">
+                    <h2><i class="fas fa-star"></i> Batch Generator Features</h2>
+                    <p>Everything you need for efficient citation management</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Fast Processing</h4>
+                        <p>Generate dozens of citations in seconds instead of hours. Perfect for large research projects.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-barcode"></i>
+                        </div>
+                        <h4>ISBN Batch Lookup</h4>
+                        <p>Automatically fetch book details for multiple ISBNs at once. No manual data entry required.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-export"></i>
+                        </div>
+                        <h4>Multiple Export Formats</h4>
+                        <p>Export your bibliography as TXT, DOC, or PDF. Compatible with all word processors.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clone"></i>
+                        </div>
+                        <h4>Template System</h4>
+                        <p>Save and reuse citation templates for different project types and requirements.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync"></i>
+                        </div>
+                        <h4>Style Consistency</h4>
+                        <p>Ensure all citations follow the same formatting rules. Perfect for academic papers.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h4>Cloud Storage</h4>
+                        <p>Save your bibliographies to the cloud and access them from any device, anytime.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Use Cases -->
+            <section class="faq-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-lightbulb"></i> Perfect For</h2>
+                    <p>Ideal for these academic scenarios</p>
+                </div>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-graduation-cap"></i> Thesis and Dissertation References</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Generate hundreds of citations for your thesis or dissertation in minutes. Ensure consistency across all references and save countless hours of manual work.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-book"></i> Literature Review Bibliographies</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Quickly compile citations from multiple sources for comprehensive literature reviews. Import ISBNs from your reading list and generate perfect citations instantly.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-users"></i> Group Research Projects</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Collaborate efficiently by sharing CSV files of sources. Team members can contribute to the bibliography, and you can generate consistent citations for the entire project.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-university"></i> Course Reading Lists</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Professors can quickly generate properly formatted citations for course reading lists. Share with students in multiple formats to suit their preferences.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Final CTA -->
+            <div class="info-box" style="text-align: center; margin: 60px 0; padding: 40px;">
+                <h3><i class="fas fa-clock"></i> Save Time on Your Next Project</h3>
+                <p>Join thousands of students and researchers who have upgraded to Premium and are saving hours on citation management.</p>
+                <div style="margin-top: 30px;">
+                    <a href="premium.html" class="btn btn-premium btn-large">
+                        <i class="fas fa-crown"></i> Start Your Premium Trial
+                    </a>
+                    <a href="contact.html" class="btn btn-outline btn-large">
+                        <i class="fas fa-question-circle"></i> Questions? Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h4><i class="fas fa-book-open"></i> StudentCitationTools.com</h4>
+                    </div>
+                    <p>Free academic tools for students worldwide. Making citation generation easy and accessible since 2023.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Premium Tools</h5>
+                    <a href="batch.html" class="nav-active"><i class="fas fa-chevron-right"></i> Batch Generator</a>
+                    <a href="plagiarism-checker.html"><i class="fas fa-chevron-right"></i> Plagiarism Checker</a>
+                    <a href="premium.html"><i class="fas fa-chevron-right"></i> All Premium Features</a>
+                    <a href="premium.html#pricing"><i class="fas fa-chevron-right"></i> Pricing Plans</a>
+                    <a href="premium.html#features"><i class="fas fa-chevron-right"></i> Feature Comparison</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Resources</h5>
+                    <a href="guide.html"><i class="fas fa-chevron-right"></i> Formatting Guide</a>
+                    <a href="examples.html"><i class="fas fa-chevron-right"></i> Citation Examples</a>
+                    <a href="tips.html"><i class="fas fa-chevron-right"></i> Writing Tips</a>
+                    <a href="faq.html"><i class="fas fa-chevron-right"></i> FAQ</a>
+                    <a href="blog.html"><i class="fas fa-chevron-right"></i> Academic Blog</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Legal</h5>
+                    <a href="privacy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
+                    <a href="terms.html"><i class="fas fa-chevron-right"></i> Terms of Service</a>
+                    <a href="disclaimer.html"><i class="fas fa-chevron-right"></i> Disclaimer</a>
+                    <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>© 2024 StudentCitationTools.com | Professional Citation Generator</p>
+                    <p class="disclaimer">Batch citation generation is a Premium feature. Free users can generate individual citations.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mainNav.classList.toggle('active');
+                    mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? 
+                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (mainNav.classList.contains('active') && 
+                        !mainNav.contains(e.target) && 
+                        !mobileMenuBtn.contains(e.target)) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+            }
+            
+            // Initialize theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-mode');
+                    
+                    const icon = this.querySelector('i');
+                    if (document.body.classList.contains('dark-mode')) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                        localStorage.setItem('theme', 'light');
+                    }
+                });
+                
+                // Load saved theme
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    themeToggle.querySelector('i').classList.remove('fa-moon');
+                    themeToggle.querySelector('i').classList.add('fa-sun');
+                }
+            }
+            
+            // Initialize method tabs
+            const methodTabs = document.querySelectorAll('.method-tab');
+            methodTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const method = this.dataset.method;
+                    
+                    // Update active tab
+                    methodTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    document.querySelectorAll('.method-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(method + '-method').classList.add('active');
+                });
+            });
+            
+            // Initialize CSV upload
+            const csvUpload = document.getElementById('csvUpload');
+            const csvFile = document.getElementById('csvFile');
+            
+            if (csvUpload && csvFile) {
+                csvUpload.addEventListener('click', () => csvFile.click());
+                csvUpload.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    csvUpload.style.borderColor = '#9b59b6';
+                    csvUpload.style.background = 'rgba(155, 89, 182, 0.1)';
+                });
+                csvUpload.addEventListener('dragleave', () => {
+                    csvUpload.style.borderColor = '';
+                    csvUpload.style.background = '';
+                });
+                csvUpload.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    csvUpload.style.borderColor = '';
+                    csvUpload.style.background = '';
+                    
+                    const file = e.dataTransfer.files[0];
+                    if (file && file.name.endsWith('.csv')) {
+                        handleCSVFile(file);
+                    } else {
+                        showNotification('Please upload a CSV file.', 'error');
+                    }
+                });
+                
+                csvFile.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        handleCSVFile(file);
+                    }
+                });
+            }
+            
+            // Initialize FAQ toggle
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqItem = this.parentElement;
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('.fa-chevron-down');
+                    
+                    // Close all other items
+                    document.querySelectorAll('.faq-item.active').forEach(item => {
+                        if (item !== faqItem) {
+                            item.classList.remove('active');
+                            item.querySelector('.fa-chevron-down').style.transform = 'rotate(0deg)';
+                        }
+                    });
+                    
+                    // Toggle current item
+                    faqItem.classList.toggle('active');
+                    
+                    if (faqItem.classList.contains('active')) {
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+            
+            // Track page view
+            if (typeof gtag === 'function') {
+                gtag('event', 'page_view', {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                    page_path: window.location.pathname
+                });
+            }
+        });
+        
+        function handleCSVFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                // For demo purposes, just show a success message
+                showNotification(`CSV file "${file.name}" uploaded successfully!`, 'success');
+                
+                // In a real implementation, you would parse the CSV and populate the form
+                console.log('CSV content:', content);
+                
+                // Track CSV upload
+                if (typeof gtag === 'function') {
+                    gtag('event', 'csv_upload', {
+                        'event_category': 'batch',
+                        'event_label': 'file_upload'
+                    });
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function processBatch() {
+            // Show premium required notice
+            showNotification('Batch generation is a Premium feature. Upgrade to unlock this time-saving tool!', 'info');
+            
+            // For demo purposes, generate sample citations
+            const isbnBatch = document.getElementById('isbnBatch').value;
+            const manualEntries = document.getElementById('manualEntries').value;
+            
+            if (!isbnBatch.trim() && !manualEntries.trim()) {
+                showNotification('Please enter some ISBNs or manual entries to generate citations.', 'error');
+                return;
+            }
+            
+            // Generate sample citations for demo
+            const sampleCitations = [
+                {
+                    citation: "Smith, J. (2023). The Art of Academic Writing. Academic Press.",
+                    style: "APA",
+                    source: "Book"
+                },
+                {
+                    citation: "Johnson, M., & Williams, R. (2022). Modern Research Methods. University Press.",
+                    style: "APA",
+                    source: "Book"
+                },
+                {
+                    citation: "Brown, A. (2021). 'Digital Literacy in Education'. Journal of Educational Technology, 15(3), 45-67.",
+                    style: "APA",
+                    source: "Journal"
+                },
+                {
+                    citation: "Davis, S. (2020). Historical Perspectives. Penguin Books.",
+                    style: "APA",
+                    source: "Book"
+                },
+                {
+                    citation: "Wilson, T. (2019). Scientific Writing Made Easy. Springer.",
+                    style: "APA",
+                    source: "Book"
+                }
+            ];
+            
+            displayCitations(sampleCitations);
+            
+            // Track batch generation attempt
+            if (typeof gtag === 'function') {
+                gtag('event', 'batch_generate', {
+                    'event_category': 'batch',
+                    'event_label': 'demo_generation'
+                });
+            }
+        }
+        
+        function displayCitations(citations) {
+            const preview = document.getElementById('citationsPreview');
+            const count = document.getElementById('citationCount');
+            
+            if (citations.length === 0) {
+                preview.innerHTML = `
+                    <div class="no-citations">
+                        <i class="fas fa-file-alt fa-3x" style="margin-bottom: 20px; color: #bdc3c7;"></i>
+                        <h3>No citations generated</h3>
+                        <p>Enter valid ISBNs or manual entries to generate citations.</p>
+                    </div>
+                `;
+                count.textContent = '0 citations';
+                return;
+            }
+            
+            let html = '';
+            citations.forEach((citation, index) => {
+                html += `
+                    <div class="citation-item">
+                        <div class="citation-content">${citation.citation}</div>
+                        <div class="citation-meta">
+                            <span class="citation-style">${citation.style}</span>
+                            <span>${citation.source}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            preview.innerHTML = html;
+            count.textContent = `${citations.length} citations`;
+        }
+        
+        function clearBatch() {
+            document.getElementById('isbnBatch').value = '';
+            document.getElementById('manualEntries').value = '';
+            document.getElementById('citationsPreview').innerHTML = `
+                <div class="no-citations">
+                    <i class="fas fa-file-alt fa-3x" style="margin-bottom: 20px; color: #bdc3c7;"></i>
+                    <h3>No citations generated yet</h3>
+                    <p>Enter ISBNs or upload a CSV file to generate citations in bulk.</p>
+                </div>
+            `;
+            document.getElementById('citationCount').textContent = '0 citations';
+            
+            showNotification('Batch input cleared.', 'info');
+        }
+        
+        function loadExample() {
+            const exampleISBNs = `978-3-16-148410-0
+978-0-262-03384-8
+978-0-452-28423-4
+978-1-4028-9462-6
+978-0-06-112008-4
+978-0-7432-7356-5
+978-0-14-303943-3
+978-0-679-72369-9`;
+            
+            document.getElementById('isbnBatch').value = exampleISBNs;
+            
+            // Switch to ISBN method
+            document.querySelectorAll('.method-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelector('[data-method="isbn"]').classList.add('active');
+            document.querySelectorAll('.method-content').forEach(content => content.classList.remove('active'));
+            document.getElementById('isbn-method').classList.add('active');
+            
+            showNotification('Example ISBNs loaded. Click "Generate Citations" to see a demo.', 'success');
+            
+            // Track example load
+            if (typeof gtag === 'function') {
+                gtag('event', 'batch_example', {
+                    'event_category': 'batch',
+                    'event_label': 'load_example'
+                });
+            }
+        }
+        
+        function exportBatch(format) {
+            // Show premium required notice
+            if (format !== 'txt') {
+                showNotification(`${format.toUpperCase()} export is a Premium feature. Upgrade to unlock all export formats!`, 'info');
+                
+                // Track export attempt
+                if (typeof gtag === 'function') {
+                    gtag('event', 'batch_export', {
+                        'event_category': 'batch',
+                        'event_label': `${format}_premium_required`
+                    });
+                }
+                return;
+            }
+            
+            // For demo, export as TXT
+            const citations = document.querySelectorAll('.citation-content');
+            if (citations.length === 0) {
+                showNotification('No citations to export. Please generate some citations first.', 'error');
+                return;
+            }
+            
+            let exportText = 'Generated Citations - StudentCitationTools.com\n\n';
+            citations.forEach((citation, index) => {
+                exportText += `${index + 1}. ${citation.textContent}\n\n`;
+            });
+            
+            const blob = new Blob([exportText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `batch_citations_${new Date().getTime()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showNotification('Citations exported as TXT file!', 'success');
+            
+            // Track export
+            if (typeof gtag === 'function') {
+                gtag('event', 'batch_export', {
+                    'event_category': 'batch',
+                    'event_label': `${format}_export`
+                });
+            }
+        }
+        
+        function showNotification(message, type) {
+            // Remove existing notification
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+        
+        // Add window resize handler
+        window.addEventListener('resize', function() {
+            const mainNav = document.getElementById('mainNav');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (window.innerWidth > 768 && mainNav) {
+                mainNav.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
