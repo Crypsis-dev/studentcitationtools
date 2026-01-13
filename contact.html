@@ -1,107 +1,720 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHREV68R2D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZHREV68R2D');
+    </script>
+    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | StudentCitationTools.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Contact Support | StudentCitationTools.com</title>
+    <meta name="description" content="Contact our support team for help with citation generation, report issues, or provide feedback. We're here to help!">
+    <meta name="keywords" content="citation support, contact citation generator, academic help, citation tool contact">
+    <meta name="author" content="StudentCitationTools.com">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Contact Support - StudentCitationTools.com">
+    <meta property="og:description" content="Get help with our citation generator, report issues, or provide feedback.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://studentcitationtools.com/contact.html">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact Support",
+        "description": "Contact page for StudentCitationTools.com citation generator",
+        "url": "https://studentcitationtools.com/contact.html",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "qtechz073@gmail.com",
+            "contactType": "customer service",
+            "availableLanguage": "English"
+        }
+    }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-hero {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .contact-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .contact-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 60px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .contact-form {
+            background: var(--dark-color);
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .contact-info {
+            background: var(--dark-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        body.dark-mode .form-group label {
+            color: var(--light-color);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        body.dark-mode .form-group input,
+        body.dark-mode .form-group select,
+        body.dark-mode .form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--gray-color);
+            color: var(--light-color);
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        body.dark-mode .info-item {
+            border-bottom-color: var(--gray-color);
+        }
+        
+        .info-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .info-icon {
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .info-content h3 {
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        body.dark-mode .info-content h3 {
+            color: var(--light-color);
+        }
+        
+        .info-content p {
+            color: var(--gray-color);
+            margin-bottom: 5px;
+        }
+        
+        body.dark-mode .info-content p {
+            color: var(--gray-light);
+        }
+        
+        .info-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .info-content a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        .response-time {
+            background: rgba(46, 204, 113, 0.1);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .response-time i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+        }
+        
+        .faq-section {
+            margin: 60px 0;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            color: var(--dark-color);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        body.dark-mode .social-link {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light-color);
+        }
+        
+        .social-link:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
         <div class="container">
-            <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+            <button class="mobile-menu-btn" aria-label="Menu" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="logo">
-                <h1>📚 StudentCitationTools.com</h1>
-                <p class="tagline">Contact Us</p>
+                <h1><i class="fas fa-book-open"></i> StudentCitationTools.com</h1>
+                <p class="tagline">Free academic tools for students worldwide</p>
             </div>
-            <nav class="main-nav">
-                <a href="index.html">Home</a>
-                <a href="apa.html">APA Generator</a>
-                <a href="mla.html">MLA Generator</a>
-                <a href="chicago.html">Chicago Generator</a>
-                <a href="contact.html" class="nav-active">Contact</a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="apa.html"><i class="fas fa-file-alt"></i> APA Generator</a>
+                <a href="mla.html"><i class="fas fa-font"></i> MLA Generator</a>
+                <a href="chicago.html"><i class="fas fa-university"></i> Chicago Generator</a>
+                <a href="isbn.html"><i class="fas fa-barcode"></i> ISBN Lookup</a>
+                <a href="premium.html"><i class="fas fa-crown"></i> Premium</a>
+                <a href="guide.html"><i class="fas fa-graduation-cap"></i> Guide</a>
+                <a href="examples.html"><i class="fas fa-list-ul"></i> Examples</a>
+                <a href="contact.html" class="nav-active"><i class="fas fa-envelope"></i> Contact</a>
             </nav>
+            <div class="header-actions">
+                <button class="btn btn-small" id="themeToggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </div>
     </header>
 
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="contact-container">
+            <h1><i class="fas fa-headset"></i> Contact Our Support Team</h1>
+            <p>Need help with citations? Have questions or feedback? We're here to assist you!</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
     <main class="main">
-        <div class="container">
-            <div class="content-page">
-                <h1>Contact Us</h1>
-                <p>We're here to help! Get in touch with us for any questions, feedback, or support.</p>
+        <div class="contact-container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h2><i class="fas fa-paper-plane"></i> Send us a Message</h2>
+                    <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+                    
+                    <form id="contactForm" onsubmit="submitContactForm(event)">
+                        <div class="form-group">
+                            <label for="name"><i class="fas fa-user"></i> Full Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Your name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope"></i> Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="your@email.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject"><i class="fas fa-tag"></i> Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="support">Technical Support</option>
+                                <option value="feature">Feature Request</option>
+                                <option value="bug">Bug Report</option>
+                                <option value="premium">Premium Subscription</option>
+                                <option value="partnership">Partnership Inquiry</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message"><i class="fas fa-comment"></i> Message *</label>
+                            <textarea id="message" name="message" rows="6" required placeholder="Please describe your issue or inquiry in detail..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                        
+                        <p class="privacy-note" style="margin-top: 15px; font-size: 0.9rem; color: var(--gray-color);">
+                            <i class="fas fa-lock"></i> Your information is secure. We respect your privacy and will never share your details.
+                        </p>
+                    </form>
+                </div>
                 
+                <!-- Contact Information -->
                 <div class="contact-info">
-                    <h2>Email Support</h2>
-                    <p><strong>Primary Contact:</strong> <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a></p>
-                    <p>We typically respond within 24 hours.</p>
+                    <h2><i class="fas fa-info-circle"></i> Get in Touch</h2>
+                    <p>You can also reach us through these channels:</p>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Email Support</h3>
+                            <p><strong>Primary Contact:</strong></p>
+                            <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a>
+                            <p><strong>Premium Support:</strong></p>
+                            <a href="mailto:premium@studentcitationtools.com">premium@studentcitationtools.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Response Time</h3>
+                            <p><strong>Standard Support:</strong> Within 24-48 hours</p>
+                            <p><strong>Premium Support:</strong> Within 6-12 hours</p>
+                            <p><strong>Urgent Issues:</strong> Please mark as urgent in your email</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="info-content">
+                            <h3>Community & Social</h3>
+                            <p>Join our community for updates and discussions:</p>
+                            <div class="social-links">
+                                <a href="#" class="social-link" aria-label="Facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="Twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="Reddit">
+                                    <i class="fab fa-reddit-alien"></i>
+                                </a>
+                                <a href="#" class="social-link" aria-label="Discord">
+                                    <i class="fab fa-discord"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="response-time">
+                        <p><i class="fas fa-bolt"></i> <strong>Need immediate help?</strong> Check our <a href="faq.html">FAQ page</a> for quick answers to common questions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+                    <p>Quick answers to common questions</p>
                 </div>
                 
-                <h2>Frequently Asked Questions</h2>
-                
-                <div class="faq-item">
-                    <h3>Is StudentCitationTools.com really free?</h3>
-                    <p>Yes! Our tool is completely free to use with no hidden costs or registration requirements.</p>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4><i class="fas fa-question"></i> Is StudentCitationTools.com really free?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! Our core citation generator is 100% free with no hidden costs. We also offer Premium features for power users who need advanced functionality.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4><i class="fas fa-question"></i> Do you store my data?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No. All citation generation happens locally in your browser. We don't store any of your citation data unless you explicitly save it (and even then, it's stored locally on your device).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4><i class="fas fa-question"></i> Can I use this tool on mobile?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolutely! Our website is fully responsive and works perfectly on all devices including smartphones and tablets. No app download required.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4><i class="fas fa-question"></i> Which citation styles do you support?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We support APA 7th edition, MLA 9th edition, and Chicago 17th edition - the three most popular academic styles. These cover 95% of academic citation needs.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4><i class="fas fa-question"></i> How does the ISBN lookup work?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our tool queries book databases using the ISBN you provide and automatically retrieves author, title, publisher, year, and other details to fill your citation form automatically.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4><i class="fas fa-question"></i> What's included in Premium?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Premium includes unlimited citations, batch generation, advanced export formats, citation history, plagiarism check, and ad-free experience. <a href="premium.html">See all features</a>.</p>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="faq-item">
-                    <h3>Do you store my data?</h3>
-                    <p>No. All citation generation happens locally in your browser. We don't store any of your information.</p>
+            </section>
+            
+            <!-- Additional Help -->
+            <div class="info-box" style="margin: 40px 0;">
+                <h3><i class="fas fa-life-ring"></i> Need More Help?</h3>
+                <p>Before contacting support, you might find these resources helpful:</p>
+                <div style="display: flex; gap: 20px; margin-top: 15px; flex-wrap: wrap;">
+                    <a href="guide.html" class="btn btn-outline">
+                        <i class="fas fa-book"></i> Formatting Guide
+                    </a>
+                    <a href="examples.html" class="btn btn-outline">
+                        <i class="fas fa-file-alt"></i> Examples
+                    </a>
+                    <a href="tips.html" class="btn btn-outline">
+                        <i class="fas fa-lightbulb"></i> Writing Tips
+                    </a>
+                    <a href="faq.html" class="btn btn-outline">
+                        <i class="fas fa-question-circle"></i> Full FAQ
+                    </a>
                 </div>
-                
-                <div class="faq-item">
-                    <h3>Can I use this tool on mobile?</h3>
-                    <p>Absolutely! Our website is fully responsive and works perfectly on all devices including smartphones and tablets.</p>
-                </div>
-                
-                <div class="faq-item">
-                    <h3>Which citation styles do you support?</h3>
-                    <p>We support APA 7th edition, MLA 9th edition, and Chicago 17th edition - the three most popular academic styles.</p>
-                </div>
-                
-                <h2>Need Help?</h2>
-                <p>If you're experiencing technical issues or have suggestions for improvements, please email us at <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a> with:</p>
-                <ul>
-                    <li>Description of the issue</li>
-                    <li>Browser and device information</li>
-                    <li>Screenshots if possible</li>
-                </ul>
             </div>
         </div>
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>StudentCitationTools.com</h4>
-                    <p>Free academic tools for students worldwide.</p>
-                    <p>Contact: <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a></p>
+                    <div class="footer-logo">
+                        <h4><i class="fas fa-book-open"></i> StudentCitationTools.com</h4>
+                    </div>
+                    <p>Free academic tools for students worldwide. Making citation generation easy and accessible since 2023.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
+                
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <a href="index.html">Home</a>
-                    <a href="apa.html">APA Generator</a>
-                    <a href="mla.html">MLA Generator</a>
-                    <a href="chicago.html">Chicago Generator</a>
+                    <h5>Citation Tools</h5>
+                    <a href="apa.html"><i class="fas fa-chevron-right"></i> APA Generator</a>
+                    <a href="mla.html"><i class="fas fa-chevron-right"></i> MLA Generator</a>
+                    <a href="chicago.html"><i class="fas fa-chevron-right"></i> Chicago Generator</a>
+                    <a href="isbn.html"><i class="fas fa-chevron-right"></i> ISBN Lookup Tool</a>
+                    <a href="batch.html"><i class="fas fa-chevron-right"></i> Batch Generator</a>
                 </div>
+                
                 <div class="footer-section">
-                    <h4>Legal</h4>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="disclaimer.html">Disclaimer</a>
+                    <h5>Resources</h5>
+                    <a href="guide.html"><i class="fas fa-chevron-right"></i> Formatting Guide</a>
+                    <a href="examples.html"><i class="fas fa-chevron-right"></i> Citation Examples</a>
+                    <a href="tips.html"><i class="fas fa-chevron-right"></i> Writing Tips</a>
+                    <a href="blog.html"><i class="fas fa-chevron-right"></i> Academic Blog</a>
+                    <a href="faq.html"><i class="fas fa-chevron-right"></i> FAQ</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Legal & Support</h5>
+                    <a href="privacy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
+                    <a href="terms.html"><i class="fas fa-chevron-right"></i> Terms of Service</a>
+                    <a href="disclaimer.html"><i class="fas fa-chevron-right"></i> Disclaimer</a>
+                    <a href="contact.html" class="nav-active"><i class="fas fa-chevron-right"></i> Contact Support</a>
+                    <a href="sitemap.html"><i class="fas fa-chevron-right"></i> Sitemap</a>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>© 2026 StudentCitationTools.com | Free Citation Generator</p>
+                <div class="footer-copyright">
+                    <p>© 2024 StudentCitationTools.com | Professional Citation Generator</p>
+                    <p class="disclaimer">This tool generates citations based on official style guides. Always verify with your institution's requirements.</p>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
+    <script src="script.js"></script>
     <script>
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.main-nav').classList.toggle('active');
+        // Initialize the contact page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mainNav.classList.toggle('active');
+                    mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? 
+                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (mainNav.classList.contains('active') && 
+                        !mainNav.contains(e.target) && 
+                        !mobileMenuBtn.contains(e.target)) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+            }
+            
+            // Initialize theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-mode');
+                    
+                    const icon = this.querySelector('i');
+                    if (document.body.classList.contains('dark-mode')) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                        localStorage.setItem('theme', 'light');
+                    }
+                });
+                
+                // Load saved theme
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    themeToggle.querySelector('i').classList.remove('fa-moon');
+                    themeToggle.querySelector('i').classList.add('fa-sun');
+                }
+            }
+            
+            // Initialize FAQ toggle
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqItem = this.parentElement;
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('.fa-chevron-down');
+                    
+                    faqItem.classList.toggle('active');
+                    
+                    if (faqItem.classList.contains('active')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+            
+            // Track page view
+            if (typeof gtag === 'function') {
+                gtag('event', 'page_view', {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                    page_path: window.location.pathname
+                });
+            }
+        });
+        
+        // Contact form submission
+        function submitContactForm(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Simple validation
+            if (!name || !email || !subject || !message) {
+                showNotification('Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            // Simulate form submission
+            showNotification('Thank you for your message! We\'ll get back to you soon.', 'success');
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+            
+            // Track form submission
+            if (typeof gtag === 'function') {
+                gtag('event', 'contact_form', {
+                    'event_category': 'engagement',
+                    'event_label': 'contact_submission'
+                });
+            }
+            
+            return false;
+        }
+        
+        // Notification function
+        function showNotification(message, type) {
+            // Remove existing notification
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+        
+        // Add window resize handler
+        window.addEventListener('resize', function() {
+            const mainNav = document.getElementById('mainNav');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (window.innerWidth > 768 && mainNav) {
+                mainNav.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            }
         });
     </script>
+    <!-- reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>
