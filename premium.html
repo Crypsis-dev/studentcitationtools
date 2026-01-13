@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Features - StudentCitationTools.com</title>
+    <meta name="description" content="Upgrade to Premium for unlimited citations, batch generation, plagiarism check, and more advanced features.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .pricing-hero {
+            background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .pricing-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-hero .hero-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .pricing-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .pricing-card.popular {
+            border: 3px solid #f39c12;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f39c12;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .pricing-icon {
+            font-size: 3.5rem;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-card.popular .pricing-icon {
+            color: #f39c12;
+        }
+        
+        .pricing-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-card.popular .pricing-price {
+            color: #f39c12;
+        }
+        
+        .pricing-period {
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-weight: normal;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+        
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pricing-features li i {
+            color: #2ecc71;
+            font-size: 1.2rem;
+        }
+        
+        .pricing-features li.disabled {
+            color: #bdc3c7;
+        }
+        
+        .pricing-features li.disabled i {
+            color: #bdc3c7;
+        }
+        
+        .pricing-cta {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .feature-comparison {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 50px;
+            margin: 60px 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .comparison-table th {
+            background: #2c3e50;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(52, 152, 219, 0.05);
+        }
+        
+        .feature-check {
+            color: #2ecc71;
+            font-size: 1.2rem;
+        }
+        
+        .feature-cross {
+            color: #e74c3c;
+            font-size: 1.2rem;
+        }
+        
+        .testimonials {
+            margin: 60px 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .author-info p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .faq-section {
+            margin: 60px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-tiers {
+                grid-template-columns: 1fr;
+            }
+            
+            .pricing-card.popular {
+                transform: none;
+            }
+            
+            .pricing-card.popular:hover {
+                transform: translateY(-10px);
+            }
+            
+            .feature-comparison {
+                padding: 20px;
+                overflow-x: auto;
+            }
+            
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <button class="mobile-menu-btn" aria-label="Menu" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo">
+                <h1><i class="fas fa-book-open"></i> StudentCitationTools.com</h1>
+                <p class="tagline">Free academic tools for students worldwide</p>
+            </div>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="apa.html"><i class="fas fa-file-alt"></i> APA Generator</a>
+                <a href="mla.html"><i class="fas fa-font"></i> MLA Generator</a>
+                <a href="chicago.html"><i class="fas fa-university"></i> Chicago Generator</a>
+                <a href="isbn.html"><i class="fas fa-barcode"></i> ISBN Lookup</a>
+                <a href="premium.html" class="nav-active"><i class="fas fa-crown"></i> Premium</a>
+                <a href="guide.html"><i class="fas fa-graduation-cap"></i> Guide</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pricing-hero">
+        <div class="pricing-container">
+            <h1>Upgrade to Premium</h1>
+            <p class="hero-subtitle">Unlock unlimited citations, advanced features, and priority support to supercharge your academic writing</p>
+            <div class="cta-buttons">
+                <a href="#pricing" class="btn btn-primary btn-large">
+                    <i class="fas fa-rocket"></i> View Plans
+                </a>
+                <a href="#features" class="btn btn-secondary btn-large">
+                    <i class="fas fa-star"></i> See Features
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Tiers -->
+    <section class="pricing-container" id="pricing">
+        <div class="section-header">
+            <h2><i class="fas fa-tags"></i> Choose Your Plan</h2>
+            <p>Select the perfect plan for your academic needs</p>
+        </div>
+        
+        <div class="pricing-tiers">
+            <!-- Free Tier -->
+            <div class="pricing-card">
+                <div class="pricing-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3 class="pricing-title">Free</h3>
+                <div class="pricing-price">$0<span class="pricing-period">/month</span></div>
+                
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Basic citation generation</li>
+                    <li><i class="fas fa-check"></i> 3 citation styles (APA, MLA, Chicago)</li>
+                    <li><i class="fas fa-check"></i> 10 citations per day limit</li>
+                    <li><i class="fas fa-check"></i> Basic ISBN lookup</li>
+                    <li><i class="fas fa-check"></i> Text export only</li>
+                    <li><i class="fas fa-check"></i> Last 10 citations saved</li>
+                    <li class="disabled"><i class="fas fa-times"></i> No batch generation</li>
+                    <li class="disabled"><i class="fas fa-times"></i> No plagiarism check</li>
+                    <li class="disabled"><i class="fas fa-times"></i> No priority support</li>
+                    <li class="disabled"><i class="fas fa-times"></i> Contains ads</li>
+                </ul>
+                
+                <a href="index.html" class="btn btn-outline pricing-cta">
+                    <i class="fas fa-check"></i> Current Plan
+                </a>
+            </div>
+            
+            <!-- Premium Tier -->
+            <div class="pricing-card popular">
+                <div class="popular-badge">MOST POPULAR</div>
+                <div class="pricing-icon">
+                    <i class="fas fa-crown"></i>
+                </div>
+                <h3 class="pricing-title">Premium</h3>
+                <div class="pricing-price">$4.99<span class="pricing-period">/month</span></div>
+                <p class="pricing-savings">Save 58% with annual billing: $49.99/year</p>
+                
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Unlimited citation generation</li>
+                    <li><i class="fas fa-check"></i> All citation styles (APA, MLA, Chicago)</li>
+                    <li><i class="fas fa-check"></i> No daily limits</li>
+                    <li><i class="fas fa-check"></i> Advanced ISBN lookup</li>
+                    <li><i class="fas fa-check"></i> Multiple export formats (PDF, DOC, BibTeX)</li>
+                    <li><i class="fas fa-check"></i> 500 citations saved</li>
+                    <li><i class="fas fa-check"></i> Batch citation generation</li>
+                    <li><i class="fas fa-check"></i> Basic plagiarism check</li>
+                    <li><i class="fas fa-check"></i> Priority email support</li>
+                    <li><i class="fas fa-check"></i> Ad-free experience</li>
+                </ul>
+                
+                <button class="btn btn-premium pricing-cta" onclick="enablePremium()">
+                    <i class="fas fa-shopping-cart"></i> Upgrade Now
+                </button>
+            </div>
+            
+            <!-- Student Pro Tier -->
+            <div class="pricing-card">
+                <div class="pricing-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3 class="pricing-title">Student Pro</h3>
+                <div class="pricing-price">$9.99<span class="pricing-period">/month</span></div>
+                <p class="pricing-savings">Best for serious researchers</p>
+                
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check"></i> Everything in Premium</li>
+                    <li><i class="fas fa-check"></i> Advanced plagiarism check</li>
+                    <li><i class="fas fa-check"></i> Unlimited citation storage</li>
+                    <li><i class="fas fa-check"></i> Citation style customization</li>
+                    <li><i class="fas fa-check"></i> Reference list generation</li>
+                    <li><i class="fas fa-check"></i> Bibliography management</li>
+                    <li><i class="fas fa-check"></i> Team collaboration features</li>
+                    <li><i class="fas fa-check"></i> 24/7 priority support</li>
+                    <li><i class="fas fa-check"></i> Early access to new features</li>
+                    <li><i class="fas fa-check"></i> Personal account manager</li>
+                </ul>
+                
+                <button class="btn btn-primary pricing-cta" onclick="showContactForm()">
+                    <i class="fas fa-envelope"></i> Contact Sales
+                </button>
+            </div>
+        </div>
+        
+        <!-- Annual Savings Notice -->
+        <div class="info-box" style="text-align: center; margin-top: 30px;">
+            <p><i class="fas fa-lightbulb"></i> <strong>Save 58% with annual billing!</strong> Pay $49.99 once for Premium instead of $59.88 monthly.</p>
+        </div>
+    </section>
+
+    <!-- Feature Comparison -->
+    <section class="feature-comparison" id="features">
+        <div class="pricing-container">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-bar"></i> Feature Comparison</h2>
+                <p>See how our plans stack up against each other</p>
+            </div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Free</th>
+                        <th>Premium</th>
+                        <th>Student Pro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: left;"><strong>Daily Citation Limit</strong></td>
+                        <td>10 citations/day</td>
+                        <td>Unlimited</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><strong>Citation Styles</strong></td>
+                        <td>3 (APA, MLA, Chicago)</td>
+                        <td>All styles</td>
+                        <td>All + Custom styles</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><strong>ISBN Lookup</strong></td>
+                        <td>Basic</td>
+                        <td>Advanced</td>
+                        <td>Advanced + Batch</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><strong>Export Formats</strong></td>
+                        <td>TXT only</td>
+                        <td>PDF, DOC, TXT, BibTeX</td>
+                        <td>All formats + Word add-in</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><strong>Citation History</strong></td>
+                        <td>Last 10 citations</td>
+                        <td>500 citations</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><strong>Batch Generation</strong></td>
+                        <td><i class="fas fa-times feature-cross"></i></td>
+                        <td><i class="fas fa-check feature-check"></i></td>
+                        <td><i class="fas fa-check feature-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><strong>Plagiarism Check</strong></td>
+                        <td><i class="fas fa-times feature-cross"></i></td>
+                        <td>Basic (1000 words)</td>
+                        <td>Advanced (unlimited)</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><strong>Ad-free Experience</strong></td>
+                        <td><i class="fas fa-times feature-cross"></i></td>
+                        <td><i class="fas fa-check feature-check"></i></td>
+                        <td><i class="fas fa-check feature-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><strong>Priority Support</strong></td>
+                        <td><i class="fas fa-times feature-cross"></i></td>
+                        <td>Email (24-48h)</td>
+                        <td>24/7 Chat + Phone</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><strong>Team Collaboration</strong></td>
+                        <td><i class="fas fa-times feature-cross"></i></td>
+                        <td><i class="fas fa-times feature-cross"></i></td>
+                        <td><i class="fas fa-check feature-check"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="pricing-container">
+            <div class="section-header">
+                <h2><i class="fas fa-comments"></i> What Our Users Say</h2>
+                <p>Join thousands of satisfied students and researchers</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The Premium plan saved me countless hours on my thesis. The batch citation feature alone was worth the price!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>PhD Candidate, Harvard University</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As a professor, I recommend this tool to all my students. The Premium features make citation management effortless."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Dr. Michael Chen</h4>
+                            <p>Professor of Psychology, Stanford</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The ISBN lookup feature is a game-changer! I can now cite dozens of books in minutes instead of hours."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>James Wilson</h4>
+                            <p>Graduate Student, Oxford University</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="pricing-container">
+            <div class="section-header">
+                <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+                <p>Get answers to common questions about Premium</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4><i class="fas fa-question"></i> Can I cancel my subscription anytime?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! You can cancel your Premium subscription at any time. Your subscription will remain active until the end of your billing period, and then you'll revert to the Free plan.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4><i class="fas fa-question"></i> Do you offer student discounts?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Students can get 20% off any plan by verifying their student status with a valid .edu email address. Contact our support team for student pricing.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4><i class="fas fa-question"></i> What payment methods do you accept?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and Apple Pay for monthly subscriptions.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4><i class="fas fa-question"></i> Is my payment information secure?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! We use industry-standard encryption and never store your payment information on our servers. All payments are processed through secure payment gateways.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4><i class="fas fa-question"></i> Can I switch between monthly and annual billing?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can switch between monthly and annual billing at any time from your account settings. Any remaining balance will be prorated.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h4><i class="fas fa-question"></i> Do you offer institutional licenses?</h4>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We offer special pricing for universities, libraries, and research institutions. Contact our sales team for institutional pricing and volume discounts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="hero" style="margin-top: 60px;">
+        <div class="pricing-container">
+            <div class="hero-content">
+                <h2>Ready to Upgrade Your Academic Workflow?</h2>
+                <p class="hero-subtitle">Join thousands of students and researchers who have already upgraded to Premium</p>
+                
+                <div class="cta-buttons">
+                    <button class="btn btn-premium btn-large" onclick="enablePremium()">
+                        <i class="fas fa-rocket"></i> Upgrade to Premium - $4.99/month
+                    </button>
+                    <a href="contact.html" class="btn btn-secondary btn-large">
+                        <i class="fas fa-question-circle"></i> Need Help Choosing?
+                    </a>
+                </div>
+                
+                <p class="hero-subtitle" style="margin-top: 20px; font-size: 0.9rem;">
+                    <i class="fas fa-shield-alt"></i> 30-day money-back guarantee • Cancel anytime • No hidden fees
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h4><i class="fas fa-book-open"></i> StudentCitationTools.com</h4>
+                    </div>
+                    <p>Free academic tools for students worldwide. Making citation generation easy and accessible since 2023.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Plans</h5>
+                    <a href="index.html"><i class="fas fa-chevron-right"></i> Free Plan</a>
+                    <a href="premium.html"><i class="fas fa-chevron-right"></i> Premium Plan</a>
+                    <a href="premium.html"><i class="fas fa-chevron-right"></i> Student Pro</a>
+                    <a href="contact.html"><i class="fas fa-chevron-right"></i> Institutional</a>
+                    <a href="contact.html"><i class="fas fa-chevron-right"></i> Student Discount</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Resources</h5>
+                    <a href="guide.html"><i class="fas fa-chevron-right"></i> Formatting Guide</a>
+                    <a href="examples.html"><i class="fas fa-chevron-right"></i> Citation Examples</a>
+                    <a href="blog.html"><i class="fas fa-chevron-right"></i> Academic Blog</a>
+                    <a href="tips.html"><i class="fas fa-chevron-right"></i> Writing Tips</a>
+                    <a href="contact.html"><i class="fas fa-chevron-right"></i> Support</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Legal</h5>
+                    <a href="privacy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
+                    <a href="terms.html"><i class="fas fa-chevron-right"></i> Terms of Service</a>
+                    <a href="refund.html"><i class="fas fa-chevron-right"></i> Refund Policy</a>
+                    <a href="cookies.html"><i class="fas fa-chevron-right"></i> Cookie Policy</a>
+                    <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>© 2024 StudentCitationTools.com | Professional Citation Generator</p>
+                    <p class="disclaimer">Premium subscriptions auto-renew unless canceled. Prices in USD.</p>
+                </div>
+                
+                <div class="footer-payment">
+                    <h6>Secure Payment Methods</h6>
+                    <div class="payment-icons">
+                        <i class="fab fa-cc-visa" title="Visa"></i>
+                        <i class="fab fa-cc-mastercard" title="MasterCard"></i>
+                        <i class="fab fa-cc-amex" title="American Express"></i>
+                        <i class="fab fa-cc-paypal" title="PayPal"></i>
+                        <i class="fab fa-apple-pay" title="Apple Pay"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Premium page specific functions
+        function showContactForm() {
+            citationGenerator.showAlert('Please contact us at sales@studentcitationtools.com for Student Pro pricing.', 'info');
+            citationGenerator.trackEvent('premium', 'contact_sales');
+        }
+        
+        // Initialize FAQ toggles
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqItem = this.parentElement;
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('.fa-chevron-down');
+                    
+                    // Toggle active class
+                    faqItem.classList.toggle('active');
+                    
+                    // Toggle icon
+                    if (faqItem.classList.contains('active')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+            
+            // Track page view
+            if (typeof gtag === 'function') {
+                gtag('event', 'page_view', {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                    page_path: window.location.pathname
+                });
+            }
+        });
+        
+        // Mobile menu for premium page
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isActive = mainNav.classList.contains('active');
+                    
+                    if (isActive) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+                        document.body.classList.remove('menu-open');
+                        document.body.style.overflow = '';
+                    } else {
+                        mainNav.classList.add('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+                        mobileMenuBtn.setAttribute('aria-label', 'Close menu');
+                        document.body.classList.add('menu-open');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (mainNav.classList.contains('active') && 
+                        !mainNav.contains(e.target) && 
+                        !mobileMenuBtn.contains(e.target)) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+                        document.body.classList.remove('menu-open');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
