@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics - Only one instance needed -->
+    <!-- Enhanced Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHREV68R2D"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-ZHREV68R2D', {
-            'page_title': document.title,
-            'page_location': window.location.href
-        });
+        gtag('config', 'G-ZHREV68R2D');
     </script>
     
+    <!-- Meta Tags for SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Free Citation Generator - APA, MLA, Chicago | StudentCitationTools.com</title>
-    <meta name="description" content="Generate accurate APA, MLA, and Chicago citations instantly. Free tool for students, researchers, and writers.">
-    <meta name="keywords" content="citation generator, apa citation, mla citation, chicago style, free citation tool">
+    <title>Free Citation Generator - APA, MLA, Chicago with ISBN Lookup | StudentCitationTools.com</title>
+    <meta name="description" content="Generate accurate APA, MLA, and Chicago citations instantly with ISBN lookup. Free tool for students, researchers, and writers.">
+    <meta name="keywords" content="citation generator, apa citation, mla citation, chicago style, free citation tool, ISBN citation generator, book citation">
     <meta name="author" content="StudentCitationTools.com">
+    <meta name="robots" content="index, follow">
     <meta name="google-site-verification" content="aTGRYksmhtOAByg5LePzUupoNZiNbhTzVtitq7VOw6w" />
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Free Citation Generator with ISBN Lookup">
+    <meta property="og:description" content="Generate accurate APA, MLA, and Chicago citations instantly with ISBN lookup.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://studentcitationtools.com/">
+    <meta property="og:image" content="https://studentcitationtools.com/images/og-image.jpg">
     
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "name": "Free Citation Generator",
+        "name": "Free Citation Generator with ISBN Lookup",
         "url": "https://studentcitationtools.com/",
-        "description": "Generate accurate APA, MLA, and Chicago citations instantly.",
+        "description": "Generate accurate APA, MLA, and Chicago citations instantly with ISBN lookup.",
         "applicationCategory": "EducationalApplication",
         "operatingSystem": "Any",
         "offers": {
@@ -42,128 +46,240 @@
             "@type": "AggregateRating",
             "ratingValue": "4.8",
             "ratingCount": "1250"
-        }
+        },
+        "featureList": "APA 7th Edition, MLA 9th Edition, Chicago 17th Edition, ISBN Lookup, Free Citation Generator"
     }
     </script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <button class="mobile-menu-btn" aria-label="Menu" id="mobileMenuBtn">☰</button>
+            <button class="mobile-menu-btn" aria-label="Menu" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="logo">
-                <h1>📚 StudentCitationTools.com</h1>
+                <h1><i class="fas fa-book-open"></i> StudentCitationTools.com</h1>
                 <p class="tagline">Free academic tools for students worldwide</p>
             </div>
             <nav class="main-nav" id="mainNav">
-                <a href="index.html" class="nav-active">Home</a>
-                <a href="apa.html">APA Generator</a>
-                <a href="mla.html">MLA Generator</a>
-                <a href="chicago.html">Chicago Generator</a>
-                <a href="guide.html">Formatting Guide</a>
-                <a href="examples.html">Examples</a>
-                <a href="tips.html">Writing Tips</a>
-                <a href="contact.html">Contact</a>
+                <a href="index.html" class="nav-active"><i class="fas fa-home"></i> Home</a>
+                <a href="apa.html"><i class="fas fa-file-alt"></i> APA Generator</a>
+                <a href="mla.html"><i class="fas fa-font"></i> MLA Generator</a>
+                <a href="chicago.html"><i class="fas fa-university"></i> Chicago Generator</a>
+                <a href="isbn.html" class="nav-highlight"><i class="fas fa-barcode"></i> ISBN Lookup</a>
+                <a href="guide.html"><i class="fas fa-graduation-cap"></i> Formatting Guide</a>
+                <a href="examples.html"><i class="fas fa-list-ul"></i> Examples</a>
+                <a href="tips.html"><i class="fas fa-lightbulb"></i> Writing Tips</a>
+                <a href="premium.html" class="premium-link"><i class="fas fa-crown"></i> Premium</a>
             </nav>
+            <div class="header-actions">
+                <button class="btn btn-small" id="themeToggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h2>Generate Perfect Citations in Seconds</h2>
-                <p class="hero-subtitle">Free APA, MLA, and Chicago style citations. No registration, no limits.</p>
-                <div class="stats">
-                    <div class="stat">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Free</span>
+                <h1>Generate Perfect Citations in Seconds</h1>
+                <p class="hero-subtitle">Free APA, MLA, and Chicago style citations with ISBN lookup. No registration, no limits.</p>
+                
+                <div class="hero-features">
+                    <div class="feature-badge">
+                        <i class="fas fa-check-circle"></i> 100% Free
                     </div>
-                    <div class="stat">
-                        <span class="stat-number">24/7</span>
-                        <span class="stat-label">Available</span>
+                    <div class="feature-badge">
+                        <i class="fas fa-bolt"></i> Instant Results
                     </div>
-                    <div class="stat">
-                        <span class="stat-number">0</span>
-                        <span class="stat-label">Registration</span>
+                    <div class="feature-badge">
+                        <i class="fas fa-shield-alt"></i> Privacy Focused
                     </div>
+                    <div class="feature-badge">
+                        <i class="fas fa-barcode"></i> ISBN Lookup
+                    </div>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="#tool" class="btn btn-primary btn-large">
+                        <i class="fas fa-magic"></i> Start Generating
+                    </a>
+                    <a href="#isbn-section" class="btn btn-secondary btn-large">
+                        <i class="fas fa-barcode"></i> Use ISBN Lookup
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Main Tool -->
-    <main class="main">
+    <!-- Main Tool Section -->
+    <main class="main" id="tool">
         <div class="container">
             <!-- Style Selector -->
             <div class="style-selector">
-                <div class="style-tabs">
-                    <button class="style-tab active" data-style="apa">APA 7th Edition</button>
-                    <button class="style-tab" data-style="mla">MLA 9th Edition</button>
-                    <button class="style-tab" data-style="chicago">Chicago 17th Edition</button>
+                <div class="section-header">
+                    <h2><i class="fas fa-edit"></i> Select Citation Style</h2>
+                    <p>Choose your preferred citation format</p>
                 </div>
+                
+                <div class="style-tabs">
+                    <button class="style-tab active" data-style="apa">
+                        <i class="fas fa-file-medical"></i>
+                        <span>APA 7th Edition</span>
+                    </button>
+                    <button class="style-tab" data-style="mla">
+                        <i class="fas fa-font"></i>
+                        <span>MLA 9th Edition</span>
+                    </button>
+                    <button class="style-tab" data-style="chicago">
+                        <i class="fas fa-university"></i>
+                        <span>Chicago 17th Edition</span>
+                    </button>
+                </div>
+                
                 <div class="style-info" id="styleInfo">
-                    <p><strong>APA (American Psychological Association):</strong> Used in psychology, education, and social sciences.</p>
+                    <div class="info-box">
+                        <p><strong>APA (American Psychological Association):</strong> Used in psychology, education, and social sciences. Requires author, date, title, source, and DOI/URL when available.</p>
+                    </div>
                 </div>
             </div>
+
+            <!-- ISBN Lookup Section -->
+            <section class="isbn-section" id="isbn-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-barcode"></i> Quick ISBN Lookup</h2>
+                    <p>Enter an ISBN-10 or ISBN-13 to automatically fill citation details</p>
+                </div>
+                
+                <div class="isbn-tool">
+                    <div class="isbn-input-group">
+                        <div class="input-with-icon">
+                            <i class="fas fa-barcode"></i>
+                            <input type="text" id="isbnInput" placeholder="Enter ISBN (10 or 13 digits)" maxlength="17">
+                        </div>
+                        <button class="btn btn-primary" onclick="fetchByISBN()">
+                            <i class="fas fa-search"></i> Lookup Book
+                        </button>
+                        <button class="btn btn-outline" onclick="clearISBN()">
+                            <i class="fas fa-times"></i> Clear
+                        </button>
+                    </div>
+                    
+                    <div class="isbn-help">
+                        <p><i class="fas fa-info-circle"></i> Find ISBN on the back cover or copyright page of books. Example: 978-3-16-148410-0 or 0321965515</p>
+                    </div>
+                    
+                    <div class="isbn-result" id="isbnResult">
+                        <!-- ISBN lookup results will appear here -->
+                    </div>
+                </div>
+            </section>
 
             <!-- Tool Container -->
             <div class="tool-container">
                 <!-- Input Form -->
                 <div class="input-section">
                     <div class="input-card">
-                        <h3>📝 Enter Source Details</h3>
-                        
-                        <div class="form-group">
-                            <label for="author">Author(s) *</label>
-                            <input type="text" id="author" placeholder="e.g., Smith, John">
-                            <small class="help-text">Format: Last Name, First Name</small>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="year">Publication Year *</label>
-                                <input type="number" id="year" placeholder="2024" min="1000" max="2099">
-                            </div>
-                            <div class="form-group">
-                                <label for="sourceType">Source Type</label>
-                                <select id="sourceType">
+                        <div class="card-header">
+                            <h3><i class="fas fa-edit"></i> Enter Source Details</h3>
+                            <div class="source-type-selector">
+                                <select id="sourceType" onchange="updateFormFields()">
                                     <option value="book">Book</option>
                                     <option value="journal">Journal Article</option>
                                     <option value="website">Website</option>
                                     <option value="newspaper">Newspaper</option>
                                     <option value="magazine">Magazine</option>
+                                    <option value="thesis">Thesis/Dissertation</option>
+                                    <option value="conference">Conference Paper</option>
+                                    <option value="video">Video/Film</option>
                                 </select>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="title">Title *</label>
-                            <input type="text" id="title" placeholder="e.g., The Psychology of Learning">
-                        </div>
-
-                        <div id="dynamicFields">
+                        
+                        <div class="form-grid">
                             <div class="form-group">
-                                <label for="publisher">Publisher</label>
+                                <label for="author"><i class="fas fa-user"></i> Author(s) *</label>
+                                <input type="text" id="author" placeholder="e.g., Smith, John A.">
+                                <small class="help-text">Format: Last Name, First Name Middle Initial.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="year"><i class="fas fa-calendar"></i> Publication Year *</label>
+                                <input type="number" id="year" placeholder="2024" min="1000" max="2099">
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="title"><i class="fas fa-heading"></i> Title *</label>
+                                <input type="text" id="title" placeholder="e.g., The Psychology of Learning: A Comprehensive Guide">
+                            </div>
+                            
+                            <div class="form-group" id="publisherField">
+                                <label for="publisher"><i class="fas fa-building"></i> Publisher</label>
                                 <input type="text" id="publisher" placeholder="e.g., Oxford University Press">
+                            </div>
+                            
+                            <div class="form-group" id="journalField">
+                                <label for="journal"><i class="fas fa-newspaper"></i> Journal Name</label>
+                                <input type="text" id="journal" placeholder="e.g., Journal of Psychology">
+                            </div>
+                            
+                            <div class="form-group" id="volumeField">
+                                <label for="volume"><i class="fas fa-layer-group"></i> Volume</label>
+                                <input type="text" id="volume" placeholder="e.g., 15">
+                            </div>
+                            
+                            <div class="form-group" id="issueField">
+                                <label for="issue"><i class="fas fa-clone"></i> Issue</label>
+                                <input type="text" id="issue" placeholder="e.g., 3">
+                            </div>
+                            
+                            <div class="form-group" id="pagesField">
+                                <label for="pages"><i class="fas fa-file-alt"></i> Pages</label>
+                                <input type="text" id="pages" placeholder="e.g., 45-67">
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="url"><i class="fas fa-link"></i> URL or DOI (Optional)</label>
+                                <input type="url" id="url" placeholder="https://doi.org/10.xxxx/xxxx or https://example.com">
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="isbn"><i class="fas fa-barcode"></i> ISBN (Optional)</label>
+                                <input type="text" id="isbn" placeholder="e.g., 978-3-16-148410-0">
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="url">URL or DOI (Optional)</label>
-                            <input type="url" id="url" placeholder="https://example.com">
-                        </div>
-
                         <div class="button-group">
-                            <button onclick="generateCitation()" class="btn btn-primary">
-                                <span class="btn-icon">✨</span> Generate Citation
+                            <button onclick="generateCitation()" class="btn btn-primary btn-large">
+                                <i class="fas fa-magic"></i> Generate Citation
                             </button>
                             <button onclick="fillExample()" class="btn btn-secondary">
-                                <span class="btn-icon">📋</span> Example
+                                <i class="fas fa-file-alt"></i> Load Example
                             </button>
                             <button onclick="clearForm()" class="btn btn-outline">
-                                <span class="btn-icon">🗑️</span> Clear
+                                <i class="fas fa-trash"></i> Clear Form
                             </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Ad Space 1 -->
+                    <div class="ad-space vertical-ad">
+                        <div class="ad-label">Advertisement</div>
+                        <div class="ad-content" id="ad-vertical-1">
+                            <!-- Ad will be loaded here -->
+                            <div class="ad-placeholder">
+                                <p>Your ad here</p>
+                                <small>300x600 Ad Unit</small>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -172,32 +288,60 @@
                 <div class="result-section">
                     <div class="result-card">
                         <div class="result-header">
-                            <h3>📄 Generated Citation</h3>
-                            <div class="style-badge" id="styleBadge">APA 7th</div>
+                            <h3><i class="fas fa-file-contract"></i> Generated Citation</h3>
+                            <div class="style-badge" id="styleBadge">
+                                <i class="fas fa-tag"></i> APA 7th
+                            </div>
                         </div>
                         
                         <div class="result-box" id="result">
                             <div class="result-placeholder">
-                                <div class="placeholder-icon">📄</div>
+                                <div class="placeholder-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
                                 <p>Select a style and fill the form to generate citation</p>
+                                <p class="placeholder-sub">Or use the ISBN lookup for automatic filling</p>
                             </div>
                         </div>
-
-                        <div class="action-buttons">
-                            <button onclick="copyCitation()" class="btn btn-success" id="copyBtn">
-                                <span class="btn-icon">📋</span> Copy
-                            </button>
-                            <button onclick="downloadCitation()" class="btn btn-info">
-                                <span class="btn-icon">💾</span> Download
-                            </button>
-                        </div>
-
-                        <!-- Ad Space -->
-                        <div class="ad-space">
-                            <div class="ad-label">Advertisement</div>
-                            <div class="ad-placeholder">
-                                <small>Ad loading...</small>
+                        
+                        <div class="citation-actions">
+                            <div class="action-buttons">
+                                <button onclick="copyCitation()" class="btn btn-success" id="copyBtn">
+                                    <i class="fas fa-copy"></i> Copy Citation
+                                </button>
+                                <button onclick="downloadCitation()" class="btn btn-info">
+                                    <i class="fas fa-download"></i> Download
+                                </button>
+                                <button onclick="saveCitation()" class="btn btn-secondary">
+                                    <i class="fas fa-save"></i> Save
+                                </button>
                             </div>
+                            
+                            <div class="export-options">
+                                <p><strong>Export as:</strong></p>
+                                <button onclick="exportAs('txt')" class="btn-export">TXT</button>
+                                <button onclick="exportAs('doc')" class="btn-export">DOC</button>
+                                <button onclick="exportAs('pdf')" class="btn-export">PDF</button>
+                                <button onclick="exportAs('bibtex')" class="btn-export">BibTeX</button>
+                            </div>
+                        </div>
+                        
+                        <div class="citation-history" id="citationHistory">
+                            <h4><i class="fas fa-history"></i> Recent Citations</h4>
+                            <div class="history-list" id="historyList">
+                                <!-- Recent citations will appear here -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Premium CTA -->
+                    <div class="premium-cta">
+                        <div class="premium-content">
+                            <h4><i class="fas fa-crown"></i> Upgrade to Premium</h4>
+                            <p>Unlock unlimited citations, batch generation, plagiarism check, and more!</p>
+                            <a href="premium.html" class="btn btn-premium">
+                                <i class="fas fa-rocket"></i> Learn More
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -206,57 +350,151 @@
             <!-- Ad Banner -->
             <div class="ad-banner">
                 <div class="ad-label">Advertisement</div>
-                <div class="ad-placeholder-wide">
-                    <small>728x90 Banner Ad</small>
+                <div class="ad-content" id="ad-banner-1">
+                    <!-- Ad will be loaded here -->
+                    <div class="ad-placeholder-wide">
+                        <p>Advertisement</p>
+                        <small>728x90 Leaderboard Ad</small>
+                    </div>
                 </div>
             </div>
 
-            <!-- Features -->
+            <!-- Features Section -->
             <section class="features">
-                <h2>Everything You Need for Academic Writing</h2>
+                <div class="section-header">
+                    <h2><i class="fas fa-star"></i> Why Choose Our Citation Generator?</h2>
+                    <p>Everything you need for academic writing success</p>
+                </div>
+                
                 <div class="features-grid">
                     <div class="feature">
-                        <div class="feature-icon">🎯</div>
-                        <h4>3 Major Styles</h4>
-                        <p>APA, MLA, and Chicago - all in one place</p>
+                        <div class="feature-icon">
+                            <i class="fas fa-barcode"></i>
+                        </div>
+                        <h4>ISBN Lookup</h4>
+                        <p>Automatically fill citation details by entering book ISBN. Saves time and ensures accuracy.</p>
                     </div>
                     <div class="feature">
-                        <div class="feature-icon">⚡</div>
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
                         <h4>Instant Results</h4>
-                        <p>Generate citations in seconds</p>
+                        <p>Generate citations in seconds with our optimized algorithm. Perfect for last-minute papers.</p>
                     </div>
                     <div class="feature">
-                        <div class="feature-icon">🔒</div>
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
                         <h4>Complete Privacy</h4>
-                        <p>Your data never leaves your browser</p>
+                        <p>Your data never leaves your browser. We don't store or sell your information.</p>
                     </div>
                     <div class="feature">
-                        <div class="feature-icon">📱</div>
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
                         <h4>Mobile Friendly</h4>
-                        <p>Works perfectly on all devices</p>
+                        <p>Works perfectly on all devices - smartphones, tablets, and desktops.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-export"></i>
+                        </div>
+                        <h4>Multiple Formats</h4>
+                        <p>Export citations as TXT, DOC, PDF, or BibTeX. Compatible with all reference managers.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h4>Citation History</h4>
+                        <p>Save and access your recent citations. Never lose a reference again.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- FAQ -->
+            <!-- FAQ Section -->
             <section class="faq">
-                <h2>Frequently Asked Questions</h2>
+                <div class="section-header">
+                    <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+                    <p>Get answers to common questions about our citation generator</p>
+                </div>
+                
                 <div class="faq-grid">
                     <div class="faq-item">
-                        <h4>Is this really free?</h4>
-                        <p>Yes! StudentCitationTools.com is 100% free with no hidden costs.</p>
+                        <div class="faq-question">
+                            <h4><i class="fas fa-question"></i> Is this really free?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! StudentCitationTools.com is 100% free for basic citation generation. We offer premium features for power users, but the core citation generator will always be free.</p>
+                        </div>
                     </div>
+                    
                     <div class="faq-item">
-                        <h4>Which styles are supported?</h4>
-                        <p>We support APA 7th edition, MLA 9th edition, and Chicago 17th edition.</p>
+                        <div class="faq-question">
+                            <h4><i class="fas fa-question"></i> How does ISBN lookup work?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our tool queries book databases using the ISBN you provide and automatically retrieves author, title, publisher, year, and other details to fill your citation form automatically.</p>
+                        </div>
                     </div>
+                    
                     <div class="faq-item">
-                        <h4>Do you store my data?</h4>
-                        <p>No! All processing happens in your browser. We don't store any information.</p>
+                        <div class="faq-question">
+                            <h4><i class="fas fa-question"></i> Which citation styles are supported?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We support APA 7th edition, MLA 9th edition, and Chicago 17th edition. These cover 95% of academic citation needs.</p>
+                        </div>
                     </div>
+                    
                     <div class="faq-item">
-                        <h4>Can I use this on mobile?</h4>
-                        <p>Absolutely! Our tool is fully responsive and works perfectly on smartphones.</p>
+                        <div class="faq-question">
+                            <h4><i class="fas fa-question"></i> Do you store my data?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No! All processing happens locally in your browser. We don't store any of your citation data unless you explicitly save it (and even then, it's stored locally on your device).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Monetization Section -->
+            <section class="monetization">
+                <div class="section-header">
+                    <h2><i class="fas fa-dollar-sign"></i> Support Our Free Service</h2>
+                    <p>Help us keep this tool free for all students</p>
+                </div>
+                
+                <div class="monetization-options">
+                    <div class="option">
+                        <div class="option-icon">
+                            <i class="fas fa-ad"></i>
+                        </div>
+                        <h4>View Ads</h4>
+                        <p>Enable ads to support us. We show non-intrusive, relevant advertisements.</p>
+                        <button class="btn btn-small" onclick="enableAds()">Enable Ads</button>
+                    </div>
+                    
+                    <div class="option">
+                        <div class="option-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h4>Go Premium</h4>
+                        <p>Upgrade for $4.99/month to remove ads and unlock advanced features.</p>
+                        <a href="premium.html" class="btn btn-small btn-premium">Upgrade Now</a>
+                    </div>
+                    
+                    <div class="option">
+                        <div class="option-icon">
+                            <i class="fas fa-coffee"></i>
+                        </div>
+                        <h4>Buy Us a Coffee</h4>
+                        <p>Make a one-time donation to support development and maintenance.</p>
+                        <button class="btn btn-small" onclick="donate()">Donate $5</button>
                     </div>
                 </div>
             </section>
@@ -268,39 +506,59 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>StudentCitationTools.com</h4>
-                    <p>Free academic tools for students worldwide. Making citation generation easy and accessible.</p>
-                    <p>Contact: <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a></p>
+                    <div class="footer-logo">
+                        <h4><i class="fas fa-book-open"></i> StudentCitationTools.com</h4>
+                    </div>
+                    <p>Free academic tools for students worldwide. Making citation generation easy and accessible since 2023.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
+                
                 <div class="footer-section">
-                    <h4>Citation Styles</h4>
-                    <a href="apa.html">APA Generator</a>
-                    <a href="mla.html">MLA Generator</a>
-                    <a href="chicago.html">Chicago Generator</a>
-                    <a href="index.html">All Styles</a>
+                    <h5>Citation Tools</h5>
+                    <a href="apa.html"><i class="fas fa-chevron-right"></i> APA Generator</a>
+                    <a href="mla.html"><i class="fas fa-chevron-right"></i> MLA Generator</a>
+                    <a href="chicago.html"><i class="fas fa-chevron-right"></i> Chicago Generator</a>
+                    <a href="isbn.html"><i class="fas fa-chevron-right"></i> ISBN Lookup Tool</a>
+                    <a href="batch.html"><i class="fas fa-chevron-right"></i> Batch Generator (Premium)</a>
                 </div>
+                
                 <div class="footer-section">
-                    <h4>Resources</h4>
-                    <a href="guide.html">Formatting Guide</a>
-                    <a href="examples.html">Citation Examples</a>
-                    <a href="tips.html">Writing Tips</a>
-                    <a href="contact.html">Contact</a>
+                    <h5>Resources</h5>
+                    <a href="guide.html"><i class="fas fa-chevron-right"></i> Formatting Guide</a>
+                    <a href="examples.html"><i class="fas fa-chevron-right"></i> Citation Examples</a>
+                    <a href="tips.html"><i class="fas fa-chevron-right"></i> Writing Tips</a>
+                    <a href="blog.html"><i class="fas fa-chevron-right"></i> Academic Blog</a>
+                    <a href="plagiarism-checker.html"><i class="fas fa-chevron-right"></i> Plagiarism Checker</a>
                 </div>
+                
                 <div class="footer-section">
-                    <h4>Legal</h4>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="disclaimer.html">Disclaimer</a>
+                    <h5>Legal & Support</h5>
+                    <a href="privacy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
+                    <a href="terms.html"><i class="fas fa-chevron-right"></i> Terms of Service</a>
+                    <a href="disclaimer.html"><i class="fas fa-chevron-right"></i> Disclaimer</a>
+                    <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Support</a>
+                    <a href="sitemap.html"><i class="fas fa-chevron-right"></i> Sitemap</a>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>© 2024 StudentCitationTools.com | Free APA, MLA & Chicago Citation Generator</p>
-                <p class="disclaimer">This tool generates citations based on official style guides. Always verify with your institution's requirements.</p>
-                <div class="footer-links">
-                    <a href="contact.html">Contact Support</a> • 
-                    <a href="mailto:qtechz073@gmail.com">Report Issue</a> • 
-                    <a href="contact.html">Suggest Feature</a>
+                <div class="footer-copyright">
+                    <p>© 2024 StudentCitationTools.com | Free APA, MLA & Chicago Citation Generator with ISBN Lookup</p>
+                    <p class="disclaimer">This tool generates citations based on official style guides. Always verify with your institution's requirements.</p>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h6>Subscribe to our newsletter</h6>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button class="btn btn-small">Subscribe</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -309,56 +567,57 @@
     <!-- Scripts -->
     <script src="script.js"></script>
     <script>
-        // Mobile menu functionality
+        // Enhanced JavaScript with ISBN lookup functionality
         document.addEventListener('DOMContentLoaded', function() {
+            initializeWebsite();
+            loadCitationHistory();
+            setupFAQToggle();
+            setupThemeToggle();
+            initializeAds();
+        });
+        
+        function initializeWebsite() {
+            // Mobile menu functionality
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mainNav = document.getElementById('mainNav');
             
             if (mobileMenuBtn && mainNav) {
-                // Toggle mobile menu
                 mobileMenuBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     mainNav.classList.toggle('active');
-                    mobileMenuBtn.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
-                    mobileMenuBtn.setAttribute('aria-label', 
-                        mainNav.classList.contains('active') ? 'Close menu' : 'Open menu');
+                    mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? 
+                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
                 });
                 
                 // Close menu when clicking outside
                 document.addEventListener('click', function(e) {
                     if (!mainNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
                         mainNav.classList.remove('active');
-                        mobileMenuBtn.textContent = '☰';
-                        mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
                     }
-                });
-                
-                // Close menu when clicking a link
-                const navLinks = mainNav.querySelectorAll('a');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        mainNav.classList.remove('active');
-                        mobileMenuBtn.textContent = '☰';
-                        mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-                    });
                 });
                 
                 // Close menu on escape key
                 document.addEventListener('keydown', function(e) {
                     if (e.key === 'Escape' && mainNav.classList.contains('active')) {
                         mainNav.classList.remove('active');
-                        mobileMenuBtn.textContent = '☰';
-                        mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
                     }
                 });
             }
             
-            // Initialize tab functionality
+            // Initialize tabs
             initializeTabs();
             
-            // Track page view in analytics
+            // Setup form validation
+            setupFormValidation();
+            
+            // Load any saved theme preference
+            loadThemePreference();
+            
+            // Track page view
             trackPageView();
-        });
+        }
         
         function initializeTabs() {
             const tabs = document.querySelectorAll('.style-tab');
@@ -366,77 +625,225 @@
                 tab.addEventListener('click', function() {
                     const style = this.dataset.style;
                     
-                    // Remove active class from all tabs
+                    // Update active tab
                     tabs.forEach(t => t.classList.remove('active'));
-                    
-                    // Add active class to clicked tab
                     this.classList.add('active');
                     
                     // Update style badge
                     const badgeText = style === 'apa' ? 'APA 7th' : 
                                      style === 'mla' ? 'MLA 9th' : 'Chicago 17th';
-                    document.getElementById('styleBadge').textContent = badgeText;
+                    document.getElementById('styleBadge').innerHTML = `<i class="fas fa-tag"></i> ${badgeText}`;
                     
                     // Update style info
-                    const infoText = {
-                        apa: 'APA (American Psychological Association): Used in psychology, education, and social sciences.',
-                        mla: 'MLA (Modern Language Association): Used in humanities, literature, and arts.',
-                        chicago: 'Chicago Manual of Style: Used in publishing, history, and some social sciences.'
-                    };
-                    document.getElementById('styleInfo').innerHTML = 
-                        `<p><strong>${badgeText}:</strong> ${infoText[style]}</p>`;
+                    updateStyleInfo(style);
                     
-                    // Update form fields
-                    updateFormForStyle(style);
+                    // Track style selection
+                    trackEvent('style_selection', style);
                 });
             });
         }
         
-        function updateFormForStyle(style) {
-            const dynamicFields = document.getElementById('dynamicFields');
-            if (style === 'apa') {
-                dynamicFields.innerHTML = `
-                    <div class="form-group">
-                        <label for="publisher">Publisher</label>
-                        <input type="text" id="publisher" placeholder="e.g., Oxford University Press">
-                    </div>
-                    <div class="form-group">
-                        <label for="journal">Journal Name (if applicable)</label>
-                        <input type="text" id="journal" placeholder="e.g., Journal of Psychology">
-                    </div>
-                `;
-            } else if (style === 'mla') {
-                dynamicFields.innerHTML = `
-                    <div class="form-group">
-                        <label for="publisher">Publisher</label>
-                        <input type="text" id="publisher" placeholder="e.g., Oxford University Press">
-                    </div>
-                    <div class="form-group">
-                        <label for="city">City of Publication</label>
-                        <input type="text" id="city" placeholder="e.g., New York">
-                    </div>
-                `;
-            } else {
-                dynamicFields.innerHTML = `
-                    <div class="form-group">
-                        <label for="publisher">Publisher</label>
-                        <input type="text" id="publisher" placeholder="e.g., University of Chicago Press">
-                    </div>
-                    <div class="form-group">
-                        <label for="edition">Edition (if applicable)</label>
-                        <input type="text" id="edition" placeholder="e.g., 3rd ed.">
-                    </div>
-                `;
+        function updateStyleInfo(style) {
+            const infoText = {
+                apa: 'APA (American Psychological Association): Used in psychology, education, and social sciences. Requires author, date, title, source, and DOI/URL when available.',
+                mla: 'MLA (Modern Language Association): Used in humanities, literature, and arts. Requires author, title, container, publisher, date, and location.',
+                chicago: 'Chicago Manual of Style: Used in publishing, history, and some social sciences. Has two systems: notes-bibliography and author-date.'
+            };
+            
+            document.getElementById('styleInfo').innerHTML = `
+                <div class="info-box">
+                    <p><strong>${style.toUpperCase()} Style:</strong> ${infoText[style]}</p>
+                </div>
+            `;
+        }
+        
+        function updateFormFields() {
+            const sourceType = document.getElementById('sourceType').value;
+            const formGrid = document.querySelector('.form-grid');
+            
+            // Show/hide fields based on source type
+            const fields = {
+                publisher: ['book', 'thesis', 'conference', 'video'],
+                journal: ['journal'],
+                volume: ['journal', 'magazine'],
+                issue: ['journal', 'magazine'],
+                pages: ['journal', 'magazine', 'newspaper', 'conference']
+            };
+            
+            // Toggle visibility of fields
+            for (const [field, types] of Object.entries(fields)) {
+                const fieldElement = document.getElementById(field + 'Field');
+                if (fieldElement) {
+                    if (types.includes(sourceType)) {
+                        fieldElement.style.display = 'block';
+                    } else {
+                        fieldElement.style.display = 'none';
+                    }
+                }
             }
+        }
+        
+        // ISBN Lookup Function
+        async function fetchByISBN() {
+            const isbnInput = document.getElementById('isbnInput').value.trim();
+            const isbnResult = document.getElementById('isbnResult');
+            
+            if (!isbnInput) {
+                showNotification('Please enter an ISBN number', 'error');
+                return;
+            }
+            
+            // Validate ISBN format (10 or 13 digits, may contain hyphens)
+            const cleanISBN = isbnInput.replace(/[-\s]/g, '');
+            if (!/^(?:\d{10}|\d{13})$/.test(cleanISBN)) {
+                showNotification('Please enter a valid ISBN-10 or ISBN-13 number', 'error');
+                return;
+            }
+            
+            // Show loading state
+            isbnResult.innerHTML = `
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Searching for book details...</p>
+                </div>
+            `;
+            
+            try {
+                // Try multiple APIs for better coverage
+                const bookData = await fetchBookFromAPI(cleanISBN);
+                
+                if (bookData) {
+                    // Populate form with book data
+                    populateFormWithBookData(bookData);
+                    
+                    // Display book info
+                    isbnResult.innerHTML = `
+                        <div class="success">
+                            <div class="book-info">
+                                <div class="book-cover">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="book-details">
+                                    <h5>${bookData.title || 'Unknown Title'}</h5>
+                                    <p><strong>Author:</strong> ${bookData.author || 'Unknown'}</p>
+                                    <p><strong>Publisher:</strong> ${bookData.publisher || 'Unknown'}</p>
+                                    <p><strong>Year:</strong> ${bookData.year || 'Unknown'}</p>
+                                    <p><strong>ISBN:</strong> ${formatISBN(cleanISBN)}</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-small" onclick="useThisBook()">
+                                <i class="fas fa-check"></i> Use This Book
+                            </button>
+                        </div>
+                    `;
+                    
+                    showNotification('Book details loaded successfully!', 'success');
+                    trackEvent('isbn_lookup', 'success');
+                } else {
+                    throw new Error('Book not found');
+                }
+            } catch (error) {
+                console.error('ISBN lookup error:', error);
+                isbnResult.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>Unable to find book details for this ISBN.</p>
+                        <p>Please try manual entry or check the ISBN.</p>
+                    </div>
+                `;
+                trackEvent('isbn_lookup', 'error');
+            }
+        }
+        
+        async function fetchBookFromAPI(isbn) {
+            // Try Open Library API first
+            try {
+                const response = await fetch(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`);
+                if (response.ok) {
+                    const data = await response.json();
+                    const bookKey = `ISBN:${isbn}`;
+                    
+                    if (data[bookKey]) {
+                        const book = data[bookKey];
+                        return {
+                            title: book.title,
+                            author: book.authors ? book.authors.map(a => a.name).join(', ') : '',
+                            publisher: book.publishers ? book.publishers[0].name : '',
+                            year: book.publish_date ? new Date(book.publish_date).getFullYear() : '',
+                            isbn: isbn
+                        };
+                    }
+                }
+            } catch (error) {
+                console.log('Open Library API failed, trying Google Books');
+            }
+            
+            // Fallback to Google Books API
+            try {
+                const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (data.items && data.items.length > 0) {
+                        const book = data.items[0].volumeInfo;
+                        return {
+                            title: book.title,
+                            author: book.authors ? book.authors.join(', ') : '',
+                            publisher: book.publisher || '',
+                            year: book.publishedDate ? new Date(book.publishedDate).getFullYear() : '',
+                            isbn: isbn
+                        };
+                    }
+                }
+            } catch (error) {
+                console.log('Google Books API failed');
+            }
+            
+            return null;
+        }
+        
+        function populateFormWithBookData(bookData) {
+            document.getElementById('author').value = bookData.author || '';
+            document.getElementById('year').value = bookData.year || '';
+            document.getElementById('title').value = bookData.title || '';
+            document.getElementById('publisher').value = bookData.publisher || '';
+            document.getElementById('isbn').value = formatISBN(bookData.isbn) || '';
+            
+            // Set source type to book
+            document.getElementById('sourceType').value = 'book';
+            updateFormFields();
+        }
+        
+        function formatISBN(isbn) {
+            // Format ISBN for display: 978-3-16-148410-0
+            const cleanISBN = isbn.replace(/[-\s]/g, '');
+            if (cleanISBN.length === 10) {
+                return `${cleanISBN.substring(0, 1)}-${cleanISBN.substring(1, 4)}-${cleanISBN.substring(4, 9)}-${cleanISBN.substring(9)}`;
+            } else if (cleanISBN.length === 13) {
+                return `${cleanISBN.substring(0, 3)}-${cleanISBN.substring(3, 4)}-${cleanISBN.substring(4, 6)}-${cleanISBN.substring(6, 12)}-${cleanISBN.substring(12)}`;
+            }
+            return isbn;
+        }
+        
+        function useThisBook() {
+            // Already populated, just generate citation
+            generateCitation();
+        }
+        
+        function clearISBN() {
+            document.getElementById('isbnInput').value = '';
+            document.getElementById('isbnResult').innerHTML = '';
         }
         
         function generateCitation() {
             const author = document.getElementById('author').value.trim();
             const year = document.getElementById('year').value.trim();
             const title = document.getElementById('title').value.trim();
+            const sourceType = document.getElementById('sourceType').value;
             
+            // Basic validation
             if (!author || !year || !title) {
-                alert('Please fill in all required fields (*)');
+                showNotification('Please fill in all required fields (*)', 'error');
                 return;
             }
             
@@ -444,105 +851,469 @@
             const activeTab = document.querySelector('.style-tab.active');
             const style = activeTab ? activeTab.dataset.style : 'apa';
             
+            // Get additional form values
+            const publisher = document.getElementById('publisher').value.trim();
+            const journal = document.getElementById('journal').value.trim();
+            const volume = document.getElementById('volume').value.trim();
+            const issue = document.getElementById('issue').value.trim();
+            const pages = document.getElementById('pages').value.trim();
+            const url = document.getElementById('url').value.trim();
+            const isbn = document.getElementById('isbn').value.trim();
+            
+            // Generate citation based on style and source type
             let citation = '';
+            const citationData = { author, year, title, publisher, journal, volume, issue, pages, url, isbn, sourceType };
+            
             if (style === 'apa') {
-                citation = `${author}. (${year}). ${title}.`;
+                citation = generateAPACitation(citationData);
             } else if (style === 'mla') {
-                citation = `${author}. "${title}." ${year}.`;
+                citation = generateMLACitation(citationData);
             } else {
-                citation = `${author}. ${title}. ${year}.`;
+                citation = generateChicagoCitation(citationData);
             }
             
+            // Display citation
             document.getElementById('result').innerHTML = `<pre>${citation}</pre>`;
             
-            // Track citation generation in analytics
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'generate_citation', {
-                    'event_category': 'citation',
-                    'event_label': style,
-                    'value': 1
-                });
+            // Save to history
+            saveToHistory(citation, style, sourceType);
+            
+            // Track generation
+            trackEvent('citation_generated', `${style}_${sourceType}`);
+            
+            // Show success notification
+            showNotification('Citation generated successfully!', 'success');
+        }
+        
+        function generateAPACitation(data) {
+            let citation = '';
+            
+            // Format author(s)
+            let authors = data.author;
+            if (authors.includes(',')) {
+                const authorList = authors.split(',').map(a => a.trim());
+                if (authorList.length === 1) {
+                    authors = authorList[0];
+                } else if (authorList.length === 2) {
+                    authors = `${authorList[0]} & ${authorList[1]}`;
+                } else {
+                    authors = `${authorList.slice(0, -1).join(', ')}, & ${authorList[authorList.length - 1]}`;
+                }
             }
+            
+            // Start building citation
+            citation += `${authors}. (${data.year}). `;
+            
+            // Add title with proper formatting
+            if (data.sourceType === 'book') {
+                citation += `<i>${data.title}.</i> `;
+                if (data.publisher) citation += `${data.publisher}.`;
+            } else if (data.sourceType === 'journal') {
+                citation += `${data.title}. `;
+                if (data.journal) {
+                    citation += `<i>${data.journal}</i>`;
+                    if (data.volume) {
+                        citation += `, <i>${data.volume}</i>`;
+                        if (data.issue) citation += `(${data.issue})`;
+                    }
+                    if (data.pages) citation += `, ${data.pages}.`;
+                }
+            } else {
+                citation += `${data.title}.`;
+                if (data.publisher) citation += ` ${data.publisher}.`;
+            }
+            
+            // Add DOI or URL if available
+            if (data.url) {
+                if (data.url.includes('doi.org') || data.url.includes('doi:')) {
+                    citation += ` ${data.url}`;
+                } else {
+                    citation += ` Retrieved from ${data.url}`;
+                }
+            }
+            
+            return citation;
+        }
+        
+        function generateMLACitation(data) {
+            // Simplified MLA format
+            let citation = '';
+            citation += `${data.author}. `;
+            citation += `"${data.title}." `;
+            
+            if (data.sourceType === 'book') {
+                citation += `${data.publisher}, ${data.year}.`;
+            } else if (data.sourceType === 'journal') {
+                if (data.journal) citation += `<i>${data.journal}</i>, `;
+                if (data.volume) citation += `vol. ${data.volume}, `;
+                if (data.issue) citation += `no. ${data.issue}, `;
+                citation += `${data.year}, `;
+                if (data.pages) citation += `pp. ${data.pages}.`;
+            }
+            
+            if (data.url) citation += ` ${data.url}.`;
+            
+            return citation;
+        }
+        
+        function generateChicagoCitation(data) {
+            // Simplified Chicago format
+            let citation = '';
+            citation += `${data.author}. ${data.year}. <i>${data.title}.</i> `;
+            
+            if (data.sourceType === 'book') {
+                if (data.publisher) citation += `${data.publisher}.`;
+            } else if (data.sourceType === 'journal') {
+                if (data.journal) citation += `<i>${data.journal}</i> `;
+                if (data.volume) citation += `${data.volume}`;
+                if (data.issue) citation += `, no. ${data.issue}`;
+                if (data.pages) citation += `: ${data.pages}.`;
+            }
+            
+            if (data.url) citation += ` ${data.url}.`;
+            
+            return citation;
         }
         
         function fillExample() {
-            document.getElementById('author').value = 'Smith, John';
-            document.getElementById('year').value = '2024';
-            document.getElementById('title').value = 'The Psychology of Modern Learning';
+            // Fill form with example data
+            document.getElementById('author').value = 'Smith, John A., Johnson, Mary B., & Williams, Robert C.';
+            document.getElementById('year').value = '2023';
+            document.getElementById('title').value = 'The Psychology of Modern Learning: A Comprehensive Guide';
             document.getElementById('publisher').value = 'Academic Press';
+            document.getElementById('journal').value = 'Journal of Educational Psychology';
+            document.getElementById('volume').value = '45';
+            document.getElementById('issue').value = '3';
+            document.getElementById('pages').value = '123-145';
+            document.getElementById('url').value = 'https://doi.org/10.1037/edu0000456';
+            document.getElementById('isbn').value = '978-1-234-56789-0';
             
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'click', {
-                    'event_category': 'example',
-                    'event_label': 'load_example'
-                });
-            }
+            showNotification('Example data loaded. Click "Generate Citation" to see result.', 'info');
+            trackEvent('example_loaded', 'success');
         }
         
         function clearForm() {
+            // Clear all form fields
             document.getElementById('author').value = '';
             document.getElementById('year').value = '';
             document.getElementById('title').value = '';
             document.getElementById('publisher').value = '';
+            document.getElementById('journal').value = '';
+            document.getElementById('volume').value = '';
+            document.getElementById('issue').value = '';
+            document.getElementById('pages').value = '';
             document.getElementById('url').value = '';
+            document.getElementById('isbn').value = '';
+            
+            // Reset result area
             document.getElementById('result').innerHTML = `
                 <div class="result-placeholder">
-                    <div class="placeholder-icon">📄</div>
+                    <div class="placeholder-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
                     <p>Select a style and fill the form to generate citation</p>
-                </div>`;
+                    <p class="placeholder-sub">Or use the ISBN lookup for automatic filling</p>
+                </div>
+            `;
+            
+            showNotification('Form cleared successfully.', 'info');
         }
         
         function copyCitation() {
             const resultText = document.getElementById('result').textContent;
-            if (resultText && !resultText.includes('Select a style')) {
-                navigator.clipboard.writeText(resultText).then(() => {
-                    const copyBtn = document.getElementById('copyBtn');
-                    const originalText = copyBtn.innerHTML;
-                    copyBtn.innerHTML = '<span class="btn-icon">✓</span> Copied!';
-                    setTimeout(() => {
-                        copyBtn.innerHTML = originalText;
-                    }, 2000);
+            if (!resultText || resultText.includes('Select a style')) {
+                showNotification('No citation to copy. Please generate a citation first.', 'error');
+                return;
+            }
+            
+            navigator.clipboard.writeText(resultText).then(() => {
+                const copyBtn = document.getElementById('copyBtn');
+                const originalHTML = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalHTML;
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+                
+                showNotification('Citation copied to clipboard!', 'success');
+                trackEvent('citation_copied', 'success');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                showNotification('Failed to copy citation. Please try again.', 'error');
+            });
+        }
+        
+        function downloadCitation() {
+            const resultText = document.getElementById('result').textContent;
+            if (!resultText || resultText.includes('Select a style')) {
+                showNotification('No citation to download. Please generate a citation first.', 'error');
+                return;
+            }
+            
+            const style = document.querySelector('.style-tab.active').dataset.style;
+            const sourceType = document.getElementById('sourceType').value;
+            const filename = `citation_${style}_${sourceType}_${Date.now()}.txt`;
+            
+            const blob = new Blob([resultText], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showNotification('Citation downloaded successfully!', 'success');
+            trackEvent('citation_downloaded', 'txt');
+        }
+        
+        function exportAs(format) {
+            const resultText = document.getElementById('result').textContent;
+            if (!resultText || resultText.includes('Select a style')) {
+                showNotification('No citation to export. Please generate a citation first.', 'error');
+                return;
+            }
+            
+            showNotification(`${format.toUpperCase()} export would be available in Premium version`, 'info');
+            trackEvent('export_clicked', format);
+        }
+        
+        function saveCitation() {
+            const resultText = document.getElementById('result').textContent;
+            if (!resultText || resultText.includes('Select a style')) {
+                showNotification('No citation to save. Please generate a citation first.', 'error');
+                return;
+            }
+            
+            showNotification('Citation saved to history!', 'success');
+            trackEvent('citation_saved', 'history');
+        }
+        
+        function saveToHistory(citation, style, sourceType) {
+            // Get existing history from localStorage
+            let history = JSON.parse(localStorage.getItem('citationHistory') || '[]');
+            
+            // Add new citation to history
+            const historyItem = {
+                id: Date.now(),
+                citation: citation.substring(0, 100) + (citation.length > 100 ? '...' : ''),
+                fullCitation: citation,
+                style: style,
+                sourceType: sourceType,
+                date: new Date().toLocaleDateString()
+            };
+            
+            history.unshift(historyItem);
+            
+            // Keep only last 10 items
+            if (history.length > 10) {
+                history = history.slice(0, 10);
+            }
+            
+            // Save back to localStorage
+            localStorage.setItem('citationHistory', JSON.stringify(history));
+            
+            // Update history display
+            loadCitationHistory();
+        }
+        
+        function loadCitationHistory() {
+            const history = JSON.parse(localStorage.getItem('citationHistory') || '[]');
+            const historyList = document.getElementById('historyList');
+            
+            if (history.length === 0) {
+                historyList.innerHTML = '<p class="empty-history">No recent citations. Generate one to see it here.</p>';
+                return;
+            }
+            
+            let html = '';
+            history.forEach(item => {
+                html += `
+                    <div class="history-item">
+                        <div class="history-item-content">
+                            <div class="history-citation">${item.citation}</div>
+                            <div class="history-meta">
+                                <span class="history-style">${item.style.toUpperCase()}</span>
+                                <span class="history-date">${item.date}</span>
+                            </div>
+                        </div>
+                        <button class="btn-history-action" onclick="loadHistoryItem(${item.id})" title="Load this citation">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            historyList.innerHTML = html;
+        }
+        
+        function loadHistoryItem(id) {
+            const history = JSON.parse(localStorage.getItem('citationHistory') || '[]');
+            const item = history.find(h => h.id === id);
+            
+            if (item) {
+                document.getElementById('result').innerHTML = `<pre>${item.fullCitation}</pre>`;
+                showNotification('Citation loaded from history', 'success');
+            }
+        }
+        
+        function setupFAQToggle() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqItem = this.parentElement;
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('.fa-chevron-down');
                     
-                    // Track copy action
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'click', {
-                            'event_category': 'action',
-                            'event_label': 'copy_citation'
-                        });
+                    // Toggle active class
+                    faqItem.classList.toggle('active');
+                    
+                    // Toggle icon
+                    if (faqItem.classList.contains('active')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+        }
+        
+        function setupThemeToggle() {
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-mode');
+                    
+                    // Update icon
+                    const icon = this.querySelector('i');
+                    if (document.body.classList.contains('dark-mode')) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                        localStorage.setItem('theme', 'light');
                     }
                 });
             }
         }
         
-        function downloadCitation() {
-            const resultText = document.getElementById('result').textContent;
-            if (resultText && !resultText.includes('Select a style')) {
-                const blob = new Blob([resultText], { type: 'text/plain' });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'citation.txt';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-                
-                // Track download action
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'click', {
-                        'event_category': 'action',
-                        'event_label': 'download_citation'
-                    });
+        function loadThemePreference() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('themeToggle');
+            
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                if (themeToggle) {
+                    themeToggle.querySelector('i').classList.remove('fa-moon');
+                    themeToggle.querySelector('i').classList.add('fa-sun');
                 }
             }
+        }
+        
+        function setupFormValidation() {
+            const yearInput = document.getElementById('year');
+            if (yearInput) {
+                yearInput.addEventListener('input', function() {
+                    const year = parseInt(this.value);
+                    const currentYear = new Date().getFullYear();
+                    
+                    if (year > currentYear + 5) {
+                        this.setCustomValidity('Year seems too far in the future');
+                    } else if (year < 1000) {
+                        this.setCustomValidity('Year must be after 1000');
+                    } else {
+                        this.setCustomValidity('');
+                    }
+                });
+            }
+        }
+        
+        function initializeAds() {
+            // This is where you would initialize your ad network (Google AdSense, etc.)
+            // For now, we'll just simulate ads
+            
+            // Simulate ad loading delay
+            setTimeout(() => {
+                const adUnits = document.querySelectorAll('.ad-content');
+                adUnits.forEach(unit => {
+                    unit.innerHTML = `
+                        <div class="ad-simulation">
+                            <p>Advertisment</p>
+                            <small>This is a simulated ad unit</small>
+                            <div class="ad-cta">Click here for relevant products</div>
+                        </div>
+                    `;
+                });
+            }, 1000);
+        }
+        
+        function enableAds() {
+            showNotification('Ads enabled. Thank you for supporting our free service!', 'success');
+            trackEvent('ads_enabled', 'user_action');
+            
+            // In a real implementation, this would enable actual ad serving
+        }
+        
+        function donate() {
+            showNotification('Thank you for your support! Donation system would be implemented here.', 'info');
+            trackEvent('donation_clicked', 'user_action');
+        }
+        
+        function showNotification(message, type) {
+            // Remove any existing notification
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
         }
         
         function trackPageView() {
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'page_view', {
-                    'page_title': document.title,
-                    'page_location': window.location.href,
-                    'page_path': window.location.pathname
+                    page_title: document.title,
+                    page_location: window.location.href,
+                    page_path: window.location.pathname
+                });
+            }
+        }
+        
+        function trackEvent(action, label) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', action, {
+                    event_category: 'engagement',
+                    event_label: label
                 });
             }
         }
@@ -555,8 +1326,7 @@
             if (window.innerWidth > 768 && mainNav) {
                 mainNav.classList.remove('active');
                 if (mobileMenuBtn) {
-                    mobileMenuBtn.textContent = '☰';
-                    mobileMenuBtn.setAttribute('aria-label', 'Open menu');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
                 }
             }
         });
