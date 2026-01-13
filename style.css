@@ -153,6 +153,7 @@ body.dark-mode .main-nav a {
 }
 
 /* Mobile Menu Button */
+/* Mobile menu button */
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -181,6 +182,41 @@ body.dark-mode .mobile-menu-btn {
 body.dark-mode .mobile-menu-btn:hover {
     background: rgba(255, 255, 255, 0.1);
 }
+
+/* Mobile menu */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--white);
+        padding: 80px 20px 20px;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 999;
+        flex-direction: column;
+        gap: 5px;
+        overflow-y: auto;
+    }
+    
+    body.dark-mode .main-nav {
+        background: var(--dark-color);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .main-nav.active {
+        right: 0;
+    }
+
+
+
+
 
 /* Hero Section */
 .hero {
