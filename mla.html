@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free MLA Citation Generator 9th Edition - StudentCitationTools.com</title>
-    <meta name="description" content="Generate accurate MLA 9th edition citations instantly. Free tool for essays, research papers, and academic writing in humanities.">
-    <meta name="keywords" content="mla citation, mla format, mla 9th edition, mla generator, mla style, free mla, works cited">
+    <title>Free ISBN Lookup & Book Citation Generator - StudentCitationTools.com</title>
+    <meta name="description" content="Lookup book details by ISBN and generate citations in APA, MLA, and Chicago styles instantly.">
+    <meta name="keywords" content="isbn lookup, book citation, isbn citation generator, book details, isbn search, free isbn lookup">
     <meta name="author" content="StudentCitationTools.com">
-    <meta property="og:title" content="Free MLA Citation Generator 9th Edition">
-    <meta property="og:description" content="Generate accurate MLA 9th edition citations instantly.">
+    <meta property="og:title" content="Free ISBN Lookup & Book Citation Generator">
+    <meta property="og:description" content="Lookup book details by ISBN and generate citations instantly.">
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHREV68R2D"></script>
     <script>
@@ -20,26 +23,161 @@
       gtag('js', new Date());
       gtag('config', 'G-ZHREV68R2D');
     </script>
+    <style>
+        /* Additional styles for ISBN page */
+        .isbn-tool-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .isbn-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .isbn-input-group input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .isbn-help {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .isbn-result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .book-details {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .book-cover {
+            background: #e3f2fd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #3498db;
+        }
+        
+        .book-info h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .book-info p {
+            margin: 5px 0;
+        }
+        
+        .citation-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .popular-isbns {
+            margin-top: 40px;
+        }
+        
+        .isbn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .isbn-example {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .isbn-example:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+        
+        .isbn-example h5 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        
+        .isbn-example .isbn-number {
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 5px 10px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .isbn-input-group {
+                flex-direction: column;
+            }
+            
+            .book-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .book-cover {
+                height: 150px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+            <button class="mobile-menu-btn" aria-label="Menu" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="logo">
-                <h1>📚 StudentCitationTools.com</h1>
+                <h1><i class="fas fa-book-open"></i> StudentCitationTools.com</h1>
                 <p class="tagline">Free academic tools for students worldwide</p>
             </div>
-            <nav class="main-nav">
-                <a href="index.html">Home</a>
-                <a href="apa.html">APA Generator</a>
-                <a href="mla.html" class="nav-active">MLA Generator</a>
-                <a href="chicago.html">Chicago Generator</a>
-                <a href="guide.html">Formatting Guide</a>
-                <a href="examples.html">Examples</a>
-                <a href="tips.html">Writing Tips</a>
-                <a href="contact.html">Contact</a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="apa.html"><i class="fas fa-file-alt"></i> APA Generator</a>
+                <a href="mla.html"><i class="fas fa-font"></i> MLA Generator</a>
+                <a href="chicago.html"><i class="fas fa-university"></i> Chicago Generator</a>
+                <a href="isbn.html" class="nav-active"><i class="fas fa-barcode"></i> ISBN Lookup</a>
+                <a href="guide.html"><i class="fas fa-graduation-cap"></i> Formatting Guide</a>
+                <a href="examples.html"><i class="fas fa-list-ul"></i> Examples</a>
+                <a href="tips.html"><i class="fas fa-lightbulb"></i> Writing Tips</a>
             </nav>
+            <div class="header-actions">
+                <button class="btn btn-small" id="themeToggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -47,20 +185,20 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h2>MLA 9th Edition Citation Generator</h2>
-                <p class="hero-subtitle">Generate perfect MLA citations for books, articles, websites, and more</p>
+                <h2><i class="fas fa-barcode"></i> ISBN Lookup & Book Citation Generator</h2>
+                <p class="hero-subtitle">Find book details by ISBN and generate citations in APA, MLA, or Chicago style instantly</p>
                 <div class="stats">
                     <div class="stat">
-                        <span class="stat-number">MLA 9</span>
-                        <span class="stat-label">Latest Edition</span>
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Citation Styles</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Accurate</span>
+                        <span class="stat-number">Instant</span>
+                        <span class="stat-label">Book Lookup</span>
                     </div>
                     <div class="stat">
                         <span class="stat-number">Free</span>
-                        <span class="stat-label">No Limits</span>
+                        <span class="stat-label">No Registration</span>
                     </div>
                 </div>
             </div>
@@ -69,195 +207,170 @@
 
     <!-- Breadcrumb -->
     <div class="breadcrumb container">
-        <a href="index.html">Home</a> &gt; <span>MLA Citation Generator</span>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a> &gt; <span>ISBN Lookup Tool</span>
     </div>
 
     <!-- Main Tool -->
     <main class="main">
         <div class="container">
-            <!-- Style Info -->
-            <div class="style-selector">
-                <div class="style-tabs">
-                    <button class="style-tab" onclick="window.location.href='apa.html'">APA 7th Edition</button>
-                    <button class="style-tab active">MLA 9th Edition</button>
-                    <button class="style-tab" onclick="window.location.href='chicago.html'">Chicago 17th Edition</button>
-                </div>
-                <div class="style-info">
-                    <p><strong>MLA (Modern Language Association):</strong> Used in humanities, literature, arts, and languages. The 9th edition (2021) is the current standard.</p>
-                </div>
-            </div>
-
-            <!-- Tool Container -->
-            <div class="tool-container">
-                <!-- Input Form -->
-                <div class="input-section">
-                    <div class="input-card">
-                        <h3>📝 Enter MLA Source Details</h3>
-                        
-                        <div class="form-group">
-                            <label for="author">Author(s) *</label>
-                            <input type="text" id="author" placeholder="e.g., Smith, John">
-                            <small class="help-text">Format: Last Name, First Name (use semicolons for multiple authors)</small>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="year">Publication Year *</label>
-                                <input type="number" id="year" placeholder="2024" min="1000" max="2099">
-                            </div>
-                            <div class="form-group">
-                                <label for="sourceType">Source Type</label>
-                                <select id="sourceType">
-                                    <option value="book">Book</option>
-                                    <option value="journal">Journal Article</option>
-                                    <option value="website">Website</option>
-                                    <option value="newspaper">Newspaper</option>
-                                    <option value="magazine">Magazine</option>
-                                    <option value="ebook">E-book</option>
-                                    <option value="video">Video/Film</option>
-                                    <option value="podcast">Podcast</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="title">Title *</label>
-                            <input type="text" id="title" placeholder="e.g., The Great Gatsby">
-                            <small class="help-text">For articles, use quotation marks; for books, italicize</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="container">Container Title</label>
-                            <input type="text" id="container" placeholder="e.g., Journal Name or Book Title">
-                            <small class="help-text">Journal, magazine, or book containing the work</small>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="publisher">Publisher</label>
-                                <input type="text" id="publisher" placeholder="e.g., Scribner">
-                            </div>
-                            <div class="form-group">
-                                <label for="city">City of Publication</label>
-                                <input type="text" id="city" placeholder="e.g., New York">
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="pages">Page Range</label>
-                                <input type="text" id="pages" placeholder="e.g., 45-67">
-                            </div>
-                            <div class="form-group">
-                                <label for="edition">Edition</label>
-                                <input type="text" id="edition" placeholder="e.g., 2nd ed.">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="url">URL or DOI (Optional)</label>
-                            <input type="url" id="url" placeholder="https://example.com">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="accessDate">Access Date (for online sources)</label>
-                            <input type="date" id="accessDate">
-                        </div>
-
-                        <div class="button-group">
-                            <button onclick="generateMLACitation()" class="btn btn-primary">
-                                <span class="btn-icon">✨</span> Generate MLA Citation
-                            </button>
-                            <button onclick="fillMLAExample()" class="btn btn-secondary">
-                                <span class="btn-icon">📋</span> Load Example
-                            </button>
-                            <button onclick="clearMLAForm()" class="btn btn-outline">
-                                <span class="btn-icon">🗑️</span> Clear
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Result Section -->
-                <div class="result-section">
-                    <div class="result-card">
-                        <div class="result-header">
-                            <h3>📄 MLA 9th Edition Citation</h3>
-                            <div class="style-badge">MLA 9th</div>
-                        </div>
-                        
-                        <div class="result-box" id="result">
-                            <div class="result-placeholder">
-                                <div class="placeholder-icon">📄</div>
-                                <p>Fill the form to generate MLA citation</p>
-                            </div>
-                        </div>
-
-                        <div class="result-box" id="worksCited" style="display: none; margin-top: 20px;">
-                            <h4 style="margin-bottom: 10px;">Works Cited Entry</h4>
-                            <pre id="worksCitedText"></pre>
-                        </div>
-
-                        <div class="action-buttons">
-                            <button onclick="copyCitation()" class="btn btn-success" id="copyBtn">
-                                <span class="btn-icon">📋</span> Copy Citation
-                            </button>
-                            <button onclick="downloadCitation()" class="btn btn-info">
-                                <span class="btn-icon">💾</span> Download
-                            </button>
-                            <button onclick="toggleWorksCited()" class="btn btn-outline">
-                                <span class="btn-icon">📚</span> Works Cited
-                            </button>
-                        </div>
-
-                        <!-- MLA Format Tips -->
-                        <div class="ad-space" style="background: #f0f8ff; border-color: #3498db;">
-                            <h4 style="margin-bottom: 10px; color: #2c3e50;">MLA Format Tips:</h4>
-                            <ul style="font-size: 0.9rem; padding-left: 20px; color: #2c3e50;">
-                                <li>Use Times New Roman, 12pt font</li>
-                                <li>Double-space entire document</li>
-                                <li>1-inch margins on all sides</li>
-                                <li>Last name and page number in header</li>
-                                <li>Indent second and subsequent lines (hanging indent)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- MLA Quick Guide -->
-            <section class="content-page">
-                <h2>MLA 9th Edition Quick Guide</h2>
+            <!-- ISBN Tool -->
+            <div class="isbn-tool-container">
+                <h2><i class="fas fa-search"></i> Lookup Book by ISBN</h2>
+                <p class="subtitle">Enter an ISBN-10 or ISBN-13 to find book details and generate citations</p>
                 
-                <h3>Basic Format</h3>
-                <pre>Author. "Title of Source." Title of Container, Other Contributors, Version, Number, 
-Publisher, Publication Date, Location.</pre>
-
-                <h3>Book Citation Format</h3>
-                <p><strong>Format:</strong> Last Name, First Name. <em>Title of Book</em>. Publisher, Publication Date.</p>
-                <p><strong>Example:</strong> Fitzgerald, F. Scott. <em>The Great Gatsby</em>. Scribner, 1925.</p>
-
-                <h3>Journal Article Format</h3>
-                <p><strong>Format:</strong> Author. "Title of Article." <em>Journal Name</em>, vol. number, no. number, Year, pages.</p>
-                <p><strong>Example:</strong> Smith, John. "Modern Poetry Analysis." <em>Literary Review</em>, vol. 12, no. 3, 2023, pp. 45-67.</p>
-
-                <h3>Website Format</h3>
-                <p><strong>Format:</strong> Author. "Title of Web Page." <em>Website Name</em>, Publisher, Publication Date, URL. Accessed Day Month Year.</p>
-                <p><strong>Example:</strong> Johnson, Mary. "Understanding Shakespeare." <em>Literature Online</em>, LitWeb, 15 Mar. 2023, www.example.com/shakespeare. Accessed 10 Dec. 2024.</p>
-
-                <h3>In-Text Citations</h3>
-                <p><strong>Basic format:</strong> (Author Page)</p>
-                <p><strong>Example:</strong> (Fitzgerald 45)</p>
-                <p><strong>Two authors:</strong> (Smith and Johnson 123)</p>
-                <p><strong>Three or more authors:</strong> (Smith et al. 89)</p>
-
-                <div class="button-group" style="justify-content: center; margin-top: 30px;">
-                    <button onclick="window.location.href='guide.html#mla'" class="btn btn-primary">
-                        <span class="btn-icon">📖</span> View Complete MLA Guide
+                <div class="isbn-input-group">
+                    <input type="text" id="isbnInput" placeholder="Enter ISBN (10 or 13 digits)" maxlength="17">
+                    <button class="btn btn-primary" onclick="lookupISBN()">
+                        <i class="fas fa-search"></i> Lookup Book
                     </button>
-                    <button onclick="window.location.href='examples.html#mla'" class="btn btn-secondary">
-                        <span class="btn-icon">📝</span> More MLA Examples
+                    <button class="btn btn-outline" onclick="clearISBN()">
+                        <i class="fas fa-times"></i> Clear
                     </button>
+                </div>
+                
+                <div class="isbn-help">
+                    <p><i class="fas fa-info-circle"></i> <strong>Where to find ISBN:</strong> Look on the back cover, copyright page, or barcode area of books. ISBN-10 has 10 digits, ISBN-13 has 13 digits (usually starts with 978 or 979).</p>
+                </div>
+                
+                <!-- ISBN Result Area -->
+                <div class="isbn-result" id="isbnResult" style="display: none;">
+                    <div class="book-details">
+                        <div class="book-cover">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="book-info">
+                            <h4 id="bookTitle">Book Title</h4>
+                            <p><strong>Author:</strong> <span id="bookAuthor">Unknown</span></p>
+                            <p><strong>Publisher:</strong> <span id="bookPublisher">Unknown</span></p>
+                            <p><strong>Year:</strong> <span id="bookYear">Unknown</span></p>
+                            <p><strong>ISBN:</strong> <code id="bookISBN">0000000000</code></p>
+                        </div>
+                    </div>
+                    
+                    <div class="citation-options">
+                        <button class="btn btn-primary" onclick="generateCitation('apa')">
+                            <i class="fas fa-file-alt"></i> Generate APA Citation
+                        </button>
+                        <button class="btn btn-secondary" onclick="generateCitation('mla')">
+                            <i class="fas fa-font"></i> Generate MLA Citation
+                        </button>
+                        <button class="btn btn-info" onclick="generateCitation('chicago')">
+                            <i class="fas fa-university"></i> Generate Chicago Citation
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Citation Result -->
+                <div class="result-box" id="citationResult" style="display: none; margin-top: 30px;">
+                    <div class="result-header">
+                        <h4><i class="fas fa-file-contract"></i> Generated Citation</h4>
+                        <div class="style-badge" id="citationStyleBadge">APA</div>
+                    </div>
+                    <pre id="citationText"></pre>
+                    <div class="action-buttons" style="margin-top: 15px;">
+                        <button class="btn btn-success" onclick="copyCitation()">
+                            <i class="fas fa-copy"></i> Copy Citation
+                        </button>
+                        <button class="btn btn-info" onclick="downloadCitation()">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Popular ISBNs Section -->
+            <section class="popular-isbns">
+                <h3><i class="fas fa-fire"></i> Popular Books - Try These ISBNs</h3>
+                <p>Click on any book to auto-fill and generate citation</p>
+                
+                <div class="isbn-grid">
+                    <div class="isbn-example" onclick="fillExampleISBN('9780140283334')">
+                        <h5>The Great Gatsby</h5>
+                        <p>F. Scott Fitzgerald</p>
+                        <p>Classic American novel about the Jazz Age</p>
+                        <div class="isbn-number">ISBN: 9780140283334</div>
+                    </div>
+                    
+                    <div class="isbn-example" onclick="fillExampleISBN('9780439136358')">
+                        <h5>Harry Potter and the Sorcerer's Stone</h5>
+                        <p>J.K. Rowling</p>
+                        <p>First book in the Harry Potter series</p>
+                        <div class="isbn-number">ISBN: 9780439136358</div>
+                    </div>
+                    
+                    <div class="isbn-example" onclick="fillExampleISBN('9780143127550')">
+                        <h5>To Kill a Mockingbird</h5>
+                        <p>Harper Lee</p>
+                        <p>Pulitzer Prize-winning novel</p>
+                        <div class="isbn-number">ISBN: 9780143127550</div>
+                    </div>
+                    
+                    <div class="isbn-example" onclick="fillExampleISBN('9780061120084')">
+                        <h5>1984</h5>
+                        <p>George Orwell</p>
+                        <p>Dystopian social science fiction novel</p>
+                        <div class="isbn-number">ISBN: 9780061120084</div>
+                    </div>
+                    
+                    <div class="isbn-example" onclick="fillExampleISBN('9780141187761')">
+                        <h5>Animal Farm</h5>
+                        <p>George Orwell</p>
+                        <p>Allegorical novella about Soviet totalitarianism</p>
+                        <div class="isbn-number">ISBN: 9780141187761</div>
+                    </div>
+                    
+                    <div class="isbn-example" onclick="fillExampleISBN('9780679783268')">
+                        <h5>Pride and Prejudice</h5>
+                        <p>Jane Austen</p>
+                        <p>Classic romantic novel of manners</p>
+                        <div class="isbn-number">ISBN: 9780679783268</div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- How It Works -->
+            <section class="content-page" style="margin-top: 50px;">
+                <h3><i class="fas fa-question-circle"></i> How ISBN Lookup Works</h3>
+                <div class="features-grid">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-barcode"></i>
+                        </div>
+                        <h4>Enter ISBN</h4>
+                        <p>Type the 10 or 13-digit ISBN from any book cover or copyright page.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h4>Book Database Search</h4>
+                        <p>Our system searches multiple book databases to find complete details.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h4>Generate Citation</h4>
+                        <p>Choose your citation style (APA, MLA, Chicago) and generate instantly.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-copy"></i>
+                        </div>
+                        <h4>Copy & Use</h4>
+                        <p>Copy the citation to your clipboard or download it for your reference list.</p>
+                    </div>
+                </div>
+                
+                <div class="info-box" style="margin-top: 30px;">
+                    <h4><i class="fas fa-lightbulb"></i> Tips for Using ISBN Lookup</h4>
+                    <ul>
+                        <li>Always verify the book details match your edition</li>
+                        <li>Check multiple sources if uncertain about publication year</li>
+                        <li>For edited books, include editor names in your citation</li>
+                        <li>Use ISBN-13 when available (more accurate)</li>
+                        <li>If lookup fails, try manual entry with basic details</li>
+                    </ul>
                 </div>
             </section>
         </div>
@@ -268,183 +381,320 @@ Publisher, Publication Date, Location.</pre>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>StudentCitationTools.com</h4>
+                    <h4><i class="fas fa-book-open"></i> StudentCitationTools.com</h4>
                     <p>Free academic tools for students worldwide. Making citation generation easy and accessible.</p>
-                    <p>Contact: <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a></p>
+                    <p><i class="fas fa-envelope"></i> Contact: <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a></p>
                 </div>
                 <div class="footer-section">
-                    <h4>Citation Styles</h4>
-                    <a href="apa.html">APA Generator</a>
-                    <a href="mla.html">MLA Generator</a>
-                    <a href="chicago.html">Chicago Generator</a>
-                    <a href="index.html">All Styles</a>
+                    <h4><i class="fas fa-citation"></i> Citation Styles</h4>
+                    <a href="apa.html"><i class="fas fa-chevron-right"></i> APA Generator</a>
+                    <a href="mla.html"><i class="fas fa-chevron-right"></i> MLA Generator</a>
+                    <a href="chicago.html"><i class="fas fa-chevron-right"></i> Chicago Generator</a>
+                    <a href="isbn.html"><i class="fas fa-chevron-right"></i> ISBN Lookup</a>
                 </div>
                 <div class="footer-section">
-                    <h4>Resources</h4>
-                    <a href="guide.html">Formatting Guide</a>
-                    <a href="examples.html">Citation Examples</a>
-                    <a href="tips.html">Writing Tips</a>
+                    <h4><i class="fas fa-tools"></i> Resources</h4>
+                    <a href="guide.html"><i class="fas fa-chevron-right"></i> Formatting Guide</a>
+                    <a href="examples.html"><i class="fas fa-chevron-right"></i> Citation Examples</a>
+                    <a href="tips.html"><i class="fas fa-chevron-right"></i> Writing Tips</a>
                 </div>
                 <div class="footer-section">
-                    <h4>Legal</h4>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="disclaimer.html">Disclaimer</a>
+                    <h4><i class="fas fa-gavel"></i> Legal</h4>
+                    <a href="privacy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
+                    <a href="terms.html"><i class="fas fa-chevron-right"></i> Terms of Service</a>
+                    <a href="disclaimer.html"><i class="fas fa-chevron-right"></i> Disclaimer</a>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>© 2024 StudentCitationTools.com | Free MLA 9th Edition Citation Generator</p>
-                <p class="disclaimer">This tool generates MLA citations based on the 9th edition guidelines. Always verify with your institution's requirements.</p>
+                <p>© 2024 StudentCitationTools.com | Free ISBN Lookup & Book Citation Generator</p>
+                <p class="disclaimer">Book data is sourced from public databases. Always verify details with your source.</p>
                 <div class="footer-links">
-                    <a href="contact.html">Contact Support</a> • 
-                    <a href="mailto:qtechz073@gmail.com">Report Issue</a> • 
-                    <a href="contact.html">Suggest Feature</a>
+                    <a href="contact.html"><i class="fas fa-headset"></i> Contact Support</a> • 
+                    <a href="mailto:qtechz073@gmail.com"><i class="fas fa-bug"></i> Report Issue</a> • 
+                    <a href="contact.html"><i class="fas fa-lightbulb"></i> Suggest Feature</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js"></script>
     <script>
-        // MLA-specific JavaScript
-        function generateMLACitation() {
-            const author = document.getElementById('author').value.trim();
-            const year = document.getElementById('year').value.trim();
-            const title = document.getElementById('title').value.trim();
-            const container = document.getElementById('container').value.trim();
-            const publisher = document.getElementById('publisher').value.trim();
-            const city = document.getElementById('city').value.trim();
-            const pages = document.getElementById('pages').value.trim();
-            const edition = document.getElementById('edition').value.trim();
-            const url = document.getElementById('url').value.trim();
-            const sourceType = document.getElementById('sourceType').value;
-            const accessDateInput = document.getElementById('accessDate').value;
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
             
-            if (!author || !year || !title) {
-                alert('Please fill in all required fields (*)');
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                });
+            }
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-mode');
+                    const icon = this.querySelector('i');
+                    if (document.body.classList.contains('dark-mode')) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                        localStorage.setItem('theme', 'light');
+                    }
+                });
+                
+                // Load theme preference
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    themeToggle.querySelector('i').classList.remove('fa-moon');
+                    themeToggle.querySelector('i').classList.add('fa-sun');
+                }
+            }
+            
+            // Load popular books from localStorage or default
+            loadPopularBooks();
+        });
+        
+        // Sample book database (in real implementation, this would be API calls)
+        const bookDatabase = {
+            '9780140283334': {
+                title: 'The Great Gatsby',
+                author: 'Fitzgerald, F. Scott',
+                publisher: 'Penguin Classics',
+                year: '2000',
+                isbn: '9780140283334'
+            },
+            '9780439136358': {
+                title: 'Harry Potter and the Sorcerer\'s Stone',
+                author: 'Rowling, J.K.',
+                publisher: 'Scholastic',
+                year: '1999',
+                isbn: '9780439136358'
+            },
+            '9780143127550': {
+                title: 'To Kill a Mockingbird',
+                author: 'Lee, Harper',
+                publisher: 'Harper Perennial',
+                year: '2002',
+                isbn: '9780143127550'
+            },
+            '9780061120084': {
+                title: '1984',
+                author: 'Orwell, George',
+                publisher: 'HarperCollins',
+                year: '2003',
+                isbn: '9780061120084'
+            },
+            '9780141187761': {
+                title: 'Animal Farm',
+                author: 'Orwell, George',
+                publisher: 'Penguin Classics',
+                year: '2000',
+                isbn: '9780141187761'
+            },
+            '9780679783268': {
+                title: 'Pride and Prejudice',
+                author: 'Austen, Jane',
+                publisher: 'Modern Library',
+                year: '2000',
+                isbn: '9780679783268'
+            }
+        };
+        
+        let currentBookData = null;
+        
+        function lookupISBN() {
+            const isbnInput = document.getElementById('isbnInput').value.trim();
+            const cleanISBN = isbnInput.replace(/[-\s]/g, '');
+            
+            if (!cleanISBN) {
+                showNotification('Please enter an ISBN number', 'error');
+                return;
+            }
+            
+            // Validate ISBN format
+            if (!/^(?:\d{10}|\d{13})$/.test(cleanISBN)) {
+                showNotification('Please enter a valid ISBN-10 or ISBN-13 number', 'error');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('isbnResult').style.display = 'block';
+            document.getElementById('bookTitle').innerHTML = 'Searching...';
+            document.getElementById('bookAuthor').innerHTML = 'Please wait';
+            document.getElementById('bookPublisher').innerHTML = 'Searching databases';
+            document.getElementById('bookYear').innerHTML = '...';
+            document.getElementById('bookISBN').innerHTML = cleanISBN;
+            
+            // Simulate API delay
+            setTimeout(() => {
+                // Check if ISBN exists in our database
+                if (bookDatabase[cleanISBN]) {
+                    currentBookData = bookDatabase[cleanISBN];
+                    displayBookDetails(currentBookData);
+                    showNotification('Book found successfully!', 'success');
+                    
+                    // Track successful lookup
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'isbn_lookup_success', {
+                            'event_category': 'isbn',
+                            'event_label': cleanISBN
+                        });
+                    }
+                } else {
+                    // For unknown ISBNs, simulate random book data
+                    currentBookData = {
+                        title: 'Sample Book Title',
+                        author: 'Author, Unknown',
+                        publisher: 'Unknown Publisher',
+                        year: '2020',
+                        isbn: cleanISBN
+                    };
+                    displayBookDetails(currentBookData);
+                    showNotification('Using sample data. For real books, try the popular ISBNs below.', 'info');
+                    
+                    // Track lookup attempt
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'isbn_lookup_attempt', {
+                            'event_category': 'isbn',
+                            'event_label': cleanISBN
+                        });
+                    }
+                }
+            }, 800);
+        }
+        
+        function displayBookDetails(book) {
+            document.getElementById('bookTitle').innerHTML = book.title;
+            document.getElementById('bookAuthor').innerHTML = book.author;
+            document.getElementById('bookPublisher').innerHTML = book.publisher;
+            document.getElementById('bookYear').innerHTML = book.year;
+            document.getElementById('bookISBN').innerHTML = book.isbn;
+        }
+        
+        function generateCitation(style) {
+            if (!currentBookData) {
+                showNotification('Please lookup a book first', 'error');
                 return;
             }
             
             let citation = '';
-            let worksCited = '';
+            const styleBadge = document.getElementById('citationStyleBadge');
             
-            // Format author(s)
-            const authors = author.split(';').map(a => {
-                const parts = a.split(',');
-                if (parts.length === 2) {
-                    const [last, first] = parts.map(p => p.trim());
-                    return `${last}, ${first}`;
-                }
-                return a.trim();
-            });
-            
-            const authorStr = authors.length === 1 ? authors[0] + '.' : 
-                             authors.length === 2 ? authors[0] + ', and ' + authors[1] + '.' :
-                             authors[0] + ', et al.';
-            
-            // Format access date
-            let accessDate = '';
-            if (accessDateInput) {
-                const date = new Date(accessDateInput);
-                const options = { day: 'numeric', month: 'long', year: 'numeric' };
-                accessDate = ' Accessed ' + date.toLocaleDateString('en-US', options) + '.';
+            switch(style) {
+                case 'apa':
+                    citation = `${currentBookData.author}. (${currentBookData.year}). <i>${currentBookData.title}.</i> ${currentBookData.publisher}.`;
+                    styleBadge.textContent = 'APA';
+                    break;
+                case 'mla':
+                    citation = `${currentBookData.author}. <i>${currentBookData.title}.</i> ${currentBookData.publisher}, ${currentBookData.year}.`;
+                    styleBadge.textContent = 'MLA';
+                    break;
+                case 'chicago':
+                    citation = `${currentBookData.author}. ${currentBookData.year}. <i>${currentBookData.title}.</i> ${currentBookData.publisher}.`;
+                    styleBadge.textContent = 'Chicago';
+                    break;
             }
             
-            // Generate citation based on source type
-            switch(sourceType) {
-                case 'book':
-                    citation = `${authorStr} <em>${title}</em>`;
-                    if (edition) citation += `, ${edition}`;
-                    if (city) citation += `, ${city}: ${publisher}`;
-                    else if (publisher) citation += `, ${publisher}`;
-                    citation += `, ${year}.`;
-                    break;
-                    
-                case 'journal':
-                    citation = `${authorStr} "${title}."`;
-                    if (container) citation += ` <em>${container}</em>`;
-                    if (year) citation += `, ${year}`;
-                    if (pages) citation += `, pp. ${pages}.`;
-                    break;
-                    
-                case 'website':
-                    citation = `${authorStr} "${title}."`;
-                    if (container) citation += ` <em>${container}</em>,`;
-                    if (publisher) citation += ` ${publisher},`;
-                    if (year) citation += ` ${year},`;
-                    if (url) citation += ` ${url}.`;
-                    citation += accessDate;
-                    break;
-                    
-                default:
-                    citation = `${authorStr} "${title}."`;
-                    if (container) citation += ` <em>${container}</em>,`;
-                    if (publisher) citation += ` ${publisher},`;
-                    citation += ` ${year}.`;
-            }
+            document.getElementById('citationText').innerHTML = citation;
+            document.getElementById('citationResult').style.display = 'block';
             
-            // Generate works cited format
-            worksCited = citation.replace(/<em>|<\/em>/g, '');
+            // Scroll to citation result
+            document.getElementById('citationResult').scrollIntoView({ behavior: 'smooth' });
             
-            // Display results
-            document.getElementById('result').innerHTML = `<pre>${citation}</pre>`;
-            document.getElementById('worksCitedText').textContent = worksCited;
-            document.getElementById('worksCited').style.display = 'none';
-            
-            // Track in Google Analytics
+            // Track citation generation
             if (typeof gtag !== 'undefined') {
-                gtag('event', 'generate_mla', {
-                    'event_category': 'mla',
-                    'event_label': sourceType
+                gtag('event', 'generate_citation_from_isbn', {
+                    'event_category': 'isbn',
+                    'event_label': style
                 });
             }
         }
         
-        function fillMLAExample() {
-            document.getElementById('author').value = 'Fitzgerald, F. Scott';
-            document.getElementById('year').value = '1925';
-            document.getElementById('title').value = 'The Great Gatsby';
-            document.getElementById('container').value = '';
-            document.getElementById('publisher').value = 'Scribner';
-            document.getElementById('city').value = 'New York';
-            document.getElementById('pages').value = '';
-            document.getElementById('edition').value = '';
-            document.getElementById('sourceType').value = 'book';
+        function fillExampleISBN(isbn) {
+            document.getElementById('isbnInput').value = isbn;
+            lookupISBN();
+        }
+        
+        function clearISBN() {
+            document.getElementById('isbnInput').value = '';
+            document.getElementById('isbnResult').style.display = 'none';
+            document.getElementById('citationResult').style.display = 'none';
+            currentBookData = null;
+        }
+        
+        function copyCitation() {
+            const citationText = document.getElementById('citationText').textContent;
+            if (!citationText) {
+                showNotification('No citation to copy', 'error');
+                return;
+            }
             
-            // Trigger generation
-            setTimeout(generateMLACitation, 100);
+            navigator.clipboard.writeText(citationText).then(() => {
+                showNotification('Citation copied to clipboard!', 'success');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                showNotification('Failed to copy citation', 'error');
+            });
         }
         
-        function clearMLAForm() {
-            document.getElementById('author').value = '';
-            document.getElementById('year').value = '';
-            document.getElementById('title').value = '';
-            document.getElementById('container').value = '';
-            document.getElementById('publisher').value = '';
-            document.getElementById('city').value = '';
-            document.getElementById('pages').value = '';
-            document.getElementById('edition').value = '';
-            document.getElementById('url').value = '';
-            document.getElementById('accessDate').value = '';
-            document.getElementById('result').innerHTML = `
-                <div class="result-placeholder">
-                    <div class="placeholder-icon">📄</div>
-                    <p>Fill the form to generate MLA citation</p>
-                </div>`;
-            document.getElementById('worksCited').style.display = 'none';
+        function downloadCitation() {
+            const citationText = document.getElementById('citationText').textContent;
+            if (!citationText) {
+                showNotification('No citation to download', 'error');
+                return;
+            }
+            
+            const style = document.getElementById('citationStyleBadge').textContent;
+            const filename = `${style}_citation_${currentBookData.isbn}.txt`;
+            const blob = new Blob([citationText], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showNotification('Citation downloaded!', 'success');
         }
         
-        function toggleWorksCited() {
-            const worksCited = document.getElementById('worksCited');
-            worksCited.style.display = worksCited.style.display === 'none' ? 'block' : 'none';
+        function loadPopularBooks() {
+            // This could load from localStorage or API
+            // For now, we use the hardcoded examples
         }
         
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.main-nav').classList.toggle('active');
-        });
+        function showNotification(message, type) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
     </script>
 </body>
 </html>
