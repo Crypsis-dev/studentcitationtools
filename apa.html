@@ -12,6 +12,8 @@
     <meta property="og:type" content="website">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHREV68R2D"></script>
     <script>
@@ -20,26 +22,52 @@
       gtag('js', new Date());
       gtag('config', 'G-ZHREV68R2D');
     </script>
+    <style>
+        /* Additional styles for APA page */
+        .source-type-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #3498db;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+        .citation-example {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+            <button class="mobile-menu-btn" aria-label="Menu" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="logo">
-                <h1>📚 StudentCitationTools.com</h1>
+                <h1><i class="fas fa-book-open"></i> StudentCitationTools.com</h1>
                 <p class="tagline">Free academic tools for students worldwide</p>
             </div>
-            <nav class="main-nav">
-                <a href="index.html">Home</a>
-                <a href="apa.html" class="nav-active">APA Generator</a>
-                <a href="mla.html">MLA Generator</a>
-                <a href="chicago.html">Chicago Generator</a>
-                <a href="guide.html">Formatting Guide</a>
-                <a href="examples.html">Examples</a>
-                <a href="tips.html">Writing Tips</a>
-                <a href="contact.html">Contact</a>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="apa.html" class="nav-active"><i class="fas fa-file-alt"></i> APA Generator</a>
+                <a href="mla.html"><i class="fas fa-font"></i> MLA Generator</a>
+                <a href="chicago.html"><i class="fas fa-university"></i> Chicago Generator</a>
+                <a href="isbn.html"><i class="fas fa-barcode"></i> ISBN Lookup</a>
+                <a href="guide.html"><i class="fas fa-graduation-cap"></i> Formatting Guide</a>
+                <a href="examples.html"><i class="fas fa-list-ul"></i> Examples</a>
+                <a href="tips.html"><i class="fas fa-lightbulb"></i> Writing Tips</a>
             </nav>
+            <div class="header-actions">
+                <button class="btn btn-small" id="themeToggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -47,7 +75,7 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h2>APA 7th Edition Citation Generator</h2>
+                <h2><i class="fas fa-file-alt"></i> APA 7th Edition Citation Generator</h2>
                 <p class="hero-subtitle">Generate perfect APA citations for psychology, education, and social sciences</p>
                 <div class="stats">
                     <div class="stat">
@@ -69,7 +97,7 @@
 
     <!-- Breadcrumb -->
     <div class="breadcrumb container">
-        <a href="index.html">Home</a> &gt; <span>APA Citation Generator</span>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a> &gt; <span>APA Citation Generator</span>
     </div>
 
     <!-- Main Tool -->
@@ -78,12 +106,18 @@
             <!-- Style Info -->
             <div class="style-selector">
                 <div class="style-tabs">
-                    <button class="style-tab active">APA 7th Edition</button>
-                    <button class="style-tab" onclick="window.location.href='mla.html'">MLA 9th Edition</button>
-                    <button class="style-tab" onclick="window.location.href='chicago.html'">Chicago 17th Edition</button>
+                    <button class="style-tab active" onclick="window.location.href='apa.html'">
+                        <i class="fas fa-file-alt"></i> APA 7th Edition
+                    </button>
+                    <button class="style-tab" onclick="window.location.href='mla.html'">
+                        <i class="fas fa-font"></i> MLA 9th Edition
+                    </button>
+                    <button class="style-tab" onclick="window.location.href='chicago.html'">
+                        <i class="fas fa-university"></i> Chicago 17th Edition
+                    </button>
                 </div>
                 <div class="style-info">
-                    <p><strong>APA (American Psychological Association):</strong> Used in psychology, education, social sciences, nursing, and business. The 7th edition (2020) is current.</p>
+                    <p><strong><i class="fas fa-info-circle"></i> APA (American Psychological Association):</strong> Used in psychology, education, social sciences, nursing, and business. The 7th edition (2020) is current.</p>
                 </div>
             </div>
 
@@ -92,21 +126,21 @@
                 <!-- Input Form -->
                 <div class="input-section">
                     <div class="input-card">
-                        <h3>📝 Enter APA Source Details</h3>
+                        <h3><i class="fas fa-edit"></i> Enter APA Source Details</h3>
                         
                         <div class="form-group">
-                            <label for="author">Author(s) *</label>
+                            <label for="author"><i class="fas fa-user"></i> Author(s) *</label>
                             <input type="text" id="author" placeholder="e.g., Smith, J. or Johnson, M. L.">
                             <small class="help-text">Format: Last Name, First Initial. (use & for multiple authors)</small>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="year">Publication Year *</label>
+                                <label for="year"><i class="fas fa-calendar"></i> Publication Year *</label>
                                 <input type="number" id="year" placeholder="2024" min="1000" max="2099">
                             </div>
                             <div class="form-group">
-                                <label for="month">Month (Optional)</label>
+                                <label for="month"><i class="fas fa-calendar-alt"></i> Month (Optional)</label>
                                 <select id="month">
                                     <option value="">Select Month</option>
                                     <option value="January">January</option>
@@ -126,64 +160,64 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="title">Title *</label>
+                            <label for="title"><i class="fas fa-heading"></i> Title *</label>
                             <input type="text" id="title" placeholder="e.g., Psychology of Learning">
                             <small class="help-text">Use sentence case (capitalize first word only)</small>
                         </div>
 
                         <div class="form-group">
-                            <label for="container">Source Title</label>
+                            <label for="container"><i class="fas fa-book"></i> Source Title</label>
                             <input type="text" id="container" placeholder="e.g., Journal of Psychology">
                             <small class="help-text">Journal name, book title, or website name</small>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="volume">Volume Number</label>
+                                <label for="volume"><i class="fas fa-layer-group"></i> Volume Number</label>
                                 <input type="text" id="volume" placeholder="e.g., 12">
                             </div>
                             <div class="form-group">
-                                <label for="issue">Issue Number</label>
+                                <label for="issue"><i class="fas fa-copy"></i> Issue Number</label>
                                 <input type="text" id="issue" placeholder="e.g., 3">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="publisher">Publisher</label>
+                                <label for="publisher"><i class="fas fa-building"></i> Publisher</label>
                                 <input type="text" id="publisher" placeholder="e.g., American Psychological Association">
                             </div>
                             <div class="form-group">
-                                <label for="location">Location</label>
+                                <label for="location"><i class="fas fa-map-marker-alt"></i> Location</label>
                                 <input type="text" id="location" placeholder="e.g., Washington, DC">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="pages">Page Range</label>
+                                <label for="pages"><i class="fas fa-file-alt"></i> Page Range</label>
                                 <input type="text" id="pages" placeholder="e.g., 45-67">
                             </div>
                             <div class="form-group">
-                                <label for="doi">DOI</label>
+                                <label for="doi"><i class="fas fa-fingerprint"></i> DOI</label>
                                 <input type="text" id="doi" placeholder="e.g., 10.1037/0003-066X.59.1.29">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="url">URL (if no DOI)</label>
+                            <label for="url"><i class="fas fa-link"></i> URL (if no DOI)</label>
                             <input type="url" id="url" placeholder="https://example.com">
                         </div>
 
                         <div class="button-group">
                             <button onclick="generateAPACitation()" class="btn btn-primary">
-                                <span class="btn-icon">✨</span> Generate APA Citation
+                                <i class="fas fa-magic"></i> Generate APA Citation
                             </button>
                             <button onclick="fillAPAExample()" class="btn btn-secondary">
-                                <span class="btn-icon">📋</span> Load Example
+                                <i class="fas fa-file-alt"></i> Load Example
                             </button>
                             <button onclick="clearAPAForm()" class="btn btn-outline">
-                                <span class="btn-icon">🗑️</span> Clear
+                                <i class="fas fa-trash"></i> Clear
                             </button>
                         </div>
                     </div>
@@ -193,49 +227,53 @@
                 <div class="result-section">
                     <div class="result-card">
                         <div class="result-header">
-                            <h3>📄 APA 7th Edition Citation</h3>
+                            <h3><i class="fas fa-file-contract"></i> APA 7th Edition Citation</h3>
                             <div class="style-badge">APA 7th</div>
                         </div>
                         
                         <div class="result-box" id="result">
                             <div class="result-placeholder">
-                                <div class="placeholder-icon">📄</div>
+                                <div class="placeholder-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
                                 <p>Fill the form to generate APA citation</p>
+                                <p class="placeholder-sub">Or use ISBN lookup for automatic filling</p>
                             </div>
                         </div>
 
-                        <div class="result-box" id="reference" style="display: none; margin-top: 20px;">
-                            <h4 style="margin-bottom: 10px;">Reference List Entry</h4>
-                            <pre id="referenceText"></pre>
-                        </div>
-
-                        <div class="result-box" id="inText" style="display: none; margin-top: 20px;">
-                            <h4 style="margin-bottom: 10px;">In-Text Citation</h4>
-                            <pre id="inTextText"></pre>
+                        <div class="citation-details" id="citationDetails" style="display: none;">
+                            <div class="detail-item">
+                                <h4><i class="fas fa-list"></i> Reference List Entry</h4>
+                                <pre id="referenceText"></pre>
+                            </div>
+                            <div class="detail-item">
+                                <h4><i class="fas fa-quote-right"></i> In-Text Citation</h4>
+                                <pre id="inTextText"></pre>
+                            </div>
                         </div>
 
                         <div class="action-buttons">
                             <button onclick="copyCitation()" class="btn btn-success" id="copyBtn">
-                                <span class="btn-icon">📋</span> Copy Citation
+                                <i class="fas fa-copy"></i> Copy Citation
                             </button>
                             <button onclick="downloadCitation()" class="btn btn-info">
-                                <span class="btn-icon">💾</span> Download
+                                <i class="fas fa-download"></i> Download
                             </button>
-                            <button onclick="toggleReferences()" class="btn btn-outline">
-                                <span class="btn-icon">📚</span> References
+                            <button onclick="toggleDetails()" class="btn btn-outline">
+                                <i class="fas fa-eye"></i> View Details
                             </button>
                         </div>
 
-                        <!-- APA Format Tips -->
-                        <div class="ad-space" style="background: #fff8f0; border-color: #e67e22;">
-                            <h4 style="margin-bottom: 10px; color: #2c3e50;">APA Format Tips:</h4>
-                            <ul style="font-size: 0.9rem; padding-left: 20px; color: #2c3e50;">
-                                <li>Use Times New Roman, 12pt font</li>
-                                <li>Double-space entire document</li>
-                                <li>1-inch margins on all sides</li>
-                                <li>Running head on each page</li>
-                                <li>Title page with author note</li>
-                                <li>Indent paragraphs 0.5 inches</li>
+                        <!-- Quick Tips -->
+                        <div class="quick-tips">
+                            <h4><i class="fas fa-lightbulb"></i> APA Format Quick Tips:</h4>
+                            <ul>
+                                <li><i class="fas fa-font"></i> Use Times New Roman, 12pt font</li>
+                                <li><i class="fas fa-text-height"></i> Double-space entire document</li>
+                                <li><i class="fas fa-square"></i> 1-inch margins on all sides</li>
+                                <li><i class="fas fa-heading"></i> Running head on each page</li>
+                                <li><i class="fas fa-file"></i> Title page with author note</li>
+                                <li><i class="fas fa-indent"></i> Indent paragraphs 0.5 inches</li>
                             </ul>
                         </div>
                     </div>
@@ -244,35 +282,61 @@
 
             <!-- APA Quick Guide -->
             <section class="content-page">
-                <h2>APA 7th Edition Quick Guide</h2>
+                <h2><i class="fas fa-graduation-cap"></i> APA 7th Edition Quick Guide</h2>
                 
-                <h3>Basic Reference Format</h3>
-                <pre>Author, A. A. (Year). Title of work: Subtitle if any. Publisher.</pre>
+                <h3><i class="fas fa-book"></i> Basic Reference Format</h3>
+                <div class="citation-example">
+                    Author, A. A. (Year). Title of work: Subtitle if any. Publisher.
+                </div>
 
-                <h3>Journal Article Format</h3>
+                <h3><i class="fas fa-newspaper"></i> Journal Article Format</h3>
                 <p><strong>Format:</strong> Author, A. A. (Year). Title of article. <em>Journal Name, Volume</em>(Issue), pages. DOI or URL</p>
-                <p><strong>Example:</strong> Smith, J. D., & Johnson, M. L. (2023). Cognitive development in early childhood. <em>Journal of Educational Psychology, 115</em>(2), 245-267. https://doi.org/10.1037/edu0000456</p>
+                <div class="citation-example">
+                    Smith, J. D., & Johnson, M. L. (2023). Cognitive development in early childhood. 
+                    <em>Journal of Educational Psychology, 115</em>(2), 245-267. 
+                    https://doi.org/10.1037/edu0000456
+                </div>
 
-                <h3>Book Format</h3>
+                <h3><i class="fas fa-book-open"></i> Book Format</h3>
                 <p><strong>Format:</strong> Author, A. A. (Year). <em>Title of book: Subtitle if any</em> (Edition). Publisher.</p>
-                <p><strong>Example:</strong> American Psychological Association. (2020). <em>Publication manual of the American Psychological Association</em> (7th ed.).</p>
+                <div class="citation-example">
+                    American Psychological Association. (2020). 
+                    <em>Publication manual of the American Psychological Association</em> (7th ed.).
+                </div>
 
-                <h3>Website Format</h3>
+                <h3><i class="fas fa-globe"></i> Website Format</h3>
                 <p><strong>Format:</strong> Author, A. A. (Year, Month Day). Title of page. <em>Website Name</em>. URL</p>
-                <p><strong>Example:</strong> Centers for Disease Control and Prevention. (2023, March 15). <em>Mental health statistics</em>. https://www.cdc.gov/mentalhealth</p>
+                <div class="citation-example">
+                    Centers for Disease Control and Prevention. (2023, March 15). 
+                    <em>Mental health statistics</em>. https://www.cdc.gov/mentalhealth
+                </div>
 
-                <h3>In-Text Citations</h3>
-                <p><strong>One author:</strong> (Smith, 2023)</p>
-                <p><strong>Two authors:</strong> (Smith & Johnson, 2023)</p>
-                <p><strong>Three or more authors:</strong> (Smith et al., 2023)</p>
-                <p><strong>Direct quote with page:</strong> (Smith, 2023, p. 45)</p>
+                <h3><i class="fas fa-quote-left"></i> In-Text Citations</h3>
+                <div class="citation-examples-grid">
+                    <div class="example-box">
+                        <h5>One author:</h5>
+                        <code>(Smith, 2023)</code>
+                    </div>
+                    <div class="example-box">
+                        <h5>Two authors:</h5>
+                        <code>(Smith & Johnson, 2023)</code>
+                    </div>
+                    <div class="example-box">
+                        <h5>Three or more authors:</h5>
+                        <code>(Smith et al., 2023)</code>
+                    </div>
+                    <div class="example-box">
+                        <h5>Direct quote with page:</h5>
+                        <code>(Smith, 2023, p. 45)</code>
+                    </div>
+                </div>
 
                 <div class="button-group" style="justify-content: center; margin-top: 30px;">
                     <button onclick="window.location.href='guide.html#apa'" class="btn btn-primary">
-                        <span class="btn-icon">📖</span> View Complete APA Guide
+                        <i class="fas fa-book"></i> View Complete APA Guide
                     </button>
                     <button onclick="window.location.href='examples.html#apa'" class="btn btn-secondary">
-                        <span class="btn-icon">📝</span> More APA Examples
+                        <i class="fas fa-list-ul"></i> More APA Examples
                     </button>
                 </div>
             </section>
@@ -284,28 +348,28 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>StudentCitationTools.com</h4>
+                    <h4><i class="fas fa-book-open"></i> StudentCitationTools.com</h4>
                     <p>Free academic tools for students worldwide. Making citation generation easy and accessible.</p>
-                    <p>Contact: <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a></p>
+                    <p><i class="fas fa-envelope"></i> Contact: <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a></p>
                 </div>
                 <div class="footer-section">
-                    <h4>Citation Styles</h4>
-                    <a href="apa.html">APA Generator</a>
-                    <a href="mla.html">MLA Generator</a>
-                    <a href="chicago.html">Chicago Generator</a>
-                    <a href="index.html">All Styles</a>
+                    <h4><i class="fas fa-citation"></i> Citation Styles</h4>
+                    <a href="apa.html"><i class="fas fa-chevron-right"></i> APA Generator</a>
+                    <a href="mla.html"><i class="fas fa-chevron-right"></i> MLA Generator</a>
+                    <a href="chicago.html"><i class="fas fa-chevron-right"></i> Chicago Generator</a>
+                    <a href="isbn.html"><i class="fas fa-chevron-right"></i> ISBN Lookup</a>
                 </div>
                 <div class="footer-section">
-                    <h4>Resources</h4>
-                    <a href="guide.html">Formatting Guide</a>
-                    <a href="examples.html">Citation Examples</a>
-                    <a href="tips.html">Writing Tips</a>
+                    <h4><i class="fas fa-tools"></i> Resources</h4>
+                    <a href="guide.html"><i class="fas fa-chevron-right"></i> Formatting Guide</a>
+                    <a href="examples.html"><i class="fas fa-chevron-right"></i> Citation Examples</a>
+                    <a href="tips.html"><i class="fas fa-chevron-right"></i> Writing Tips</a>
                 </div>
                 <div class="footer-section">
-                    <h4>Legal</h4>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="disclaimer.html">Disclaimer</a>
+                    <h4><i class="fas fa-gavel"></i> Legal</h4>
+                    <a href="privacy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
+                    <a href="terms.html"><i class="fas fa-chevron-right"></i> Terms of Service</a>
+                    <a href="disclaimer.html"><i class="fas fa-chevron-right"></i> Disclaimer</a>
                 </div>
             </div>
             
@@ -313,17 +377,54 @@
                 <p>© 2024 StudentCitationTools.com | Free APA 7th Edition Citation Generator</p>
                 <p class="disclaimer">This tool generates APA citations based on the 7th edition guidelines. Always verify with your institution's requirements.</p>
                 <div class="footer-links">
-                    <a href="contact.html">Contact Support</a> • 
-                    <a href="mailto:qtechz073@gmail.com">Report Issue</a> • 
-                    <a href="contact.html">Suggest Feature</a>
+                    <a href="contact.html"><i class="fas fa-headset"></i> Contact Support</a> • 
+                    <a href="mailto:qtechz073@gmail.com"><i class="fas fa-bug"></i> Report Issue</a> • 
+                    <a href="contact.html"><i class="fas fa-lightbulb"></i> Suggest Feature</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js"></script>
     <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                });
+            }
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-mode');
+                    const icon = this.querySelector('i');
+                    if (document.body.classList.contains('dark-mode')) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                        localStorage.setItem('theme', 'light');
+                    }
+                });
+                
+                // Load theme preference
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    themeToggle.querySelector('i').classList.remove('fa-moon');
+                    themeToggle.querySelector('i').classList.add('fa-sun');
+                }
+            }
+        });
+
         // APA-specific JavaScript
         function generateAPACitation() {
             const author = document.getElementById('author').value.trim();
@@ -411,8 +512,10 @@
             document.getElementById('result').innerHTML = `<pre>${citation}</pre>`;
             document.getElementById('referenceText').textContent = reference;
             document.getElementById('inTextText').textContent = inText;
-            document.getElementById('reference').style.display = 'none';
-            document.getElementById('inText').style.display = 'none';
+            document.getElementById('citationDetails').style.display = 'none';
+            
+            // Show success message
+            showNotification('APA citation generated successfully!', 'success');
             
             // Track in Google Analytics
             if (typeof gtag !== 'undefined') {
@@ -453,24 +556,98 @@
             document.getElementById('url').value = '';
             document.getElementById('result').innerHTML = `
                 <div class="result-placeholder">
-                    <div class="placeholder-icon">📄</div>
+                    <div class="placeholder-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
                     <p>Fill the form to generate APA citation</p>
+                    <p class="placeholder-sub">Or use ISBN lookup for automatic filling</p>
                 </div>`;
-            document.getElementById('reference').style.display = 'none';
-            document.getElementById('inText').style.display = 'none';
+            document.getElementById('citationDetails').style.display = 'none';
         }
         
-        function toggleReferences() {
-            const reference = document.getElementById('reference');
-            const inText = document.getElementById('inText');
-            reference.style.display = reference.style.display === 'none' ? 'block' : 'none';
-            inText.style.display = inText.style.display === 'none' ? 'block' : 'none';
+        function toggleDetails() {
+            const details = document.getElementById('citationDetails');
+            const btn = document.querySelector('button[onclick="toggleDetails()"]');
+            
+            if (details.style.display === 'none') {
+                details.style.display = 'block';
+                btn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Details';
+            } else {
+                details.style.display = 'none';
+                btn.innerHTML = '<i class="fas fa-eye"></i> View Details';
+            }
         }
         
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.main-nav').classList.toggle('active');
-        });
+        function copyCitation() {
+            const resultText = document.getElementById('result').textContent;
+            if (!resultText || resultText.includes('Fill the form')) {
+                showNotification('No citation to copy. Please generate a citation first.', 'error');
+                return;
+            }
+            
+            navigator.clipboard.writeText(resultText).then(() => {
+                const copyBtn = document.getElementById('copyBtn');
+                const originalHTML = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalHTML;
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+                
+                showNotification('Citation copied to clipboard!', 'success');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                showNotification('Failed to copy citation. Please try again.', 'error');
+            });
+        }
+        
+        function downloadCitation() {
+            const resultText = document.getElementById('result').textContent;
+            if (!resultText || resultText.includes('Fill the form')) {
+                showNotification('No citation to download. Please generate a citation first.', 'error');
+                return;
+            }
+            
+            const filename = `apa_citation_${Date.now()}.txt`;
+            const blob = new Blob([resultText], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showNotification('Citation downloaded successfully!', 'success');
+        }
+        
+        function showNotification(message, type) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
     </script>
 </body>
 </html>
