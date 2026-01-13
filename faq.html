@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHREV68R2D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-ZHREV68R2D');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Frequently Asked Questions | StudentCitationTools.com</title>
+    <meta name="description" content="Find answers to common questions about citation generation, ISBN lookup, premium features, and more on StudentCitationTools.com">
+    <meta name="keywords" content="citation FAQ, citation generator questions, ISBN lookup help, premium features FAQ, academic citation help">
+    <meta name="author" content="StudentCitationTools.com">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="FAQ - StudentCitationTools.com Citation Generator">
+    <meta property="og:description" content="Get answers to common questions about our citation generator tools.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://studentcitationtools.com/faq.html">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "Is StudentCitationTools.com really free?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! Our core citation generator is 100% free with no hidden costs. We offer Premium features for power users, but the basic citation generator will always be free."
+            }
+        }, {
+            "@type": "Question",
+            "name": "How does ISBN lookup work?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our tool queries book databases using the ISBN you provide and automatically retrieves author, title, publisher, year, and other details to fill your citation form automatically."
+            }
+        }, {
+            "@type": "Question",
+            "name": "Which citation styles are supported?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We support APA 7th edition, MLA 9th edition, and Chicago 17th edition. These cover 95% of academic citation needs."
+            }
+        }]
+    }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .faq-hero {
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .faq-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .faq-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+        
+        .faq-search {
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+        
+        .search-container {
+            position: relative;
+        }
+        
+        .search-container i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .faq-categories {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .faq-category {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .faq-category:hover,
+        .faq-category.active {
+            background: white;
+            color: #3498db;
+        }
+        
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .faq-section {
+            margin: 60px 0;
+        }
+        
+        .faq-section h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        body.dark-mode .faq-section h2 {
+            color: #ecf0f1;
+        }
+        
+        .faq-grid {
+            margin-bottom: 40px;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        body.dark-mode .faq-item {
+            background: #2c3e50;
+        }
+        
+        .faq-question {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: #f8f9fa;
+        }
+        
+        body.dark-mode .faq-question:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .faq-question h3 {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin: 0;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        body.dark-mode .faq-question h3 {
+            color: #ecf0f1;
+        }
+        
+        .faq-question i:first-child {
+            color: #3498db;
+        }
+        
+        .faq-question i:last-child {
+            color: #7f8c8d;
+            transition: transform 0.3s;
+        }
+        
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 30px 25px;
+            max-height: 1000px;
+        }
+        
+        .faq-item.active .faq-question i:last-child {
+            transform: rotate(180deg);
+            color: #3498db;
+        }
+        
+        .faq-answer p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        body.dark-mode .faq-answer p {
+            color: #bdc3c7;
+        }
+        
+        .faq-answer ul,
+        .faq-answer ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .faq-answer li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        body.dark-mode .faq-answer li {
+            color: #bdc3c7;
+        }
+        
+        .highlight {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 10px 15px;
+            border-radius: 5px;
+            border-left: 3px solid #3498db;
+            margin: 15px 0;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            display: none;
+        }
+        
+        .faq-contact {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            margin: 60px 0;
+        }
+        
+        body.dark-mode .faq-contact {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        @media (max-width: 768px) {
+            .faq-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .faq-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .faq-category {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .faq-question {
+                padding: 20px;
+            }
+            
+            .faq-question h3 {
+                font-size: 1.1rem;
+            }
+            
+            .faq-answer {
+                padding: 0 20px;
+            }
+            
+            .faq-item.active .faq-answer {
+                padding: 0 20px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <button class="mobile-menu-btn" aria-label="Menu" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo">
+                <h1><i class="fas fa-book-open"></i> StudentCitationTools.com</h1>
+                <p class="tagline">Free academic tools for students worldwide</p>
+            </div>
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="apa.html"><i class="fas fa-file-alt"></i> APA Generator</a>
+                <a href="mla.html"><i class="fas fa-font"></i> MLA Generator</a>
+                <a href="chicago.html"><i class="fas fa-university"></i> Chicago Generator</a>
+                <a href="isbn.html"><i class="fas fa-barcode"></i> ISBN Lookup</a>
+                <a href="batch.html"><i class="fas fa-batch"></i> Batch Generator</a>
+                <a href="premium.html"><i class="fas fa-crown"></i> Premium</a>
+                <a href="guide.html"><i class="fas fa-graduation-cap"></i> Guide</a>
+                <a href="faq.html" class="nav-active"><i class="fas fa-question-circle"></i> FAQ</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-small" id="themeToggle" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="faq-hero">
+        <div class="container">
+            <h1><i class="fas fa-question-circle"></i> Frequently Asked Questions</h1>
+            <p>Find quick answers to common questions about our citation tools and services</p>
+            
+            <div class="faq-search">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" id="faqSearch" placeholder="Search questions...">
+                </div>
+                
+                <div class="faq-categories">
+                    <div class="faq-category active" data-category="all">All Questions</div>
+                    <div class="faq-category" data-category="general">General</div>
+                    <div class="faq-category" data-category="citation">Citation</div>
+                    <div class="faq-category" data-category="premium">Premium</div>
+                    <div class="faq-category" data-category="technical">Technical</div>
+                    <div class="faq-category" data-category="account">Account</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <main class="main">
+        <div class="faq-container">
+            <!-- General Questions -->
+            <section class="faq-section" data-category="general">
+                <h2><i class="fas fa-info-circle"></i> General Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item" data-category="general">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> What is StudentCitationTools.com?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>StudentCitationTools.com is a free online citation generator that helps students, researchers, and writers create accurate citations in APA, MLA, and Chicago styles. Our tool simplifies the citation process and saves time on academic writing.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="general">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> Is StudentCitationTools.com really free?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! Our core citation generator is 100% free with no hidden costs. We offer Premium features for power users who need advanced functionality like batch generation and plagiarism checking, but the basic citation generator will always be free.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="general">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> Who can use this tool?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our tool is designed for:</p>
+                            <ul>
+                                <li><strong>Students:</strong> High school, college, and university students</li>
+                                <li><strong>Researchers:</strong> Academic and professional researchers</li>
+                                <li><strong>Writers:</strong> Authors, journalists, and content creators</li>
+                                <li><strong>Educators:</strong> Teachers and professors</li>
+                                <li><strong>Anyone</strong> who needs to create citations</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="general">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> Do I need to create an account?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No account is required for the free version. You can generate citations immediately without any registration. Premium features require an account for subscription management and feature access.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Citation Questions -->
+            <section class="faq-section" data-category="citation">
+                <h2><i class="fas fa-file-alt"></i> Citation Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item" data-category="citation">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> Which citation styles do you support?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We support the three most popular academic citation styles:</p>
+                            <ul>
+                                <li><strong>APA 7th Edition:</strong> American Psychological Association style</li>
+                                <li><strong>MLA 9th Edition:</strong> Modern Language Association style</li>
+                                <li><strong>Chicago 17th Edition:</strong> Chicago Manual of Style</li>
+                            </ul>
+                            <p>These styles cover 95% of academic citation needs across various disciplines.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="citation">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> How accurate are your citations?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our citations are generated based on the official style guides for each citation format. We regularly update our algorithms to match the latest editions and guidelines.</p>
+                            <div class="highlight">
+                                <p><strong>Important:</strong> While we strive for 100% accuracy, always double-check citations against your institution's specific requirements. Some departments or professors may have unique formatting rules.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="citation">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> How does ISBN lookup work?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our ISBN lookup feature automatically retrieves book information by ISBN (International Standard Book Number). Here's how it works:</p>
+                            <ol>
+                                <li>Enter a valid ISBN-10 or ISBN-13 in the search field</li>
+                                <li>Our system queries multiple book databases</li>
+                                <li>We retrieve author, title, publisher, publication date, and other details</li>
+                                <li>The information automatically fills your citation form</li>
+                                <li>You can then generate the citation with one click</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="citation">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> What source types can I cite?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We support citations for various source types including:</p>
+                            <ul>
+                                <li>Books and e-books</li>
+                                <li>Journal articles</li>
+                                <li>Websites and web pages</li>
+                                <li>Newspapers and magazines</li>
+                                <li>Theses and dissertations</li>
+                                <li>Conference papers</li>
+                                <li>Videos and films</li>
+                                <li>Social media posts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Premium Questions -->
+            <section class="faq-section" data-category="premium">
+                <h2><i class="fas fa-crown"></i> Premium Features</h2>
+                <div class="faq-grid">
+                    <div class="faq-item" data-category="premium">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> What's included in Premium?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Premium features include:</p>
+                            <ul>
+                                <li><strong>Unlimited Citations:</strong> No daily limits</li>
+                                <li><strong>Batch Generation:</strong> Generate multiple citations at once</li>
+                                <li><strong>Advanced Export:</strong> PDF, DOC, and BibTeX formats</li>
+                                <li><strong>Citation History:</strong> Store up to 500 citations</li>
+                                <li><strong>Plagiarism Check:</strong> Basic plagiarism detection</li>
+                                <li><strong>Ad-Free Experience:</strong> Remove all advertisements</li>
+                                <li><strong>Priority Support:</strong> Faster response times</li>
+                                <li><strong>Advanced ISBN Lookup:</strong> More comprehensive book data</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="premium">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> How much does Premium cost?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We offer flexible pricing options:</p>
+                            <ul>
+                                <li><strong>Monthly:</strong> $4.99 per month</li>
+                                <li><strong>Annual (Best Value):</strong> $49.99 per year (58% savings)</li>
+                                <li><strong>Student Pro:</strong> $9.99 per month (advanced features)</li>
+                            </ul>
+                            <p>All plans come with a 30-day money-back guarantee.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="premium">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> Can I cancel my Premium subscription?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! You can cancel your Premium subscription at any time:</p>
+                            <ol>
+                                <li>Go to your account settings</li>
+                                <li>Click on "Subscription"</li>
+                                <li>Select "Cancel Subscription"</li>
+                                <li>Confirm cancellation</li>
+                            </ol>
+                            <p>Your subscription will remain active until the end of your current billing period, and then you'll revert to the Free plan.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="premium">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> Do you offer student discounts?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! Students can receive a 20% discount on any Premium plan. To qualify:</p>
+                            <ul>
+                                <li>Use your .edu email address during signup</li>
+                                <li>Verify your student status</li>
+                                <li>Contact support for institutional discounts</li>
+                            </ul>
+                            <p>Discounts are also available for educational institutions and group purchases.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Technical Questions -->
+            <section class="faq-section" data-category="technical">
+                <h2><i class="fas fa-laptop"></i> Technical Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item" data-category="technical">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> Do you store my data?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p><strong>Free Version:</strong> No data is stored. All citation generation happens locally in your browser. Your information never leaves your device.</p>
+                            <p><strong>Premium Version:</strong> We store only essential account information and your saved citations (if you choose to save them). All data is encrypted and protected according to our <a href="privacy.html">Privacy Policy</a>.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="technical">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> Can I use this tool on mobile?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolutely! Our website is fully responsive and works perfectly on:</p>
+                            <ul>
+                                <li>Smartphones (iOS & Android)</li>
+                                <li>Tablets (iPad & Android tablets)</li>
+                                <li>Desktop computers (Windows, Mac, Linux)</li>
+                                <li>All modern web browsers</li>
+                            </ul>
+                            <p>No app download required - simply visit our website on any device with a web browser.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="technical">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> What browsers are supported?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We support all modern browsers including:</p>
+                            <ul>
+                                <li>Google Chrome (recommended)</li>
+                                <li>Mozilla Firefox</li>
+                                <li>Safari</li>
+                                <li>Microsoft Edge</li>
+                                <li>Opera</li>
+                            </ul>
+                            <p>For best performance, ensure your browser is updated to the latest version.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" data-category="technical">
+                        <div class="faq-question">
+                            <h3><i class="fas fa-question"></i> Is there an API available?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! We offer an API for developers and institutions:</p>
+                            <ul>
+                                <li><strong>Basic API:</strong> Free for limited personal use</li>
+                                <li><strong>Professional API:</strong> For commercial applications</li>
+                                <li><strong>Enterprise API:</strong> Custom solutions for institutions</li>
+                            </ul>
+                            <p>Contact our <a href="contact.html">sales team</a> for API documentation and pricing.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults">
+                <i class="fas fa-search fa-3x" style="margin-bottom: 20px; color: #bdc3c7;"></i>
+                <h3>No questions found</h3>
+                <p>Try searching with different keywords or browse the categories above.</p>
+            </div>
+            
+            <!-- Contact CTA -->
+            <div class="faq-contact">
+                <h2><i class="fas fa-headset"></i> Still have questions?</h2>
+                <p>Can't find what you're looking for? Our support team is here to help!</p>
+                <div style="margin-top: 30px;">
+                    <a href="contact.html" class="btn btn-primary btn-large">
+                        <i class="fas fa-envelope"></i> Contact Support
+                    </a>
+                    <a href="premium.html" class="btn btn-premium btn-large">
+                        <i class="fas fa-crown"></i> Get Premium Support
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h4><i class="fas fa-book-open"></i> StudentCitationTools.com</h4>
+                    </div>
+                    <p>Free academic tools for students worldwide. Making citation generation easy and accessible since 2023.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Tools</h5>
+                    <a href="apa.html"><i class="fas fa-chevron-right"></i> APA Generator</a>
+                    <a href="mla.html"><i class="fas fa-chevron-right"></i> MLA Generator</a>
+                    <a href="chicago.html"><i class="fas fa-chevron-right"></i> Chicago Generator</a>
+                    <a href="isbn.html"><i class="fas fa-chevron-right"></i> ISBN Lookup</a>
+                    <a href="batch.html"><i class="fas fa-chevron-right"></i> Batch Generator</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Resources</h5>
+                    <a href="guide.html"><i class="fas fa-chevron-right"></i> Formatting Guide</a>
+                    <a href="examples.html"><i class="fas fa-chevron-right"></i> Citation Examples</a>
+                    <a href="tips.html"><i class="fas fa-chevron-right"></i> Writing Tips</a>
+                    <a href="faq.html" class="nav-active"><i class="fas fa-chevron-right"></i> FAQ</a>
+                    <a href="blog.html"><i class="fas fa-chevron-right"></i> Blog</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Legal</h5>
+                    <a href="privacy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
+                    <a href="terms.html"><i class="fas fa-chevron-right"></i> Terms of Service</a>
+                    <a href="disclaimer.html"><i class="fas fa-chevron-right"></i> Disclaimer</a>
+                    <a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>© 2024 StudentCitationTools.com | Professional Citation Generator</p>
+                    <p class="disclaimer">This tool generates citations based on official style guides. Always verify with your institution's requirements.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize mobile menu
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mainNav.classList.toggle('active');
+                    mobileMenuBtn.innerHTML = mainNav.classList.contains('active') ? 
+                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (mainNav.classList.contains('active') && 
+                        !mainNav.contains(e.target) && 
+                        !mobileMenuBtn.contains(e.target)) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+            }
+            
+            // Initialize theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-mode');
+                    
+                    const icon = this.querySelector('i');
+                    if (document.body.classList.contains('dark-mode')) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                        localStorage.setItem('theme', 'light');
+                    }
+                });
+                
+                // Load saved theme
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    themeToggle.querySelector('i').classList.remove('fa-moon');
+                    themeToggle.querySelector('i').classList.add('fa-sun');
+                }
+            }
+            
+            // Initialize FAQ functionality
+            initializeFAQ();
+            
+            // Track page view
+            if (typeof gtag === 'function') {
+                gtag('event', 'page_view', {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                    page_path: window.location.pathname
+                });
+            }
+        });
+        
+        function initializeFAQ() {
+            // FAQ toggle functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqItem = this.parentElement;
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('.fa-chevron-down');
+                    
+                    // Close all other items
+                    document.querySelectorAll('.faq-item.active').forEach(item => {
+                        if (item !== faqItem) {
+                            item.classList.remove('active');
+                            item.querySelector('.fa-chevron-down').style.transform = 'rotate(0deg)';
+                        }
+                    });
+                    
+                    // Toggle current item
+                    faqItem.classList.toggle('active');
+                    
+                    if (faqItem.classList.contains('active')) {
+                        icon.style.transform = 'rotate(180deg)';
+                        icon.style.color = '#3498db';
+                        
+                        // Track FAQ view
+                        const questionText = this.querySelector('h3').textContent;
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'faq_view', {
+                                'event_category': 'engagement',
+                                'event_label': questionText
+                            });
+                        }
+                    } else {
+                        icon.style.transform = 'rotate(0deg)';
+                        icon.style.color = '';
+                    }
+                });
+            });
+            
+            // Category filtering
+            const categories = document.querySelectorAll('.faq-category');
+            const faqItems = document.querySelectorAll('.faq-item');
+            const faqSections = document.querySelectorAll('.faq-section');
+            const noResults = document.getElementById('noResults');
+            
+            categories.forEach(category => {
+                category.addEventListener('click', function() {
+                    // Update active category
+                    categories.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const selectedCategory = this.dataset.category;
+                    
+                    // Show/hide items based on category
+                    let visibleCount = 0;
+                    
+                    faqItems.forEach(item => {
+                        if (selectedCategory === 'all' || item.dataset.category === selectedCategory) {
+                            item.style.display = 'block';
+                            visibleCount++;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    // Show/hide sections based on visible items
+                    faqSections.forEach(section => {
+                        const sectionItems = section.querySelectorAll('.faq-item');
+                        const visibleSectionItems = Array.from(sectionItems).filter(item => 
+                            item.style.display !== 'none'
+                        );
+                        
+                        if (visibleSectionItems.length > 0) {
+                            section.style.display = 'block';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                    
+                    // Show/hide no results message
+                    if (visibleCount === 0) {
+                        noResults.style.display = 'block';
+                    } else {
+                        noResults.style.display = 'none';
+                    }
+                    
+                    // Track category selection
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'faq_category', {
+                            'event_category': 'engagement',
+                            'event_label': selectedCategory
+                        });
+                    }
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('faqSearch');
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                
+                if (searchTerm.length < 2) {
+                    // Reset to current category if search is cleared
+                    const activeCategory = document.querySelector('.faq-category.active');
+                    if (activeCategory) {
+                        activeCategory.click();
+                    }
+                    return;
+                }
+                
+                let visibleCount = 0;
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question h3').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        visibleCount++;
+                        
+                        // Highlight search term in question
+                        const questionElement = item.querySelector('.faq-question h3');
+                        const originalText = questionElement.innerHTML;
+                        const highlightedText = originalText.replace(
+                            new RegExp(searchTerm, 'gi'),
+                            match => `<span style="background-color: yellow; color: black; padding: 2px;">${match}</span>`
+                        );
+                        questionElement.innerHTML = highlightedText;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide sections based on visible items
+                faqSections.forEach(section => {
+                    const sectionItems = section.querySelectorAll('.faq-item');
+                    const visibleSectionItems = Array.from(sectionItems).filter(item => 
+                        item.style.display !== 'none'
+                    );
+                    
+                    if (visibleSectionItems.length > 0) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide no results message
+                if (visibleCount === 0) {
+                    noResults.style.display = 'block';
+                } else {
+                    noResults.style.display = 'none';
+                }
+                
+                // Track search
+                if (typeof gtag === 'function') {
+                    gtag('event', 'search', {
+                        'event_category': 'engagement',
+                        'event_label': searchTerm
+                    });
+                }
+            });
+            
+            // Open first FAQ item by default
+            if (faqQuestions.length > 0) {
+                faqQuestions[0].click();
+            }
+        }
+        
+        // Add window resize handler
+        window.addEventListener('resize', function() {
+            const mainNav = document.getElementById('mainNav');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            
+            if (window.innerWidth > 768 && mainNav) {
+                mainNav.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
