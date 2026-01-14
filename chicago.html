@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Free Chicago Style Citation Generator 17th Edition - StudentCitationTools.com</title>
     <meta name="description" content="Generate accurate Chicago Manual of Style 17th edition citations instantly. For history, publishing, and academic papers.">
     <meta name="keywords" content="chicago citation, chicago style, chicago manual, chicago generator, free chicago, notes bibliography">
@@ -10,8 +10,1223 @@
     <meta property="og:title" content="Free Chicago Style Citation Generator">
     <meta property="og:description" content="Generate accurate Chicago Style citations instantly.">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #9b59b6;
+            --primary-dark: #8e44ad;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --white: #ffffff;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            --dark: #f8f9fa;
+            --light: #1a1a2e;
+            --white: #16213e;
+            --gray-light: #2d3748;
+            color: #f8f9fa;
+            background: var(--light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            width: 100%;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        body.dark-mode .header {
+            background: rgba(26, 26, 46, 0.95);
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo-tagline {
+            display: none;
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 2px;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 1002;
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .main-nav {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: var(--white);
+            padding: 80px 25px 25px;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+
+        body.dark-mode .main-nav {
+            background: var(--dark);
+        }
+
+        .main-nav.active {
+            right: 0;
+        }
+
+        .nav-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 25px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-header .logo-text {
+            color: white;
+            font-size: 16px;
+        }
+
+        .nav-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .nav-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .nav-link {
+            color: var(--light);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(155, 89, 182, 0.1);
+            color: var(--primary);
+        }
+
+        .nav-link i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theme-toggle {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 40px;
+            background: linear-gradient(135deg, #9b59b6 0%, #7209b7 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 L1000,0 L1000,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 100% 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--success);
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--gray-light);
+            padding: 12px 0;
+            margin-top: -1px;
+            font-size: 0.9rem;
+        }
+
+        body.dark-mode .breadcrumb {
+            background: var(--dark);
+        }
+
+        .breadcrumb a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb span {
+            color: var(--dark);
+        }
+
+        body.dark-mode .breadcrumb span {
+            color: var(--light);
+        }
+
+        /* Main Content */
+        .main {
+            padding: 30px 0;
+            background: var(--light);
+            min-height: calc(100vh - 70px);
+        }
+
+        body.dark-mode .main {
+            background: var(--dark);
+        }
+
+        /* Style Selector */
+        .style-selector {
+            background: var(--white);
+            border-radius: var(--radius);
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        body.dark-mode .style-selector {
+            background: var(--dark);
+        }
+
+        .style-tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px;
+            background: var(--gray-light);
+        }
+
+        body.dark-mode .style-tabs {
+            background: var(--dark);
+        }
+
+        .style-tab {
+            padding: 15px;
+            background: var(--white);
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius-sm);
+            color: var(--dark);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        body.dark-mode .style-tab {
+            background: var(--dark);
+            color: var(--light);
+            border-color: var(--gray-light);
+        }
+
+        .style-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .style-tab:not(.active):hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .style-info {
+            padding: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .style-info i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
+        /* System Tabs */
+        .system-tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .system-tab {
+            padding: 15px;
+            background: var(--white);
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius-sm);
+            color: var(--dark);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        body.dark-mode .system-tab {
+            background: var(--dark);
+            color: var(--light);
+            border-color: var(--gray-light);
+        }
+
+        .system-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Tool Container */
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        /* Input Section */
+        .input-section {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        body.dark-mode .input-section {
+            background: var(--dark);
+        }
+
+        .input-card {
+            padding: 20px;
+        }
+
+        .input-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .input-card h3 {
+            color: var(--light);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        body.dark-mode label {
+            color: var(--light);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--white);
+            color: var(--dark);
+            font-family: inherit;
+        }
+
+        body.dark-mode input,
+        body.dark-mode select {
+            background: var(--dark);
+            border-color: var(--gray-light);
+            color: var(--light);
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.2);
+        }
+
+        .help-text {
+            display: block;
+            margin-top: 6px;
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.4;
+        }
+
+        /* Button Group */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 16px 24px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5e0a9b;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-success {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        .btn-info {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Result Section */
+        .result-section {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        body.dark-mode .result-section {
+            background: var(--dark);
+        }
+
+        .result-card {
+            padding: 20px;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .result-header h3 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .result-header h3 {
+            color: var(--light);
+        }
+
+        .style-badge {
+            background: var(--primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .result-box {
+            background: var(--gray-light);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.dark-mode .result-box {
+            background: var(--dark);
+            border: 1px solid var(--gray-light);
+        }
+
+        .result-placeholder {
+            text-align: center;
+            color: var(--gray);
+        }
+
+        .result-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+            opacity: 0.5;
+        }
+
+        .placeholder-sub {
+            font-size: 0.9rem;
+            margin-top: 8px;
+            color: var(--gray);
+        }
+
+        /* Citation Formats */
+        .citation-formats {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .format-box {
+            background: var(--gray-light);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        body.dark-mode .format-box {
+            background: var(--dark);
+            border: 1px solid var(--gray-light);
+        }
+
+        .format-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .format-box h4 {
+            color: var(--light);
+        }
+
+        .format-box pre {
+            background: var(--white);
+            padding: 15px;
+            border-radius: var(--radius-sm);
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        body.dark-mode .format-box pre {
+            background: var(--dark);
+            border: 1px solid var(--gray-light);
+            color: var(--light);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        /* Quick Tips */
+        .quick-tips {
+            background: var(--gray-light);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin-top: 25px;
+        }
+
+        body.dark-mode .quick-tips {
+            background: var(--dark);
+        }
+
+        .quick-tips h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .quick-tips h4 {
+            color: var(--light);
+        }
+
+        .quick-tips ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .quick-tips li {
+            margin-bottom: 10px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .quick-tips li i {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--primary);
+        }
+
+        /* Content Page */
+        .content-page {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-top: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        body.dark-mode .content-page {
+            background: var(--dark);
+        }
+
+        .content-page h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .content-page h2 {
+            color: var(--light);
+        }
+
+        .content-page h3 {
+            font-size: 1.2rem;
+            margin: 25px 0 15px;
+            color: var(--dark);
+        }
+
+        body.dark-mode .content-page h3 {
+            color: var(--light);
+        }
+
+        .content-page p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .citation-example {
+            background: var(--gray-light);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        body.dark-mode .citation-example {
+            background: var(--dark);
+            border-left-color: var(--primary);
+        }
+
+        .citation-examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .example-box {
+            background: var(--gray-light);
+            border-radius: var(--radius-sm);
+            padding: 15px;
+            text-align: center;
+        }
+
+        body.dark-mode .example-box {
+            background: var(--dark);
+        }
+
+        .example-box h5 {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: var(--gray);
+        }
+
+        .example-box code {
+            background: var(--white);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        body.dark-mode .example-box code {
+            background: var(--dark);
+            border: 1px solid var(--gray-light);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: var(--light);
+            padding: 40px 0 20px;
+        }
+
+        body.dark-mode .footer {
+            background: #0f3460;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-section p {
+            color: var(--gray-light);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--gray-light);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: var(--gray-light);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom .disclaimer {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 15px 20px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            max-width: 350px;
+            z-index: 1001;
+            animation: slideIn 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        body.dark-mode .notification {
+            background: var(--dark);
+        }
+
+        .notification-success {
+            border-left-color: #2ecc71;
+        }
+
+        .notification-error {
+            border-left-color: #e74c3c;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            transition: var(--transition);
+        }
+
+        .notification-close:hover {
+            color: var(--dark);
+        }
+
+        body.dark-mode .notification-close:hover {
+            color: var(--light);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            .hero {
+                padding: 120px 0 60px;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .stats {
+                gap: 40px;
+            }
+
+            .style-tabs {
+                flex-direction: row;
+                gap: 15px;
+            }
+
+            .system-tabs {
+                flex-direction: row;
+            }
+
+            .form-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .button-group {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .btn {
+                flex: 1;
+                min-width: 140px;
+            }
+
+            .action-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .action-buttons .btn {
+                flex: 1;
+                min-width: 140px;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tool-container {
+                grid-template-columns: 1.2fr 0.8fr;
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+
+            .logo-tagline {
+                display: block;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .main {
+                padding: 40px 0;
+            }
+
+            .style-tabs {
+                padding: 20px;
+            }
+
+            .input-card {
+                padding: 30px;
+            }
+
+            .result-card {
+                padding: 30px;
+            }
+
+            .content-page {
+                padding: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Large Desktop */
+        @media (min-width: 1200px) {
+            .container {
+                padding: 0;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 360px) {
+            .logo-text {
+                font-size: 16px;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .stat {
+                min-width: 70px;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHREV68R2D"></script>
     <script>
@@ -25,23 +1240,64 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <button class="mobile-menu-btn" aria-label="Menu">☰</button>
             <div class="logo">
-                <h1>📚 StudentCitationTools.com</h1>
-                <p class="tagline">Free academic tools for students worldwide</p>
+                <div class="logo-icon">📚</div>
+                <div>
+                    <div class="logo-text">StudentCitationTools</div>
+                    <div class="logo-tagline">Academic Tools Made Easy</div>
+                </div>
             </div>
-            <nav class="main-nav">
-                <a href="index.html">Home</a>
-                <a href="apa.html">APA Generator</a>
-                <a href="mla.html">MLA Generator</a>
-                <a href="chicago.html" class="nav-active">Chicago Generator</a>
-                <a href="guide.html">Formatting Guide</a>
-                <a href="examples.html">Examples</a>
-                <a href="tips.html">Writing Tips</a>
-                <a href="contact.html">Contact</a>
-            </nav>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
         </div>
     </header>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Mobile Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-header">
+            <div class="logo-text">StudentCitationTools</div>
+            <button class="nav-close" id="navClose" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="apa.html" class="nav-link">
+                <i class="fas fa-file-alt"></i> APA Generator
+            </a>
+            <a href="mla.html" class="nav-link">
+                <i class="fas fa-font"></i> MLA Generator
+            </a>
+            <a href="chicago.html" class="nav-link active">
+                <i class="fas fa-university"></i> Chicago Generator
+            </a>
+            <a href="isbn.html" class="nav-link">
+                <i class="fas fa-barcode"></i> ISBN Lookup
+            </a>
+            <a href="guide.html" class="nav-link">
+                <i class="fas fa-graduation-cap"></i> Formatting Guide
+            </a>
+            <a href="examples.html" class="nav-link">
+                <i class="fas fa-list-ul"></i> Examples
+            </a>
+            <a href="tips.html" class="nav-link">
+                <i class="fas fa-lightbulb"></i> Writing Tips
+            </a>
+        </div>
+    </nav>
 
     <!-- Hero -->
     <section class="hero">
@@ -68,30 +1324,42 @@
     </section>
 
     <!-- Breadcrumb -->
-    <div class="breadcrumb container">
-        <a href="index.html">Home</a> &gt; <span>Chicago Citation Generator</span>
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a> &gt; <span>Chicago Citation Generator</span>
+        </div>
     </div>
 
-    <!-- Main Tool -->
+    <!-- Main Content -->
     <main class="main">
         <div class="container">
-            <!-- Style Info -->
+            <!-- Style Selector -->
             <div class="style-selector">
                 <div class="style-tabs">
-                    <button class="style-tab" onclick="window.location.href='apa.html'">APA 7th Edition</button>
-                    <button class="style-tab" onclick="window.location.href='mla.html'">MLA 9th Edition</button>
-                    <button class="style-tab active">Chicago 17th Edition</button>
+                    <button class="style-tab" onclick="window.location.href='apa.html'">
+                        <i class="fas fa-file-alt"></i> APA 7th Edition
+                    </button>
+                    <button class="style-tab" onclick="window.location.href='mla.html'">
+                        <i class="fas fa-font"></i> MLA 9th Edition
+                    </button>
+                    <button class="style-tab active" onclick="window.location.href='chicago.html'">
+                        <i class="fas fa-university"></i> Chicago 17th Edition
+                    </button>
                 </div>
                 <div class="style-info">
-                    <p><strong>Chicago Manual of Style (17th edition):</strong> Used in history, arts, publishing, and some social sciences. Offers Notes-Bibliography and Author-Date systems.</p>
+                    <p><strong><i class="fas fa-info-circle"></i> Chicago Manual of Style (17th edition):</strong> Used in history, arts, publishing, and some social sciences. Offers Notes-Bibliography and Author-Date systems.</p>
                 </div>
             </div>
 
             <!-- System Selector -->
-            <div class="style-selector" style="margin-top: 20px;">
-                <div class="style-tabs">
-                    <button class="style-tab active" data-system="notes">Notes-Bibliography</button>
-                    <button class="style-tab" data-system="author-date">Author-Date</button>
+            <div class="style-selector">
+                <div class="system-tabs">
+                    <button class="system-tab active" data-system="notes">
+                        <i class="fas fa-sticky-note"></i> Notes-Bibliography
+                    </button>
+                    <button class="system-tab" data-system="author-date">
+                        <i class="fas fa-calendar-alt"></i> Author-Date
+                    </button>
                 </div>
                 <div class="style-info">
                     <p><strong>Notes-Bibliography:</strong> Used in humanities, uses footnotes/endnotes and bibliography.</p>
@@ -104,21 +1372,21 @@
                 <!-- Input Form -->
                 <div class="input-section">
                     <div class="input-card">
-                        <h3>📝 Enter Chicago Source Details</h3>
+                        <h3><i class="fas fa-edit"></i> Enter Chicago Source Details</h3>
                         
                         <div class="form-group">
-                            <label for="author">Author(s) *</label>
+                            <label for="author"><i class="fas fa-user"></i> Author(s) *</label>
                             <input type="text" id="author" placeholder="e.g., Smith, John">
-                            <small class="help-text">Format: Last Name, First Name</small>
+                            <small class="help-text">Format: Last Name, First Name (use ; for multiple authors)</small>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="year">Publication Year *</label>
+                                <label for="year"><i class="fas fa-calendar"></i> Publication Year *</label>
                                 <input type="number" id="year" placeholder="2024" min="1000" max="2099">
                             </div>
                             <div class="form-group">
-                                <label for="sourceType">Source Type</label>
+                                <label for="sourceType"><i class="fas fa-book"></i> Source Type</label>
                                 <select id="sourceType">
                                     <option value="book">Book</option>
                                     <option value="journal">Journal Article</option>
@@ -131,69 +1399,69 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="title">Title *</label>
+                            <label for="title"><i class="fas fa-heading"></i> Title *</label>
                             <input type="text" id="title" placeholder="e.g., A History of Modern Europe">
                             <small class="help-text">Use headline-style capitalization</small>
                         </div>
 
                         <div class="form-group">
-                            <label for="container">Container Title</label>
+                            <label for="container"><i class="fas fa-book"></i> Container Title</label>
                             <input type="text" id="container" placeholder="e.g., Journal of Historical Studies">
                             <small class="help-text">Journal, edited book, or website name</small>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="publisher">Publisher</label>
+                                <label for="publisher"><i class="fas fa-building"></i> Publisher</label>
                                 <input type="text" id="publisher" placeholder="e.g., University of Chicago Press">
                             </div>
                             <div class="form-group">
-                                <label for="location">Location</label>
+                                <label for="location"><i class="fas fa-map-marker-alt"></i> Location</label>
                                 <input type="text" id="location" placeholder="e.g., Chicago, IL">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="pages">Page Range</label>
+                                <label for="pages"><i class="fas fa-file-alt"></i> Page Range</label>
                                 <input type="text" id="pages" placeholder="e.g., 45-67">
                             </div>
                             <div class="form-group">
-                                <label for="edition">Edition</label>
+                                <label for="edition"><i class="fas fa-copy"></i> Edition</label>
                                 <input type="text" id="edition" placeholder="e.g., 2nd ed.">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="volume">Volume</label>
+                                <label for="volume"><i class="fas fa-layer-group"></i> Volume</label>
                                 <input type="text" id="volume" placeholder="e.g., 3">
                             </div>
                             <div class="form-group">
-                                <label for="issue">Issue</label>
+                                <label for="issue"><i class="fas fa-copy"></i> Issue</label>
                                 <input type="text" id="issue" placeholder="e.g., 4">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="url">URL (Optional)</label>
+                            <label for="url"><i class="fas fa-link"></i> URL (Optional)</label>
                             <input type="url" id="url" placeholder="https://example.com">
                         </div>
 
                         <div class="form-group">
-                            <label for="accessDate">Access Date (for online)</label>
+                            <label for="accessDate"><i class="fas fa-calendar-check"></i> Access Date (for online)</label>
                             <input type="date" id="accessDate">
                         </div>
 
                         <div class="button-group">
                             <button onclick="generateChicagoCitation()" class="btn btn-primary">
-                                <span class="btn-icon">✨</span> Generate Chicago Citation
+                                <i class="fas fa-magic"></i> Generate Chicago Citation
                             </button>
                             <button onclick="fillChicagoExample()" class="btn btn-secondary">
-                                <span class="btn-icon">📋</span> Load Example
+                                <i class="fas fa-file-alt"></i> Load Example
                             </button>
                             <button onclick="clearChicagoForm()" class="btn btn-outline">
-                                <span class="btn-icon">🗑️</span> Clear
+                                <i class="fas fa-trash"></i> Clear
                             </button>
                         </div>
                     </div>
@@ -203,49 +1471,57 @@
                 <div class="result-section">
                     <div class="result-card">
                         <div class="result-header">
-                            <h3>📄 Chicago Style Citation</h3>
+                            <h3><i class="fas fa-file-contract"></i> Chicago Style Citation</h3>
                             <div class="style-badge" id="systemBadge">Notes-Bibliography</div>
                         </div>
                         
                         <div class="result-box" id="result">
                             <div class="result-placeholder">
-                                <div class="placeholder-icon">📄</div>
+                                <div class="placeholder-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
                                 <p>Fill the form to generate Chicago citation</p>
                             </div>
                         </div>
 
-                        <div class="result-box" id="bibliography" style="display: none; margin-top: 20px;">
-                            <h4 style="margin-bottom: 10px;">Bibliography Entry</h4>
-                            <pre id="bibliographyText"></pre>
-                        </div>
-
-                        <div class="result-box" id="footnote" style="display: none; margin-top: 20px;">
-                            <h4 style="margin-bottom: 10px;">Footnote/Endnote</h4>
-                            <pre id="footnoteText"></pre>
+                        <!-- Citation Formats -->
+                        <div class="citation-formats" id="citationFormats">
+                            <div class="format-box" id="footnoteBox">
+                                <h4><i class="fas fa-sticky-note"></i> Footnote/Endnote</h4>
+                                <pre id="footnoteText"></pre>
+                            </div>
+                            <div class="format-box" id="bibliographyBox">
+                                <h4><i class="fas fa-list"></i> Bibliography Entry</h4>
+                                <pre id="bibliographyText"></pre>
+                            </div>
+                            <div class="format-box" id="inTextBox" style="display: none;">
+                                <h4><i class="fas fa-quote-right"></i> In-Text Citation</h4>
+                                <pre id="inTextText"></pre>
+                            </div>
                         </div>
 
                         <div class="action-buttons">
                             <button onclick="copyCitation()" class="btn btn-success" id="copyBtn">
-                                <span class="btn-icon">📋</span> Copy Citation
+                                <i class="fas fa-copy"></i> Copy Citation
                             </button>
                             <button onclick="downloadCitation()" class="btn btn-info">
-                                <span class="btn-icon">💾</span> Download
+                                <i class="fas fa-download"></i> Download
                             </button>
-                            <button onclick="toggleChicagoViews()" class="btn btn-outline">
-                                <span class="btn-icon">📚</span> All Formats
+                            <button onclick="toggleFormats()" class="btn btn-outline" id="formatsBtn">
+                                <i class="fas fa-eye"></i> All Formats
                             </button>
                         </div>
 
-                        <!-- Chicago Format Tips -->
-                        <div class="ad-space" style="background: #f9f0ff; border-color: #9b59b6;">
-                            <h4 style="margin-bottom: 10px; color: #2c3e50;">Chicago Format Tips:</h4>
-                            <ul style="font-size: 0.9rem; padding-left: 20px; color: #2c3e50;">
-                                <li>Use Times New Roman, 12pt font</li>
-                                <li>Double-space text, single-space footnotes</li>
-                                <li>1-inch margins on all sides</li>
-                                <li>Superscript numbers for footnotes</li>
-                                <li>Bibliography in alphabetical order</li>
-                                <li>Indent first line of footnotes</li>
+                        <!-- Quick Tips -->
+                        <div class="quick-tips">
+                            <h4><i class="fas fa-lightbulb"></i> Chicago Format Quick Tips:</h4>
+                            <ul>
+                                <li><i class="fas fa-font"></i> Use Times New Roman, 12pt font</li>
+                                <li><i class="fas fa-text-height"></i> Double-space text, single-space footnotes</li>
+                                <li><i class="fas fa-square"></i> 1-inch margins on all sides</li>
+                                <li><i class="fas fa-superscript"></i> Superscript numbers for footnotes</li>
+                                <li><i class="fas fa-sort-alpha-down"></i> Bibliography in alphabetical order</li>
+                                <li><i class="fas fa-indent"></i> Indent first line of footnotes</li>
                             </ul>
                         </div>
                     </div>
@@ -254,36 +1530,40 @@
 
             <!-- Chicago Quick Guide -->
             <section class="content-page">
-                <h2>Chicago Style 17th Edition Quick Guide</h2>
+                <h2><i class="fas fa-graduation-cap"></i> Chicago Style 17th Edition Quick Guide</h2>
                 
-                <h3>Notes-Bibliography System (Humanities)</h3>
+                <h3><i class="fas fa-sticky-note"></i> Notes-Bibliography System (Humanities)</h3>
                 <p><strong>Footnote:</strong> Author First Name Last Name, <em>Title</em> (Location: Publisher, Year), page(s).</p>
                 <p><strong>Bibliography:</strong> Last Name, First Name. <em>Title</em>. Location: Publisher, Year.</p>
+                <div class="citation-example">
+                    1. John Smith, A History of Modern Europe (Chicago: University of Chicago Press, 2023), 45.
+                    <br><br>
+                    Smith, John. A History of Modern Europe. Chicago: University of Chicago Press, 2023.
+                </div>
 
-                <h3>Author-Date System (Sciences)</h3>
+                <h3><i class="fas fa-calendar-alt"></i> Author-Date System (Sciences)</h3>
                 <p><strong>Reference List:</strong> Last Name, First Name. Year. <em>Title</em>. Location: Publisher.</p>
                 <p><strong>In-text:</strong> (Last Name Year, Page)</p>
+                <div class="citation-example">
+                    Smith, John. 2023. A History of Modern Europe. Chicago: University of Chicago Press.
+                    <br><br>
+                    (Smith 2023, 45)
+                </div>
 
-                <h3>Book Citation Examples</h3>
+                <h3><i class="fas fa-newspaper"></i> Journal Article Examples</h3>
                 <p><strong>Notes-Bibliography:</strong></p>
-                <pre>1. John Smith, A History of Modern Europe (Chicago: University of Chicago Press, 2023), 45.
-Smith, John. A History of Modern Europe. Chicago: University of Chicago Press, 2023.</pre>
-
-                <p><strong>Author-Date:</strong></p>
-                <pre>Smith, John. 2023. A History of Modern Europe. Chicago: University of Chicago Press.
-(Smith 2023, 45)</pre>
-
-                <h3>Journal Article Examples</h3>
-                <p><strong>Notes-Bibliography:</strong></p>
-                <pre>1. Mary Johnson, "Historical Analysis Methods," Journal of History 12, no. 3 (2023): 45-67.
-Johnson, Mary. "Historical Analysis Methods." Journal of History 12, no. 3 (2023): 45-67.</pre>
+                <div class="citation-example">
+                    1. Mary Johnson, "Historical Analysis Methods," Journal of History 12, no. 3 (2023): 45-67.
+                    <br><br>
+                    Johnson, Mary. "Historical Analysis Methods." Journal of History 12, no. 3 (2023): 45-67.
+                </div>
 
                 <div class="button-group" style="justify-content: center; margin-top: 30px;">
                     <button onclick="window.location.href='guide.html#chicago'" class="btn btn-primary">
-                        <span class="btn-icon">📖</span> View Complete Chicago Guide
+                        <i class="fas fa-book"></i> View Complete Chicago Guide
                     </button>
                     <button onclick="window.location.href='examples.html#chicago'" class="btn btn-secondary">
-                        <span class="btn-icon">📝</span> More Chicago Examples
+                        <i class="fas fa-list-ul"></i> More Chicago Examples
                     </button>
                 </div>
             </section>
@@ -295,28 +1575,28 @@ Johnson, Mary. "Historical Analysis Methods." Journal of History 12, no. 3 (2023
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>StudentCitationTools.com</h4>
+                    <h4><i class="fas fa-book-open"></i> StudentCitationTools.com</h4>
                     <p>Free academic tools for students worldwide. Making citation generation easy and accessible.</p>
-                    <p>Contact: <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a></p>
+                    <p><i class="fas fa-envelope"></i> Contact: <a href="mailto:qtechz073@gmail.com">qtechz073@gmail.com</a></p>
                 </div>
                 <div class="footer-section">
-                    <h4>Citation Styles</h4>
-                    <a href="apa.html">APA Generator</a>
-                    <a href="mla.html">MLA Generator</a>
-                    <a href="chicago.html">Chicago Generator</a>
-                    <a href="index.html">All Styles</a>
+                    <h4><i class="fas fa-citation"></i> Citation Styles</h4>
+                    <a href="apa.html"><i class="fas fa-chevron-right"></i> APA Generator</a>
+                    <a href="mla.html"><i class="fas fa-chevron-right"></i> MLA Generator</a>
+                    <a href="chicago.html"><i class="fas fa-chevron-right"></i> Chicago Generator</a>
+                    <a href="isbn.html"><i class="fas fa-chevron-right"></i> ISBN Lookup</a>
                 </div>
                 <div class="footer-section">
-                    <h4>Resources</h4>
-                    <a href="guide.html">Formatting Guide</a>
-                    <a href="examples.html">Citation Examples</a>
-                    <a href="tips.html">Writing Tips</a>
+                    <h4><i class="fas fa-tools"></i> Resources</h4>
+                    <a href="guide.html"><i class="fas fa-chevron-right"></i> Formatting Guide</a>
+                    <a href="examples.html"><i class="fas fa-chevron-right"></i> Citation Examples</a>
+                    <a href="tips.html"><i class="fas fa-chevron-right"></i> Writing Tips</a>
                 </div>
                 <div class="footer-section">
-                    <h4>Legal</h4>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
-                    <a href="disclaimer.html">Disclaimer</a>
+                    <h4><i class="fas fa-gavel"></i> Legal</h4>
+                    <a href="privacy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
+                    <a href="terms.html"><i class="fas fa-chevron-right"></i> Terms of Service</a>
+                    <a href="disclaimer.html"><i class="fas fa-chevron-right"></i> Disclaimer</a>
                 </div>
             </div>
             
@@ -324,36 +1604,100 @@ Johnson, Mary. "Historical Analysis Methods." Journal of History 12, no. 3 (2023
                 <p>© 2024 StudentCitationTools.com | Free Chicago Style Citation Generator</p>
                 <p class="disclaimer">This tool generates Chicago citations based on the 17th edition guidelines. Always verify with your institution's requirements.</p>
                 <div class="footer-links">
-                    <a href="contact.html">Contact Support</a> • 
-                    <a href="mailto:qtechz073@gmail.com">Report Issue</a> • 
-                    <a href="contact.html">Suggest Feature</a>
+                    <a href="contact.html"><i class="fas fa-headset"></i> Contact Support</a> • 
+                    <a href="mailto:qtechz073@gmail.com"><i class="fas fa-bug"></i> Report Issue</a> • 
+                    <a href="contact.html"><i class="fas fa-lightbulb"></i> Suggest Feature</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
+    <!-- JavaScript -->
     <script>
+        // Mobile Menu Functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navClose = document.getElementById('navClose');
+        const navOverlay = document.getElementById('navOverlay');
+        const mainNav = document.getElementById('mainNav');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function toggleMobileMenu() {
+            mainNav.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function closeMobileMenu() {
+            mainNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        navClose.addEventListener('click', closeMobileMenu);
+        navOverlay.addEventListener('click', closeMobileMenu);
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Chicago System Toggle
         let currentSystem = 'notes';
-        
-        // Initialize system tabs
-        document.querySelectorAll('[data-system]').forEach(tab => {
+        const systemTabs = document.querySelectorAll('.system-tab');
+        const systemBadge = document.getElementById('systemBadge');
+
+        systemTabs.forEach(tab => {
             tab.addEventListener('click', function() {
                 const system = this.dataset.system;
                 switchSystem(system);
             });
         });
-        
+
         function switchSystem(system) {
             currentSystem = system;
-            document.querySelectorAll('[data-system]').forEach(t => t.classList.remove('active'));
+            
+            // Update active tab
+            systemTabs.forEach(tab => tab.classList.remove('active'));
             document.querySelector(`[data-system="${system}"]`).classList.add('active');
-            document.getElementById('systemBadge').textContent = 
-                system === 'notes' ? 'Notes-Bibliography' : 'Author-Date';
+            
+            // Update badge
+            systemBadge.textContent = system === 'notes' ? 'Notes-Bibliography' : 'Author-Date';
+            
+            // Update visibility
+            const inTextBox = document.getElementById('inTextBox');
+            if (system === 'author-date') {
+                inTextBox.style.display = 'block';
+            } else {
+                inTextBox.style.display = 'none';
+            }
         }
-        
-        // Chicago-specific JavaScript
+
+        // Chicago Citation Functions
         function generateChicagoCitation() {
             const author = document.getElementById('author').value.trim();
             const year = document.getElementById('year').value.trim();
@@ -370,13 +1714,13 @@ Johnson, Mary. "Historical Analysis Methods." Journal of History 12, no. 3 (2023
             const accessDateInput = document.getElementById('accessDate').value;
             
             if (!author || !year || !title) {
-                alert('Please fill in all required fields (*)');
+                showNotification('Please fill in all required fields (*)', 'error');
                 return;
             }
             
             let footnote = '';
             let bibliography = '';
-            let citation = '';
+            let inText = '';
             
             // Format author(s)
             const authors = author.split(';').map(a => {
@@ -386,7 +1730,7 @@ Johnson, Mary. "Historical Analysis Methods." Journal of History 12, no. 3 (2023
                     return { first, last };
                 }
                 return { first: a.trim(), last: '' };
-            });
+            }).filter(a => a.first && a.last);
             
             // Format access date
             let accessDate = '';
@@ -402,22 +1746,36 @@ Johnson, Mary. "Historical Analysis Methods." Journal of History 12, no. 3 (2023
                 const authorFirst = authors.map(a => `${a.first} ${a.last}`.trim()).join(' and ');
                 
                 // Footnote
-                footnote = `${authorFirst}, <em>${title}</em>`;
-                if (edition) footnote += `, ${edition}`;
-                if (location && publisher) footnote += ` (${location}: ${publisher}, ${year})`;
-                else if (publisher) footnote += ` (${publisher}, ${year})`;
-                if (pages) footnote += `, ${pages}.`;
-                else footnote += '.';
+                footnote = `${authorFirst}, "${title}"`;
+                if (container) {
+                    footnote += `, in <em>${container}</em>`;
+                }
+                if (location && publisher) {
+                    footnote += ` (${location}: ${publisher}, ${year})`;
+                } else if (publisher) {
+                    footnote += ` (${publisher}, ${year})`;
+                } else {
+                    footnote += ` (${year})`;
+                }
+                if (pages) footnote += `, ${pages}`;
+                footnote += '.';
                 
                 // Bibliography
                 const authorBib = authors.map(a => `${a.last}, ${a.first}`).join(' and ');
-                bibliography = `${authorBib}. <em>${title}</em>`;
-                if (edition) bibliography += `. ${edition}`;
-                if (location && publisher) bibliography += `. ${location}: ${publisher}`;
-                else if (publisher) bibliography += `. ${publisher}`;
+                bibliography = `${authorBib}. "${title}"`;
+                if (container) {
+                    bibliography += `. In <em>${container}</em>`;
+                }
+                if (location && publisher) {
+                    bibliography += `. ${location}: ${publisher}`;
+                } else if (publisher) {
+                    bibliography += `. ${publisher}`;
+                }
                 bibliography += `, ${year}.`;
                 
-                citation = `<strong>Footnote:</strong>\n${footnote}\n\n<strong>Bibliography:</strong>\n${bibliography}`;
+                // Display main result
+                const mainResult = `<strong>Footnote:</strong>\n${footnote}\n\n<strong>Bibliography:</strong>\n${bibliography}`;
+                document.getElementById('result').innerHTML = `<pre style="white-space: pre-wrap; word-wrap: break-word;">${mainResult}</pre>`;
                 
             } else {
                 // Author-Date system
@@ -425,25 +1783,37 @@ Johnson, Mary. "Historical Analysis Methods." Journal of History 12, no. 3 (2023
                 
                 // Reference list
                 bibliography = `${authorRef}. ${year}. <em>${title}</em>`;
-                if (edition) bibliography += `. ${edition}`;
-                if (location && publisher) bibliography += `. ${location}: ${publisher}`;
-                else if (publisher) bibliography += `. ${publisher}`;
+                if (container) {
+                    bibliography += `. In <em>${container}</em>`;
+                }
+                if (location && publisher) {
+                    bibliography += `. ${location}: ${publisher}`;
+                } else if (publisher) {
+                    bibliography += `. ${publisher}`;
+                }
                 bibliography += '.';
                 
                 // In-text citation
-                const inText = authors.length === 1 ? 
-                    `(${authors[0].last} ${year}${pages ? `, ${pages}` : ''})` :
-                    `(${authors[0].last} et al. ${year}${pages ? `, ${pages}` : ''})`;
+                if (authors.length === 1) {
+                    inText = `(${authors[0].last} ${year}${pages ? `, ${pages}` : ''})`;
+                } else if (authors.length === 2) {
+                    inText = `(${authors[0].last} and ${authors[1].last} ${year}${pages ? `, ${pages}` : ''})`;
+                } else {
+                    inText = `(${authors[0].last} et al. ${year}${pages ? `, ${pages}` : ''})`;
+                }
                 
-                citation = `<strong>Reference List:</strong>\n${bibliography}\n\n<strong>In-text:</strong>\n${inText}`;
+                // Display main result
+                const mainResult = `<strong>Reference List:</strong>\n${bibliography}\n\n<strong>In-text:</strong>\n${inText}`;
+                document.getElementById('result').innerHTML = `<pre style="white-space: pre-wrap; word-wrap: break-word;">${mainResult}</pre>`;
             }
             
-            // Display results
-            document.getElementById('result').innerHTML = `<pre>${citation}</pre>`;
+            // Store formatted text for copying
             document.getElementById('footnoteText').textContent = footnote;
             document.getElementById('bibliographyText').textContent = bibliography;
-            document.getElementById('footnote').style.display = 'none';
-            document.getElementById('bibliography').style.display = 'none';
+            document.getElementById('inTextText').textContent = inText;
+            
+            // Show success message
+            showNotification('Chicago citation generated successfully!', 'success');
             
             // Track in Google Analytics
             if (typeof gtag !== 'undefined') {
@@ -482,25 +1852,153 @@ Johnson, Mary. "Historical Analysis Methods." Journal of History 12, no. 3 (2023
             document.getElementById('issue').value = '';
             document.getElementById('url').value = '';
             document.getElementById('accessDate').value = '';
+            
             document.getElementById('result').innerHTML = `
                 <div class="result-placeholder">
-                    <div class="placeholder-icon">📄</div>
+                    <div class="placeholder-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
                     <p>Fill the form to generate Chicago citation</p>
                 </div>`;
-            document.getElementById('footnote').style.display = 'none';
-            document.getElementById('bibliography').style.display = 'none';
+            
+            document.getElementById('citationFormats').style.display = 'none';
+            document.getElementById('formatsBtn').innerHTML = '<i class="fas fa-eye"></i> All Formats';
+            
+            showNotification('Form cleared successfully!', 'success');
         }
         
-        function toggleChicagoViews() {
-            const footnote = document.getElementById('footnote');
-            const bibliography = document.getElementById('bibliography');
-            footnote.style.display = footnote.style.display === 'none' ? 'block' : 'none';
-            bibliography.style.display = bibliography.style.display === 'none' ? 'block' : 'none';
+        function toggleFormats() {
+            const formats = document.getElementById('citationFormats');
+            const btn = document.getElementById('formatsBtn');
+            
+            if (formats.style.display === 'none') {
+                formats.style.display = 'block';
+                btn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Formats';
+            } else {
+                formats.style.display = 'none';
+                btn.innerHTML = '<i class="fas fa-eye"></i> All Formats';
+            }
         }
         
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-            document.querySelector('.main-nav').classList.toggle('active');
+        function copyCitation() {
+            const resultText = document.getElementById('result').textContent;
+            if (!resultText || resultText.includes('Fill the form')) {
+                showNotification('No citation to copy. Please generate a citation first.', 'error');
+                return;
+            }
+            
+            navigator.clipboard.writeText(resultText).then(() => {
+                const copyBtn = document.getElementById('copyBtn');
+                const originalHTML = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyBtn.classList.add('copied');
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalHTML;
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+                
+                showNotification('Citation copied to clipboard!', 'success');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                showNotification('Failed to copy citation. Please try again.', 'error');
+            });
+        }
+        
+        function downloadCitation() {
+            const resultText = document.getElementById('result').textContent;
+            if (!resultText || resultText.includes('Fill the form')) {
+                showNotification('No citation to download. Please generate a citation first.', 'error');
+                return;
+            }
+            
+            const filename = `chicago_citation_${Date.now()}.txt`;
+            const blob = new Blob([resultText], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showNotification('Citation downloaded successfully!', 'success');
+        }
+        
+        function showNotification(message, type) {
+            // Remove existing notifications
+            document.querySelectorAll('.notification').forEach(n => n.remove());
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()" aria-label="Close notification">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+
+        // Form validation and auto-formatting
+        document.getElementById('author').addEventListener('input', function(e) {
+            // Auto-format author names
+            if (e.target.value.includes(',,')) {
+                e.target.value = e.target.value.replace(',,', ',');
+            }
+        });
+
+        document.getElementById('year').addEventListener('input', function(e) {
+            const year = parseInt(e.target.value);
+            if (year < 1000 || year > 2099) {
+                e.target.setCustomValidity('Please enter a valid year between 1000 and 2099');
+            } else {
+                e.target.setCustomValidity('');
+            }
+        });
+
+        // Handle form submission with Enter key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) {
+                e.preventDefault();
+                generateChicagoCitation();
+            }
+        });
+
+        // Improve mobile form input experience
+        document.querySelectorAll('input, select').forEach(element => {
+            element.addEventListener('focus', function() {
+                if (window.innerWidth < 768) {
+                    // Scroll element into view on mobile
+                    setTimeout(() => {
+                        this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300);
+                }
+            });
+        });
+
+        // Load example on page load for demo purposes
+        window.addEventListener('load', function() {
+            // Small delay to ensure everything is loaded
+            setTimeout(() => {
+                if (window.innerWidth > 768) { // Only on desktop
+                    fillChicagoExample();
+                }
+            }, 500);
         });
     </script>
 </body>
