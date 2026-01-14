@@ -42,12 +42,7 @@
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    <url>
-        <loc>https://studentcitationtools.com/premium.html</loc>
-        <lastmod>2024-12-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
+  
     
     <!-- Resource Pages - Medium Priority -->
     <url>
@@ -120,22 +115,7 @@
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
-    <url>
-        <loc>https://studentcitationtools.com/cookies.html</loc>
-        <lastmod>2024-12-15</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.3</priority>
-    </url>
-    <url>
-        <loc>https://studentcitationtools.com/refund.html</loc>
-        <lastmod>2024-12-15</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.3</priority>
-    </url>
-    <url>
-        <loc>https://studentcitationtools.com/sitemap.html</loc>
-        <lastmod>2024-12-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.2</priority>
-    </url>
+   
+   
+  
 </urlset>
