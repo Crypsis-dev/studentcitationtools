@@ -7,58 +7,223 @@
     <meta name="description" content="Learn essential academic writing tips, research strategies, and citation best practices.">
     <meta name="keywords" content="academic writing tips, research paper tips, essay writing, citation tips, plagiarism avoidance">
     <meta name="author" content="StudentCitationTools.com">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHREV68R2D"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-ZHREV68R2D');
-    </script>
     <style>
-        .tip-section {
-            margin-bottom: 40px;
-            padding: 25px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        /* Navigation */
+        .main-nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+            font-weight: 500;
+        }
+        
+        .main-nav a:hover,
+        .main-nav .nav-active {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            margin: 1rem 0;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb span {
+            color: #7f8c8d;
+        }
+        
+        /* Main Content */
+        .main {
+            padding: 2rem 0;
+        }
+        
+        /* Quick Navigation */
+        .quick-nav {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border: 1px solid #eaeaea;
+        }
+        
+        .quick-nav h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* Tip Sections */
+        .tip-section {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
         .tip-section h2 {
             color: #2c3e50;
             border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.75rem;
+            font-size: 1.5rem;
         }
+        
         .tip-card {
             background: #f8f9fa;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 5px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
             border-left: 4px solid #3498db;
         }
+        
         .tip-card.good {
             border-left-color: #2ecc71;
+            background: #f0f9f4;
         }
+        
         .tip-card.bad {
             border-left-color: #e74c3c;
+            background: #fdf0f0;
         }
-        .tip-icon {
-            font-size: 1.5rem;
-            margin-right: 10px;
+        
+        .tip-card h4 {
+            color: #2c3e50;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
         }
+        
+        /* Lists */
         .checklist {
             list-style: none;
             padding-left: 0;
         }
+        
         .checklist li {
-            padding: 8px 0 8px 30px;
+            padding: 0.5rem 0 0.5rem 1.75rem;
             position: relative;
+            margin-bottom: 0.5rem;
         }
+        
         .checklist li:before {
             content: "✓";
             color: #2ecc71;
@@ -66,50 +231,273 @@
             position: absolute;
             left: 0;
         }
+        
         .warning-list li:before {
             content: "⚠";
             color: #e74c3c;
         }
+        
+        /* Timeline */
         .timeline {
             position: relative;
-            padding-left: 30px;
-            margin: 20px 0;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
         }
+        
         .timeline:before {
             content: "";
             position: absolute;
-            left: 10px;
+            left: 0.5rem;
             top: 0;
             bottom: 0;
             width: 2px;
             background: #3498db;
         }
+        
         .timeline-item {
             position: relative;
-            margin-bottom: 20px;
-            padding-left: 20px;
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
         }
+        
         .timeline-item:before {
             content: "";
             position: absolute;
-            left: -10px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
+            left: -0.25rem;
+            top: 0.5rem;
+            width: 0.75rem;
+            height: 0.75rem;
             border-radius: 50%;
             background: #3498db;
         }
+        
+        /* Resource Cards */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+        
         .resource-card {
             background: white;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            margin: 10px 0;
-            transition: transform 0.3s;
+            border: 1px solid #eaeaea;
+            border-radius: 8px;
+            padding: 1.25rem;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
+        
         .resource-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+        
+        .resource-card h4 {
+            color: #2c3e50;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+        
+        .resource-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .resource-card li {
+            padding: 0.25rem 0;
+            color: #555;
+        }
+        
+        /* Button Group */
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+        
+        /* Final Tips Section */
+        .final-tips {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2.5rem 0;
+        }
+        
+        .final-tips h2 {
+            color: white;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tip-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.25rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem 0 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            color: #ecf0f1;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .footer-section a {
+            display: block;
+            color: #bdc3c7;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 1rem;
+            text-align: center;
+            color: #95a5a6;
+            font-size: 0.9rem;
+        }
+        
+        .disclaimer {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .main-nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                padding: 1rem;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+            
+            .main-nav.active {
+                display: flex;
+            }
+            
+            .main-nav a {
+                width: 100%;
+                text-align: center;
+                padding: 0.75rem;
+            }
+            
+            .hero {
+                padding: 2rem 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .tip-section {
+                padding: 1.25rem;
+            }
+            
+            .tip-section h2 {
+                font-size: 1.35rem;
+            }
+            
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .hero h2 {
+                font-size: 1.75rem;
+            }
+            
+            .tip-section {
+                padding: 1rem;
+                border-radius: 8px;
+            }
+            
+            .tip-card {
+                padding: 1rem;
+            }
+            
+            .quick-nav {
+                padding: 1rem;
+            }
+            
+            .final-tips {
+                padding: 1.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+        
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Active Navigation Highlight */
+        .quick-nav .btn.active {
+            box-shadow: 0 0 0 2px currentColor;
         }
     </style>
 </head>
@@ -154,9 +542,9 @@
     <main class="main">
         <div class="container">
             <!-- Quick Navigation -->
-            <div class="quick-nav" style="background: #f8f9fa; padding: 20px; border-radius: 5px; margin-bottom: 30px;">
-                <h3 style="margin-bottom: 15px;">Quick Navigation</h3>
-                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <div class="quick-nav">
+                <h3>Quick Navigation</h3>
+                <div class="btn-group">
                     <a href="#research" class="btn" style="background: #3498db; color: white;">Research Tips</a>
                     <a href="#writing" class="btn" style="background: #2ecc71; color: white;">Writing Process</a>
                     <a href="#citations" class="btn" style="background: #9b59b6; color: white;">Citation Tips</a>
@@ -168,10 +556,10 @@
 
             <!-- Research Tips -->
             <section class="tip-section" id="research">
-                <h2><span class="tip-icon">🔍</span> Research Strategies</h2>
+                <h2><span>🔍</span> Research Strategies</h2>
                 
                 <div class="tip-card good">
-                    <h4>✅ Effective Research Tips</h4>
+                    <h4>Effective Research Tips</h4>
                     <ul class="checklist">
                         <li><strong>Start with a research question:</strong> Formulate a clear, focused question to guide your search</li>
                         <li><strong>Use academic databases:</strong> Google Scholar, JSTOR, PubMed, ERIC, and your library's databases</li>
@@ -182,11 +570,11 @@
                 </div>
 
                 <div class="tip-card">
-                    <h4>📚 Database Search Strategies</h4>
-                    <ul>
-                        <li><strong>Boolean operators:</strong> Use AND, OR, NOT to refine searches (e.g., "climate change AND policy")</li>
-                        <li><strong>Truncation:</strong> Use * to find variations (e.g., "educat*" finds educate, education, educator)</li>
-                        <li><strong>Phrase searching:</strong> Use quotes for exact phrases (e.g., "artificial intelligence")</li>
+                    <h4>Database Search Strategies</h4>
+                    <ul class="checklist">
+                        <li><strong>Boolean operators:</strong> Use AND, OR, NOT to refine searches</li>
+                        <li><strong>Truncation:</strong> Use * to find variations (e.g., "educat*" finds educate, education)</li>
+                        <li><strong>Phrase searching:</strong> Use quotes for exact phrases</li>
                         <li><strong>Field searching:</strong> Limit to title, abstract, or author fields</li>
                         <li><strong>Citation chaining:</strong> Check references in good articles to find related sources</li>
                     </ul>
@@ -195,7 +583,7 @@
 
             <!-- Writing Process -->
             <section class="tip-section" id="writing">
-                <h2><span class="tip-icon">✍️</span> The Writing Process</h2>
+                <h2><span>✍️</span> The Writing Process</h2>
                 
                 <h3>Writing Timeline</h3>
                 <div class="timeline">
@@ -218,7 +606,7 @@
                 </div>
 
                 <div class="tip-card good">
-                    <h4>✅ Effective Writing Strategies</h4>
+                    <h4>Effective Writing Strategies</h4>
                     <ul class="checklist">
                         <li><strong>Write daily:</strong> Even 30 minutes daily is better than one long session</li>
                         <li><strong>Start with the easiest section:</strong> Build momentum by writing what you know best</li>
@@ -229,7 +617,7 @@
                 </div>
 
                 <div class="tip-card bad">
-                    <h4>❌ Common Writing Mistakes to Avoid</h4>
+                    <h4>Common Writing Mistakes to Avoid</h4>
                     <ul class="warning-list">
                         <li>Writing the introduction first (often easier to write it last)</li>
                         <li>Trying to sound "academic" with overly complex language</li>
@@ -242,21 +630,21 @@
 
             <!-- Citation Tips -->
             <section class="tip-section" id="citations">
-                <h2><span class="tip-icon">📋</span> Citation & Formatting Tips</h2>
+                <h2><span>📋</span> Citation & Formatting Tips</h2>
                 
                 <div class="tip-card">
                     <h4>Best Practices for Citations</h4>
-                    <ul>
+                    <ul class="checklist">
                         <li><strong>Cite as you write:</strong> Add citations immediately when using a source</li>
                         <li><strong>Use citation management tools:</strong> Zotero, Mendeley, or our free generators</li>
-                        <li><strong>Check required style:</strong> Confirm which style (APA, MLA, Chicago) your institution requires</li>
+                        <li><strong>Check required style:</strong> Confirm which style your institution requires</li>
                         <li><strong>Be consistent:</strong> Use the same style throughout your paper</li>
                         <li><strong>Verify accuracy:</strong> Double-check all citations against official style guides</li>
                     </ul>
                 </div>
 
                 <div class="tip-card good">
-                    <h4>✅ Citation Checklist</h4>
+                    <h4>Citation Checklist</h4>
                     <ul class="checklist">
                         <li>All direct quotes have page numbers in citations</li>
                         <li>Reference list/Works Cited is alphabetized</li>
@@ -267,45 +655,17 @@
                         <li>Consistent punctuation and capitalization</li>
                     </ul>
                 </div>
-
-                <div class="tip-card">
-                    <h4>When to Cite vs. When Not to Cite</h4>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
-                        <div>
-                            <h5 style="color: #2ecc71;">✅ Cite These:</h5>
-                            <ul>
-                                <li>Direct quotes</li>
-                                <li>Paraphrased ideas</li>
-                                <li>Statistical data</li>
-                                <li>Research findings</li>
-                                <li>Images or graphs</li>
-                                <li>Specific facts</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h5 style="color: #e74c3c;">❌ Don't Cite These:</h5>
-                            <ul>
-                                <li>Common knowledge</li>
-                                <li>Your own ideas</li>
-                                <li>Standard procedures</li>
-                                <li>Generally accepted facts</li>
-                                <li>Personal experiences</li>
-                                <li>Original research/data</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </section>
 
             <!-- Plagiarism Avoidance -->
             <section class="tip-section" id="plagiarism">
-                <h2><span class="tip-icon">⚠️</span> Avoiding Plagiarism</h2>
+                <h2><span>⚠️</span> Avoiding Plagiarism</h2>
                 
                 <div class="tip-card bad">
-                    <h4>❌ What Constitutes Plagiarism</h4>
-                    <ul>
+                    <h4>What Constitutes Plagiarism</h4>
+                    <ul class="warning-list">
                         <li><strong>Direct plagiarism:</strong> Copying text word-for-word without quotation marks or citation</li>
-                        <li><strong>Paraphrasing plagiarism:</strong> Changing a few words but keeping the same structure without citation</li>
+                        <li><strong>Paraphrasing plagiarism:</strong> Changing a few words but keeping the same structure</li>
                         <li><strong>Mosaic plagiarism:</strong> Mixing copied phrases with original text without proper citation</li>
                         <li><strong>Self-plagiarism:</strong> Reusing your own previously published work without permission</li>
                         <li><strong>Accidental plagiarism:</strong> Forgetting to cite sources or improper paraphrasing</li>
@@ -313,7 +673,7 @@
                 </div>
 
                 <div class="tip-card good">
-                    <h4>✅ How to Avoid Plagiarism</h4>
+                    <h4>How to Avoid Plagiarism</h4>
                     <ul class="checklist">
                         <li><strong>Take careful notes:</strong> Clearly distinguish between quotes, paraphrases, and your ideas</li>
                         <li><strong>Cite everything:</strong> When in doubt, cite the source</li>
@@ -322,24 +682,15 @@
                         <li><strong>Keep track of sources:</strong> Maintain a working bibliography as you research</li>
                     </ul>
                 </div>
-
-                <div class="tip-card">
-                    <h4>Proper Paraphrasing Techniques</h4>
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-top: 15px;">
-                        <p><strong>Original Text:</strong> "Climate change is causing sea levels to rise at an unprecedented rate, threatening coastal communities worldwide."</p>
-                        <p><strong>❌ Poor Paraphrase (plagiarism):</strong> Climate change is making sea levels increase at a fast rate, endangering coastal communities globally.</p>
-                        <p><strong>✅ Good Paraphrase:</strong> According to recent research, coastal populations face significant risks due to the rapid increase in sea levels caused by climate change (Smith, 2023).</p>
-                    </div>
-                </div>
             </section>
 
             <!-- Editing & Proofreading -->
             <section class="tip-section" id="editing">
-                <h2><span class="tip-icon">🔍</span> Editing & Proofreading Tips</h2>
+                <h2><span>🔍</span> Editing & Proofreading Tips</h2>
                 
                 <div class="tip-card">
                     <h4>The Editing Process</h4>
-                    <ol>
+                    <ol class="checklist">
                         <li><strong>Take a break:</strong> Step away from your paper for at least 24 hours</li>
                         <li><strong>Read aloud:</strong> You'll catch more errors when you hear the words</li>
                         <li><strong>Check structure:</strong> Ensure logical flow between paragraphs and sections</li>
@@ -350,7 +701,7 @@
                 </div>
 
                 <div class="tip-card good">
-                    <h4>✅ Common Errors to Check</h4>
+                    <h4>Common Errors to Check</h4>
                     <ul class="checklist">
                         <li>Subject-verb agreement</li>
                         <li>Comma splices and run-on sentences</li>
@@ -366,16 +717,16 @@
 
             <!-- Resources -->
             <section class="tip-section" id="resources">
-                <h2><span class="tip-icon">📚</span> Additional Resources</h2>
+                <h2><span>📚</span> Additional Resources</h2>
                 
-                <div class="example-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div class="resource-grid">
                     <div class="resource-card">
                         <h4>Writing Guides & Manuals</h4>
                         <ul>
                             <li><strong>Purdue OWL:</strong> Comprehensive online writing lab</li>
                             <li><strong>APA Style Blog:</strong> Official APA style guidance</li>
                             <li><strong>MLA Style Center:</strong> Official MLA resources</li>
-                            <li><strong>Chicago Manual of Style Online:</strong> Official Chicago guide</li>
+                            <li><strong>Chicago Manual of Style:</strong> Official Chicago guide</li>
                             <li><strong>Strunk & White:</strong> The Elements of Style</li>
                         </ul>
                     </div>
@@ -403,49 +754,49 @@
                     </div>
                 </div>
 
-                <div class="tip-card" style="margin-top: 20px; background: #e8f4fc;">
+                <div class="tip-card" style="background: #e8f4fc;">
                     <h4>Our Free Citation Tools</h4>
                     <p>Use our free tools to save time and ensure accurate citations:</p>
-                    <div class="button-group" style="margin-top: 15px;">
-                        <button onclick="window.location.href='apa.html'" class="btn" style="background: #3498db; color: white;">APA Generator</button>
-                        <button onclick="window.location.href='mla.html'" class="btn" style="background: #2ecc71; color: white;">MLA Generator</button>
-                        <button onclick="window.location.href='chicago.html'" class="btn" style="background: #9b59b6; color: white;">Chicago Generator</button>
-                        <button onclick="window.location.href='guide.html'" class="btn" style="background: #f39c12; color: white;">Formatting Guide</button>
+                    <div class="button-group">
+                        <a href="apa.html" class="btn" style="background: #3498db; color: white;">APA Generator</a>
+                        <a href="mla.html" class="btn" style="background: #2ecc71; color: white;">MLA Generator</a>
+                        <a href="chicago.html" class="btn" style="background: #9b59b6; color: white;">Chicago Generator</a>
+                        <a href="guide.html" class="btn" style="background: #f39c12; color: white;">Formatting Guide</a>
                     </div>
                 </div>
             </section>
 
             <!-- Final Tips -->
-            <section class="tip-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-                <h2 style="color: white;">🎓 Final Writing Success Tips</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
-                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 5px;">
-                        <h4 style="color: white;">Start Early</h4>
+            <section class="final-tips">
+                <h2><span>🎓</span> Final Writing Success Tips</h2>
+                <div class="tips-grid">
+                    <div class="tip-item">
+                        <h4>Start Early</h4>
                         <p>Give yourself plenty of time for research, writing, and revision.</p>
                     </div>
-                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 5px;">
-                        <h4 style="color: white;">Seek Feedback</h4>
+                    <div class="tip-item">
+                        <h4>Seek Feedback</h4>
                         <p>Ask peers, tutors, or professors to review your work.</p>
                     </div>
-                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 5px;">
-                        <h4 style="color: white;">Stay Organized</h4>
+                    <div class="tip-item">
+                        <h4>Stay Organized</h4>
                         <p>Keep all research, notes, and drafts in one place.</p>
                     </div>
-                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 5px;">
-                        <h4 style="color: white;">Take Care of Yourself</h4>
+                    <div class="tip-item">
+                        <h4>Take Care of Yourself</h4>
                         <p>Get enough sleep, take breaks, and maintain balance.</p>
                     </div>
                 </div>
                 
-                <div class="button-group" style="justify-content: center; margin-top: 30px;">
-                    <button onclick="window.location.href='contact.html'" class="btn" style="background: white; color: #667eea;">
-                        <span class="btn-icon">💬</span> Get Writing Help
-                    </button>
+                <div class="button-group" style="justify-content: center;">
+                    <a href="contact.html" class="btn" style="background: white; color: #667eea;">
+                        Get Writing Help
+                    </a>
                 </div>
             </section>
 
             <!-- Last Updated -->
-            <div style="margin-top: 40px; padding: 15px; background: #f8f9fa; border-radius: 5px; font-size: 0.9rem; color: #7f8c8d; text-align: center;">
+            <div style="margin: 2.5rem 0; padding: 1rem; background: #f8f9fa; border-radius: 8px; font-size: 0.9rem; color: #7f8c8d; text-align: center;">
                 <p><strong>Last Updated:</strong> December 2024 | <strong>Tip:</strong> Bookmark this page for easy reference during your writing projects!</p>
             </div>
         </div>
@@ -499,33 +850,32 @@
             document.querySelector('.main-nav').classList.toggle('active');
         });
         
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('.main-nav');
+            const btn = document.querySelector('.mobile-menu-btn');
+            if (nav.classList.contains('active') && !nav.contains(event.target) && !btn.contains(event.target)) {
+                nav.classList.remove('active');
+            }
+        });
+        
+        // Close menu on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                document.querySelector('.main-nav').classList.remove('active');
+            }
         });
         
         // Highlight current section in navigation
         window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('.tip-section');
-            const navLinks = document.querySelectorAll('.quick-nav a');
+            const sections = document.querySelectorAll('.tip-section, .final-tips');
+            const navLinks = document.querySelectorAll('.quick-nav .btn');
             
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 100)) {
+                if (window.scrollY >= (sectionTop - 100)) {
                     current = section.getAttribute('id');
                 }
             });
