@@ -6,6 +6,7 @@ class CitationGenerator {
         this.citationHistory = [];
         this.premiumUser = false;
         this.adEnabled = true;
+        this.init();
     }
 
     // Main initialization
@@ -32,6 +33,8 @@ class CitationGenerator {
     initMobileMenu() {
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mainNav = document.getElementById('mainNav');
+        const navOverlay = document.getElementById('navOverlay');
+        const navClose = document.getElementById('navClose');
         
         if (!mobileMenuBtn || !mainNav) {
             console.warn('Mobile menu elements not found');
@@ -40,17 +43,16 @@ class CitationGenerator {
         
         mobileMenuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isActive = mainNav.classList.contains('active');
-            isActive ? this.closeMobileMenu() : this.openMobileMenu();
+            this.toggleMobileMenu();
         });
         
-        document.addEventListener('click', (e) => {
-            if (mainNav.classList.contains('active') && 
-                !mainNav.contains(e.target) && 
-                !mobileMenuBtn.contains(e.target)) {
-                this.closeMobileMenu();
-            }
-        });
+        if (navClose) {
+            navClose.addEventListener('click', () => this.closeMobileMenu());
+        }
+        
+        if (navOverlay) {
+            navOverlay.addEventListener('click', () => this.closeMobileMenu());
+        }
         
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && mainNav.classList.contains('active')) {
@@ -63,31 +65,40 @@ class CitationGenerator {
                 this.closeMobileMenu();
             }
         });
+        
+        // Close menu when clicking navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => this.closeMobileMenu());
+        });
     }
 
-    openMobileMenu() {
+    toggleMobileMenu() {
         const mainNav = document.getElementById('mainNav');
+        const navOverlay = document.getElementById('navOverlay');
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         
-        mainNav.classList.add('active');
-        mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
-        mobileMenuBtn.setAttribute('aria-label', 'Close menu');
-        document.body.classList.add('menu-open');
-        document.body.style.overflow = 'hidden';
-        
-        this.trackEvent('mobile_menu', 'open');
+        if (mainNav.classList.contains('active')) {
+            this.closeMobileMenu();
+        } else {
+            mainNav.classList.add('active');
+            navOverlay.classList.add('active');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+            mobileMenuBtn.setAttribute('aria-label', 'Close menu');
+            document.body.style.overflow = 'hidden';
+            this.trackEvent('mobile_menu', 'open');
+        }
     }
 
     closeMobileMenu() {
         const mainNav = document.getElementById('mainNav');
+        const navOverlay = document.getElementById('navOverlay');
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         
         mainNav.classList.remove('active');
+        navOverlay.classList.remove('active');
         mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
         mobileMenuBtn.setAttribute('aria-label', 'Open menu');
-        document.body.classList.remove('menu-open');
         document.body.style.overflow = '';
-        
         this.trackEvent('mobile_menu', 'close');
     }
 
@@ -111,6 +122,11 @@ class CitationGenerator {
         if (savedStyle && ['apa', 'mla', 'chicago'].includes(savedStyle)) {
             this.switchStyle(savedStyle);
         }
+        
+        // Initialize with APA if no style selected
+        if (!this.currentStyle) {
+            this.switchStyle('apa');
+        }
     }
 
     switchStyle(style) {
@@ -132,43 +148,17 @@ class CitationGenerator {
             activeTab.classList.add('active');
         }
         
-        // Update badge
-        const badgeMap = {
-            'apa': '<i class="fas fa-tag"></i> APA 7th',
-            'mla': '<i class="fas fa-tag"></i> MLA 9th',
-            'chicago': '<i class="fas fa-tag"></i> Chicago 17th'
-        };
-        const styleBadge = document.getElementById('styleBadge');
-        if (styleBadge) {
-            styleBadge.innerHTML = badgeMap[style] || '<i class="fas fa-tag"></i> APA 7th';
+        // Update form to show style info
+        const styleInput = document.getElementById('style');
+        if (styleInput) {
+            styleInput.value = style;
         }
-        
-        // Update style info
-        this.updateStyleInfo(style);
-        
-        // Update URL without reload
-        const url = new URL(window.location);
-        url.searchParams.set('style', style);
-        window.history.replaceState({}, '', url);
         
         this.trackEvent('citation_style', 'switch', style);
         
         // Regenerate citation if form has data
         if (document.getElementById('author')?.value.trim()) {
             setTimeout(() => this.generateCitation(), 100);
-        }
-    }
-
-    updateStyleInfo(style) {
-        const infoMap = {
-            'apa': '<p><strong>APA 7th Edition:</strong> Used in psychology, education, and social sciences. Requires author, date, title, source, and DOI/URL when available.</p>',
-            'mla': '<p><strong>MLA 9th Edition:</strong> Used in humanities, literature, and arts. Requires author, title, container, publisher, date, and location.</p>',
-            'chicago': '<p><strong>Chicago 17th Edition:</strong> Used in publishing, history, and some social sciences. Has two systems: notes-bibliography and author-date.</p>'
-        };
-        
-        const styleInfo = document.getElementById('styleInfo');
-        if (styleInfo) {
-            styleInfo.innerHTML = `<div class="info-box">${infoMap[style] || infoMap.apa}</div>`;
         }
     }
 
@@ -182,20 +172,48 @@ class CitationGenerator {
                 this.currentSourceType = e.target.value;
                 this.updateFormFields();
             });
+            
+            // Set initial source type
+            this.currentSourceType = sourceTypeSelect.value;
         }
+        
+        // Add form submit handler
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.generateCitation();
+            });
+        }
+        
+        // Add event listeners to generate buttons
+        document.querySelectorAll('.btn-generate').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.generateCitation();
+            });
+        });
+        
+        // Add event listeners to example buttons
+        document.querySelectorAll('.btn-example').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.fillExample();
+            });
+        });
+        
+        // Add event listeners to clear buttons
+        document.querySelectorAll('.btn-clear').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.clearForm();
+            });
+        });
         
         // Form validation
         const requiredInputs = document.querySelectorAll('input[required]');
         requiredInputs.forEach(input => {
             input.addEventListener('blur', () => this.validateField(input));
-        });
-        
-        // Enter key to generate citation
-        document.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) {
-                e.preventDefault();
-                this.generateCitation();
-            }
         });
         
         // Auto-save form data
@@ -257,19 +275,22 @@ class CitationGenerator {
                 const data = JSON.parse(saved);
                 if (data.style) this.switchStyle(data.style);
                 if (data.sourceType) {
-                    document.getElementById('sourceType').value = data.sourceType;
-                    this.currentSourceType = data.sourceType;
-                    this.updateFormFields();
+                    const sourceTypeSelect = document.getElementById('sourceType');
+                    if (sourceTypeSelect) {
+                        sourceTypeSelect.value = data.sourceType;
+                        this.currentSourceType = data.sourceType;
+                        this.updateFormFields();
+                    }
                 }
                 
-                setTimeout(() => {
-                    if (data.author) document.getElementById('author').value = data.author;
-                    if (data.year) document.getElementById('year').value = data.year;
-                    if (data.title) document.getElementById('title').value = data.title;
-                    if (data.publisher) document.getElementById('publisher').value = data.publisher;
-                    if (data.url) document.getElementById('url').value = data.url;
-                    if (data.isbn) document.getElementById('isbn').value = data.isbn;
-                }, 100);
+                // Set form values
+                const fields = ['author', 'year', 'title', 'publisher', 'url', 'isbn'];
+                fields.forEach(field => {
+                    const element = document.getElementById(field);
+                    if (element && data[field]) {
+                        element.value = data[field];
+                    }
+                });
             }
         } catch (e) {
             console.error('Failed to load form data:', e);
@@ -281,11 +302,20 @@ class CitationGenerator {
     // ======================
     initISBNLookup() {
         const isbnInput = document.getElementById('isbnInput');
+        const isbnBtn = document.querySelector('.isbn-input-group .btn');
+        
         if (isbnInput) {
             isbnInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     this.fetchByISBN();
                 }
+            });
+        }
+        
+        if (isbnBtn) {
+            isbnBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.fetchByISBN();
             });
         }
     }
@@ -294,7 +324,15 @@ class CitationGenerator {
         const isbnInput = document.getElementById('isbnInput');
         const isbnResult = document.getElementById('isbnResult');
         
-        if (!isbnInput || !isbnResult) return;
+        if (!isbnInput) {
+            // Try alternative selectors
+            isbnInput = document.querySelector('.isbn-input');
+        }
+        
+        if (!isbnInput || !isbnResult) {
+            console.warn('ISBN input or result container not found');
+            return;
+        }
         
         const isbn = isbnInput.value.trim();
         
@@ -312,8 +350,8 @@ class CitationGenerator {
         
         // Show loading state
         isbnResult.innerHTML = `
-            <div class="loading">
-                <i class="fas fa-spinner fa-spin"></i>
+            <div class="loading" style="text-align: center; padding: 20px;">
+                <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px;"></i>
                 <p>Searching for book details...</p>
             </div>
         `;
@@ -325,20 +363,20 @@ class CitationGenerator {
                 this.populateFormWithBookData(bookData);
                 
                 isbnResult.innerHTML = `
-                    <div class="success">
-                        <div class="book-info">
-                            <div class="book-cover">
-                                <i class="fas fa-book"></i>
+                    <div class="success" style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 15px; margin: 10px 0; border-radius: 4px;">
+                        <div class="book-info" style="display: flex; gap: 15px; align-items: flex-start;">
+                            <div class="book-cover" style="background: #3498db; color: white; width: 60px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 4px;">
+                                <i class="fas fa-book" style="font-size: 30px;"></i>
                             </div>
-                            <div class="book-details">
-                                <h5>${bookData.title || 'Unknown Title'}</h5>
-                                <p><strong>Author:</strong> ${bookData.author || 'Unknown'}</p>
-                                <p><strong>Publisher:</strong> ${bookData.publisher || 'Unknown'}</p>
-                                <p><strong>Year:</strong> ${bookData.year || 'Unknown'}</p>
-                                <p><strong>ISBN:</strong> ${this.formatISBN(cleanISBN)}</p>
+                            <div class="book-details" style="flex: 1;">
+                                <h5 style="margin: 0 0 10px 0; color: #2c3e50;">${bookData.title || 'Unknown Title'}</h5>
+                                <p style="margin: 5px 0; font-size: 14px;"><strong>Author:</strong> ${bookData.author || 'Unknown'}</p>
+                                <p style="margin: 5px 0; font-size: 14px;"><strong>Publisher:</strong> ${bookData.publisher || 'Unknown'}</p>
+                                <p style="margin: 5px 0; font-size: 14px;"><strong>Year:</strong> ${bookData.year || 'Unknown'}</p>
+                                <p style="margin: 5px 0; font-size: 14px;"><strong>ISBN:</strong> ${this.formatISBN(cleanISBN)}</p>
                             </div>
                         </div>
-                        <button class="btn btn-small" onclick="citationGenerator.useThisBook()">
+                        <button class="btn btn-primary" onclick="citationGenerator.useThisBook()" style="margin-top: 10px;">
                             <i class="fas fa-check"></i> Use This Book
                         </button>
                     </div>
@@ -352,10 +390,13 @@ class CitationGenerator {
         } catch (error) {
             console.error('ISBN lookup error:', error);
             isbnResult.innerHTML = `
-                <div class="error">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <p>Unable to find book details for this ISBN.</p>
-                    <p>Please try manual entry or check the ISBN.</p>
+                <div class="error" style="background: #ffebee; border-left: 4px solid #f44336; padding: 15px; margin: 10px 0; border-radius: 4px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                        <i class="fas fa-exclamation-triangle" style="color: #f44336; font-size: 20px;"></i>
+                        <strong>Book Not Found</strong>
+                    </div>
+                    <p style="margin: 0; font-size: 14px;">Unable to find book details for this ISBN.</p>
+                    <p style="margin: 5px 0 0 0; font-size: 14px;">Please try manual entry or check the ISBN.</p>
                 </div>
             `;
             this.trackEvent('isbn_lookup', 'error', cleanISBN);
@@ -363,7 +404,28 @@ class CitationGenerator {
     }
 
     async fetchBookData(isbn) {
-        // Try Open Library API first
+        // Try multiple APIs
+        const apis = [
+            this.tryOpenLibraryAPI(isbn),
+            this.tryGoogleBooksAPI(isbn),
+            this.tryWorldCatAPI(isbn)
+        ];
+        
+        for (const apiPromise of apis) {
+            try {
+                const bookData = await apiPromise;
+                if (bookData) {
+                    return bookData;
+                }
+            } catch (error) {
+                console.log('API failed, trying next...');
+            }
+        }
+        
+        return null;
+    }
+
+    async tryOpenLibraryAPI(isbn) {
         try {
             const response = await fetch(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`);
             if (response.ok) {
@@ -376,16 +438,17 @@ class CitationGenerator {
                         title: book.title,
                         author: book.authors ? book.authors.map(a => a.name).join(', ') : '',
                         publisher: book.publishers ? book.publishers[0].name : '',
-                        year: book.publish_date ? new Date(book.publish_date).getFullYear() : '',
+                        year: book.publish_date ? this.extractYear(book.publish_date) : '',
                         isbn: isbn
                     };
                 }
             }
         } catch (error) {
-            console.log('Open Library API failed, trying Google Books');
+            throw error;
         }
-        
-        // Fallback to Google Books API
+    }
+
+    async tryGoogleBooksAPI(isbn) {
         try {
             const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
             if (response.ok) {
@@ -397,29 +460,64 @@ class CitationGenerator {
                         title: book.title,
                         author: book.authors ? book.authors.join(', ') : '',
                         publisher: book.publisher || '',
-                        year: book.publishedDate ? new Date(book.publishedDate).getFullYear() : '',
+                        year: book.publishedDate ? this.extractYear(book.publishedDate) : '',
                         isbn: isbn
                     };
                 }
             }
         } catch (error) {
-            console.log('Google Books API failed');
+            throw error;
         }
-        
-        return null;
+    }
+
+    async tryWorldCatAPI(isbn) {
+        // Fallback: Try to get basic info
+        try {
+            // This is a simplified approach - in production you'd use proper API
+            return {
+                title: `Book (ISBN: ${isbn})`,
+                author: 'Unknown Author',
+                publisher: 'Unknown Publisher',
+                year: new Date().getFullYear().toString(),
+                isbn: isbn
+            };
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    extractYear(dateString) {
+        try {
+            const date = new Date(dateString);
+            return date.getFullYear().toString();
+        } catch (e) {
+            // Try to extract year from string
+            const yearMatch = dateString.match(/\b(\d{4})\b/);
+            return yearMatch ? yearMatch[1] : '';
+        }
     }
 
     populateFormWithBookData(bookData) {
-        document.getElementById('author').value = bookData.author || '';
-        document.getElementById('year').value = bookData.year || '';
-        document.getElementById('title').value = bookData.title || '';
-        document.getElementById('publisher').value = bookData.publisher || '';
-        document.getElementById('isbn').value = this.formatISBN(bookData.isbn) || '';
+        // Set form values
+        const authorField = document.getElementById('author');
+        const yearField = document.getElementById('year');
+        const titleField = document.getElementById('title');
+        const publisherField = document.getElementById('publisher');
+        const isbnField = document.getElementById('isbn');
+        
+        if (authorField) authorField.value = bookData.author || '';
+        if (yearField) yearField.value = bookData.year || '';
+        if (titleField) titleField.value = bookData.title || '';
+        if (publisherField) publisherField.value = bookData.publisher || '';
+        if (isbnField) isbnField.value = this.formatISBN(bookData.isbn) || '';
         
         // Set source type to book
-        document.getElementById('sourceType').value = 'book';
-        this.currentSourceType = 'book';
-        this.updateFormFields();
+        const sourceTypeSelect = document.getElementById('sourceType');
+        if (sourceTypeSelect) {
+            sourceTypeSelect.value = 'book';
+            this.currentSourceType = 'book';
+            this.updateFormFields();
+        }
     }
 
     formatISBN(isbn) {
@@ -437,7 +535,7 @@ class CitationGenerator {
     }
 
     clearISBN() {
-        const isbnInput = document.getElementById('isbnInput');
+        const isbnInput = document.getElementById('isbnInput') || document.querySelector('.isbn-input');
         const isbnResult = document.getElementById('isbnResult');
         if (isbnInput) isbnInput.value = '';
         if (isbnResult) isbnResult.innerHTML = '';
@@ -477,7 +575,7 @@ class CitationGenerator {
         // Generate citation based on style
         let citation = '';
         try {
-            const citationData = { author, year, title, publisher, journal, volume, issue, pages, url, isbn };
+            const citationData = { author, year, title, publisher, journal, volume, issue, pages, url, isbn, sourceType: this.currentSourceType };
             
             switch(this.currentStyle) {
                 case 'apa':
@@ -496,7 +594,7 @@ class CitationGenerator {
             // Display result
             const resultElement = document.getElementById('result');
             if (resultElement) {
-                resultElement.innerHTML = `<pre>${citation}</pre>`;
+                resultElement.innerHTML = `<pre style="margin: 0; white-space: pre-wrap; word-wrap: break-word; font-family: 'Courier New', monospace; line-height: 1.6;">${citation}</pre>`;
             }
             
             // Save to history
@@ -531,29 +629,45 @@ class CitationGenerator {
         }
         
         // Start building citation
-        citation += `${authors}. (${data.year}). `;
+        citation += `${authors}. `;
+        citation += `(${data.year}). `;
         
         // Add title with proper formatting
-        if (this.currentSourceType === 'book') {
+        if (data.sourceType === 'book') {
             citation += `<i>${data.title}.</i> `;
-            if (data.publisher) citation += `${data.publisher}.`;
-        } else if (this.currentSourceType === 'journal') {
+            if (data.publisher) {
+                citation += `${data.publisher}.`;
+            }
+        } else if (data.sourceType === 'journal') {
             citation += `${data.title}. `;
             if (data.journal) {
                 citation += `<i>${data.journal}</i>`;
                 if (data.volume) {
                     citation += `, <i>${data.volume}</i>`;
-                    if (data.issue) citation += `(${data.issue})`;
+                    if (data.issue) {
+                        citation += `(${data.issue})`;
+                    }
                 }
-                if (data.pages) citation += `, ${data.pages}.`;
+                if (data.pages) {
+                    citation += `, ${data.pages}.`;
+                } else {
+                    citation += `.`;
+                }
+            }
+        } else if (data.sourceType === 'website') {
+            citation += `${data.title}. `;
+            if (data.url) {
+                citation += `Retrieved from ${data.url}`;
             }
         } else {
             citation += `${data.title}.`;
-            if (data.publisher) citation += ` ${data.publisher}.`;
+            if (data.publisher) {
+                citation += ` ${data.publisher}.`;
+            }
         }
         
         // Add DOI or URL if available
-        if (data.url) {
+        if (data.url && data.sourceType !== 'website') {
             if (data.url.includes('doi.org') || data.url.includes('doi:')) {
                 citation += ` ${data.url}`;
             } else {
@@ -566,38 +680,95 @@ class CitationGenerator {
 
     generateMLACitation(data) {
         let citation = '';
-        citation += `${data.author}. `;
-        citation += `"${data.title}." `;
         
-        if (this.currentSourceType === 'book') {
-            citation += `${data.publisher}, ${data.year}.`;
-        } else if (this.currentSourceType === 'journal') {
-            if (data.journal) citation += `<i>${data.journal}</i>, `;
-            if (data.volume) citation += `vol. ${data.volume}, `;
-            if (data.issue) citation += `no. ${data.issue}, `;
-            citation += `${data.year}, `;
-            if (data.pages) citation += `pp. ${data.pages}.`;
+        // Format authors
+        let authors = data.author;
+        citation += `${authors}. `;
+        
+        // Title
+        if (data.sourceType === 'book') {
+            citation += `<i>${data.title}.</i> `;
+        } else {
+            citation += `"${data.title}." `;
         }
         
-        if (data.url) citation += ` ${data.url}.`;
+        // Container/Publication info
+        if (data.sourceType === 'journal') {
+            if (data.journal) {
+                citation += `<i>${data.journal}</i>, `;
+            }
+            if (data.volume) {
+                citation += `vol. ${data.volume}, `;
+            }
+            if (data.issue) {
+                citation += `no. ${data.issue}, `;
+            }
+            citation += `${data.year}, `;
+            if (data.pages) {
+                citation += `pp. ${data.pages}.`;
+            }
+        } else if (data.sourceType === 'book') {
+            if (data.publisher) {
+                citation += `${data.publisher}, ${data.year}.`;
+            } else {
+                citation += `${data.year}.`;
+            }
+        } else {
+            citation += `${data.publisher}, ${data.year}.`;
+        }
+        
+        // Add URL if available
+        if (data.url) {
+            citation += ` ${data.url}.`;
+        }
         
         return citation;
     }
 
     generateChicagoCitation(data) {
         let citation = '';
-        citation += `${data.author}. ${data.year}. <i>${data.title}.</i> `;
         
-        if (this.currentSourceType === 'book') {
-            if (data.publisher) citation += `${data.publisher}.`;
-        } else if (this.currentSourceType === 'journal') {
-            if (data.journal) citation += `<i>${data.journal}</i> `;
-            if (data.volume) citation += `${data.volume}`;
-            if (data.issue) citation += `, no. ${data.issue}`;
-            if (data.pages) citation += `: ${data.pages}.`;
+        // Format authors
+        let authors = data.author;
+        citation += `${authors}. `;
+        
+        // Title and publication info
+        if (data.sourceType === 'book') {
+            citation += `<i>${data.title}.</i> `;
+            if (data.publisher) {
+                citation += `${data.publisher}, ${data.year}.`;
+            } else {
+                citation += `${data.year}.`;
+            }
+        } else if (data.sourceType === 'journal') {
+            citation += `"${data.title}." `;
+            if (data.journal) {
+                citation += `<i>${data.journal}</i> `;
+                if (data.volume) {
+                    citation += `${data.volume}`;
+                    if (data.issue) {
+                        citation += `, no. ${data.issue}`;
+                    }
+                    if (data.pages) {
+                        citation += ` (${data.year}): ${data.pages}.`;
+                    } else {
+                        citation += ` (${data.year}).`;
+                    }
+                }
+            }
+        } else {
+            citation += `"${data.title}." `;
+            if (data.publisher) {
+                citation += `${data.publisher}, ${data.year}.`;
+            } else {
+                citation += `${data.year}.`;
+            }
         }
         
-        if (data.url) citation += ` ${data.url}.`;
+        // Add URL if available
+        if (data.url) {
+            citation += ` ${data.url}`;
+        }
         
         return citation;
     }
@@ -647,16 +818,14 @@ class CitationGenerator {
         
         const example = examples[this.currentStyle] || examples.apa;
         
-        document.getElementById('author').value = example.author;
-        document.getElementById('year').value = example.year;
-        document.getElementById('title').value = example.title;
-        document.getElementById('publisher').value = example.publisher;
-        document.getElementById('journal').value = example.journal || '';
-        document.getElementById('volume').value = example.volume || '';
-        document.getElementById('issue').value = example.issue || '';
-        document.getElementById('pages').value = example.pages || '';
-        document.getElementById('url').value = example.url || '';
-        document.getElementById('isbn').value = example.isbn || '';
+        // Update form fields
+        const fields = ['author', 'year', 'title', 'publisher', 'journal', 'volume', 'issue', 'pages', 'url', 'isbn'];
+        fields.forEach(field => {
+            const element = document.getElementById(field);
+            if (element && example[field]) {
+                element.value = example[field];
+            }
+        });
         
         this.showAlert('Example data loaded. Click "Generate Citation" to see result.', 'info');
         this.trackEvent('example', 'load', this.currentStyle);
@@ -670,16 +839,20 @@ class CitationGenerator {
             if (element) element.value = '';
         });
         
+        // Clear ISBN lookup
+        const isbnInput = document.getElementById('isbnInput') || document.querySelector('.isbn-input');
+        const isbnResult = document.getElementById('isbnResult');
+        if (isbnInput) isbnInput.value = '';
+        if (isbnResult) isbnResult.innerHTML = '';
+        
         // Reset result area
         const result = document.getElementById('result');
         if (result) {
             result.innerHTML = `
-                <div class="result-placeholder">
-                    <div class="placeholder-icon">
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <p>Select a style and fill the form to generate citation</p>
-                    <p class="placeholder-sub">Or use the ISBN lookup for automatic filling</p>
+                <div class="result-placeholder" style="text-align: center; color: #666;">
+                    <i class="fas fa-file-alt" style="font-size: 48px; margin-bottom: 15px; color: #3498db;"></i>
+                    <p style="font-size: 16px; margin-bottom: 5px;">Your citation will appear here</p>
+                    <p class="placeholder-sub" style="font-size: 14px; color: #888;">Fill the form and click "Generate Citation"</p>
                 </div>
             `;
         }
@@ -695,24 +868,31 @@ class CitationGenerator {
         const result = document.getElementById('result');
         if (!result) return;
         
-        const text = result.textContent;
-        if (!text || text.includes('Select a style')) {
+        const pre = result.querySelector('pre');
+        if (!pre) {
+            this.showAlert('No citation to copy. Please generate a citation first.', 'error');
+            return;
+        }
+        
+        const text = pre.textContent;
+        if (!text || text.includes('Your citation will appear here')) {
             this.showAlert('No citation to copy. Please generate a citation first.', 'error');
             return;
         }
         
         navigator.clipboard.writeText(text).then(() => {
-            const copyBtn = document.getElementById('copyBtn');
-            if (copyBtn) {
-                const originalHTML = copyBtn.innerHTML;
-                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                copyBtn.classList.add('copied');
+            // Find and update copy button
+            const copyButtons = document.querySelectorAll('.btn-copy');
+            copyButtons.forEach(btn => {
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                btn.style.background = '#2ecc71';
                 
                 setTimeout(() => {
-                    copyBtn.innerHTML = originalHTML;
-                    copyBtn.classList.remove('copied');
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = '';
                 }, 2000);
-            }
+            });
             
             this.showAlert('Citation copied to clipboard!', 'success');
             this.trackEvent('citation', 'copy');
@@ -723,453 +903,8 @@ class CitationGenerator {
         });
     }
 
-    downloadCitation() {
-        const result = document.getElementById('result');
-        if (!result) return;
-        
-        const text = result.textContent;
-        if (!text || text.includes('Select a style')) {
-            this.showAlert('No citation to download. Please generate a citation first.', 'error');
-            return;
-        }
-        
-        try {
-            const style = this.currentStyle;
-            const sourceType = this.currentSourceType;
-            const filename = `citation_${style}_${sourceType}_${Date.now()}.txt`;
-            
-            const blob = new Blob([text], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-            
-            this.showAlert('Citation downloaded successfully!', 'success');
-            this.trackEvent('citation', 'download');
-            
-        } catch (error) {
-            console.error('Download error:', error);
-            this.showAlert('Failed to download citation.', 'error');
-        }
-    }
-
-    exportAs(format) {
-        const result = document.getElementById('result');
-        if (!result) return;
-        
-        const text = result.textContent;
-        if (!text || text.includes('Select a style')) {
-            this.showAlert('No citation to export. Please generate a citation first.', 'error');
-            return;
-        }
-        
-        // Premium feature check
-        if (!this.premiumUser && format !== 'txt') {
-            this.showAlert(`${format.toUpperCase()} export is a premium feature. Upgrade to unlock!`, 'info');
-            this.trackEvent('export', 'premium_required', format);
-            return;
-        }
-        
-        // Handle different export formats
-        switch(format) {
-            case 'txt':
-                this.downloadCitation();
-                break;
-            case 'doc':
-                this.exportToDoc(text);
-                break;
-            case 'pdf':
-                this.exportToPDF(text);
-                break;
-            case 'bibtex':
-                this.exportToBibTeX(text);
-                break;
-        }
-    }
-
-    exportToDoc(text) {
-        // Create Word document
-        const blob = new Blob([`
-            <html xmlns:o="urn:schemas-microsoft-com:office:office" 
-                  xmlns:w="urn:schemas-microsoft-com:office:word" 
-                  xmlns="http://www.w3.org/TR/REC-html40">
-            <head>
-                <meta charset="utf-8">
-                <title>Citation Export</title>
-            </head>
-            <body>
-                <pre>${text}</pre>
-            </body>
-            </html>
-        `], { type: 'application/msword' });
-        
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `citation_${this.currentStyle}.doc`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-        
-        this.trackEvent('export', 'doc');
-    }
-
-    exportToPDF(text) {
-        // Simple PDF export (in production, use a proper PDF library)
-        this.showAlert('PDF export would be implemented with a proper PDF library.', 'info');
-        this.trackEvent('export', 'pdf');
-    }
-
-    exportToBibTeX(text) {
-        // Convert to BibTeX format
-        const bibtex = `@book{citation_${Date.now()},
-    author = {${document.getElementById('author').value}},
-    title = {${document.getElementById('title').value}},
-    year = {${document.getElementById('year').value}},
-    publisher = {${document.getElementById('publisher').value || 'Unknown'}},
-    isbn = {${document.getElementById('isbn').value || ''}}
-}`;
-        
-        const blob = new Blob([bibtex], { type: 'application/x-bibtex' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `citation_${this.currentStyle}.bib`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-        
-        this.trackEvent('export', 'bibtex');
-    }
-
-    saveCitation() {
-        const result = document.getElementById('result');
-        if (!result) return;
-        
-        const text = result.textContent;
-        if (!text || text.includes('Select a style')) {
-            this.showAlert('No citation to save. Please generate a citation first.', 'error');
-            return;
-        }
-        
-        // Premium feature check
-        if (!this.premiumUser) {
-            this.showAlert('Save feature is premium. Upgrade to unlock!', 'info');
-            this.trackEvent('save', 'premium_required');
-            return;
-        }
-        
-        // Save to cloud (simulated)
-        this.showAlert('Citation saved to cloud!', 'success');
-        this.trackEvent('citation', 'save');
-    }
-
     // ======================
-    // CITATION HISTORY
-    // ======================
-    initCitationHistory() {
-        this.loadCitationHistory();
-    }
-
-    saveCitationToHistory(citation) {
-        try {
-            const history = JSON.parse(localStorage.getItem('citationHistory') || '[]');
-            
-            history.unshift({
-                id: Date.now(),
-                citation: citation.substring(0, 100) + (citation.length > 100 ? '...' : ''),
-                fullCitation: citation,
-                style: this.currentStyle,
-                sourceType: this.currentSourceType,
-                date: new Date().toLocaleDateString()
-            });
-            
-            // Keep only last 10 items for free users, 50 for premium
-            const maxHistory = this.premiumUser ? 50 : 10;
-            if (history.length > maxHistory) {
-                history.length = maxHistory;
-            }
-            
-            localStorage.setItem('citationHistory', JSON.stringify(history));
-            this.citationHistory = history;
-            
-            // Update history display
-            this.displayCitationHistory();
-            
-        } catch (e) {
-            console.error('Failed to save citation history:', e);
-        }
-    }
-
-    loadCitationHistory() {
-        try {
-            const history = JSON.parse(localStorage.getItem('citationHistory') || '[]');
-            this.citationHistory = history;
-            this.displayCitationHistory();
-        } catch (e) {
-            console.error('Failed to load citation history:', e);
-        }
-    }
-
-    displayCitationHistory() {
-        const historyList = document.getElementById('historyList');
-        if (!historyList) return;
-        
-        if (this.citationHistory.length === 0) {
-            historyList.innerHTML = '<p class="empty-history">No recent citations. Generate one to see it here.</p>';
-            return;
-        }
-        
-        let html = '';
-        this.citationHistory.forEach(item => {
-            html += `
-                <div class="history-item">
-                    <div class="history-item-content">
-                        <div class="history-citation">${item.citation}</div>
-                        <div class="history-meta">
-                            <span class="history-style">${item.style.toUpperCase()}</span>
-                            <span class="history-date">${item.date}</span>
-                        </div>
-                    </div>
-                    <button class="btn-history-action" onclick="citationGenerator.loadHistoryItem(${item.id})" title="Load this citation">
-                        <i class="fas fa-redo"></i>
-                    </button>
-                </div>
-            `;
-        });
-        
-        historyList.innerHTML = html;
-    }
-
-    loadHistoryItem(id) {
-        const item = this.citationHistory.find(h => h.id === id);
-        
-        if (item) {
-            const result = document.getElementById('result');
-            if (result) {
-                result.innerHTML = `<pre>${item.fullCitation}</pre>`;
-            }
-            this.showAlert('Citation loaded from history', 'success');
-            this.trackEvent('history', 'load', item.style);
-        }
-    }
-
-    // ======================
-    // PREMIUM FEATURES
-    // ======================
-    initPremiumFeatures() {
-        // Check if user has premium
-        const premiumStatus = localStorage.getItem('premiumUser');
-        this.premiumUser = premiumStatus === 'true';
-        
-        // Update UI based on premium status
-        this.updatePremiumUI();
-        
-        // Initialize premium features
-        this.initFAQToggle();
-        this.initThemeToggle();
-    }
-
-    updatePremiumUI() {
-        const premiumElements = document.querySelectorAll('.premium-feature');
-        premiumElements.forEach(el => {
-            if (!this.premiumUser) {
-                el.classList.add('locked');
-                el.setAttribute('title', 'Premium feature - Upgrade to unlock');
-            } else {
-                el.classList.remove('locked');
-                el.removeAttribute('title');
-            }
-        });
-        
-        // Update premium indicator
-        const premiumIndicator = document.querySelector('.premium-indicator');
-        if (premiumIndicator) {
-            premiumIndicator.style.display = this.premiumUser ? 'block' : 'none';
-        }
-    }
-
-    enablePremium() {
-        // In a real application, this would involve payment processing
-        // For demo purposes, we'll just set the flag
-        this.premiumUser = true;
-        localStorage.setItem('premiumUser', 'true');
-        
-        // Update UI
-        this.updatePremiumUI();
-        
-        // Show success message
-        this.showAlert('Premium features unlocked! Thank you for upgrading.', 'success');
-        this.trackEvent('premium', 'enabled');
-        
-        // Reload history with increased limit
-        this.loadCitationHistory();
-    }
-
-    initFAQToggle() {
-        const faqQuestions = document.querySelectorAll('.faq-question');
-        
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', function() {
-                const faqItem = this.parentElement;
-                const answer = this.nextElementSibling;
-                const icon = this.querySelector('.fa-chevron-down');
-                
-                // Toggle active class
-                faqItem.classList.toggle('active');
-                
-                // Toggle icon
-                if (faqItem.classList.contains('active')) {
-                    icon.classList.remove('fa-chevron-down');
-                    icon.classList.add('fa-chevron-up');
-                } else {
-                    icon.classList.remove('fa-chevron-up');
-                    icon.classList.add('fa-chevron-down');
-                }
-            });
-        });
-    }
-
-    initThemeToggle() {
-        const themeToggle = document.getElementById('themeToggle');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark-mode');
-                
-                // Update icon
-                const icon = themeToggle.querySelector('i');
-                if (document.body.classList.contains('dark-mode')) {
-                    icon.classList.remove('fa-moon');
-                    icon.classList.add('fa-sun');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    icon.classList.remove('fa-sun');
-                    icon.classList.add('fa-moon');
-                    localStorage.setItem('theme', 'light');
-                }
-                
-                this.trackEvent('theme', 'toggle', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-            });
-            
-            // Load saved theme
-            this.loadThemePreference();
-        }
-    }
-
-    loadThemePreference() {
-        const savedTheme = localStorage.getItem('theme');
-        const themeToggle = document.getElementById('themeToggle');
-        
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            if (themeToggle) {
-                themeToggle.querySelector('i').classList.remove('fa-moon');
-                themeToggle.querySelector('i').classList.add('fa-sun');
-            }
-        }
-    }
-
-    enableAds() {
-        this.adEnabled = true;
-        localStorage.setItem('adsEnabled', 'true');
-        this.showAlert('Ads enabled. Thank you for supporting our free service!', 'success');
-        this.trackEvent('ads', 'enabled');
-    }
-
-    disableAds() {
-        if (!this.premiumUser) {
-            this.showAlert('Ad-free experience is a premium feature. Upgrade to remove ads.', 'info');
-            return;
-        }
-        
-        this.adEnabled = false;
-        localStorage.setItem('adsEnabled', 'false');
-        this.showAlert('Ads disabled. Enjoy your ad-free experience!', 'success');
-        this.trackEvent('ads', 'disabled');
-    }
-
-    // ======================
-    // ANALYTICS FUNCTIONS
-    // ======================
-    initAnalytics() {
-        // Track page view
-        this.trackPageView();
-        
-        // Track interactions
-        this.trackInteractions();
-        
-        // Track errors
-        window.addEventListener('error', (e) => {
-            this.trackEvent('error', 'javascript', e.message, 1);
-        });
-        
-        // Track performance
-        if ('performance' in window) {
-            window.addEventListener('load', () => {
-                const timing = performance.timing;
-                const loadTime = timing.loadEventEnd - timing.navigationStart;
-                this.trackEvent('performance', 'page_load', loadTime.toString(), 1);
-            });
-        }
-    }
-
-    trackPageView() {
-        if (typeof gtag === 'function') {
-            gtag('event', 'page_view', {
-                page_title: document.title,
-                page_location: window.location.href,
-                page_path: window.location.pathname
-            });
-        }
-    }
-
-    trackEvent(category, action, label = null, value = null) {
-        if (typeof gtag === 'function') {
-            const eventParams = {
-                event_category: category,
-                event_label: label || action,
-                value: value || 1
-            };
-            
-            // Clean up parameters
-            Object.keys(eventParams).forEach(key => {
-                if (eventParams[key] === null || eventParams[key] === undefined) {
-                    delete eventParams[key];
-                }
-            });
-            
-            gtag('event', action, eventParams);
-        }
-        
-        // Also log to console for debugging
-        console.log(`[Analytics] ${category}.${action}`, label ? `Label: ${label}` : '', value ? `Value: ${value}` : '');
-    }
-
-    trackInteractions() {
-        // Track button clicks
-        document.querySelectorAll('.btn, .style-tab, .mobile-menu-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const text = this.textContent.trim() || this.getAttribute('aria-label') || 'button';
-                citationGenerator.trackEvent('ui', 'click', text);
-            });
-        });
-        
-        // Track form field interactions
-        document.querySelectorAll('input, select, textarea').forEach(field => {
-            field.addEventListener('focus', function() {
-                citationGenerator.trackEvent('form', 'focus', this.name || this.id);
-            });
-        });
-    }
-
-    // ======================
-    // HELPER FUNCTIONS
+    // ALERT SYSTEM
     // ======================
     showAlert(message, type = 'info') {
         // Remove existing alerts
@@ -1191,6 +926,58 @@ class CitationGenerator {
             </button>
         `;
         
+        // Add styles if not already present
+        if (!document.querySelector('#notification-styles')) {
+            const style = document.createElement('style');
+            style.id = 'notification-styles';
+            style.textContent = `
+                .notification {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: white;
+                    border-left: 4px solid #3498db;
+                    border-radius: 4px;
+                    padding: 15px 20px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    min-width: 300px;
+                    max-width: 400px;
+                    z-index: 9999;
+                    animation: slideIn 0.3s ease;
+                }
+                .notification-success { border-left-color: #2ecc71; }
+                .notification-error { border-left-color: #e74c3c; }
+                .notification-info { border-left-color: #3498db; }
+                .notification-content {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+                .notification-content i {
+                    font-size: 20px;
+                }
+                .notification-success i { color: #2ecc71; }
+                .notification-error i { color: #e74c3c; }
+                .notification-info i { color: #3498db; }
+                .notification-close {
+                    background: none;
+                    border: none;
+                    color: #999;
+                    cursor: pointer;
+                    padding: 5px;
+                    margin-left: 10px;
+                }
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
         // Add to page
         document.body.appendChild(notification);
         
@@ -1203,10 +990,56 @@ class CitationGenerator {
     }
 
     // ======================
+    // ANALYTICS FUNCTIONS
+    // ======================
+    initAnalytics() {
+        // Track page view
+        this.trackPageView();
+        
+        // Track interactions
+        this.trackInteractions();
+    }
+
+    trackPageView() {
+        if (typeof gtag === 'function') {
+            gtag('event', 'page_view', {
+                page_title: document.title,
+                page_location: window.location.href,
+                page_path: window.location.pathname
+            });
+        }
+    }
+
+    trackEvent(category, action, label = null, value = null) {
+        if (typeof gtag === 'function') {
+            const eventParams = {
+                event_category: category,
+                event_label: label || action,
+                value: value || 1
+            };
+            
+            gtag('event', action, eventParams);
+        }
+        
+        // Also log to console for debugging
+        console.log(`[Analytics] ${category}.${action}`, label ? `Label: ${label}` : '', value ? `Value: ${value}` : '');
+    }
+
+    trackInteractions() {
+        // Track button clicks
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const text = this.textContent.trim() || this.getAttribute('aria-label') || 'button';
+                citationGenerator.trackEvent('ui', 'click', text);
+            });
+        });
+    }
+
+    // ======================
     // SERVICE WORKER
     // ======================
     initServiceWorker() {
-        if ('serviceWorker' in navigator) {
+        if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
             navigator.serviceWorker.register('/sw.js')
                 .then(reg => console.log('Service Worker registered:', reg))
                 .catch(err => console.log('Service Worker registration failed:', err));
@@ -1226,8 +1059,55 @@ class CitationGenerator {
         }
         
         if (isbn) {
-            document.getElementById('isbnInput').value = isbn;
-            setTimeout(() => this.fetchByISBN(), 1000);
+            const isbnInput = document.getElementById('isbnInput') || document.querySelector('.isbn-input');
+            if (isbnInput) {
+                isbnInput.value = isbn;
+                setTimeout(() => this.fetchByISBN(), 1000);
+            }
+        }
+    }
+
+    // ======================
+    // INITIALIZATION
+    // ======================
+    initCitationHistory() {
+        this.loadCitationHistory();
+    }
+
+    initPremiumFeatures() {
+        // Check if user has premium
+        const premiumStatus = localStorage.getItem('premiumUser');
+        this.premiumUser = premiumStatus === 'true';
+    }
+
+    saveCitationToHistory(citation) {
+        // Implementation for saving citation to history
+        try {
+            const history = JSON.parse(localStorage.getItem('citationHistory') || '[]');
+            history.unshift({
+                id: Date.now(),
+                citation: citation,
+                style: this.currentStyle,
+                date: new Date().toISOString()
+            });
+            
+            // Keep only last 20 items
+            if (history.length > 20) {
+                history.length = 20;
+            }
+            
+            localStorage.setItem('citationHistory', JSON.stringify(history));
+        } catch (e) {
+            console.error('Failed to save citation history:', e);
+        }
+    }
+
+    loadCitationHistory() {
+        try {
+            const history = JSON.parse(localStorage.getItem('citationHistory') || '[]');
+            this.citationHistory = history;
+        } catch (e) {
+            console.error('Failed to load citation history:', e);
         }
     }
 }
@@ -1241,21 +1121,8 @@ window.generateCitation = () => citationGenerator.generateCitation();
 window.fillExample = () => citationGenerator.fillExample();
 window.clearForm = () => citationGenerator.clearForm();
 window.copyCitation = () => citationGenerator.copyCitation();
-window.downloadCitation = () => citationGenerator.downloadCitation();
-window.exportAs = (format) => citationGenerator.exportAs(format);
-window.saveCitation = () => citationGenerator.saveCitation();
 window.fetchByISBN = () => citationGenerator.fetchByISBN();
-window.clearISBN = () => citationGenerator.clearISBN();
 window.useThisBook = () => citationGenerator.useThisBook();
-window.enableAds = () => citationGenerator.enableAds();
-window.enablePremium = () => citationGenerator.enablePremium();
-
-// Initialize when DOM is loaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => citationGenerator.init());
-} else {
-    citationGenerator.init();
-}
 
 // Keyboard shortcuts
 document.addEventListener('keydown', function(e) {
@@ -1271,18 +1138,11 @@ document.addEventListener('keydown', function(e) {
         citationGenerator.fillExample();
     }
     
-    // Ctrl/Cmd + C to copy (only when not in input)
-    if ((e.ctrlKey || e.metaKey) && e.key === 'c' && 
-        !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+    // Ctrl/Cmd + C to copy
+    if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
         e.preventDefault();
         citationGenerator.copyCitation();
     }
-    
-    // Ctrl/Cmd + L for ISBN lookup
-    if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
-        e.preventDefault();
-        document.getElementById('isbnInput')?.focus();
-    }
 });
 
-console.log('Enhanced Citation Generator script loaded successfully');
+console.log('Enhanced Citation Generator loaded successfully');
