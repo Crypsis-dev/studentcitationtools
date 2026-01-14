@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Free ISBN Lookup & Book Citation Generator - StudentCitationTools.com</title>
     <meta name="description" content="Lookup book details by ISBN and generate citations in APA, MLA, and Chicago styles instantly.">
     <meta name="keywords" content="isbn lookup, book citation, isbn citation generator, book details, isbn search, free isbn lookup">
@@ -10,10 +10,1204 @@
     <meta property="og:title" content="Free ISBN Lookup & Book Citation Generator">
     <meta property="og:description" content="Lookup book details by ISBN and generate citations instantly.">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --success: #2ecc71;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --white: #ffffff;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            --dark: #f8f9fa;
+            --light: #1a1a2e;
+            --white: #16213e;
+            --gray-light: #2d3748;
+            color: #f8f9fa;
+            background: var(--light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            width: 100%;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        body.dark-mode .header {
+            background: rgba(26, 26, 46, 0.95);
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo-tagline {
+            display: none;
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 2px;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 1002;
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Navigation */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .main-nav {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: var(--white);
+            padding: 80px 25px 25px;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+        }
+
+        body.dark-mode .main-nav {
+            background: var(--dark);
+        }
+
+        .main-nav.active {
+            right: 0;
+        }
+
+        .nav-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 15px 25px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-header .logo-text {
+            color: white;
+            font-size: 16px;
+        }
+
+        .nav-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .nav-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .nav-link {
+            color: var(--light);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--primary);
+        }
+
+        .nav-link i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theme-toggle {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 40px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 L1000,0 L1000,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 100% 100%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--success);
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: var(--gray-light);
+            padding: 12px 0;
+            margin-top: -1px;
+            font-size: 0.9rem;
+        }
+
+        body.dark-mode .breadcrumb {
+            background: var(--dark);
+        }
+
+        .breadcrumb a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumb span {
+            color: var(--dark);
+        }
+
+        body.dark-mode .breadcrumb span {
+            color: var(--light);
+        }
+
+        /* Main Content */
+        .main {
+            padding: 30px 0;
+            background: var(--light);
+            min-height: calc(100vh - 70px);
+        }
+
+        body.dark-mode .main {
+            background: var(--dark);
+        }
+
+        /* ISBN Tool Container */
+        .tool-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        body.dark-mode .tool-container {
+            background: var(--dark);
+        }
+
+        .tool-container h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .tool-container h2 {
+            color: var(--light);
+        }
+
+        .tool-container .subtitle {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* ISBN Input Group */
+        .isbn-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .isbn-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius-sm);
+            font-size: 1.1rem;
+            transition: var(--transition);
+            background: var(--white);
+            color: var(--dark);
+            font-family: monospace;
+            letter-spacing: 1px;
+        }
+
+        body.dark-mode .isbn-input {
+            background: var(--dark);
+            border-color: var(--gray-light);
+            color: var(--light);
+        }
+
+        .isbn-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .input-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 16px 24px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5e0a9b;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-success {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+        }
+
+        .btn-info {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Help Text */
+        .help-box {
+            background: var(--gray-light);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        body.dark-mode .help-box {
+            background: var(--dark);
+        }
+
+        .help-box p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .help-box strong {
+            color: var(--dark);
+        }
+
+        body.dark-mode .help-box strong {
+            color: var(--light);
+        }
+
+        /* ISBN Result */
+        .isbn-result {
+            display: none;
+            background: var(--gray-light);
+            border-radius: var(--radius-sm);
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        body.dark-mode .isbn-result {
+            background: var(--dark);
+        }
+
+        .book-details {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        @media (min-width: 768px) {
+            .book-details {
+                grid-template-columns: 120px 1fr;
+            }
+        }
+
+        .book-cover {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .book-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+
+        body.dark-mode .book-info h4 {
+            color: var(--light);
+        }
+
+        .book-info p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .book-info strong {
+            color: var(--dark);
+            font-weight: 600;
+            min-width: 80px;
+            display: inline-block;
+        }
+
+        body.dark-mode .book-info strong {
+            color: var(--light);
+        }
+
+        .book-info code {
+            background: var(--white);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+
+        body.dark-mode .book-info code {
+            background: var(--dark);
+            border: 1px solid var(--gray-light);
+        }
+
+        /* Citation Options */
+        .citation-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        /* Citation Result */
+        .citation-result {
+            display: none;
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 25px;
+            margin-top: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        body.dark-mode .citation-result {
+            background: var(--dark);
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .result-header h4 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .result-header h4 {
+            color: var(--light);
+        }
+
+        .style-badge {
+            background: var(--primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .result-box {
+            background: var(--gray-light);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin: 20px 0;
+            min-height: 150px;
+        }
+
+        body.dark-mode .result-box {
+            background: var(--dark);
+            border: 1px solid var(--gray-light);
+        }
+
+        .result-box pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--dark);
+        }
+
+        body.dark-mode .result-box pre {
+            color: var(--light);
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        /* Popular Books Section */
+        .popular-section {
+            margin-top: 50px;
+        }
+
+        .popular-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .popular-section h3 {
+            color: var(--light);
+        }
+
+        .popular-section > p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .book-card {
+            background: var(--white);
+            border: 1px solid var(--gray-light);
+            border-radius: var(--radius);
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.dark-mode .book-card {
+            background: var(--dark);
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .book-card h5 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+
+        body.dark-mode .book-card h5 {
+            color: var(--light);
+        }
+
+        .book-card p {
+            color: var(--gray);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .book-card .description {
+            flex-grow: 1;
+            margin-bottom: 15px;
+        }
+
+        .isbn-number {
+            background: var(--gray-light);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--dark);
+            margin-top: 10px;
+        }
+
+        body.dark-mode .isbn-number {
+            background: var(--dark);
+            color: var(--light);
+            border: 1px solid var(--gray-light);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            margin-top: 60px;
+        }
+
+        .how-it-works h3 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .how-it-works h3 {
+            color: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .feature {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 25px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        body.dark-mode .feature {
+            background: var(--dark);
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .feature h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        body.dark-mode .feature h4 {
+            color: var(--light);
+        }
+
+        .feature p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Tips Section */
+        .tips-section {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        body.dark-mode .tips-section {
+            background: var(--dark);
+        }
+
+        .tips-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        body.dark-mode .tips-section h4 {
+            color: var(--light);
+        }
+
+        .tips-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tips-section li {
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .tips-section li:before {
+            content: "•";
+            color: var(--primary);
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: var(--light);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        body.dark-mode .footer {
+            background: #0f3460;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-section p {
+            color: var(--gray-light);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .footer-section a {
+            display: block;
+            color: var(--gray-light);
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: var(--gray-light);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom .disclaimer {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 15px 20px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            max-width: 350px;
+            z-index: 1001;
+            animation: slideIn 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        body.dark-mode .notification {
+            background: var(--dark);
+        }
+
+        .notification-success {
+            border-left-color: #2ecc71;
+        }
+
+        .notification-error {
+            border-left-color: #e74c3c;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            transition: var(--transition);
+        }
+
+        .notification-close:hover {
+            color: var(--dark);
+        }
+
+        body.dark-mode .notification-close:hover {
+            color: var(--light);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Tablet Styles */
+        @media (min-width: 768px) {
+            .hero {
+                padding: 120px 0 60px;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .stats {
+                gap: 40px;
+            }
+
+            .isbn-input-group {
+                flex-direction: row;
+            }
+
+            .isbn-input {
+                flex: 1;
+            }
+
+            .input-actions {
+                flex-direction: row;
+            }
+
+            .citation-options {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .citation-options .btn {
+                flex: 1;
+                min-width: 150px;
+            }
+
+            .action-buttons {
+                flex-direction: row;
+            }
+
+            .action-buttons .btn {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 1024px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+
+            .logo-tagline {
+                display: block;
+            }
+
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .main {
+                padding: 40px 0;
+            }
+
+            .tool-container {
+                padding: 30px;
+            }
+
+            .books-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Large Desktop */
+        @media (min-width: 1200px) {
+            .container {
+                padding: 0;
+            }
+        }
+
+        /* Small Mobile */
+        @media (max-width: 360px) {
+            .logo-text {
+                font-size: 16px;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .stat {
+                min-width: 70px;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZHREV68R2D"></script>
     <script>
@@ -22,169 +1216,75 @@
       gtag('js', new Date());
       gtag('config', 'G-ZHREV68R2D');
     </script>
-    <style>
-        /* Additional styles for ISBN page */
-        .isbn-tool-container {
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        
-        .isbn-input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .isbn-input-group input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        
-        .isbn-help {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .isbn-result {
-            margin-top: 20px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 5px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .book-details {
-            display: grid;
-            grid-template-columns: 120px 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .book-cover {
-            background: #e3f2fd;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: #3498db;
-        }
-        
-        .book-info h4 {
-            margin-top: 0;
-            color: #2c3e50;
-        }
-        
-        .book-info p {
-            margin: 5px 0;
-        }
-        
-        .citation-options {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .popular-isbns {
-            margin-top: 40px;
-        }
-        
-        .isbn-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .isbn-example {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .isbn-example:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-color: #3498db;
-        }
-        
-        .isbn-example h5 {
-            margin-top: 0;
-            color: #2c3e50;
-        }
-        
-        .isbn-example .isbn-number {
-            font-family: monospace;
-            background: #f8f9fa;
-            padding: 5px 10px;
-            border-radius: 3px;
-            display: inline-block;
-            margin-top: 10px;
-        }
-        
-        @media (max-width: 768px) {
-            .isbn-input-group {
-                flex-direction: column;
-            }
-            
-            .book-details {
-                grid-template-columns: 1fr;
-            }
-            
-            .book-cover {
-                height: 150px;
-            }
-        }
-    </style>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <button class="mobile-menu-btn" aria-label="Menu" id="mobileMenuBtn">
+            <div class="logo">
+                <div class="logo-icon">📚</div>
+                <div>
+                    <div class="logo-text">StudentCitationTools</div>
+                    <div class="logo-tagline">Academic Tools Made Easy</div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
                 <i class="fas fa-bars"></i>
             </button>
-            <div class="logo">
-                <h1><i class="fas fa-book-open"></i> StudentCitationTools.com</h1>
-                <p class="tagline">Free academic tools for students worldwide</p>
-            </div>
-            <nav class="main-nav" id="mainNav">
-                <a href="index.html"><i class="fas fa-home"></i> Home</a>
-                <a href="apa.html"><i class="fas fa-file-alt"></i> APA Generator</a>
-                <a href="mla.html"><i class="fas fa-font"></i> MLA Generator</a>
-                <a href="chicago.html"><i class="fas fa-university"></i> Chicago Generator</a>
-                <a href="isbn.html" class="nav-active"><i class="fas fa-barcode"></i> ISBN Lookup</a>
-                <a href="guide.html"><i class="fas fa-graduation-cap"></i> Formatting Guide</a>
-                <a href="examples.html"><i class="fas fa-list-ul"></i> Examples</a>
-                <a href="tips.html"><i class="fas fa-lightbulb"></i> Writing Tips</a>
-            </nav>
+            
             <div class="header-actions">
-                <button class="btn btn-small" id="themeToggle" title="Toggle dark mode">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
         </div>
     </header>
 
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Mobile Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-header">
+            <div class="logo-text">StudentCitationTools</div>
+            <button class="nav-close" id="navClose" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="apa.html" class="nav-link">
+                <i class="fas fa-file-alt"></i> APA Generator
+            </a>
+            <a href="mla.html" class="nav-link">
+                <i class="fas fa-font"></i> MLA Generator
+            </a>
+            <a href="chicago.html" class="nav-link">
+                <i class="fas fa-university"></i> Chicago Generator
+            </a>
+            <a href="isbn.html" class="nav-link active">
+                <i class="fas fa-barcode"></i> ISBN Lookup
+            </a>
+            <a href="guide.html" class="nav-link">
+                <i class="fas fa-graduation-cap"></i> Formatting Guide
+            </a>
+            <a href="examples.html" class="nav-link">
+                <i class="fas fa-list-ul"></i> Examples
+            </a>
+            <a href="tips.html" class="nav-link">
+                <i class="fas fa-lightbulb"></i> Writing Tips
+            </a>
+        </div>
+    </nav>
+
     <!-- Hero -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h2><i class="fas fa-barcode"></i> ISBN Lookup & Book Citation Generator</h2>
+                <h2>ISBN Lookup & Book Citation Generator</h2>
                 <p class="hero-subtitle">Find book details by ISBN and generate citations in APA, MLA, or Chicago style instantly</p>
                 <div class="stats">
                     <div class="stat">
@@ -205,34 +1305,38 @@
     </section>
 
     <!-- Breadcrumb -->
-    <div class="breadcrumb container">
-        <a href="index.html"><i class="fas fa-home"></i> Home</a> &gt; <span>ISBN Lookup Tool</span>
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a> &gt; <span>ISBN Lookup Tool</span>
+        </div>
     </div>
 
-    <!-- Main Tool -->
+    <!-- Main Content -->
     <main class="main">
         <div class="container">
             <!-- ISBN Tool -->
-            <div class="isbn-tool-container">
+            <div class="tool-container">
                 <h2><i class="fas fa-search"></i> Lookup Book by ISBN</h2>
                 <p class="subtitle">Enter an ISBN-10 or ISBN-13 to find book details and generate citations</p>
                 
                 <div class="isbn-input-group">
-                    <input type="text" id="isbnInput" placeholder="Enter ISBN (10 or 13 digits)" maxlength="17">
-                    <button class="btn btn-primary" onclick="lookupISBN()">
-                        <i class="fas fa-search"></i> Lookup Book
-                    </button>
-                    <button class="btn btn-outline" onclick="clearISBN()">
-                        <i class="fas fa-times"></i> Clear
-                    </button>
+                    <input type="text" id="isbnInput" class="isbn-input" placeholder="Enter ISBN (10 or 13 digits)" maxlength="17">
+                    <div class="input-actions">
+                        <button onclick="lookupISBN()" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Lookup Book
+                        </button>
+                        <button onclick="clearISBN()" class="btn btn-outline">
+                            <i class="fas fa-times"></i> Clear
+                        </button>
+                    </div>
                 </div>
                 
-                <div class="isbn-help">
+                <div class="help-box">
                     <p><i class="fas fa-info-circle"></i> <strong>Where to find ISBN:</strong> Look on the back cover, copyright page, or barcode area of books. ISBN-10 has 10 digits, ISBN-13 has 13 digits (usually starts with 978 or 979).</p>
                 </div>
                 
-                <!-- ISBN Result Area -->
-                <div class="isbn-result" id="isbnResult" style="display: none;">
+                <!-- ISBN Result -->
+                <div class="isbn-result" id="isbnResult">
                     <div class="book-details">
                         <div class="book-cover">
                             <i class="fas fa-book"></i>
@@ -247,88 +1351,90 @@
                     </div>
                     
                     <div class="citation-options">
-                        <button class="btn btn-primary" onclick="generateCitation('apa')">
+                        <button onclick="generateCitation('apa')" class="btn btn-primary">
                             <i class="fas fa-file-alt"></i> Generate APA Citation
                         </button>
-                        <button class="btn btn-secondary" onclick="generateCitation('mla')">
+                        <button onclick="generateCitation('mla')" class="btn btn-secondary">
                             <i class="fas fa-font"></i> Generate MLA Citation
                         </button>
-                        <button class="btn btn-info" onclick="generateCitation('chicago')">
+                        <button onclick="generateCitation('chicago')" class="btn btn-info">
                             <i class="fas fa-university"></i> Generate Chicago Citation
                         </button>
                     </div>
                 </div>
                 
                 <!-- Citation Result -->
-                <div class="result-box" id="citationResult" style="display: none; margin-top: 30px;">
+                <div class="citation-result" id="citationResult">
                     <div class="result-header">
                         <h4><i class="fas fa-file-contract"></i> Generated Citation</h4>
                         <div class="style-badge" id="citationStyleBadge">APA</div>
                     </div>
-                    <pre id="citationText"></pre>
-                    <div class="action-buttons" style="margin-top: 15px;">
-                        <button class="btn btn-success" onclick="copyCitation()">
+                    <div class="result-box">
+                        <pre id="citationText"></pre>
+                    </div>
+                    <div class="action-buttons">
+                        <button onclick="copyCitation()" class="btn btn-success">
                             <i class="fas fa-copy"></i> Copy Citation
                         </button>
-                        <button class="btn btn-info" onclick="downloadCitation()">
+                        <button onclick="downloadCitation()" class="btn btn-info">
                             <i class="fas fa-download"></i> Download
                         </button>
                     </div>
                 </div>
             </div>
             
-            <!-- Popular ISBNs Section -->
-            <section class="popular-isbns">
+            <!-- Popular Books Section -->
+            <section class="popular-section">
                 <h3><i class="fas fa-fire"></i> Popular Books - Try These ISBNs</h3>
                 <p>Click on any book to auto-fill and generate citation</p>
                 
-                <div class="isbn-grid">
-                    <div class="isbn-example" onclick="fillExampleISBN('9780140283334')">
+                <div class="books-grid">
+                    <div class="book-card" onclick="fillExampleISBN('9780140283334')">
                         <h5>The Great Gatsby</h5>
-                        <p>F. Scott Fitzgerald</p>
-                        <p>Classic American novel about the Jazz Age</p>
+                        <p><strong>Author:</strong> F. Scott Fitzgerald</p>
+                        <p class="description">Classic American novel about the Jazz Age and the American Dream</p>
                         <div class="isbn-number">ISBN: 9780140283334</div>
                     </div>
                     
-                    <div class="isbn-example" onclick="fillExampleISBN('9780439136358')">
+                    <div class="book-card" onclick="fillExampleISBN('9780439136358')">
                         <h5>Harry Potter and the Sorcerer's Stone</h5>
-                        <p>J.K. Rowling</p>
-                        <p>First book in the Harry Potter series</p>
+                        <p><strong>Author:</strong> J.K. Rowling</p>
+                        <p class="description">First book in the Harry Potter series, introducing the magical world</p>
                         <div class="isbn-number">ISBN: 9780439136358</div>
                     </div>
                     
-                    <div class="isbn-example" onclick="fillExampleISBN('9780143127550')">
+                    <div class="book-card" onclick="fillExampleISBN('9780143127550')">
                         <h5>To Kill a Mockingbird</h5>
-                        <p>Harper Lee</p>
-                        <p>Pulitzer Prize-winning novel</p>
+                        <p><strong>Author:</strong> Harper Lee</p>
+                        <p class="description">Pulitzer Prize-winning novel about racial injustice in the American South</p>
                         <div class="isbn-number">ISBN: 9780143127550</div>
                     </div>
                     
-                    <div class="isbn-example" onclick="fillExampleISBN('9780061120084')">
+                    <div class="book-card" onclick="fillExampleISBN('9780061120084')">
                         <h5>1984</h5>
-                        <p>George Orwell</p>
-                        <p>Dystopian social science fiction novel</p>
+                        <p><strong>Author:</strong> George Orwell</p>
+                        <p class="description">Dystopian social science fiction novel about totalitarian government</p>
                         <div class="isbn-number">ISBN: 9780061120084</div>
                     </div>
                     
-                    <div class="isbn-example" onclick="fillExampleISBN('9780141187761')">
+                    <div class="book-card" onclick="fillExampleISBN('9780141187761')">
                         <h5>Animal Farm</h5>
-                        <p>George Orwell</p>
-                        <p>Allegorical novella about Soviet totalitarianism</p>
+                        <p><strong>Author:</strong> George Orwell</p>
+                        <p class="description">Allegorical novella about Soviet totalitarianism and corruption</p>
                         <div class="isbn-number">ISBN: 9780141187761</div>
                     </div>
                     
-                    <div class="isbn-example" onclick="fillExampleISBN('9780679783268')">
+                    <div class="book-card" onclick="fillExampleISBN('9780679783268')">
                         <h5>Pride and Prejudice</h5>
-                        <p>Jane Austen</p>
-                        <p>Classic romantic novel of manners</p>
+                        <p><strong>Author:</strong> Jane Austen</p>
+                        <p class="description">Classic romantic novel of manners set in Georgian England</p>
                         <div class="isbn-number">ISBN: 9780679783268</div>
                     </div>
                 </div>
             </section>
             
             <!-- How It Works -->
-            <section class="content-page" style="margin-top: 50px;">
+            <section class="how-it-works">
                 <h3><i class="fas fa-question-circle"></i> How ISBN Lookup Works</h3>
                 <div class="features-grid">
                     <div class="feature">
@@ -361,14 +1467,16 @@
                     </div>
                 </div>
                 
-                <div class="info-box" style="margin-top: 30px;">
+                <!-- Tips -->
+                <div class="tips-section">
                     <h4><i class="fas fa-lightbulb"></i> Tips for Using ISBN Lookup</h4>
                     <ul>
-                        <li>Always verify the book details match your edition</li>
+                        <li>Always verify the book details match your specific edition</li>
                         <li>Check multiple sources if uncertain about publication year</li>
                         <li>For edited books, include editor names in your citation</li>
-                        <li>Use ISBN-13 when available (more accurate)</li>
+                        <li>Use ISBN-13 when available (more accurate than ISBN-10)</li>
                         <li>If lookup fails, try manual entry with basic details</li>
+                        <li>Always double-check generated citations with official style guides</li>
                     </ul>
                 </div>
             </section>
@@ -417,50 +1525,61 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- JavaScript -->
     <script>
-        // Mobile menu toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mainNav = document.getElementById('mainNav');
-            
-            if (mobileMenuBtn && mainNav) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    mainNav.classList.toggle('active');
-                });
-            }
-            
-            // Theme toggle
-            const themeToggle = document.getElementById('themeToggle');
-            if (themeToggle) {
-                themeToggle.addEventListener('click', function() {
-                    document.body.classList.toggle('dark-mode');
-                    const icon = this.querySelector('i');
-                    if (document.body.classList.contains('dark-mode')) {
-                        icon.classList.remove('fa-moon');
-                        icon.classList.add('fa-sun');
-                        localStorage.setItem('theme', 'dark');
-                    } else {
-                        icon.classList.remove('fa-sun');
-                        icon.classList.add('fa-moon');
-                        localStorage.setItem('theme', 'light');
-                    }
-                });
-                
-                // Load theme preference
-                const savedTheme = localStorage.getItem('theme');
-                if (savedTheme === 'dark') {
-                    document.body.classList.add('dark-mode');
-                    themeToggle.querySelector('i').classList.remove('fa-moon');
-                    themeToggle.querySelector('i').classList.add('fa-sun');
-                }
-            }
-            
-            // Load popular books from localStorage or default
-            loadPopularBooks();
+        // Mobile Menu Functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navClose = document.getElementById('navClose');
+        const navOverlay = document.getElementById('navOverlay');
+        const mainNav = document.getElementById('mainNav');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function toggleMobileMenu() {
+            mainNav.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function closeMobileMenu() {
+            mainNav.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        navClose.addEventListener('click', closeMobileMenu);
+        navOverlay.addEventListener('click', closeMobileMenu);
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
         });
-        
-        // Sample book database (in real implementation, this would be API calls)
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Book Database (in real implementation, this would be API calls)
         const bookDatabase = {
             '9780140283334': {
                 title: 'The Great Gatsby',
@@ -470,7 +1589,7 @@
                 isbn: '9780140283334'
             },
             '9780439136358': {
-                title: 'Harry Potter and the Sorcerer\'s Stone',
+                title: "Harry Potter and the Sorcerer's Stone",
                 author: 'Rowling, J.K.',
                 publisher: 'Scholastic',
                 year: '1999',
@@ -505,9 +1624,29 @@
                 isbn: '9780679783268'
             }
         };
-        
+
         let currentBookData = null;
-        
+
+        // ISBN input formatting
+        document.getElementById('isbnInput').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^\dX]/gi, '');
+            
+            // Format as ISBN (add hyphens)
+            if (value.length > 3 && value.length <= 13) {
+                if (value.length <= 3) {
+                    value = value;
+                } else if (value.length <= 5) {
+                    value = value.substring(0, 3) + '-' + value.substring(3);
+                } else if (value.length <= 10) {
+                    value = value.substring(0, 3) + '-' + value.substring(3, 5) + '-' + value.substring(5);
+                } else {
+                    value = value.substring(0, 3) + '-' + value.substring(3, 5) + '-' + value.substring(5, 10) + '-' + value.substring(10);
+                }
+            }
+            
+            e.target.value = value;
+        });
+
         function lookupISBN() {
             const isbnInput = document.getElementById('isbnInput').value.trim();
             const cleanISBN = isbnInput.replace(/[-\s]/g, '');
@@ -518,18 +1657,52 @@
             }
             
             // Validate ISBN format
-            if (!/^(?:\d{10}|\d{13})$/.test(cleanISBN)) {
+            if (!/^(?:\d{9}[\dX]|\d{13})$/.test(cleanISBN)) {
                 showNotification('Please enter a valid ISBN-10 or ISBN-13 number', 'error');
                 return;
             }
             
-            // Show loading
-            document.getElementById('isbnResult').style.display = 'block';
-            document.getElementById('bookTitle').innerHTML = 'Searching...';
+            // Validate ISBN-10 check digit
+            if (cleanISBN.length === 10) {
+                let sum = 0;
+                for (let i = 0; i < 9; i++) {
+                    sum += parseInt(cleanISBN[i]) * (10 - i);
+                }
+                const checkDigit = cleanISBN[9].toUpperCase();
+                const calculatedCheckDigit = (11 - (sum % 11)) % 11;
+                const checkDigitValue = checkDigit === 'X' ? 10 : parseInt(checkDigit);
+                
+                if (calculatedCheckDigit !== checkDigitValue) {
+                    showNotification('Invalid ISBN-10 check digit. Please check the number.', 'error');
+                    return;
+                }
+            }
+            
+            // Validate ISBN-13 check digit
+            if (cleanISBN.length === 13) {
+                let sum = 0;
+                for (let i = 0; i < 12; i++) {
+                    sum += parseInt(cleanISBN[i]) * (i % 2 === 0 ? 1 : 3);
+                }
+                const checkDigit = (10 - (sum % 10)) % 10;
+                
+                if (parseInt(cleanISBN[12]) !== checkDigit) {
+                    showNotification('Invalid ISBN-13 check digit. Please check the number.', 'error');
+                    return;
+                }
+            }
+            
+            // Show loading state
+            const resultDiv = document.getElementById('isbnResult');
+            resultDiv.style.display = 'block';
+            document.getElementById('bookTitle').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
             document.getElementById('bookAuthor').innerHTML = 'Please wait';
             document.getElementById('bookPublisher').innerHTML = 'Searching databases';
             document.getElementById('bookYear').innerHTML = '...';
             document.getElementById('bookISBN').innerHTML = cleanISBN;
+            
+            // Hide previous citation result
+            document.getElementById('citationResult').style.display = 'none';
             
             // Simulate API delay
             setTimeout(() => {
@@ -549,14 +1722,14 @@
                 } else {
                     // For unknown ISBNs, simulate random book data
                     currentBookData = {
-                        title: 'Sample Book Title',
-                        author: 'Author, Unknown',
+                        title: 'Book Not Found in Database',
+                        author: 'Author Unknown',
                         publisher: 'Unknown Publisher',
-                        year: '2020',
+                        year: '2000',
                         isbn: cleanISBN
                     };
                     displayBookDetails(currentBookData);
-                    showNotification('Using sample data. For real books, try the popular ISBNs below.', 'info');
+                    showNotification('Book not found in our database. Using placeholder data. Try one of the popular ISBNs below.', 'info');
                     
                     // Track lookup attempt
                     if (typeof gtag !== 'undefined') {
@@ -588,15 +1761,15 @@
             
             switch(style) {
                 case 'apa':
-                    citation = `${currentBookData.author}. (${currentBookData.year}). <i>${currentBookData.title}.</i> ${currentBookData.publisher}.`;
+                    citation = `${currentBookData.author}. (${currentBookData.year}). <em>${currentBookData.title}.</em> ${currentBookData.publisher}.`;
                     styleBadge.textContent = 'APA';
                     break;
                 case 'mla':
-                    citation = `${currentBookData.author}. <i>${currentBookData.title}.</i> ${currentBookData.publisher}, ${currentBookData.year}.`;
+                    citation = `${currentBookData.author}. <em>${currentBookData.title}.</em> ${currentBookData.publisher}, ${currentBookData.year}.`;
                     styleBadge.textContent = 'MLA';
                     break;
                 case 'chicago':
-                    citation = `${currentBookData.author}. ${currentBookData.year}. <i>${currentBookData.title}.</i> ${currentBookData.publisher}.`;
+                    citation = `${currentBookData.author}. ${currentBookData.year}. <em>${currentBookData.title}.</em> ${currentBookData.publisher}.`;
                     styleBadge.textContent = 'Chicago';
                     break;
             }
@@ -605,7 +1778,7 @@
             document.getElementById('citationResult').style.display = 'block';
             
             // Scroll to citation result
-            document.getElementById('citationResult').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('citationResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             
             // Track citation generation
             if (typeof gtag !== 'undefined') {
@@ -626,6 +1799,7 @@
             document.getElementById('isbnResult').style.display = 'none';
             document.getElementById('citationResult').style.display = 'none';
             currentBookData = null;
+            showNotification('Form cleared!', 'success');
         }
         
         function copyCitation() {
@@ -665,12 +1839,10 @@
             showNotification('Citation downloaded!', 'success');
         }
         
-        function loadPopularBooks() {
-            // This could load from localStorage or API
-            // For now, we use the hardcoded examples
-        }
-        
         function showNotification(message, type) {
+            // Remove existing notifications
+            document.querySelectorAll('.notification').forEach(n => n.remove());
+            
             // Create notification element
             const notification = document.createElement('div');
             notification.className = `notification notification-${type}`;
@@ -679,7 +1851,7 @@
                     <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
                     <span>${message}</span>
                 </div>
-                <button class="notification-close" onclick="this.parentElement.remove()">
+                <button class="notification-close" onclick="this.parentElement.remove()" aria-label="Close notification">
                     <i class="fas fa-times"></i>
                 </button>
             `;
@@ -694,6 +1866,37 @@
                 }
             }, 5000);
         }
+
+        // Auto-focus ISBN input on page load
+        window.addEventListener('load', function() {
+            // Focus on ISBN input after a short delay
+            setTimeout(() => {
+                document.getElementById('isbnInput').focus();
+            }, 300);
+            
+            // Load first example book on desktop
+            if (window.innerWidth > 768) {
+                fillExampleISBN('9780140283334');
+            }
+        });
+
+        // Handle Enter key in ISBN input
+        document.getElementById('isbnInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                lookupISBN();
+            }
+        });
+
+        // Improve mobile input experience
+        document.getElementById('isbnInput').addEventListener('focus', function() {
+            if (window.innerWidth < 768) {
+                // Scroll input into view on mobile
+                setTimeout(() => {
+                    this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            }
+        });
     </script>
 </body>
 </html>
